@@ -1,7 +1,20 @@
-const testValue = [
+const testJSON = [
     {
-        sentence: 'A silly fox jumped over a fence',
-    }
+        id: 0,
+        sentence: 'A silly crow flew over a fence',
+    },
+    {
+        id: 1,
+        sentence: 'The dog, which had been running around the yard all day, was exhausted and panting heavily when he finally came inside.',
+    },
+    {
+        id: 2,
+        sentence: 'The cat sat on the mat.',
+    },
+    {
+        id: 3,
+        sentence: 'The woman smiled at the child.',
+    },
 ]
 
-export default testValue;
+export default testJSON;
