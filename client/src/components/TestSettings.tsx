@@ -9,7 +9,7 @@ export const TestSettings = () => {
       <button
         className="flex items-center"
         onClick={() => {
-          testSettings == false
+          testSettings === false
             ? setTestSettings(true)
             : setTestSettings(false);
         }}

@@ -1,4 +1,4 @@
-import React from "react";
+"react";
 
 export const Footer = () => {
   return (
@@ -17,10 +17,11 @@ export const Footer = () => {
           <span>Privacy</span>
         </div>
       </div>
-      <div className="flex flex-col">
-        <span>80's after dark</span>
+      <div className="flex flex-col relative">
+
         <span>version</span>
       </div>
+
     </section>
   );
 };
