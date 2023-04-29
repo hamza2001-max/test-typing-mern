@@ -5,16 +5,16 @@
 
 @layer base {
   :root {
-    --color-primary: #000;
-    --color-secondary: #ff0000;
-    --color-tertiary: #fff;
-    --color-fill: #b7b7b7;
+    --color-primary: #b7b7b7;
+    --color-secondary: #000;
+    --color-tertiary: #ff0000;
+    --color-fill: #f2f2f2;
   }
 
   .dark {
-    --color-primary: #fff;
-    --color-secondary: #ff0000;
-    --color-tertiary: #fff;
+    --color-primary: #444444;
+    --color-secondary: #fff;
+    --color-tertiary: #ff0000;
     --color-fill: #000;
   }
 

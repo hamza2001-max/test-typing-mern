@@ -13,7 +13,9 @@ function App() {
     <div className= {`${theme} App relative bg-custom-fill`}>
       <Navigation/>
       <Main/>
-      <button onClick={() => setThemeVisibility(!themeVisiblity)}>
+      <button 
+      className="text-custom-primary"
+      onClick={() => setThemeVisibility(!themeVisiblity)}>
           theme
         </button>
       {themeVisiblity && (

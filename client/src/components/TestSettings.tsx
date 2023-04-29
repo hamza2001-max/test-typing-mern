@@ -7,7 +7,7 @@ export const TestSettings = () => {
   return (
     <section>
       <button
-        className="flex items-center"
+        className="flex items-center text-custom-primary cursor-pointer hover:text-custom-secondary transition ease-in-out delay-75"
         onClick={() => {
           testSettings === false
             ? setTestSettings(true)

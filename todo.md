@@ -1,13 +1,20 @@
 - [ ] remember
   - [ ] dont make functions to big and approach component
         based coding.
+
 - [ ] frontend
   - [ ] Test.tsx
-    - [ ] make input disabled upon finishing the last word and
-          not on the last space,
+    - [x] make input disabled upon finishing the last word and
+          not on the last space.
+    - [x] if a word contains wrong character underline it red.
+    - [x] get a random sentence on clicking refresh.
+  - [ ] App.tsx
+    - [x] initiate the multiple themes.
+    - [ ] complete the multiple themes.
 
-- [ ] fix
-  - [ ] create space in the split sentence.
+- [x] fix
+  - [x] create space in the split sentence.
+  - [ ] refactor Test into TestSentence.
   
 - [ ] ideas
   - [ ] create multiple users.
@@ -15,3 +22,4 @@
   - [ ] give admin the ability to make other admins.
   - [ ] give admin dashboard.
   - [ ] give multiple color modes.
+  - [ ] make underline appear only when space is pressed.
