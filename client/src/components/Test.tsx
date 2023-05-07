@@ -1,7 +1,6 @@
 import { useState, useRef } from "react";
-// import { TestSentence } from "./TestSentence";
+import { VscDebugRestart } from "react-icons/vsc";
 import testJSON from "../testJson.js";
-
 export const TypingSpeedTest = () => {
   const [randomNumber, setRandomNumber] = useState<number>(
     Math.floor(Math.random() * 5)
@@ -94,7 +93,7 @@ export const TypingSpeedTest = () => {
                 return (
                   <span
                     key={index}
-                    className="text-custom-tertiary underline underline-offset-2 pb-1"
+                    className="tailUnderline underline-offset-2 pb-1"
                   >
                     {part}
                   </span>
@@ -103,34 +102,32 @@ export const TypingSpeedTest = () => {
             return part;
           })}
         </div>
-        {/* <div>{newTestSentence}</div> */}
       </section>
     );
   };
 
   return (
-    <div className="text-custom-primary relative flex flex-col px-10 py-10 my-12">
-      {/* <p>input characters: {inputValue.length - 1}</p>
-      <p>Sentence characters: {testSentence.length - 1}</p> */}
+    <div className="text-custom-primary relative flex flex-col px-10 py-10 my-12 mb-36">
       {inputValue && (
         <h1 className="text-custom-tertiary">
           {inputValue.split(" ").length - 1}/{testSentence.split(" ").length}{" "}
           words
         </h1>
       )}
-
-      <TestSentence />
+      <div className="text-2xl">
+        <TestSentence />
+      </div>
       <input
         type="text"
         onChange={handleChange}
-        className="border border-black mt-2"
+        className="h-10 border border-custom-primary rounded-md mt-6 py-1 px-1"
         ref={inputRef}
       />
       <button
-        className="mt-5 hover:text-custom-secondary transition ease-in-out delay-75"
+        className="text-2xl w-full flex justify-center mt-10 hover:text-custom-secondary transition ease-in-out delay-75"
         onClick={handleRefresh}
       >
-        refresh
+        <VscDebugRestart/>
       </button>
     </div>
   );

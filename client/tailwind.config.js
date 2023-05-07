@@ -15,14 +15,27 @@ module.exports = {
       backgroundColor: {
         custom: {
           fill: 'var(--color-fill)',
+          primary: 'var(--color-primary)',
+          secondary: 'var(--color-secondary)',
+          tertiary: 'var(--color-tertiary)',
+        }
+      },
+      borderColor:{
+        custom: {
+          primary: 'var(--color-primary)'
         }
       }
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      const extendUnderline = {
+        '.tailUnderline': {
+          'textDecoration': 'underline',
+          'text-decoration-color': 'var(--color-tertiary)',
+        },
+      }
+      addUtilities(extendUnderline)
+    }
+  ]
 }
-
-// --color-text-primary: #000;
-// --color-text-secondary: #ff0000;
-// --color-fill-primary: #fff;
-// --color-fill-secondary: #b7b7b7;

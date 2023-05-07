@@ -18,6 +18,19 @@
     --color-fill: #000;
   }
 
+  .afterDark {
+    --color-primary: #99d6ea;
+    --color-secondary: #fca6d1;
+    --color-tertiary: #e1e7ec;
+    --color-fill: #1b1d36;
+  }
+
+  .retrocast {
+    --color-primary: #88dbdf;
+    --color-secondary: #f3e03b;
+    --color-tertiary: #ffffff;
+    --color-fill: #07737a;
+  }
 }
 
 body {
