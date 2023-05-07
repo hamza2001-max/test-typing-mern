@@ -1,25 +1,14 @@
-import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { combineReducers, configureStore, createSlice } from "@reduxjs/toolkit";
 import { themeSlice } from "./redux/themeSlice";
-const initialValue = {
-  value: 0,
-};
+import { testModeSlice } from "./redux/testModeSlice";
 
-const counterSlice = createSlice({
-  name: "counter",
-  initialState: initialValue,
-  reducers: {
-    increment: (state) => {
-      state.value += 1;
-    },
-    decrement: (state) => {
-      state.value -= 1;
-    },
-  },
-});
+const rootReducer = combineReducers({
+  testMode:testModeSlice.reducer,
+  theme:themeSlice.reducer
+})
 
-export const { increment, decrement } = counterSlice.actions;
 const store = configureStore({
-  reducer: themeSlice.reducer,
+  reducer: rootReducer
 });
 
 export default store;

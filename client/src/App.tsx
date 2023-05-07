@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
 import { Footer } from "./components/Footer";
-// import { Main } from "./components/Main";
 import { Navigation } from "./components/Navigation";
 import { themeInterface } from "./types";
 import { useState } from "react";
