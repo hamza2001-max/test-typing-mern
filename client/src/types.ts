@@ -1,3 +1,5 @@
+import { ActionCreatorWithoutPayload } from "@reduxjs/toolkit";
+
 export interface themeInterface {
   theme: string;
 }
@@ -24,9 +26,12 @@ export interface testModifierInterface {
 
 export interface testModeInterface {
   title: string;
+  time: ActionCreatorWithoutPayload<"testMode/time">;
+  words: ActionCreatorWithoutPayload<"testMode/words">;
+  quote: ActionCreatorWithoutPayload<"testMode/quote">;
+  zen: ActionCreatorWithoutPayload<"testMode/zen">;
+  custom: ActionCreatorWithoutPayload<"testMode/custom">;
   defaultLimit?: string | number;
-  testMode: string;
-  setTestMode: React.Dispatch<React.SetStateAction<string>>;
   setTestLimit: React.Dispatch<React.SetStateAction<string | number>>;
 }
 

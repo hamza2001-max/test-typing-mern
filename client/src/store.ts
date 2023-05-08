@@ -1,14 +1,16 @@
-import { combineReducers, configureStore, createSlice } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { themeSlice } from "./redux/themeSlice";
-import { testModeSlice } from "./redux/testModeSlice";
+import { testLimiterSlice, testModeSlice, testModifierSlice } from "./redux/testModeSlice";
 
 const rootReducer = combineReducers({
-  testMode:testModeSlice.reducer,
-  theme:themeSlice.reducer
-})
+  theme: themeSlice.reducer,
+  testMode: testModeSlice.reducer,
+  testModifier: testModifierSlice.reducer,
+  testLimiter: testLimiterSlice.reducer
+});
 
 const store = configureStore({
-  reducer: rootReducer
+  reducer: rootReducer,
 });
 
 export default store;

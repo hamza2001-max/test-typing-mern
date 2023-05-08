@@ -25,3 +25,34 @@ export const testModeSlice = createSlice({
     },
   },
 });
+
+const testModifierInitialState = {
+  testModifier: "",
+};
+
+export const testModifierSlice = createSlice({
+  name: "testModifier",
+  initialState: testModifierInitialState,
+  reducers: {
+    punctuation: (state) => {
+      state.testModifier = "punctuation";
+    },
+    numbers: (state) => {
+      state.testModifier = "numbers";
+    },
+  },
+});
+
+const testLimiterInitialState = {
+  testLimiter: <string|number> "",
+};
+
+export const testLimiterSlice = createSlice({
+  name: "testLimiter",
+  initialState: testLimiterInitialState,
+  reducers: {
+    testLimiterReducer: (state, action) => {
+      state.testLimiter = action.payload;
+    },
+  },
+});

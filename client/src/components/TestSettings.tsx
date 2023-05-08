@@ -5,14 +5,22 @@ import { TestSettingsModifierSm } from "./TestSettingsModifierSm";
 import { testSettingModeData, testSettingModifierData } from "../jsonData";
 import { TestSettingsModeSm } from "./TestSettingsModeSm";
 import { TestSettingLimiterSm } from "./TestSettingLimiterSm";
+import { testModeSlice } from "../redux/testModeSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export const TestSettings = ({
   testSettingsVisibility,
   setTestSettingsVisibility,
 }: testSettingsVisibilityInterface) => {
-  const [testMode, setTestMode] = useState("words");
+  // const [testMode, setTestMode] = useState("words");
   const [testModifier, setTestModifier] = useState("");
   const [testLimit, setTestLimit] = useState<number | string>(25);
+  const { time, words, quote, zen, custom } = testModeSlice.actions;
+  const testModeDispatch = useDispatch();
+
+  const testModeSelector = useSelector(
+    (state: { testMode: string }) => state.testMode
+  );
 
   return (
     <section>
@@ -34,30 +42,85 @@ export const TestSettings = ({
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex flex-col space-y-2">
-            {testSettingModifierData.map((button) => (
-              <TestSettingsModifierSm
-                title={button.title}
-                testModifier={testModifier}
-                setTestModifier={setTestModifier}
-              />
-            ))}
+            {/* <TestSettingsModifierSm/> */}
+            {/* <button
+              className={`text-custom-${
+                testModeSelector === "time" ? `primary` : `secondary`
+              } bg-custom-${
+                testModeSelector === "time" ? `secondary` : `primary`
+              } py-2 rounded-md`}
+              onClick={() => {
+                testModeDispatch(time());
+              }}
+            >
+              time
+            </button>
+            <button
+              className={`text-custom-${
+                testModeSelector === "words" ? `primary` : `secondary`
+              } bg-custom-${
+                testModeSelector === "words" ? `secondary` : `primary`
+              } py-2 rounded-md`}
+              onClick={() => {
+                testModeDispatch(words());
+              }}
+            >
+              words
+            </button>
+            <button
+              className={`text-custom-${
+                testModeSelector === "quote" ? `primary` : `secondary`
+              } bg-custom-${
+                testModeSelector === "quote" ? `secondary` : `primary`
+              } py-2 rounded-md`}
+              onClick={() => {
+                testModeDispatch(quote());
+              }}
+            >
+              quote
+            </button>
+            <button
+              className={`text-custom-${
+                testModeSelector === "zen" ? `primary` : `secondary`
+              } bg-custom-${
+                testModeSelector === "zen" ? `secondary` : `primary`
+              } py-2 rounded-md`}
+              onClick={() => {
+                testModeDispatch(zen());
+              }}
+            >
+              zen
+            </button>
+            <button
+              className={`text-custom-${
+                testModeSelector === "custom" ? `primary` : `secondary`
+              } bg-custom-${
+                testModeSelector === "custom" ? `secondary` : `primary`
+              } py-2 rounded-md`}
+              onClick={() => {
+                testModeDispatch(custom());
+              }}
+            >
+              custom
+            </button> */}
           </div>
           <div className="flex flex-col space-y-2">
-            {testSettingModeData.map((button) => (
+          <TestSettingsModeSm/>
+
+            {/* {testSettingModeData.map((button) => (
               <TestSettingsModeSm
+                time={time}
                 title={button.title}
                 defaultLimit={button.defaultLimit}
-                testMode={testMode}
-                setTestMode={setTestMode}
                 setTestLimit={setTestLimit}
               />
-            ))}
+            ))} */}
           </div>
-          <TestSettingLimiterSm
+          {/* <TestSettingLimiterSm
             testMode={testMode}
             testLimit={testLimit}
             setTestLimit={setTestLimit}
-          />
+          /> */}
         </section>
       )}
     </section>

@@ -1,10 +1,21 @@
 import { useState, useRef } from "react";
 import { VscDebugRestart } from "react-icons/vsc";
 import testJSON from "../testJson.js";
-import { testModeSlice } from "../redux/testModeSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { testModeInterface } from "../types.js";
+import { useSelector } from "react-redux";
 export const TypingSpeedTest = () => {
+  const testModeSelector = useSelector(
+    (state: { testMode: string }) => state.testMode
+  );
+  const testModifierSelector = useSelector(
+    (state: { testModifier: string }) => state.testModifier
+  );
+  const testLimiterSelector = useSelector(
+    (state: { testLimiter: string }) => state.testLimiter
+  );
+  console.log(testModeSelector);
+  console.log(testModifierSelector);
+  console.log(testLimiterSelector);
+  
   const [randomNumber, setRandomNumber] = useState<number>(
     Math.floor(Math.random() * 5)
   );
@@ -14,12 +25,8 @@ export const TypingSpeedTest = () => {
   const [refresh, setRefresh] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
-  const { words, quote } = testModeSlice.actions;
-  const dispatch = useDispatch();
-  const testMode = useSelector((state: testModeInterface) => state.testMode);
 
-  console.log(testMode);
-  
+
   const handleRefresh = () => {
     setRandomNumber(Math.floor(Math.random() * testJSON.length));
     setTestSentence(testJSON[randomNumber].sentence);
@@ -137,8 +144,6 @@ export const TypingSpeedTest = () => {
       >
         <VscDebugRestart />
       </button>
-      <button onClick={() => dispatch(words())}> click me! </button>
-      <button onClick={() => dispatch(quote())}> click me! </button>
     </div>
   );
 };

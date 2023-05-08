@@ -1,7 +1,8 @@
 - [ ] remember
   - [ ] dont make functions to big and approach component
         based coding.
-
+  - [ ] remove bg color from setting buttons for now.
+  
 - [ ] frontend
   - [ ] Test.tsx
     - [x] make input disabled upon finishing the last word and
@@ -15,6 +16,7 @@
 - [x] fix
   - [x] create space in the split sentence.
   - [ ] refactor Test into TestSentence.
+  - [ ] refactor the component folder structure.
   
 - [ ] ideas
   - [ ] create multiple users.
