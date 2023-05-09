@@ -4,23 +4,41 @@ import {
   testSettingModifierData,
 } from "../jsonData";
 import { useDispatch, useSelector } from "react-redux";
+import { testModifierSlice } from "../redux/testSettingsSlice";
 
 export const TestSettingsModeSm = () => {
-  const testModeSelector = useSelector(
-    (state: { testMode: string }) => state.testMode
-  );
   const testModeDispatch = useDispatch();
   const testModifierDispatch = useDispatch();
   const testLimiterDispatch = useDispatch();
+
+  const testModeSelector = useSelector(
+    (state: { testMode: { testMode: string | number } }) =>
+      state.testMode.testMode
+  );
+  const testModifierSelector = useSelector(
+    (state: { testModifier: { testModifier: string } }) =>
+      state.testModifier.testModifier
+  );
+  const testLimiterSelector = useSelector(
+    (state: { testLimiter: { testLimiter: string } }) =>
+      state.testLimiter.testLimiter
+  );
+
   return (
-    <>
+    <section className="space-y-6">
       <div className="flex flex-col space-y-2">
         {testSettingModifierData.map((button) => (
           <button
             key={button.label}
-            className={`text-custom-secondary bg-custom-primary py-2 rounded-md`}
+            className={`${
+              button.label === testModifierSelector
+                ? "text-custom-primary bg-custom-secondary"
+                : "text-custom-secondary bg-custom-primary"
+            } py-2 rounded-md`}
             onClick={() => {
-              testModeDispatch(button.action());
+              button.label === testModifierSelector
+                ? testModifierDispatch(testModifierSlice.actions.reset())
+                : testModifierDispatch(button.action());
             }}
           >
             {button.label}
@@ -31,65 +49,82 @@ export const TestSettingsModeSm = () => {
         {testSettingModeData.map((button) => (
           <button
             key={button.label}
-            className={`text-custom-secondary bg-custom-primary py-2 rounded-md`}
+            className={`${
+              button.label === testModeSelector
+                ? "text-custom-primary bg-custom-secondary"
+                : "text-custom-secondary bg-custom-primary"
+            } py-2 rounded-md`}
             onClick={() => {
-              testModifierDispatch(button.action());
+              const action = {
+                type: "SET_LIMIT",
+                payload: button.defaultLimit,
+              };
+              testModeDispatch(button.action());
+              button.defaultLimit && testLimiterDispatch(action);
             }}
           >
             {button.label}
           </button>
         ))}
       </div>
-
-
-      {/* testModeSelector === "time" is never true. */}
-
-      
       <div className="flex flex-col space-y-2">
         {testModeSelector === "time" &&
           testSettingLimiterData.time.map((option, index) => (
             <button
               key={index}
-              className={`text-custom-secondary bg-custom-primary py-2 rounded-md`}
+              className={`${
+                option.limit === testLimiterSelector
+                  ? "text-custom-primary bg-custom-secondary"
+                  : "text-custom-secondary bg-custom-primary"
+              } py-2 rounded-md`}
               onClick={() => testLimiterDispatch(option.action)}
             >
               {option.limit}
             </button>
           ))}
-        {/* {testModeSelector === "words" &&
+        {testModeSelector === "words" &&
           testSettingLimiterData.words.map((option, index) => (
             <button
               key={index}
-              className={`text-custom-primary bg-custom-secondary py-2 rounded-md`}
-              onClick={() => testModeDispatch(option.limit)}
+              className={`${
+                option.limit === testLimiterSelector
+                  ? "text-custom-primary bg-custom-secondary"
+                  : "text-custom-secondary bg-custom-primary"
+              } py-2 rounded-md`}
+              onClick={() => testLimiterDispatch(option.action)}
             >
               {option.limit}
             </button>
-          ))} */}
-        {/* {testModeSelector === "quote" &&
+          ))}
+        {testModeSelector === "quote" &&
           testSettingLimiterData.quote.map((option, index) => (
             <button
               key={index}
-              className={`text-custom-primary bg-custom-secondary py-2 rounded-md`}
-              onClick={() => setTestLimit(option.limit)}
+              className={`${
+                option.limit === testLimiterSelector
+                  ? "text-custom-primary bg-custom-secondary"
+                  : "text-custom-secondary bg-custom-primary"
+              } py-2 rounded-md`}
+              onClick={() => testLimiterDispatch(option.action)}
             >
               {option.limit}
             </button>
-          ))} */}
-        {/* {testModeSelector === "custom" &&
+          ))}
+        {testModeSelector === "custom" &&
           testSettingLimiterData.custom.map((option, index) => (
             <button
               key={index}
-              className={`text-custom-primary bg-custom-secondary py-2 rounded-md`}
-              onClick={() => setTestLimit(option.limit)}
+              className={`${
+                option.limit === testLimiterSelector
+                  ? "text-custom-primary bg-custom-secondary"
+                  : "text-custom-secondary bg-custom-primary"
+              } py-2 rounded-md`}
+              onClick={() => testLimiterDispatch(option.action)}
             >
               {option.limit}
             </button>
-          ))} */}
+          ))}
       </div>
-    </>
+    </section>
   );
 };
-{
-  /* {JSON.stringify(testModeSelector)} */
-}

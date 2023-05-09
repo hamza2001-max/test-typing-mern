@@ -2,7 +2,7 @@ import {
   testLimiterSlice,
   testModeSlice,
   testModifierSlice,
-} from "./redux/testModeSlice";
+} from "./redux/testSettingsSlice";
 const { time, words, quote, zen, custom } = testModeSlice.actions;
 const { punctuation, numbers } = testModifierSlice.actions;
 const { testLimiterReducer } = testLimiterSlice.actions;
@@ -19,34 +19,12 @@ export const testSettingModifierData = [
 ];
 
 export const testSettingModeData = [
-  { label: "time", action: time },
-  { label: "words", action: words },
-  { label: "quote", action: quote },
+  { label: "time", defaultLimit: 30, action: time },
+  { label: "words", defaultLimit: 25, action: words },
+  { label: "quote", defaultLimit: "medium", action: quote },
   { label: "zen", action: zen },
   { label: "custom", action: custom },
 ];
-
-// export const testSettingModeData = [
-//   {
-//     title: "time",
-//     defaultLimit: 30,
-//   },
-//   {
-//     title: "words",
-//     defaultLimit: 25,
-//   },
-//   {
-//     title: "quote",
-//     defaultLimit: "medium",
-//   },
-//   {
-//     title: "zen",
-//   },
-//   {
-//     title: "custom",
-//     defaultLimit: "",
-//   },
-// ];
 
 export const testSettingLimiterData = {
   time: [
@@ -74,40 +52,51 @@ export const testSettingLimiterData = {
   words: [
     {
       limit: 10,
+      action: testLimiterReducer(10),
     },
     {
       limit: 25,
+      action: testLimiterReducer(25),
     },
     {
       limit: 50,
+      action: testLimiterReducer(50),
     },
     {
       limit: 100,
+      action: testLimiterReducer(100),
     },
     {
       limit: "custom",
+      action: testLimiterReducer("custom"),
     },
   ],
   quote: [
     {
       limit: "all",
+      action: testLimiterReducer("all"),
     },
     {
       limit: "short",
+      action: testLimiterReducer("short"),
     },
     {
       limit: "medium",
+      action: testLimiterReducer("medium"),
     },
     {
       limit: "long",
+      action: testLimiterReducer("long"),
     },
     {
-      limit: "search (experiment)",
+      limit: "search",
+      action: testLimiterReducer("search"),
     },
   ],
   custom: [
     {
-      limit: "change (experiment)",
+      limit: "change",
+      action: testLimiterReducer("change"),
     },
   ],
 };

@@ -40,11 +40,14 @@ export const testModifierSlice = createSlice({
     numbers: (state) => {
       state.testModifier = "numbers";
     },
+    reset: () => {
+      return testModifierInitialState;
+    },
   },
 });
 
 const testLimiterInitialState = {
-  testLimiter: <string|number> "",
+  testLimiter: <string | number>"",
 };
 
 export const testLimiterSlice = createSlice({

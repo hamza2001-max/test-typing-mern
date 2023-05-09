@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { themeSlice } from "./redux/themeSlice";
-import { testLimiterSlice, testModeSlice, testModifierSlice } from "./redux/testModeSlice";
+import { testLimiterSlice, testModeSlice, testModifierSlice } from "./redux/testSettingsSlice";
 
 const rootReducer = combineReducers({
   theme: themeSlice.reducer,
