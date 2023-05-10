@@ -1,24 +1,7 @@
 import { useState, useRef } from "react";
 import { VscDebugRestart } from "react-icons/vsc";
 import testJSON from "../testJson.js";
-import { useSelector } from "react-redux";
-export const TypingSpeedTest = () => {
-  const testModeSelector = useSelector(
-    (state: { testMode: { testMode: string } }) => state.testMode.testMode
-  );
-  const testModifierSelector = useSelector(
-    (state: { testModifier: { testModifier: string } }) =>
-      state.testModifier.testModifier
-  );
-  const testLimiterSelector = useSelector(
-    (state: { testLimiter: { testLimiter: string } }) =>
-      state.testLimiter.testLimiter
-  );
-  
-  console.log(testModeSelector);
-  console.log(testModifierSelector);
-  console.log(testLimiterSelector);
-
+export const TestModeWords = () => {
   const [randomNumber, setRandomNumber] = useState<number>(
     Math.floor(Math.random() * 5)
   );
@@ -36,7 +19,7 @@ export const TypingSpeedTest = () => {
   };
 
   if (refresh) {
-    return <TypingSpeedTest />;
+    return <TestModeWords />;
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

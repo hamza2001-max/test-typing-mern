@@ -47,7 +47,7 @@ export const testModifierSlice = createSlice({
 });
 
 const testLimiterInitialState = {
-  testLimiter: <string | number>"",
+  testLimiter: 25 as string | number,
 };
 
 export const testLimiterSlice = createSlice({

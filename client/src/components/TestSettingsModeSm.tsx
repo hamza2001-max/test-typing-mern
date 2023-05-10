@@ -27,43 +27,39 @@ export const TestSettingsModeSm = () => {
   return (
     <section className="space-y-6">
       <div className="flex flex-col space-y-2">
-        {testSettingModifierData.map((button) => (
+        {testSettingModifierData.map((btn) => (
           <button
-            key={button.label}
+            key={btn.label}
             className={`${
-              button.label === testModifierSelector
+              btn.label === testModifierSelector
                 ? "text-custom-primary bg-custom-secondary"
                 : "text-custom-secondary bg-custom-primary"
             } py-2 rounded-md`}
             onClick={() => {
-              button.label === testModifierSelector
+              btn.label === testModifierSelector
                 ? testModifierDispatch(testModifierSlice.actions.reset())
-                : testModifierDispatch(button.action());
+                : testModifierDispatch(btn.action());
             }}
           >
-            {button.label}
+            {btn.label}
           </button>
         ))}
       </div>
       <div className="flex flex-col space-y-2">
-        {testSettingModeData.map((button) => (
+        {testSettingModeData.map((btn) => (
           <button
-            key={button.label}
+            key={btn.label}
             className={`${
-              button.label === testModeSelector
+              btn.label === testModeSelector
                 ? "text-custom-primary bg-custom-secondary"
                 : "text-custom-secondary bg-custom-primary"
             } py-2 rounded-md`}
             onClick={() => {
-              const action = {
-                type: "SET_LIMIT",
-                payload: button.defaultLimit,
-              };
-              testModeDispatch(button.action());
-              button.defaultLimit && testLimiterDispatch(action);
+              testModeDispatch(btn.action());
+              btn.defaultLimit && testLimiterDispatch(btn.defaultLimit);
             }}
           >
-            {button.label}
+            {btn.label}
           </button>
         ))}
       </div>

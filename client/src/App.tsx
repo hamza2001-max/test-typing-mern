@@ -4,7 +4,7 @@ import { Navigation } from "./components/Navigation";
 import { themeInterface } from "./types";
 import { useState } from "react";
 import { TestSettings } from "./components/TestSettings";
-import { TypingSpeedTest } from "./components/Test";
+import { TestGrounds } from "./components/TestGrounds";
 
 function App() {
   const theme = useSelector((state: themeInterface) => state.theme);
@@ -25,7 +25,7 @@ function App() {
           testSettingsVisibility={testSettingsVisibility}
           setTestSettingsVisibility={setTestSettingsVisibility}
         />
-        <TypingSpeedTest />
+        <TestGrounds />
       </section>
       <Footer
         themeVisibility={themeVisibility}
