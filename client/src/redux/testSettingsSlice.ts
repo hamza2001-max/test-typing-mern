@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const testModeInitialState = {
   testMode: "words",
 };
-
 export const testModeSlice = createSlice({
   name: "testMode",
   initialState: testModeInitialState,
@@ -29,7 +28,6 @@ export const testModeSlice = createSlice({
 const testModifierInitialState = {
   testModifier: "",
 };
-
 export const testModifierSlice = createSlice({
   name: "testModifier",
   initialState: testModifierInitialState,
@@ -49,7 +47,6 @@ export const testModifierSlice = createSlice({
 const testLimiterInitialState = {
   testLimiter: 25 as string | number,
 };
-
 export const testLimiterSlice = createSlice({
   name: "testLimiter",
   initialState: testLimiterInitialState,

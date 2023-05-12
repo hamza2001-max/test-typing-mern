@@ -5,11 +5,14 @@ import {
 } from "../jsonData";
 import { useDispatch, useSelector } from "react-redux";
 import { testModifierSlice } from "../redux/testSettingsSlice";
+import { testSettingsVSlice } from "../redux/visibilitySlice";
 
 export const TestSettingsModeSm = () => {
   const testModeDispatch = useDispatch();
   const testModifierDispatch = useDispatch();
   const testLimiterDispatch = useDispatch();
+  const testSettingsVDispatch = useDispatch();
+  const { inVisibleTS } = testSettingsVSlice.actions;
 
   const testModeSelector = useSelector(
     (state: { testMode: { testMode: string | number } }) =>
@@ -87,7 +90,11 @@ export const TestSettingsModeSm = () => {
                   ? "text-custom-primary bg-custom-secondary"
                   : "text-custom-secondary bg-custom-primary"
               } py-2 rounded-md`}
-              onClick={() => testLimiterDispatch(option.action)}
+              onClick={() => {
+                testLimiterDispatch(option.action);
+                option.limit === "custom" &&
+                  testSettingsVDispatch(inVisibleTS());
+              }}
             >
               {option.limit}
             </button>

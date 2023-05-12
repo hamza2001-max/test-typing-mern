@@ -5,7 +5,7 @@
 
 @layer base {
   :root {
-    --color-primary: #b7b7b7;
+    --color-primary: #bdbdbd;
     --color-secondary: #000;
     --color-tertiary: #ff0000;
     --color-fill: #f2f2f2;
@@ -30,6 +30,13 @@
     --color-secondary: #f3e03b;
     --color-tertiary: #ffffff;
     --color-fill: #07737a;
+  }
+
+  .laser {
+    --color-primary: #b82356;
+    --color-secondary: #009eaf;
+    --color-tertiary: #dbe7e8;
+    --color-fill: #221b44;
   }
 }
 

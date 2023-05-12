@@ -1,36 +1,56 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Footer } from "./components/Footer";
 import { Navigation } from "./components/Navigation";
-import { themeInterface } from "./types";
-import { useState } from "react";
 import { TestSettings } from "./components/TestSettings";
 import { TestGrounds } from "./components/TestGrounds";
+import {
+  customPromptVSlice,
+  testSettingsVSlice,
+  themeVSlice,
+} from "./redux/visibilitySlice";
+import {
+  customPromptVSInterface,
+  testSettingsVInterface,
+  themeInterface,
+  themeVInterface,
+} from "./types";
 
 function App() {
-  const theme = useSelector((state: themeInterface) => state.theme);
-  const [themeVisibility, setThemeVisibility] = useState(false);
-  const [testSettingsVisibility, setTestSettingsVisibility] = useState(false);
+  const themeVDispatch = useDispatch();
+  const testSettingsVDispatch = useDispatch();
+  const customPromptVDispatch = useDispatch();
+
+  const { inVisibleTheme } = themeVSlice.actions;
+  const { inVisibleTS } = testSettingsVSlice.actions;
+  const { inVisibleCustom } = customPromptVSlice.actions;
+
+  const theme = useSelector((state: themeInterface) => state.theme.theme);
+  const testSettingsVSelector = useSelector(
+    (state: testSettingsVInterface) => state.testSettingsV.testSettingsV
+  );
+  const customPromptVSelector = useSelector(
+    (state: customPromptVSInterface) => state.customPromptV.customPromptV
+  );
+  const themeVSelector = useSelector(
+    (state: themeVInterface) => state.themeV.themeV
+  );
 
   return (
     <div
       className={`${theme} App relative bg-custom-fill`}
       onClick={() => {
-        themeVisibility === true && setThemeVisibility(false);
-        testSettingsVisibility === true && setTestSettingsVisibility(false);
+        themeVSelector === true && themeVDispatch(inVisibleTheme());
+        testSettingsVSelector === true && testSettingsVDispatch(inVisibleTS());
+        customPromptVSelector === true &&
+          customPromptVDispatch(inVisibleCustom());
       }}
     >
       <Navigation />
       <section className="flex flex-col items-center">
-        <TestSettings
-          testSettingsVisibility={testSettingsVisibility}
-          setTestSettingsVisibility={setTestSettingsVisibility}
-        />
+        <TestSettings />
         <TestGrounds />
       </section>
-      <Footer
-        themeVisibility={themeVisibility}
-        setThemeVisibility={setThemeVisibility}
-      />
+      <Footer />
     </div>
   );
 }

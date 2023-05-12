@@ -24,6 +24,9 @@ module.exports = {
         custom: {
           primary: 'var(--color-primary)'
         }
+      },
+      width: {
+          '98': '400px'
       }
     },
   },

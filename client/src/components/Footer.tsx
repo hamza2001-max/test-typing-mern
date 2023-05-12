@@ -1,13 +1,16 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { themeSlice } from "../redux/themeSlice";
-import { themeVisibilityInterface } from "../types";
+import { themeVInterface } from "../types";
+import { themeVSlice } from "../redux/visibilitySlice";
 
-export const Footer = ({
-  themeVisibility,
-  setThemeVisibility,
-}: themeVisibilityInterface) => {
-  const dispatch = useDispatch();
-  const { light, dark, afterDark, retrocast } = themeSlice.actions;
+export const Footer = () => {
+  const themeVSelector = useSelector(
+    (state: themeVInterface) => state.themeV.themeV
+  );
+  const themeVDispatch = useDispatch();
+  const { visibleTheme } = themeVSlice.actions;
+  const themeDispatch = useDispatch();
+  const { light, dark, afterDark, retrocast, laser } = themeSlice.actions;
 
   return (
     <section className="flex justify-between  px-6 py-6">
@@ -41,7 +44,7 @@ export const Footer = ({
           </span>
         </div>
       </div>
-      {themeVisibility && (
+      {themeVSelector && (
         <div
           className="h-64 w-64 p-4 rounded-xl flex flex-col space-y-3 text-xs bg-custom-fill 
         text-custom-primary border border-custom-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
@@ -49,7 +52,7 @@ export const Footer = ({
         >
           <div
             className="flex justify-between cursor-pointer"
-            onClick={() => dispatch(light())}
+            onClick={() => themeDispatch(light())}
           >
             <span>light</span>
             <div className="flex justify-center items-center space-x-1 bg-[#f2f2f2] h-5 w-14 rounded-2xl">
@@ -60,7 +63,7 @@ export const Footer = ({
           </div>
           <div
             className="flex justify-between cursor-pointer"
-            onClick={() => dispatch(dark())}
+            onClick={() => themeDispatch(dark())}
           >
             <span>dark</span>
             <div className="flex justify-center items-center space-x-1 bg-[#000] h-5 w-14 rounded-2xl">
@@ -71,7 +74,7 @@ export const Footer = ({
           </div>
           <div
             className="flex justify-between cursor-pointer"
-            onClick={() => dispatch(afterDark())}
+            onClick={() => themeDispatch(afterDark())}
           >
             <span>80's after dark</span>
             <div className="flex justify-center items-center space-x-1 bg-[#1b1d36] h-5 w-14 rounded-2xl">
@@ -82,7 +85,7 @@ export const Footer = ({
           </div>
           <div
             className="flex justify-between cursor-pointer"
-            onClick={() => dispatch(retrocast())}
+            onClick={() => themeDispatch(retrocast())}
           >
             <span>retrocast</span>
             <div className="flex justify-center items-center space-x-1 bg-[#07737a] h-5 w-14 rounded-2xl">
@@ -91,12 +94,24 @@ export const Footer = ({
               <div className="bg-[#ffffff] h-3 w-3 rounded-full"></div>
             </div>
           </div>
+
+          <div
+            className="flex justify-between cursor-pointer"
+            onClick={() => themeDispatch(laser())}
+          >
+            <span>laser</span>
+            <div className="flex justify-center items-center space-x-1 bg-[#221b44] h-5 w-14 rounded-2xl">
+              <div className="bg-[#b82356] h-3 w-3 rounded-full"></div>
+              <div className="bg-[#009eaf] h-3 w-3 rounded-full"></div>
+              <div className="bg-[#dbe7e8] h-3 w-3 rounded-full"></div>
+            </div>
+          </div>
         </div>
       )}
       <div className="text-custom-primary flex flex-col relative">
         <span
           className="flex items-center cursor-pointer hover:text-custom-secondary transition ease-in-out delay-75"
-          onClick={() => setThemeVisibility(true)}
+          onClick={() => themeVDispatch(visibleTheme())}
         >
           theme
         </span>

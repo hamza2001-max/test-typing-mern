@@ -1,26 +1,49 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { VscDebugRestart } from "react-icons/vsc";
-import testJSON from "../testJson.js";
+import { wordsJSON } from "../testJson.js";
+import { useDispatch, useSelector } from "react-redux";
+import { TestModeWordsPrompt } from "./TestModeWordsPrompt";
+import { customPromptVSlice } from "../redux/visibilitySlice";
+import { customPromptVSInterface } from "../types.js";
+
 export const TestModeWords = () => {
-  const [randomNumber, setRandomNumber] = useState<number>(
-    Math.floor(Math.random() * 5)
-  );
-  const [testSentence, setTestSentence] = useState<string>(
-    testJSON[randomNumber].sentence
-  );
-  const [refresh, setRefresh] = useState<boolean>(false);
+  const [testSentence, setTestSentence] = useState<string>("hamzaAli");
   const [inputValue, setInputValue] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleRefresh = () => {
-    setRandomNumber(Math.floor(Math.random() * testJSON.length));
-    setTestSentence(testJSON[randomNumber].sentence);
-    setRefresh(true);
+  const customPromptVDispatch = useDispatch();
+  const { visibleCustom } = customPromptVSlice.actions;
+
+  const customPromptVSelector = useSelector(
+    (state: customPromptVSInterface) => state.customPromptV.customPromptV
+  );
+  const testLimiterSelector = useSelector(
+    (state: { testLimiter: { testLimiter: string } }) =>
+      state.testLimiter.testLimiter
+  );
+
+  useEffect(() => {
+    testSentenceCreator();
+  }, [testLimiterSelector]);
+
+  const testSentenceCreator = () => {
+    let prototypeSentence = "";
+    if (typeof testLimiterSelector === "number") {
+      let randomLimit = Math.floor(Math.random() * wordsJSON.length);
+      for (let i = 0; i < testLimiterSelector - 1; i++) {
+        prototypeSentence += wordsJSON[randomLimit].word + " ";
+        randomLimit = Math.floor(Math.random() * wordsJSON.length);
+      }
+      setTestSentence(prototypeSentence);
+    }
+    if (typeof testLimiterSelector === "string") {
+      customPromptVDispatch(visibleCustom());
+    }
   };
 
-  if (refresh) {
-    return <TestModeWords />;
-  }
+  const handleRefresh = () => {
+    testSentenceCreator();
+  };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
@@ -107,28 +130,32 @@ export const TestModeWords = () => {
   };
 
   return (
-    <div className="text-custom-primary relative flex flex-col px-10 py-10 my-12 mb-36">
-      {inputValue && (
-        <h1 className="text-custom-tertiary">
-          {inputValue.split(" ").length - 1}/{testSentence.split(" ").length}{" "}
-          words
-        </h1>
-      )}
-      <div className="text-2xl">
-        <TestSentence />
+    <section>
+      <div className="text-custom-primary relative flex flex-col px-10 py-10 my-12 mb-36">
+        {inputValue && (
+          <h1 className="text-custom-tertiary">
+            {inputValue.split(" ").length - 1}/{testSentence.split(" ").length}{" "}
+            words
+          </h1>
+        )}
+        <div className="text-2xl">
+          <TestSentence />
+        </div>
+        <input
+          type="text"
+          onChange={handleChange}
+          className="h-10 border border-custom-primary rounded-md mt-6 py-1 px-1"
+          ref={inputRef}
+        />
+        <button
+          className="text-2xl w-full flex justify-center mt-10 hover:text-custom-secondary transition ease-in-out delay-75"
+          onClick={handleRefresh}
+        >
+          <VscDebugRestart />
+        </button>
       </div>
-      <input
-        type="text"
-        onChange={handleChange}
-        className="h-10 border border-custom-primary rounded-md mt-6 py-1 px-1"
-        ref={inputRef}
-      />
-      <button
-        className="text-2xl w-full flex justify-center mt-10 hover:text-custom-secondary transition ease-in-out delay-75"
-        onClick={handleRefresh}
-      >
-        <VscDebugRestart />
-      </button>
-    </div>
+      {customPromptVSelector && <TestModeWordsPrompt />}
+      {/* <Proto/> */}
+    </section>
   );
 };

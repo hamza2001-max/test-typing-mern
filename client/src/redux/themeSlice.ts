@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const themeInitialState = {
   theme: "",
 };
-
 export const themeSlice = createSlice({
   name: "theme",
   initialState: themeInitialState,
@@ -15,10 +14,13 @@ export const themeSlice = createSlice({
       state.theme = "dark";
     },
     afterDark: (state) => {
-      state.theme = "afterDark"
+      state.theme = "afterDark";
     },
     retrocast: (state) => {
-      state.theme = "retrocast"
-    }
+      state.theme = "retrocast";
+    },
+    laser: (state) => {
+      state.theme = "laser";
+    },
   },
 });
