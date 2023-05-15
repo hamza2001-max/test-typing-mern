@@ -5,10 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { TestModeWordsPrompt } from "./TestModeWordsPrompt";
 import { customPromptVSlice } from "../redux/visibilitySlice";
 import { customPromptVSInterface } from "../types.js";
+import { Proto } from "./Proto";
 
 export const TestModeWords = () => {
   const [testSentence, setTestSentence] = useState<string>("hamzaAli");
   const [inputValue, setInputValue] = useState<string>("");
+  const [lastInputChar, setLastInputChar] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   const customPromptVDispatch = useDispatch();
@@ -25,6 +27,12 @@ export const TestModeWords = () => {
   useEffect(() => {
     testSentenceCreator();
   }, [testLimiterSelector]);
+
+  useEffect(() => {
+    setLastInputChar(inputValue.split("")[inputValue.length - 1]);
+  }, [inputValue]);
+
+  // console.log(lastInputChar);
 
   const testSentenceCreator = () => {
     let prototypeSentence = "";
@@ -43,6 +51,9 @@ export const TestModeWords = () => {
 
   const handleRefresh = () => {
     testSentenceCreator();
+    if (inputRef.current) {
+      inputRef.current.value = "";
+    }
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -107,22 +118,34 @@ export const TestModeWords = () => {
       sentenceParts.push(currentPart);
     }
 
+    const incorrectIndex: number[] = [];
+    // console.log(incorrectIndex);
+
     return (
       <section>
         <div className="w-64">
           {sentenceParts.map((part, index) => {
-            for (let i = 0; i < part.length; i++) {
-              if (part[i].props.className === "text-custom-tertiary")
-                return (
-                  <span
-                    key={index}
-                    className="tailUnderline underline-offset-2 pb-1"
-                  >
-                    {part}
-                  </span>
-                );
-            }
-            return part;
+            const hasCustomTertiaryClass = part.some(
+              (item) => item.props.className === "text-custom-tertiary"
+            );
+            return hasCustomTertiaryClass ? (
+              <span
+                key={index}
+                className="tailUnderline underline-offset-2 pb-1"
+              >
+                {part.map((item, i) =>
+                  item.props.className === "text-custom-tertiary" ? (
+                    <span key={i} className={item.props.className}>
+                      {item.props.children}
+                    </span>
+                  ) : (
+                    item
+                  )
+                )}
+              </span>
+            ) : (
+              part
+            );
           })}
         </div>
       </section>
@@ -155,7 +178,7 @@ export const TestModeWords = () => {
         </button>
       </div>
       {customPromptVSelector && <TestModeWordsPrompt />}
-      {/* <Proto/> */}
+      <Proto/>
     </section>
   );
 };

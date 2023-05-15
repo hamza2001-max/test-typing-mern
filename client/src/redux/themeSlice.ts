@@ -22,5 +22,8 @@ export const themeSlice = createSlice({
     laser: (state) => {
       state.theme = "laser";
     },
+    matrix: (state) => {
+      state.theme = "matrix";
+    },
   },
 });

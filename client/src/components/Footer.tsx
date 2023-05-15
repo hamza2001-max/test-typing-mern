@@ -10,7 +10,8 @@ export const Footer = () => {
   const themeVDispatch = useDispatch();
   const { visibleTheme } = themeVSlice.actions;
   const themeDispatch = useDispatch();
-  const { light, dark, afterDark, retrocast, laser } = themeSlice.actions;
+  const { light, dark, afterDark, retrocast, laser, matrix } =
+    themeSlice.actions;
 
   return (
     <section className="flex justify-between  px-6 py-6">
@@ -104,6 +105,18 @@ export const Footer = () => {
               <div className="bg-[#b82356] h-3 w-3 rounded-full"></div>
               <div className="bg-[#009eaf] h-3 w-3 rounded-full"></div>
               <div className="bg-[#dbe7e8] h-3 w-3 rounded-full"></div>
+            </div>
+          </div>
+
+          <div
+            className="flex justify-between cursor-pointer"
+            onClick={() => themeDispatch(matrix())}
+          >
+            <span>matrix</span>
+            <div className="flex justify-center items-center space-x-1 bg-[#000000] h-5 w-14 rounded-2xl">
+              <div className="bg-[#003b00] h-3 w-3 rounded-full"></div>
+              <div className="bg-[#15ff00] h-3 w-3 rounded-full"></div>
+              <div className="bg-[#d1ffcd] h-3 w-3 rounded-full"></div>
             </div>
           </div>
         </div>
