@@ -10,7 +10,7 @@ export const Footer = () => {
   const themeVDispatch = useDispatch();
   const { visibleTheme } = themeVSlice.actions;
   const themeDispatch = useDispatch();
-  const { light, dark, afterDark, retrocast, laser, matrix } =
+  const { light, dark, afterDark, retrocast, laser, matrix, trance } =
     themeSlice.actions;
 
   return (
@@ -117,6 +117,17 @@ export const Footer = () => {
               <div className="bg-[#003b00] h-3 w-3 rounded-full"></div>
               <div className="bg-[#15ff00] h-3 w-3 rounded-full"></div>
               <div className="bg-[#d1ffcd] h-3 w-3 rounded-full"></div>
+            </div>
+          </div>
+          <div
+            className="flex justify-between cursor-pointer"
+            onClick={() => themeDispatch(trance())}
+          >
+            <span>trance</span>
+            <div className="flex justify-center items-center space-x-1 bg-[#00021b] h-5 w-14 rounded-2xl">
+              <div className="bg-[#3c4c79] h-3 w-3 rounded-full"></div>
+              <div className="bg-[#e51376] h-3 w-3 rounded-full"></div>
+              <div className="bg-[#ffffff] h-3 w-3 rounded-full"></div>
             </div>
           </div>
         </div>

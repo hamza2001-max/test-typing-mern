@@ -45,6 +45,13 @@
     --color-tertiary: #d1ffcd;
     --color-fill: #000000;
   }
+
+  .trance {
+    --color-primary: #3c4c79;
+    --color-secondary: #e51376;
+    --color-tertiary: #ffffff;
+    --color-fill: #00021b;
+  }
 }
 
 body {
