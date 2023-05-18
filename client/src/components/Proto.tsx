@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { wordsJSON } from "../testJson";
+import { VscDebugRestart } from "react-icons/vsc";
 
 interface ProtoSentenceInterface {
   inputValue: string;
@@ -16,94 +17,117 @@ const ProtoSentence = ({
   inputRef,
   inputValue,
 }: ProtoSentenceInterface) => {
-  const newTestSentence = prototypeSentence.split(" ").map((word, index1) => {
-    const lastWordWrittenIndex = textWritten.split(" ").length - 1;
-    const currentProtoWord = prototypeSentence.split(" ")[lastWordWrittenIndex];
-    if (index1 === lastWordWrittenIndex) {
-      return (
-        <span key={index1}>
-          {word.split("").map((letter, index2) => {
-            let sColorClass = "";
-            if (index2 <= inputValue.length - 1) {
-              if (
-                currentProtoWord.split("")[index2] ===
-                inputValue.split("")[inputValue.length - 1]
-              ) {
-                if (index2 === inputValue.length - 1) {
-                  sColorClass = "text-custom-secondary";
-                } else {
-                  if (
-                    currentProtoWord.split("")[index2] ===
-                    inputValue.split("")[index2]
-                  ) {
-                    sColorClass = "text-custom-secondary";
-                  } else {
-                    sColorClass = "text-custom-tertiary";
-                  }
-                }
-              } else {
-                if (
-                  currentProtoWord.split("")[index2] ===
-                  inputValue.split("")[index2]
-                ) {
-                  sColorClass = "text-custom-secondary";
-                } else {
-                  sColorClass = "text-custom-tertiary";
-                }
-              }
-            }
-            return (
-              <span key={index2} className={sColorClass}>
-                {letter}
-              </span>
-            );
-          })}
-          &nbsp;
-        </span>
-      );
-    } else {
-      const writtenWord = textWritten.split(" ")[index1];
-      if (writtenWord) {
+  const newTestSentence = prototypeSentence
+    .split(" ")
+    .map((word, firstIndex) => {
+      const lastWordWrittenIndex = textWritten.split(" ").length - 1;
+      const currentSentenceWord =
+        prototypeSentence.split(" ")[lastWordWrittenIndex];
+      if (firstIndex === lastWordWrittenIndex) {
         return (
-          <span key={index1}>
-            {word.split("").map((letter, index3) => {
-              let sColorClass = "";
-              if (index3 <= word.length - 1) {
-                if (writtenWord.split("")[index3] === word.split("")[index3]) {
-                  if (index3 === inputValue.length - 1) {
-                    sColorClass = "text-custom-secondary";
+          <span key={firstIndex} className="flex">
+            {word.split("").map((letter, secondIndex) => {
+              let currentClass = "";
+              if (secondIndex <= inputValue.length - 1) {
+                if (
+                  currentSentenceWord.split("")[secondIndex] ===
+                  inputValue.split("")[inputValue.length - 1]
+                ) {
+                  if (secondIndex === inputValue.length - 1) {
+                    currentClass = "text-custom-secondary";
                   } else {
                     if (
-                      writtenWord.split("")[index3] === word.split("")[index3]
+                      currentSentenceWord.split("")[secondIndex] ===
+                      inputValue.split("")[secondIndex]
                     ) {
-                      sColorClass = "text-custom-secondary";
+                      currentClass = "text-custom-secondary";
                     } else {
-                      sColorClass = "text-custom-tertiary";
+                      currentClass = "text-custom-tertiary";
                     }
                   }
                 } else {
                   if (
-                    writtenWord.split("")[index3] === word.split("")[index3]
+                    currentSentenceWord.split("")[secondIndex] ===
+                    inputValue.split("")[secondIndex]
                   ) {
-                    sColorClass = "text-custom-secondary";
+                    currentClass = "text-custom-secondary";
                   } else {
-                    sColorClass = "text-custom-tertiary";
+                    currentClass = "text-custom-tertiary";
                   }
                 }
               }
-              return <span className={sColorClass}>{letter}</span>;
+              return (
+                <span key={secondIndex} className="relative flex">
+                  {currentSentenceWord.length === inputValue.length &&
+                    secondIndex === inputValue.length - 1 && (
+                      <div
+                        className={`absolute top-1 right-0 w-0.1 h-6 rounded-sm bg-custom-secondary transition duration-200 caret`}
+                      ></div>
+                    )}
+                  {secondIndex === inputValue.length && (
+                    <div
+                      className={`absolute top-1 left-0 w-0.1 h-6 rounded-sm bg-custom-secondary transition duration-200 caret`}
+                    ></div>
+                  )}
+                  <span className={currentClass}>{letter}</span>
+                </span>
+              );
             })}
             &nbsp;
           </span>
         );
       } else {
-        return <span>{word}&nbsp;</span>;
+        const writtenWord = textWritten.split(" ")[firstIndex];
+        if (writtenWord) {
+          return (
+            <span key={firstIndex}>
+              {word.split("").map((letter, thirdIndex) => {
+                let prevClass = "";
+                if (thirdIndex <= word.length - 1) {
+                  if (
+                    writtenWord.split("")[thirdIndex] ===
+                    word.split("")[thirdIndex]
+                  ) {
+                    if (thirdIndex === inputValue.length - 1) {
+                      prevClass = "text-custom-secondary";
+                    } else {
+                      if (
+                        writtenWord.split("")[thirdIndex] ===
+                        word.split("")[thirdIndex]
+                      ) {
+                        prevClass = "text-custom-secondary";
+                      } else {
+                        prevClass = "text-custom-tertiary";
+                      }
+                    }
+                  } else {
+                    if (
+                      writtenWord.split("")[thirdIndex] ===
+                      word.split("")[thirdIndex]
+                    ) {
+                      prevClass = "text-custom-secondary";
+                    } else {
+                      prevClass = "text-custom-tertiary";
+                    }
+                  }
+                }
+                return (
+                  <span className={prevClass} key={thirdIndex}>
+                    {letter}
+                  </span>
+                );
+              })}
+              &nbsp;
+            </span>
+          );
+        } else {
+          return <span key={firstIndex}>{word}&nbsp;</span>;
+        }
       }
-    }
-  });
+    });
   return (
     <section
-      className="text-custom-primary text-2xl"
+      className="flex text-custom-primary text-2xl"
       onClick={() => {
         inputRef.current?.focus();
       }}
@@ -116,33 +140,51 @@ const ProtoSentence = ({
 export const Proto = () => {
   const [inputValue, setInputValue] = useState("");
   const [textWritten, setTextWritten] = useState("");
-  const [wordIndex, setWordIndex] = useState(0);
-  const [caretPosition, setCaretPosition] = useState(0);
+  // const [wordIndex, setWordIndex] = useState(0);
+  // const [caretPosition, setCaretPosition] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
+  console.log(inputValue);
+  console.log(textWritten);
+
   useEffect(() => {
     inputRef.current?.focus();
   });
 
+  const handleRefresh = () => {
+    setTextWritten("");
+    setInputValue("");
+    if (inputRef.current) {
+      inputRef.current.value = "";
+      inputRef.current.disabled = false;
+    }
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === " ") {
       e.preventDefault();
-      if (inputValue === prototypeSentence.split(" ")[wordIndex]) {
-        console.log("correct");
-      } else {
-        console.log("incorrect");
-      }
-      setWordIndex((prev) => ++prev);
+      // setWordIndex((prev) => ++prev);
       setTextWritten((prev) => prev + inputValue + " ");
       setInputValue("");
       if (inputRef.current) {
         inputRef.current.value = "";
       }
+      if (
+        textWritten.split(" ").length - 1 ===
+        prototypeSentence.split(" ").length - 1
+        // (textWritten.split(" ")[textWritten.split(" ").length - 1] ===
+        //   prototypeSentence.split(" ")[prototypeSentence.split(" ").length - 1])
+      ) {
+        if (inputRef.current) {
+          inputRef.current.disabled = true;
+        }
+      }
     }
   };
+
   return (
     <section className="relative ">
       <ProtoSentence
@@ -150,9 +192,6 @@ export const Proto = () => {
         textWritten={textWritten}
         inputRef={inputRef}
       />
-      {/* <div
-        className={`absolute top-2 left-0 w-0.1 h-6 rounded-sm bg-custom-secondary transition duration-200 caret`}
-      ></div> */}
       <input
         type="text"
         className="w-full mt-3 py-2 sr-only"
@@ -160,6 +199,12 @@ export const Proto = () => {
         onChange={handleChange}
         onKeyDown={handleKeyDown}
       />
+      <button
+        className="text-2xl w-full flex justify-center mt-10 hover:text-custom-secondary transition ease-in-out delay-75"
+        onClick={handleRefresh}
+      >
+        <VscDebugRestart />
+      </button>
     </section>
   );
 };

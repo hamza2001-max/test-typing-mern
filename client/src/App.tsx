@@ -37,7 +37,7 @@ function App() {
 
   return (
     <div
-      className={`${theme} App relative bg-custom-fill`}
+      className={`${theme} App relative bg-custom-fill h-screen`}
       onClick={() => {
         themeVSelector === true && themeVDispatch(inVisibleTheme());
         testSettingsVSelector === true && testSettingsVDispatch(inVisibleTS());
