@@ -22,9 +22,14 @@ module.exports = {
       },
       borderColor:{
         custom: {
-          primary: 'var(--color-primary)'
+          primary: 'var(--color-primary)',
+          tertiary: 'var(--color-tertiary)',
         }
       },
+      borderWidth:{
+        '3': '3px'
+      },
+
       width: {
           '0.1': '0.12rem',
           '98': '400px'

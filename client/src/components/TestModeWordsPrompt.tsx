@@ -1,7 +1,7 @@
 export const TestModeWordsPrompt = () => {
   return (
     <div
-      className="w-98 space-y-4 p-8 border border-custom-primary rounded-xl text-custom-primary bg-custom-fill absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+      className="w-98 z-10 space-y-4 p-8 border border-custom-primary rounded-xl text-custom-primary bg-custom-fill absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
       onClick={(e) => e.stopPropagation()}
     >
       <h1 className="text-xl">Word Amount</h1>

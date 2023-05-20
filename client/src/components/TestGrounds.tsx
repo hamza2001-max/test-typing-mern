@@ -6,6 +6,4 @@ export const TestGrounds = () => {
     (state: { testMode: { testMode: string } }) => state.testMode.testMode
   );
   return <section>{testModeSelector === "words" && <Proto />}</section>;
-
-  // return <section>{testModeSelector === "words" && <TestModeWords />}</section>;
 };

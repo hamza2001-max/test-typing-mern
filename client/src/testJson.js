@@ -192,7 +192,7 @@ export const wordsJSON = [
     word: "like"
   },
   {
-    word: "dont't"
+    word: "dont"
   },
   {
     word: "what"
