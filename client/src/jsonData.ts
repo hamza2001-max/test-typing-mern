@@ -20,7 +20,7 @@ export const testSettingModifierData = [
 
 export const testSettingModeData = [
   { label: "time", defaultLimit: testLimiterReducer(30), action: time },
-  { label: "words", defaultLimit: testLimiterReducer(10), action: words },
+  { label: "words", defaultLimit: testLimiterReducer(25), action: words },
   { label: "quote", defaultLimit: testLimiterReducer("medium"), action: quote },
   { label: "zen", action: zen },
   { label: "custom", action: custom },

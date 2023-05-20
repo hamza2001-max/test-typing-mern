@@ -13,11 +13,6 @@ interface ProtoSentenceInterface {
   inputRef: React.RefObject<HTMLInputElement>;
 }
 
-// let prototypeSentence = wordsJSON
-//   .slice(0, 3)
-//   .map((word) => word.word)
-//   .join(" ");
-
 const ProtoSentence = ({
   textWritten,
   inputRef,
@@ -29,7 +24,7 @@ const ProtoSentence = ({
     const currentSentenceWord = testSentence.split(" ")[lastWordWrittenIndex];
     if (firstIndex === lastWordWrittenIndex) {
       return (
-        <span key={firstIndex} className="flex">
+        <span key={firstIndex}>
           {word.split("").map((letter, secondIndex) => {
             let currentClass = "";
             if (secondIndex <= inputValue.length - 1) {
@@ -61,21 +56,19 @@ const ProtoSentence = ({
               }
             }
             return (
-              <span key={secondIndex} className="relative flex">
+              <span key={secondIndex} className={`${currentClass} relative`}>
                 {currentSentenceWord.length === inputValue.length &&
                   secondIndex === inputValue.length - 1 && (
-                    <div
+                    <span
                       className={`absolute top-1 right-0 w-0.1 h-6 rounded-sm bg-custom-secondary transition duration-200 caret`}
-                    ></div>
+                    ></span>
                   )}
                 {secondIndex === inputValue.length && (
-                  <div
+                  <span
                     className={`absolute top-1 left-0 w-0.1 h-6 rounded-sm bg-custom-secondary transition duration-200 caret`}
-                  ></div>
+                  ></span>
                 )}
-                <span key={secondIndex} className={currentClass}>
                   {letter}
-                </span>
               </span>
             );
           })}
@@ -143,21 +136,21 @@ const ProtoSentence = ({
   });
 
   return (
-      <section
-        className=" flex text-custom-primary text-2xl w-96"
-        onClick={() => {
-          inputRef.current?.focus();
-        }}
-      >
-        {newTestSentence}
-      </section>
+    <section
+      className=" flex text-custom-primary text-2xl"
+      onClick={() => {
+        inputRef.current?.focus();
+      }}
+    >
+      <p className=" w-64 whitespace-normal break-words bg-amber-300">{newTestSentence}</p>
+    </section>
   );
 };
 
 export const Proto = () => {
-  const [testSentence, setTestSentence] = useState<string>('hamzaAli');
-  const [inputValue, setInputValue] = useState<string>('');
-  const [textWritten, setTextWritten] = useState<string>('');
+  const [testSentence, setTestSentence] = useState<string>("hamzaAli");
+  const [inputValue, setInputValue] = useState<string>("");
+  const [textWritten, setTextWritten] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   const customPromptVDispatch = useDispatch();
@@ -176,74 +169,28 @@ export const Proto = () => {
     testSentenceCreator();
   }, [testLimiterSelector]);
 
-  const handleRefresh = useCallback(() => {
-    testSentenceCreator();
-    setTextWritten('');
-    setInputValue('');
-    if (inputRef.current) {
-      inputRef.current.value = '';
-      inputRef.current.disabled = false;
-      inputRef.current?.focus();
-    }
-  }, []);
-
-  const testSentenceCreator = useCallback(() => {
-    let prototypeSentence = '';
-    if (typeof testLimiterSelector === 'number') {
-      for (let i = 0; i < testLimiterSelector; i++) {
-        const randomWord =
-          wordsJSON[Math.floor(Math.random() * wordsJSON.length)].word;
-        prototypeSentence +=
-          i === testLimiterSelector - 1 ? randomWord : randomWord + ' ';
-      }
-      setTestSentence(prototypeSentence);
-    }
-    if (typeof testLimiterSelector === 'string') {
-      customPromptVDispatch(visibleCustom());
-    }
-  }, [testLimiterSelector]);
-
-  const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (e.key === ' ') {
-        e.preventDefault();
-        setTextWritten((prev) => prev + inputValue + ' ');
-        setInputValue('');
-        if (textWritten.split(' ').length === testSentence.split(' ').length) {
-          if (inputRef.current) {
-            inputRef.current.disabled = true;
-          }
-        }
-        if (inputRef.current) {
-          inputRef.current.value = '';
-        }
-      }
-    },
-    [inputValue, textWritten, testSentence]
-  );
-
   useEffect(() => {
     const handleInputChange = () => {
-      if (typeof inputRef.current?.value === 'string') {
+      if (typeof inputRef.current?.value === "string") {
         setInputValue(inputRef.current?.value);
       }
     };
 
-    inputRef.current?.addEventListener('input', handleInputChange);
+    inputRef.current?.addEventListener("input", handleInputChange);
 
     return () => {
-      inputRef.current?.removeEventListener('input', handleInputChange);
+      inputRef.current?.removeEventListener("input", handleInputChange);
     };
   }, []);
 
   useEffect(() => {
     if (
-      textWritten.split(' ').length - 1 ===
-      testSentence.split(' ').length - 1
+      textWritten.split(" ").length - 1 ===
+      testSentence.split(" ").length - 1
     ) {
       if (
         inputValue.trim() ===
-        testSentence.split(' ')[testSentence.split(' ').length - 1].trim()
+        testSentence.split(" ")[testSentence.split(" ").length - 1].trim()
       ) {
         if (inputRef.current) {
           inputRef.current.disabled = true;
@@ -251,6 +198,52 @@ export const Proto = () => {
       }
     }
   }, [inputValue, textWritten, testSentence]);
+
+  const handleRefresh = useCallback(() => {
+    testSentenceCreator();
+    setTextWritten("");
+    setInputValue("");
+    if (inputRef.current) {
+      inputRef.current.value = "";
+      inputRef.current.disabled = false;
+      inputRef.current?.focus();
+    }
+  }, []);
+
+  const testSentenceCreator = useCallback(() => {
+    let prototypeSentence = "";
+    if (typeof testLimiterSelector === "number") {
+      for (let i = 0; i < testLimiterSelector; i++) {
+        const randomWord =
+          wordsJSON[Math.floor(Math.random() * wordsJSON.length)].word;
+        prototypeSentence +=
+          i === testLimiterSelector - 1 ? randomWord : randomWord + " ";
+      }
+      setTestSentence(prototypeSentence);
+    }
+    if (typeof testLimiterSelector === "string") {
+      customPromptVDispatch(visibleCustom());
+    }
+  }, [testLimiterSelector]);
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === " ") {
+        e.preventDefault();
+        setTextWritten((prev) => prev + inputValue + " ");
+        setInputValue("");
+        if (textWritten.split(" ").length === testSentence.split(" ").length) {
+          if (inputRef.current) {
+            inputRef.current.disabled = true;
+          }
+        }
+        if (inputRef.current) {
+          inputRef.current.value = "";
+        }
+      }
+    },
+    [inputValue, textWritten, testSentence]
+  );
 
   return (
     <section className="relative text-custom-primary">
