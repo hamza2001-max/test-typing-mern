@@ -1,27 +1,29 @@
-- [ ] remember
-  - [ ] dont make functions to big and approach component
-        based coding.
-  - [ ] remove bg color from setting buttons for now.
-  
-- [ ] frontend
-  - [ ] Test.tsx
-    - [x] make input disabled upon finishing the last word and
-          not on the last space.
-    - [x] if a word contains wrong character underline it red.
-    - [x] get a random sentence on clicking refresh.
-  - [ ] App.tsx
-    - [x] initiate the multiple themes.
-    - [ ] complete the multiple themes.
+- [ ] Todo
 
-- [x] fix
+  - [x] complete the customPromptfunctionality.
+  - [x] apply the caret to proto.
   - [x] create space in the split sentence.
-  - [ ] refactor Test into TestSentence.
+  - [x] refactor footer into json data.
+  - [ ] code the keyframes for caret in tailwind.
   - [ ] refactor the component folder structure.
-  
+  - [ ] create a data folder for the json data.
+
+- [ ] frontend
+
+  - [ ] apply blur when one component become visible.
+  - [ ] testSettings.tsx
+    - [ ] make testSettings responsive.
+  - [ ] TestModeWords.tsx
+    - [ ] apply blur to text if input is not on focus.
+  - [ ] TestModeWordsPrompt.tsx
+    - [ ] complete the infinite mode.
+
 - [ ] ideas
+  - [ ] create graphs.
+  - [ ] create settings.
   - [ ] create multiple users.
   - [ ] create admin.
   - [ ] give admin the ability to make other admins.
   - [ ] give admin dashboard.
-  - [ ] give multiple color modes.
-  - [ ] make underline appear only when space is pressed.
+  - [x] give multiple color modes.
+  - [x] make underline appear only when space is pressed.

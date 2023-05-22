@@ -7,7 +7,7 @@ import { FaUser } from "react-icons/fa";
 
 export const Navigation = () => {
   return (
-    <section className="flex justify-between items-center px-6 py-6">
+    <nav className="flex justify-between items-center px-6 py-6">
       <div className="flex items-center text-lg">
         <h1 className="mr-5 text-custom-secondary font-semibold">
           typeTesting
@@ -23,6 +23,6 @@ export const Navigation = () => {
         <FaBell className="cursor-pointer hover:text-custom-secondary transition ease-in-out delay-75" />
         <FaUser className="cursor-pointer hover:text-custom-secondary transition ease-in-out delay-75" />
       </div>
-    </section>
+    </nav>
   );
 };

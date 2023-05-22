@@ -12,7 +12,7 @@ export const TestSettings = () => {
   const { visibleTS } = testSettingsVSlice.actions;
 
   return (
-    <section>
+    <section className="flex justify-center items-center flex-col">
       <button
         className="flex items-center text-custom-primary cursor-pointer hover:text-custom-secondary transition ease-in-out delay-75"
         onClick={() => {

@@ -2,15 +2,14 @@ export interface themeInterface {
   theme: { theme: string };
 }
 
-// export interface themeVisibilityInterface {
-//   themeVisibility: boolean;
-//   setThemeVisibility: React.Dispatch<React.SetStateAction<boolean>>;
-// }
-
-// export interface testSettingsVisibilityInterface {
-//   testSettingsVisibility: boolean;
-//   setTestSettingsVisibility: React.Dispatch<React.SetStateAction<boolean>>;
-// }
+export interface ThemeOptionInterface {
+  title: string;
+  fill: string;
+  primary: string;
+  secondary: string;
+  tertiary: string;
+  onClick: () => void;
+}
 
 export interface testModeSInterface {
   testMode: { testMode: string };

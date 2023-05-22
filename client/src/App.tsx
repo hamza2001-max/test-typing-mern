@@ -1,8 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Footer } from "./components/Footer";
-import { Navigation } from "./components/Navigation";
-import { TestSettings } from "./components/TestSettings";
-import { TestGrounds } from "./components/TestGrounds";
 import {
   customPromptVSlice,
   testSettingsVSlice,
@@ -14,6 +10,8 @@ import {
   themeInterface,
   themeVInterface,
 } from "./types";
+
+import { Home } from "./components/Home";
 
 function App() {
   const themeVDispatch = useDispatch();
@@ -37,7 +35,7 @@ function App() {
 
   return (
     <div
-      className={`${theme} App relative bg-custom-fill h-screen`}
+      className={`${theme} App relative bg-custom-fill`}
       onClick={() => {
         themeVSelector === true && themeVDispatch(inVisibleTheme());
         testSettingsVSelector === true && testSettingsVDispatch(inVisibleTS());
@@ -45,12 +43,7 @@ function App() {
           customPromptVDispatch(inVisibleCustom());
       }}
     >
-      <Navigation />
-      <section className="flex flex-col items-center">
-        <TestSettings />
-        <TestGrounds />
-      </section>
-      <Footer />
+     <Home/>
     </div>
   );
 }
