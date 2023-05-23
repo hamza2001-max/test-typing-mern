@@ -6,11 +6,9 @@
   - [x] refactor footer into json data.
   - [ ] code the keyframes for caret in tailwind.
   - [ ] refactor the component folder structure.
-  - [ ] create a data folder for the json data.
-
-- [ ] frontend
-
-  - [ ] apply blur when one component become visible.
+  - [ ] refactor TestModeWords.tsx as a whole.
+  - [x] create a data folder for the json data.
+  - [x] apply blur when one component become visible.
   - [ ] testSettings.tsx
     - [ ] make testSettings responsive.
   - [ ] TestModeWords.tsx

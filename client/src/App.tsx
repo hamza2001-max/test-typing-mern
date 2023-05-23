@@ -10,8 +10,7 @@ import {
   themeInterface,
   themeVInterface,
 } from "./types";
-
-import { Home } from "./components/Home";
+import { Home } from "./Pages/Home";
 
 function App() {
   const themeVDispatch = useDispatch();
@@ -43,7 +42,10 @@ function App() {
           customPromptVDispatch(inVisibleCustom());
       }}
     >
-     <Home/>
+      {themeVSelector && (
+        <div className="z-20 absolute w-full h-full bg-custom-fadedBlack"></div>
+      )}
+      <Home />
     </div>
   );
 }

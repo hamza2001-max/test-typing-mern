@@ -1,7 +1,7 @@
-import { Footer } from "./Footer";
-import { Navigation } from "./Navigation";
-import { TestSettings } from "./TestSettings";
-import { TestGrounds } from "./TestGrounds";
+import { Footer } from "../components/Footer";
+import { Navigation } from "../components/Navigation";
+import { TestSettings } from "../components/TestSettings";
+import { TestGrounds } from "../components/TestGrounds";
 
 export const Home = () => {
   return (

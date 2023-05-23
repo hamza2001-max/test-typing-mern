@@ -2,7 +2,7 @@ import {
   testSettingLimiterData,
   testSettingModeData,
   testSettingModifierData,
-} from "../jsonData";
+} from "../data/testSettingData";
 import { useDispatch, useSelector } from "react-redux";
 import { testModifierSlice } from "../redux/testSettingsSlice";
 import { testSettingsVSlice } from "../redux/visibilitySlice";

@@ -1,14 +1,11 @@
-export interface themeInterface {
-  theme: { theme: string };
-}
-
 export interface ThemeOptionInterface {
   title: string;
-  fill: string;
-  primary: string;
-  secondary: string;
-  tertiary: string;
+  themeClass: string;
   onClick: () => void;
+}
+
+export interface themeInterface {
+  theme: { theme: string };
 }
 
 export interface testModeSInterface {

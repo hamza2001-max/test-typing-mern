@@ -19,6 +19,7 @@ module.exports = {
           primary: 'var(--color-primary)',
           secondary: 'var(--color-secondary)',
           tertiary: 'var(--color-tertiary)',
+          fadedBlack: 'rgba(0,0,0,.75)'
         }
       },
       borderColor:{

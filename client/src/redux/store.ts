@@ -2,14 +2,14 @@ import {
   customPromptVSlice,
   testSettingsVSlice,
   themeVSlice,
-} from "./redux/visibilitySlice";
+} from "./visibilitySlice";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { themeSlice } from "./redux/themeSlice";
+import { themeSlice } from "./themeSlice";
 import {
   testLimiterSlice,
   testModeSlice,
   testModifierSlice,
-} from "./redux/testSettingsSlice";
+} from "./testSettingsSlice";
 
 const rootReducer = combineReducers({
   theme: themeSlice.reducer,

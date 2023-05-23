@@ -71,8 +71,7 @@ const TestSentence = ({
                 {letter}
               </span>
             );
-          })}
-          {" "}
+          })}{" "}
         </span>
       );
     } else {
@@ -125,12 +124,11 @@ const TestSentence = ({
               }`}
             >
               {prevWords}
-            </span>
-            {" "}
+            </span>{" "}
           </span>
         );
       } else {
-        return <span key={firstIndex}>{word}{" "}</span>;
+        return <span key={firstIndex}>{word} </span>;
       }
     }
   });
@@ -149,6 +147,7 @@ const TestSentence = ({
 
 export const TestModeWords = () => {
   const [testSentence, setTestSentence] = useState<string>("hamzaAli");
+  const [isInputFocused, setIsInputFocused] = useState(true);
   const [inputValue, setInputValue] = useState<string>("");
   const [textWritten, setTextWritten] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
@@ -175,9 +174,7 @@ export const TestModeWords = () => {
         setInputValue(inputRef.current?.value);
       }
     };
-
     inputRef.current?.addEventListener("input", handleInputChange);
-
     return () => {
       inputRef.current?.removeEventListener("input", handleInputChange);
     };
@@ -199,6 +196,11 @@ export const TestModeWords = () => {
     }
   }, [inputValue, textWritten, testSentence]);
 
+  const handleFocus = () => {
+    setIsInputFocused(true);
+  };
+
+  const handleBlur = () => {};
   const handleRefresh = useCallback(() => {
     testSentenceCreator();
     setTextWritten("");
@@ -252,19 +254,35 @@ export const TestModeWords = () => {
   );
 
   return (
-    <section className="relative text-custom-primary flex justify-center items-center flex-col mt-5">
-      <TestSentence
-        testSentence={testSentence}
-        inputValue={inputValue}
-        textWritten={textWritten}
-        inputRef={inputRef}
-      />
-      <input
-        type="text"
-        className="w-full mt-3 py-2 sr-only"
-        ref={inputRef}
-        onKeyDown={handleKeyDown}
-      />
+    <section className="text-custom-primary flex justify-center items-center flex-col mt-5">
+      <div className="relative">
+        {/* {!inputRef.current?.focus() ? (
+          <div className="z-10 absolute w-full h-full backdrop-blur-sm"></div>
+        ) : null} */}
+        {!isInputFocused && (
+          <div
+            className="z-10 absolute w-full h-full backdrop-blur-sm"
+            onClick={() => {
+              setIsInputFocused(true);
+            }}
+          ></div>
+        )}
+        <TestSentence
+          testSentence={testSentence}
+          inputValue={inputValue}
+          textWritten={textWritten}
+          inputRef={inputRef}
+        />
+        <input
+          type="text"
+          className="w-full mt-3 py-2"
+          ref={inputRef}
+          onBlur={() => {
+            setIsInputFocused(false);
+          }}
+          onKeyDown={handleKeyDown}
+        />
+      </div>
       <button
         className="text-2xl flex justify-center mt-7 hover:text-custom-secondary transition ease-in-out delay-75"
         onClick={handleRefresh}
