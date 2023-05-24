@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { testModifierSlice } from "../redux/testSettingsSlice";
 import { testSettingsVSlice } from "../redux/visibilitySlice";
 
-export const TestSettingsModeSm = () => {
+export const TestSettingsSm = () => {
   const testModeDispatch = useDispatch();
   const testModifierDispatch = useDispatch();
   const testLimiterDispatch = useDispatch();

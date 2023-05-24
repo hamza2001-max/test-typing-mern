@@ -36,13 +36,12 @@ function App() {
     <div
       className={`${theme} App relative bg-custom-fill`}
       onClick={() => {
-        themeVSelector === true && themeVDispatch(inVisibleTheme());
-        testSettingsVSelector === true && testSettingsVDispatch(inVisibleTS());
-        customPromptVSelector === true &&
-          customPromptVDispatch(inVisibleCustom());
+        themeVSelector && themeVDispatch(inVisibleTheme());
+        testSettingsVSelector && testSettingsVDispatch(inVisibleTS());
+        customPromptVSelector && customPromptVDispatch(inVisibleCustom());
       }}
     >
-      {themeVSelector && (
+      {(themeVSelector || testSettingsVSelector) && (
         <div className="z-20 absolute w-full h-full bg-custom-fadedBlack"></div>
       )}
       <Home />

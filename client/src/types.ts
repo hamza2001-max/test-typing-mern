@@ -23,3 +23,22 @@ export interface themeVInterface {
 export interface testSettingsVInterface {
   testSettingsV: { testSettingsV: boolean };
 }
+
+export interface CurrentFragmentInterface {
+  word: string;
+  inputValue: string;
+  currentSentenceWord: string;
+}
+
+export interface WordCheckerInterface {
+  inputValue: string;
+  testSentence: string;
+  textWritten: string;
+  inputRef: React.RefObject<HTMLInputElement>;
+}
+
+export interface PreviousFragmentInterface {
+  word: string;
+  inputValue: string;
+  writtenWord: string;
+}

@@ -1,6 +1,6 @@
 import { FaCog } from "react-icons/fa";
 import { testSettingsVInterface } from "../types";
-import { TestSettingsModeSm } from "./TestSettingsModeSm";
+import { TestSettingsSm } from "./TestSettingsSm";
 import { useDispatch, useSelector } from "react-redux";
 import { testSettingsVSlice } from "../redux/visibilitySlice";
 
@@ -24,11 +24,11 @@ export const TestSettings = () => {
       </button>
       {testSettingsVSelector && (
         <section
-          className="w-72 p-4 rounded-xl flex flex-col text-sm bg-custom-fill z-10
+          className="w-72 p-4 rounded-xl flex flex-col text-sm bg-custom-fill z-30
         text-custom-primary border border-custom-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
           onClick={(e) => e.stopPropagation()}
         >
-          <TestSettingsModeSm />
+          <TestSettingsSm />
         </section>
       )}
     </section>

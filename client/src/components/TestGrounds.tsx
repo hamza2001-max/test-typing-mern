@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
-import { TestModeWords } from "./TestModeWords";
+import { Test } from "./Test";
 export const TestGrounds = () => {
   const testModeSelector = useSelector(
     (state: { testMode: { testMode: string } }) => state.testMode.testMode
   );
-  return <section>{testModeSelector === "words" && <TestModeWords />}</section>;
+  return <section>{testModeSelector === "words" && <Test />}</section>;
 };
