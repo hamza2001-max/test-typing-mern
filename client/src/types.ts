@@ -16,6 +16,10 @@ export interface customPromptVSInterface {
   customPromptV: { customPromptV: boolean };
 }
 
+export interface promptValueInterface {
+  promptValue: { promptValue: number };
+}
+
 export interface themeVInterface {
   themeV: { themeV: boolean };
 }

@@ -1,11 +1,14 @@
 import { CurrentFragmentInterface } from "../types";
 
 export const CurrentFragment = ({
-    word,
-    inputValue,
-    currentSentenceWord,
-  }: CurrentFragmentInterface) => {
-    return (
+  word,
+  inputValue,
+  currentSentenceWord,
+}: CurrentFragmentInterface) => {
+  // let extraLetters = "";
+
+  return (
+    <>
       <span>
         {word.split("").map((letter, secondIndex) => {
           let currentClass = "";
@@ -26,7 +29,9 @@ export const CurrentFragment = ({
                 }
               }
             } else {
-              if (currentSentenceWord[secondIndex] === inputValue[secondIndex]) {
+              if (
+                currentSentenceWord[secondIndex] === inputValue[secondIndex]
+              ) {
                 currentClass = "text-custom-secondary";
               } else {
                 currentClass = "text-custom-tertiary";
@@ -49,8 +54,15 @@ export const CurrentFragment = ({
               {letter}
             </span>
           );
-        })}{" "}
+        })}
+        {" "}
+        {/* {extraLetters} */}
       </span>
-    );
-  };
-  
+      {/* {inputValue.length > word.length && (
+        <>
+          {(extraLetters += inputValue[inputValue.length - 1])}
+        </>
+      )}{" "} */}
+    </>
+  );
+};

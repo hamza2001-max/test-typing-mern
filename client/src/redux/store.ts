@@ -6,6 +6,7 @@ import {
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { themeSlice } from "./themeSlice";
 import {
+  limiterPromptSlice,
   testLimiterSlice,
   testModeSlice,
   testModifierSlice,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   customPromptV: customPromptVSlice.reducer,
   testSettingsV: testSettingsVSlice.reducer,
   themeV: themeVSlice.reducer,
+  promptValue: limiterPromptSlice.reducer
 });
 
 const store = configureStore({

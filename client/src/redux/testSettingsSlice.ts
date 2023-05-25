@@ -56,3 +56,17 @@ export const testLimiterSlice = createSlice({
     },
   },
 });
+
+const limiterPromptInitialState = {
+  promptValue: 0,
+};
+
+export const limiterPromptSlice = createSlice({
+  name: "promptValue",
+  initialState: limiterPromptInitialState,
+  reducers: {
+    setLimiterPrompt: (state, action) => {
+      state.promptValue = action.payload;
+    },
+  },
+});

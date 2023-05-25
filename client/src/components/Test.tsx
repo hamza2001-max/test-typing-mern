@@ -4,6 +4,7 @@ import { VscDebugRestart } from "react-icons/vsc";
 import { useDispatch, useSelector } from "react-redux";
 import { customPromptVSlice } from "../redux/visibilitySlice";
 import { WordChecker } from "./WordChecker";
+import { promptValueInterface } from "../types";
 
 export const Test = () => {
   const [testSentence, setTestSentence] = useState<string>("hamzaAli");
@@ -17,6 +18,9 @@ export const Test = () => {
   const testLimiterSelector = useSelector(
     (state: { testLimiter: { testLimiter: string } }) =>
       state.testLimiter.testLimiter
+  );
+  const limiterPromptSelector = useSelector(
+    (state: promptValueInterface) => state.promptValue.promptValue
   );
 
   useEffect(() => {
@@ -65,6 +69,13 @@ export const Test = () => {
     }
     if (typeof testLimiterSelector === "string") {
       customPromptVDispatch(visibleCustom());
+      for (let i = 0; i < limiterPromptSelector; i++) {
+        const randomWord =
+          wordsJSON[Math.floor(Math.random() * wordsJSON.length)].word;
+        prototypeSentence +=
+          i === limiterPromptSelector - 1 ? randomWord : randomWord + " ";
+      }
+      setTestSentence(prototypeSentence);
     }
   }, [testLimiterSelector, customPromptVDispatch, visibleCustom]);
 
