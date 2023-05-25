@@ -73,8 +73,7 @@ export const Test = () => {
         const randomWord =
           wordsJSON[Math.floor(Math.random() * wordsJSON.length)].word;
         prototypeSentence +=
-          i === limiterPromptSelector - 1 ? randomWord : randomWord + " ";
-      }
+          i === limiterPromptSelector - 1 ? randomWord : randomWord + " ";}
       setTestSentence(prototypeSentence);
     }
   }, [testLimiterSelector, customPromptVDispatch, visibleCustom]);
