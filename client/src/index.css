@@ -52,6 +52,13 @@
     --color-tertiary: #02d3b0;
     --color-fill: #00021b;
   }
+
+  .desertOasis {
+    --color-primary: #0061fe;
+    --color-secondary: #000000;
+    --color-tertiary: #76bb40;
+    --color-fill: #fff2d5;
+  }
 }
 
 body {

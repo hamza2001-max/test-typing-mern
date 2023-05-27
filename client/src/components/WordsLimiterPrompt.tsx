@@ -1,12 +1,18 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { promptValueInterface } from "../types";
-import { limiterPromptSlice } from "../redux/testSettingsSlice";
+import { useDispatch } from "react-redux";
+import { customPromptVSlice } from "../redux/visibilitySlice";
+import { limiterPromptSlice, testLimiterSlice } from "../redux/testSettingsSlice";
 
 export const WordsLimiterPrompt = () => {
   const [inputValue, setInputValue] = useState(0);
   const limiterPromptDispatch = useDispatch();
+  const customPromptVDispatch = useDispatch();
+  const testLimiterDispatch = useDispatch();
+  const { testLimiterReducer } = testLimiterSlice.actions;
+
+  
   const { setLimiterPrompt } = limiterPromptSlice.actions;
+  const { inVisibleCustom } = customPromptVSlice.actions;
 
   return (
     <div
@@ -29,8 +35,9 @@ export const WordsLimiterPrompt = () => {
       <button
         className="w-full rounded-lg py-2 bg-custom-primary text-custom-secondary"
         onClick={() => {
-          console.log("hey");
+          testLimiterDispatch(testLimiterReducer("custom"));
           limiterPromptDispatch(setLimiterPrompt(inputValue));
+          customPromptVDispatch(inVisibleCustom());
         }}
       >
         Enter

@@ -70,7 +70,7 @@ export const themeSchemes = [
     theme: themeSlice.actions.dark,
   },
   {
-    title: "afterDark",
+    title: "After Dark",
     themeClass: "afterDark",
     theme: themeSlice.actions.afterDark,
   },
@@ -93,5 +93,10 @@ export const themeSchemes = [
     title: "trance",
     themeClass: "trance",
     theme: themeSlice.actions.trance,
+  },
+  {
+    title: "desert oasis",
+    themeClass: "desertOasis",
+    theme: themeSlice.actions.desertOasis,
   },
 ];

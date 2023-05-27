@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { wordsJSON } from "../testJson";
 import { VscDebugRestart } from "react-icons/vsc";
-import { useDispatch, useSelector } from "react-redux";
-import { customPromptVSlice } from "../redux/visibilitySlice";
+import {  useSelector } from "react-redux";
 import { WordChecker } from "./WordChecker";
 import { promptValueInterface } from "../types";
 
@@ -11,10 +10,7 @@ export const Test = () => {
   const [inputValue, setInputValue] = useState<string>("");
   const [textWritten, setTextWritten] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
-
-  const customPromptVDispatch = useDispatch();
-  const { visibleCustom } = customPromptVSlice.actions;
-
+  
   const testLimiterSelector = useSelector(
     (state: { testLimiter: { testLimiter: string } }) =>
       state.testLimiter.testLimiter
@@ -68,7 +64,7 @@ export const Test = () => {
       setTestSentence(prototypeSentence);
     }
     if (typeof testLimiterSelector === "string") {
-      customPromptVDispatch(visibleCustom());
+      console.log(limiterPromptSelector);
       for (let i = 0; i < limiterPromptSelector; i++) {
         const randomWord =
           wordsJSON[Math.floor(Math.random() * wordsJSON.length)].word;
@@ -76,7 +72,7 @@ export const Test = () => {
           i === limiterPromptSelector - 1 ? randomWord : randomWord + " ";}
       setTestSentence(prototypeSentence);
     }
-  }, [testLimiterSelector, customPromptVDispatch, visibleCustom]);
+  }, [testLimiterSelector, limiterPromptSelector]);
 
   const handleRefresh = useCallback(() => {
     testSentenceCreator();

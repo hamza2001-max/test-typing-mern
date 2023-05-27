@@ -75,7 +75,7 @@ export const Footer = () => {
       </section>
       {themeVSelector && (
         <div
-          className="z-30 h-64 w-64 p-4 rounded-xl flex flex-col space-y-3 text-xs bg-custom-fill 
+          className="z-30 w-98 p-4 rounded-xl flex flex-col space-y-3 text-xs bg-custom-fill 
           text-custom-primary border border-custom-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
           onClick={(e) => e.stopPropagation()}
         >
