@@ -1,16 +1,18 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { wordsJSON } from "../testJson";
 import { VscDebugRestart } from "react-icons/vsc";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { WordChecker } from "./WordChecker";
 import { promptValueInterface } from "../types";
 
 export const Test = () => {
-  const [testSentence, setTestSentence] = useState<string>("hamzaAli");
+  const [testSentence, setTestSentence] = useState<string>("");
   const [inputValue, setInputValue] = useState<string>("");
   const [textWritten, setTextWritten] = useState<string>("");
+  const [scrollIndex, setScrollIndex] = useState(3);
+  const [lineHeiInc, setLineHeiInc] = useState(1);
   const inputRef = useRef<HTMLInputElement>(null);
-  
+
   const testLimiterSelector = useSelector(
     (state: { testLimiter: { testLimiter: string } }) =>
       state.testLimiter.testLimiter
@@ -19,9 +21,13 @@ export const Test = () => {
     (state: promptValueInterface) => state.promptValue.promptValue
   );
 
-  useEffect(() => {
-    inputRef.current?.focus();
 
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current?.focus();
+      inputRef.current.disabled = false;
+    }
+    
     const handleInputChange = () => {
       if (typeof inputRef.current?.value === "string") {
         setInputValue(inputRef.current?.value);
@@ -30,7 +36,6 @@ export const Test = () => {
 
     const inputElement = inputRef.current;
     inputElement?.addEventListener("input", handleInputChange);
-
     return () => {
       inputElement?.removeEventListener("input", handleInputChange);
     };
@@ -69,7 +74,8 @@ export const Test = () => {
         const randomWord =
           wordsJSON[Math.floor(Math.random() * wordsJSON.length)].word;
         prototypeSentence +=
-          i === limiterPromptSelector - 1 ? randomWord : randomWord + " ";}
+          i === limiterPromptSelector - 1 ? randomWord : randomWord + " ";
+      }
       setTestSentence(prototypeSentence);
     }
   }, [testLimiterSelector, limiterPromptSelector]);
@@ -78,6 +84,8 @@ export const Test = () => {
     testSentenceCreator();
     setTextWritten("");
     setInputValue("");
+    setScrollIndex(3);
+    setLineHeiInc(1);
     if (inputRef.current) {
       inputRef.current.value = "";
       inputRef.current.disabled = false;
@@ -129,6 +137,10 @@ export const Test = () => {
         inputValue={inputValue}
         textWritten={textWritten}
         inputRef={inputRef}
+        scrollIndex={scrollIndex}
+        lineHeiInc={lineHeiInc}
+        setScrollIndex={setScrollIndex}
+        setLineHeiInc={setLineHeiInc}
       />
       <input
         type="text"

@@ -59,6 +59,13 @@
     --color-tertiary: #76bb40;
     --color-fill: #fff2d5;
   }
+
+  .ourTheme {
+    --color-primary: #6d0f19;
+    --color-secondary: #fcd116;
+    --color-tertiary: #ffffff;
+    --color-fill: #ce1226;
+  }
 }
 
 body {

@@ -99,4 +99,9 @@ export const themeSchemes = [
     themeClass: "desertOasis",
     theme: themeSlice.actions.desertOasis,
   },
+  {
+    title: "our theme",
+    themeClass: "ourTheme",
+    theme: themeSlice.actions.ourTheme,
+  },
 ];

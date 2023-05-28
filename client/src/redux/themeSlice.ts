@@ -30,6 +30,9 @@ export const themeSlice = createSlice({
     },
     desertOasis: (state) => {
       state.theme = "desertOasis";
-    }
+    },
+    ourTheme: (state) => {
+      state.theme = "ourTheme";
+    },
   },
 });
