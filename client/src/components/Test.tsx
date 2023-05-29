@@ -11,6 +11,8 @@ export const Test = () => {
   const [textWritten, setTextWritten] = useState<string>("");
   const [scrollIndex, setScrollIndex] = useState(3);
   const [lineHeiInc, setLineHeiInc] = useState(1);
+  const [isInputFocused, setIsInputFocused] = useState(false);
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   const testLimiterSelector = useSelector(
@@ -21,13 +23,12 @@ export const Test = () => {
     (state: promptValueInterface) => state.promptValue.promptValue
   );
 
-
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current?.focus();
       inputRef.current.disabled = false;
     }
-    
+
     const handleInputChange = () => {
       if (typeof inputRef.current?.value === "string") {
         setInputValue(inputRef.current?.value);
@@ -84,6 +85,7 @@ export const Test = () => {
     testSentenceCreator();
     setTextWritten("");
     setInputValue("");
+    setIsInputFocused(true);
     setScrollIndex(3);
     setLineHeiInc(1);
     if (inputRef.current) {
@@ -122,31 +124,42 @@ export const Test = () => {
     [inputValue, textWritten, testSentence]
   );
 
+  const handleInputBlur = () => {
+    setIsInputFocused(false);
+  };
+
+  const handleFocusClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    setIsInputFocused(true);
+    inputRef.current?.focus();
+  };
+
   return (
     <section className="text-custom-primary flex justify-center items-center flex-col mt-5">
-      {/* {!isInputFocused && (
+      <div className="relative">
+        {!isInputFocused && (
           <div
             className="z-10 absolute w-full h-full backdrop-blur-sm"
-            onClick={() => {
-              setIsInputFocused(true);
-            }}
+            onClick={handleFocusClick}
           ></div>
-        )} */}
-      <WordChecker
-        testSentence={testSentence}
-        inputValue={inputValue}
-        textWritten={textWritten}
-        inputRef={inputRef}
-        scrollIndex={scrollIndex}
-        lineHeiInc={lineHeiInc}
-        setScrollIndex={setScrollIndex}
-        setLineHeiInc={setLineHeiInc}
-      />
+        )}
+        <WordChecker
+          testSentence={testSentence}
+          inputValue={inputValue}
+          textWritten={textWritten}
+          scrollIndex={scrollIndex}
+          lineHeiInc={lineHeiInc}
+          setScrollIndex={setScrollIndex}
+          setLineHeiInc={setLineHeiInc}
+          onClick={handleFocusClick}
+        />
+      </div>
       <input
         type="text"
         className="w-full mt-3 py-2 sr-only"
         ref={inputRef}
         onKeyDown={handleKeyDown}
+        onBlur={handleInputBlur}
       />
       <button
         className="text-2xl flex justify-center mt-7 hover:text-custom-secondary transition ease-in-out delay-75"

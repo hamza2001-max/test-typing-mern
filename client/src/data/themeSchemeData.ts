@@ -61,7 +61,7 @@ import { themeSlice } from "../redux/themeSlice";
 export const themeSchemes = [
   {
     title: "light",
-    themeClass: "",
+    themeClass: "light",
     theme: themeSlice.actions.light,
   },
   {
@@ -103,5 +103,10 @@ export const themeSchemes = [
     title: "our theme",
     themeClass: "ourTheme",
     theme: themeSlice.actions.ourTheme,
+  },
+  {
+    title: "tron orange",
+    themeClass: "tronOrange",
+    theme: themeSlice.actions.tronOrange,
   },
 ];

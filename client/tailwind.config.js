@@ -22,19 +22,21 @@ module.exports = {
           fadedBlack: 'rgba(0,0,0,.75)'
         }
       },
-      borderColor:{
+      borderColor: {
         custom: {
           primary: 'var(--color-primary)',
           tertiary: 'var(--color-tertiary)',
         }
       },
-      borderWidth:{
+      borderWidth: {
         '3': '3px'
       },
-
+      height: {
+        '22': '5.7rem'
+      },
       width: {
-          '0.1': '0.12rem',
-          '98': '400px'
+        '0.1': '0.12rem',
+        '98': '400px'
       }
     },
   },

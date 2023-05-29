@@ -5,13 +5,13 @@ import { PreviousFragment } from "./PreviousFragment";
 
 export const WordChecker = ({
   textWritten,
-  inputRef,
   inputValue,
   testSentence,
   scrollIndex,
   lineHeiInc,
   setScrollIndex,
   setLineHeiInc,
+  onClick,
 }: WordCheckerInterface) => {
   const divRef = useRef<HTMLDivElement>(null);
   const typedSentenceRef = useRef<HTMLDivElement>(null);
@@ -70,9 +70,7 @@ export const WordChecker = ({
       <div
         className="flex text-custom-primary text-2xl h-24 w-64 overflow-hidden"
         ref={typedSentenceRef}
-        onClick={() => {
-          inputRef.current?.focus();
-        }}
+        onClick={onClick}
       >
         <p className="">{typedSentence}</p>
       </div>
