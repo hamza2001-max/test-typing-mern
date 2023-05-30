@@ -37,18 +37,24 @@ module.exports = {
       width: {
         '0.1': '0.12rem',
         '98': '400px'
-      }
-    },
-  },
-  plugins: [
-    function ({ addUtilities }) {
-      const extendUnderline = {
-        '.tailUnderline': {
-          'textDecoration': 'underline',
-          'text-decoration-color': 'var(--color-tertiary)',
+      },
+      keyframes: {
+        pulse: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0' },
         },
+      },
+    },
+    plugins: [
+      function ({ addUtilities }) {
+        const extendUnderline = {
+          '.tailUnderline': {
+            'textDecoration': 'underline',
+            'text-decoration-color': 'var(--color-tertiary)',
+          },
+        }
+        addUtilities(extendUnderline)
       }
-      addUtilities(extendUnderline)
-    }
-  ]
+    ]
+  }
 }

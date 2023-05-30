@@ -1,4 +1,5 @@
 import { CurrentFragmentInterface } from "../types";
+import { Caret, CaretEnd } from "./Caret";
 
 export const CurrentFragment = ({
   word,
@@ -41,21 +42,12 @@ export const CurrentFragment = ({
           return (
             <span key={secondIndex} className={`${currentClass} relative`}>
               {currentSentenceWord.length === inputValue.length &&
-                secondIndex === inputValue.length - 1 && (
-                  <span
-                    className={`absolute top-1 right-0 w-0.1 h-6 rounded-sm bg-custom-secondary transition duration-200 caret`}
-                  ></span>
-                )}
-              {secondIndex === inputValue.length && (
-                <span
-                  className={`absolute top-1 left-0 w-0.1 h-6 rounded-sm bg-custom-secondary transition duration-200 caret`}
-                ></span>
-              )}
+                secondIndex === inputValue.length - 1 && <CaretEnd />}
+              {secondIndex === inputValue.length && <Caret />}
               {letter}
             </span>
           );
-        })}
-        {" "}
+        })}{" "}
         {/* {extraLetters} */}
       </span>
       {/* {inputValue.length > word.length && (

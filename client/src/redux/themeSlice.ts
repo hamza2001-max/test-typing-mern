@@ -37,5 +37,8 @@ export const themeSlice = createSlice({
     tronOrange: (state) => {
       state.theme = "tronOrange";
     },
+    soaringSkies: (state) => {
+      state.theme = "soaringSkies";
+    },
   },
 });

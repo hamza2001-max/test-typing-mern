@@ -139,9 +139,9 @@ export const Test = () => {
       <div className="relative">
         {!isInputFocused && (
           <div
-            className="z-10 absolute w-full h-full backdrop-blur-sm"
+            className="text-custom-secondary z-10 absolute w-full h-full backdrop-blur-sm flex justify-center items-center"
             onClick={handleFocusClick}
-          ></div>
+          >Click here to focus</div>
         )}
         <WordChecker
           testSentence={testSentence}

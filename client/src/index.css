@@ -73,6 +73,13 @@
     --color-tertiary: #ff0000;
     --color-fill: #0d1c1c;
   }
+
+  .soaringSkies {
+    --color-primary: #1e107a;
+    --color-secondary: #000000;
+    --color-tertiary: #55c6f0;
+    --color-fill: #fff9f2;
+  }
 }
 
 body {
@@ -87,20 +94,4 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
-
-.caret {
-  animation-name: blink;
-  animation-duration: 0.5s;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
-
-@keyframes blink {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
 }
