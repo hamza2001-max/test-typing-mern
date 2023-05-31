@@ -22,15 +22,7 @@ export const TestSettings = () => {
         <FaCog className="cursor-pointer mr-2" />
         Test Setting
       </button>
-      {testSettingsVSelector && (
-        <section
-          className="w-72 p-4 rounded-xl flex flex-col text-sm bg-custom-fill z-30
-        text-custom-primary border border-custom-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <TestSettingsSm />
-        </section>
-      )}
+      {testSettingsVSelector && <TestSettingsSm />}
     </section>
   );
 };

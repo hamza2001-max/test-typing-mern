@@ -1,5 +1,5 @@
 import { CurrentFragmentInterface } from "../types";
-import { Caret, CaretEnd } from "./Caret";
+import { Caret } from "./Caret";
 
 export const CurrentFragment = ({
   word,
@@ -42,8 +42,8 @@ export const CurrentFragment = ({
           return (
             <span key={secondIndex} className={`${currentClass} relative`}>
               {currentSentenceWord.length === inputValue.length &&
-                secondIndex === inputValue.length - 1 && <CaretEnd />}
-              {secondIndex === inputValue.length && <Caret />}
+                secondIndex === inputValue.length - 1 && <Caret direction="right"/>}
+              {secondIndex === inputValue.length && <Caret direction="left"/>}
               {letter}
             </span>
           );

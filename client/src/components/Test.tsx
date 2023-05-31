@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { wordsJSON } from "../testJson";
 import { VscDebugRestart } from "react-icons/vsc";
+import { GiArrowCursor } from "react-icons/gi";
 import { useSelector } from "react-redux";
 import { WordChecker } from "./WordChecker";
 import { promptValueInterface } from "../types";
@@ -10,7 +11,7 @@ export const Test = () => {
   const [inputValue, setInputValue] = useState<string>("");
   const [textWritten, setTextWritten] = useState<string>("");
   const [scrollIndex, setScrollIndex] = useState(3);
-  const [lineHeiInc, setLineHeiInc] = useState(1);
+  const [lineHeiInc, setLineHeiInc] = useState(1.25);
   const [isInputFocused, setIsInputFocused] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -87,7 +88,7 @@ export const Test = () => {
     setInputValue("");
     setIsInputFocused(true);
     setScrollIndex(3);
-    setLineHeiInc(1);
+    setLineHeiInc(1.25);
     if (inputRef.current) {
       inputRef.current.value = "";
       inputRef.current.disabled = false;
@@ -136,12 +137,18 @@ export const Test = () => {
 
   return (
     <section className="text-custom-primary flex justify-center items-center flex-col mt-5">
-      <div className="relative">
+      <div className="relative w-98 flex justify-center">
+        <span className="text-custom-tertiary">
+          {textWritten.split(" ").length-1}/{testSentence.split(" ").length}
+        </span>
         {!isInputFocused && (
           <div
             className="text-custom-secondary z-10 absolute w-full h-full backdrop-blur-sm flex justify-center items-center"
             onClick={handleFocusClick}
-          >Click here to focus</div>
+          >
+            <GiArrowCursor className="text-lg mr-3" />
+            Click here to focus
+          </div>
         )}
         <WordChecker
           testSentence={testSentence}

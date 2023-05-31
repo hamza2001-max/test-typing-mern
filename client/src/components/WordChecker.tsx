@@ -34,7 +34,7 @@ export const WordChecker = ({
         if (typedSentenceRef.current) {
           typedSentenceRef.current.scrollTop = lineHeight * lineHeiInc;
           setScrollIndex((prev) => ++prev);
-          setLineHeiInc((prev) => ++prev);
+          setLineHeiInc((prev) => prev+1.25);
         }
       }
     }
@@ -68,11 +68,11 @@ export const WordChecker = ({
   return (
     <>
       <div
-        className="flex text-custom-primary text-2xl h-24 w-64 overflow-hidden"
+        className="flex text-custom-primary text-2xl h-32 w-64 overflow-hidden"
         ref={typedSentenceRef}
         onClick={onClick}
       >
-        <p className="">{typedSentence}</p>
+        <p className="leading-10">{typedSentence}</p>
       </div>
       <div className="text-2xl absolute opacity-0 -z-10" ref={divRef}>
         <p className="w-64">
