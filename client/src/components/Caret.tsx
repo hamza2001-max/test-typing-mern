@@ -5,4 +5,3 @@ export const Caret = ({direction}: {direction: 'left' | 'right'}) => {
     ></span>
   );
 };
-

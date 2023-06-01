@@ -136,38 +136,40 @@ export const Test = () => {
   };
 
   return (
-    <section className="text-custom-primary flex justify-center items-center flex-col mt-5">
-      <div className="relative w-98 flex justify-center">
-        <span className="text-custom-tertiary">
-          {textWritten.split(" ").length-1}/{testSentence.split(" ").length}
+    <section className="relative text-custom-primary flex items-center flex-col mt-5">
+      <div className="w-72">
+        <span className="text-custom-tertiary text-2xl ml-3">
+          {textWritten.split(" ").length - 1}/{testSentence.split(" ").length}
         </span>
-        {!isInputFocused && (
-          <div
-            className="text-custom-secondary z-10 absolute w-full h-full backdrop-blur-sm flex justify-center items-center"
+        <div className="relative flex justify-center">
+          {!isInputFocused && (
+            <div
+              className="text-custom-secondary z-10 absolute w-full h-full backdrop-blur-sm flex justify-center items-center"
+              onClick={handleFocusClick}
+            >
+              <GiArrowCursor className="text-lg mr-3" />
+              Click here to focus
+            </div>
+          )}
+          <WordChecker
+            testSentence={testSentence}
+            inputValue={inputValue}
+            textWritten={textWritten}
+            scrollIndex={scrollIndex}
+            lineHeiInc={lineHeiInc}
+            setScrollIndex={setScrollIndex}
+            setLineHeiInc={setLineHeiInc}
             onClick={handleFocusClick}
-          >
-            <GiArrowCursor className="text-lg mr-3" />
-            Click here to focus
-          </div>
-        )}
-        <WordChecker
-          testSentence={testSentence}
-          inputValue={inputValue}
-          textWritten={textWritten}
-          scrollIndex={scrollIndex}
-          lineHeiInc={lineHeiInc}
-          setScrollIndex={setScrollIndex}
-          setLineHeiInc={setLineHeiInc}
-          onClick={handleFocusClick}
+          />
+        </div>
+        <input
+          type="text"
+          className="w-full mt-3 py-2 sr-only"
+          ref={inputRef}
+          onKeyDown={handleKeyDown}
+          onBlur={handleInputBlur}
         />
       </div>
-      <input
-        type="text"
-        className="w-full mt-3 py-2 sr-only"
-        ref={inputRef}
-        onKeyDown={handleKeyDown}
-        onBlur={handleInputBlur}
-      />
       <button
         className="text-2xl flex justify-center mt-7 hover:text-custom-secondary transition ease-in-out delay-75"
         onClick={handleRefresh}

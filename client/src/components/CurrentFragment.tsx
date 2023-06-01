@@ -6,8 +6,6 @@ export const CurrentFragment = ({
   inputValue,
   currentSentenceWord,
 }: CurrentFragmentInterface) => {
-  // let extraLetters = "";
-
   return (
     <>
       <span>
@@ -42,19 +40,15 @@ export const CurrentFragment = ({
           return (
             <span key={secondIndex} className={`${currentClass} relative`}>
               {currentSentenceWord.length === inputValue.length &&
-                secondIndex === inputValue.length - 1 && <Caret direction="right"/>}
-              {secondIndex === inputValue.length && <Caret direction="left"/>}
+                secondIndex === inputValue.length - 1 && (
+                  <Caret direction="right"/>
+                )}
+              {secondIndex === inputValue.length && <Caret direction="left" />}
               {letter}
             </span>
           );
         })}{" "}
-        {/* {extraLetters} */}
       </span>
-      {/* {inputValue.length > word.length && (
-        <>
-          {(extraLetters += inputValue[inputValue.length - 1])}
-        </>
-      )}{" "} */}
     </>
   );
 };

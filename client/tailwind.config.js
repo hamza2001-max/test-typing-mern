@@ -32,7 +32,8 @@ module.exports = {
         '3': '3px'
       },
       height: {
-        '22': '5.7rem'
+        '22': '5.7rem',
+        '30': '7.5rem',
       },
       width: {
         '0.1': '0.12rem',
