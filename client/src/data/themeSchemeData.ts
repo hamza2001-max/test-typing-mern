@@ -56,4 +56,9 @@ export const themeSchemes = [
     themeClass: "soaringSkies",
     theme: themeSlice.actions.soaringSkies,
   },
+  {
+    title: "ishtar",
+    themeClass: "ishtar",
+    theme: themeSlice.actions.ishtar,
+  },
 ];

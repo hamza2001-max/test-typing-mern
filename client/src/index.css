@@ -80,6 +80,13 @@
     --color-tertiary: #55c6f0;
     --color-fill: #fff9f2;
   }
+
+  .ishtar {
+    --color-primary: #847869;
+    --color-secondary: #fae1c3;
+    --color-tertiary: #91170c;
+    --color-fill: #202020;
+  }
 }
 
 body {

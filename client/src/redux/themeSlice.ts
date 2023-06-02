@@ -40,5 +40,8 @@ export const themeSlice = createSlice({
     soaringSkies: (state) => {
       state.theme = "soaringSkies";
     },
+    ishtar: (state) => {
+      state.theme = "ishtar";
+    },
   },
 });

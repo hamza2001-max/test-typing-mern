@@ -1,7 +1,12 @@
-export const Caret = ({direction}: {direction: 'left' | 'right'}) => {
+export const Caret = ({ offset }: { offset: number }) => {
   return (
     <span
-      className={`absolute top-1 ${direction === 'left' ? 'left-0' : 'right-0'} w-0.1 h-6 rounded-sm bg-custom-secondary transition animate-pulse duration-75`}
+      className={`w-0.1 h-6 rounded-sm bg-custom-secondary transition animate-pulse duration-75`}
+      style={{
+        position: "absolute",
+        top: 2.5,
+        left: offset,
+      }}
     ></span>
   );
 };
