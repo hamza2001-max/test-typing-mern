@@ -1,18 +1,24 @@
+import { useSelector } from "react-redux";
 import { CurrentFragmentInterface } from "../types";
 import { Caret } from "./Caret";
+import { RootState } from "../redux/store";
 
 export const CurrentFragment = ({
   word,
   inputValue,
   currentSentenceWord,
 }: CurrentFragmentInterface) => {
+  const inputStatusSelector = useSelector(
+    (state: RootState) => state.isInputActive.isInputActive
+  );
   return (
     <span className="relative">
-      {currentSentenceWord.length - 1 >= inputValue.length ? (
-        <Caret offset={14 * inputValue.length || 0} />
-      ) : (
-        <Caret offset={14 * currentSentenceWord.length} />
-      )}
+      {inputStatusSelector &&
+        (currentSentenceWord.length - 1 >= inputValue.length ? (
+          <Caret offset={14 * inputValue.length || 0} />
+        ) : (
+          <Caret offset={14 * currentSentenceWord.length} />
+        ))}
       {word.split("").map((letter, secondIndex) => {
         let currentClass = "";
         if (secondIndex <= inputValue.length - 1) {

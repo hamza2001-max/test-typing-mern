@@ -1,49 +1,49 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const customPromptVInitialState = {
-  customPromptV: false,
+const initialPromptVisibility = {
+  isPromptVisible: false,
 };
-export const customPromptVSlice = createSlice({
-  name: "customPromptV",
-  initialState: customPromptVInitialState,
+export const promptVisibilitySlice = createSlice({
+  name: "isPromptVisible",
+  initialState: initialPromptVisibility,
   reducers: {
     visibleCustom: (state) => {
-      state.customPromptV = true;
+      state.isPromptVisible = true;
     },
     inVisibleCustom: (state) => {
-      state.customPromptV = false;
+      state.isPromptVisible = false;
     },
   },
 });
 
-const themeVInitialState = {
-  themeV: false,
+const initialThemeVisibility  = {
+  isThemeVisible: false,
 };
-export const themeVSlice = createSlice({
-  name: "themeV",
-  initialState: themeVInitialState,
+export const themeVisibilitySlice = createSlice({
+  name: "isThemeVisible",
+  initialState: initialThemeVisibility,
   reducers: {
     visibleTheme: (state) => {
-      state.themeV = true;
+      state.isThemeVisible = true;
     },
     inVisibleTheme: (state) => {
-      state.themeV = false;
+      state.isThemeVisible = false;
     },
   },
 });
 
-const testSettingsVInitialState = {
-  testSettingsV: false,
+const initialTestSettingsVisibility  = {
+  isTestSettingsVisible: false,
 };
 export const testSettingsVSlice = createSlice({
   name: "testSettingsV",
-  initialState: testSettingsVInitialState,
+  initialState: initialTestSettingsVisibility,
   reducers: {
     visibleTS: (state) => {
-      state.testSettingsV = true;
+      state.isTestSettingsVisible = true;
     },
     inVisibleTS: (state) => {
-      state.testSettingsV = false;
+      state.isTestSettingsVisible = false;
     },
   },
 });

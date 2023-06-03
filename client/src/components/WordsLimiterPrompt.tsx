@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { customPromptVSlice } from "../redux/visibilitySlice";
+import { promptVisibilitySlice } from "../redux/visibilitySlice";
 import { limiterPromptSlice, testLimiterSlice } from "../redux/testSettingsSlice";
 
 export const WordsLimiterPrompt = () => {
@@ -12,7 +12,7 @@ export const WordsLimiterPrompt = () => {
 
   
   const { setLimiterPrompt } = limiterPromptSlice.actions;
-  const { inVisibleCustom } = customPromptVSlice.actions;
+  const { inVisibleCustom } = promptVisibilitySlice.actions;
 
   return (
     <div

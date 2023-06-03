@@ -1,12 +1,13 @@
 import { FaCog } from "react-icons/fa";
-import { testSettingsVInterface } from "../types";
+// import { testSettingsVInterface } from "../types";
 import { TestSettingsSm } from "./TestSettingsSm";
 import { useDispatch, useSelector } from "react-redux";
 import { testSettingsVSlice } from "../redux/visibilitySlice";
+import { RootState } from "../redux/store";
 
 export const TestSettings = () => {
   const testSettingsVSelector = useSelector(
-    (state: testSettingsVInterface) => state.testSettingsV.testSettingsV
+    (state: RootState) => state.isTestSettingsVisible.isTestSettingsVisible
   );
   const testSettingsVDispatch = useDispatch();
   const { visibleTS } = testSettingsVSlice.actions;

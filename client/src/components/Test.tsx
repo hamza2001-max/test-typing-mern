@@ -2,9 +2,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { wordsJSON } from "../testJson";
 import { VscDebugRestart } from "react-icons/vsc";
 import { GiArrowCursor } from "react-icons/gi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { WordChecker } from "./WordChecker";
-import { promptValueInterface } from "../types";
+import { inputStatusSlice } from "../redux/inputStatusSlice";
+import { RootState } from "../redux/store";
 
 export const Test = () => {
   const [testSentence, setTestSentence] = useState<string>("");
@@ -12,17 +13,23 @@ export const Test = () => {
   const [textWritten, setTextWritten] = useState<string>("");
   const [scrollIndex, setScrollIndex] = useState(3);
   const [lineHeiInc, setLineHeiInc] = useState(1.25);
-  const [isInputFocused, setIsInputFocused] = useState(false);
-
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const { inActive, active } = inputStatusSlice.actions;
+  const inputStatusDispatch = useDispatch();
+
   const testLimiterSelector = useSelector(
-    (state: { testLimiter: { testLimiter: string } }) =>
-      state.testLimiter.testLimiter
+    (state: RootState) => state.testLimiter.testLimiter
+  );
+  const inputStatusSelector = useSelector(
+    (state: RootState) => state.isInputActive.isInputActive
   );
   const limiterPromptSelector = useSelector(
-    (state: promptValueInterface) => state.promptValue.promptValue
+    (state: RootState) => state.promptValue.promptValue
   );
+
+// console.log(inputStatusSelector);
+
 
   useEffect(() => {
     if (inputRef.current) {
@@ -86,7 +93,7 @@ export const Test = () => {
     testSentenceCreator();
     setTextWritten("");
     setInputValue("");
-    setIsInputFocused(true);
+    inputStatusDispatch(active());
     setScrollIndex(3);
     setLineHeiInc(1.25);
     if (inputRef.current) {
@@ -94,7 +101,7 @@ export const Test = () => {
       inputRef.current.disabled = false;
       inputRef.current?.focus();
     }
-  }, [testSentenceCreator]);
+  }, [testSentenceCreator, active, inputStatusDispatch]);
 
   useEffect(() => {
     testSentenceCreator();
@@ -126,13 +133,18 @@ export const Test = () => {
   );
 
   const handleInputBlur = () => {
-    setIsInputFocused(false);
+    inputStatusDispatch(inActive());
+    console.log('hello from blur');
+    
   };
 
   const handleFocusClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-    setIsInputFocused(true);
-    inputRef.current?.focus();
+    console.log('hello from focus');
+
+    if (!inputStatusSelector) {
+      inputRef.current?.focus();
+      inputStatusDispatch(active());
+    }
   };
 
   return (
@@ -142,7 +154,7 @@ export const Test = () => {
           {textWritten.split(" ").length - 1}/{testSentence.split(" ").length}
         </span>
         <div className="relative flex justify-center">
-          {!isInputFocused && (
+          {!inputStatusSelector && (
             <div
               className="text-custom-secondary z-10 absolute w-full h-full backdrop-blur-sm flex justify-center items-center"
               onClick={handleFocusClick}

@@ -6,9 +6,10 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { testModifierSlice } from "../redux/testSettingsSlice";
 import {
-  customPromptVSlice,
+  promptVisibilitySlice,
   testSettingsVSlice,
 } from "../redux/visibilitySlice";
+import { RootState } from "../redux/store";
 
 export const TestSettingsSm = () => {
   const testModeDispatch = useDispatch();
@@ -17,20 +18,17 @@ export const TestSettingsSm = () => {
   const testSettingsVDispatch = useDispatch();
   const customPromptVDispatch = useDispatch();
 
-  const { visibleCustom } = customPromptVSlice.actions;
+  const { visibleCustom } = promptVisibilitySlice.actions;
   const { inVisibleTS } = testSettingsVSlice.actions;
 
   const testModeSelector = useSelector(
-    (state: { testMode: { testMode: string | number } }) =>
-      state.testMode.testMode
+    (state: RootState) => state.testMode.testMode
   );
   const testModifierSelector = useSelector(
-    (state: { testModifier: { testModifier: string } }) =>
-      state.testModifier.testModifier
+    (state: RootState) => state.testModifier.testModifier
   );
   const testLimiterSelector = useSelector(
-    (state: { testLimiter: { testLimiter: string } }) =>
-      state.testLimiter.testLimiter
+    (state: RootState) => state.testLimiter.testLimiter
   );
 
   return (

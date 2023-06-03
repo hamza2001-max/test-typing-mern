@@ -4,29 +4,6 @@ export interface ThemeOptionInterface {
   onClick: () => void;
 }
 
-export interface themeInterface {
-  theme: { theme: string };
-}
-
-export interface testModeSInterface {
-  testMode: { testMode: string };
-}
-
-export interface customPromptVSInterface {
-  customPromptV: { customPromptV: boolean };
-}
-
-export interface promptValueInterface {
-  promptValue: { promptValue: number };
-}
-
-export interface themeVInterface {
-  themeV: { themeV: boolean };
-}
-
-export interface testSettingsVInterface {
-  testSettingsV: { testSettingsV: boolean };
-}
 
 export interface CurrentFragmentInterface {
   word: string;

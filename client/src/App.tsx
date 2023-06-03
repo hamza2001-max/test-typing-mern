@@ -1,36 +1,29 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
-  customPromptVSlice,
+  promptVisibilitySlice,
   testSettingsVSlice,
-  themeVSlice,
+  themeVisibilitySlice,
 } from "./redux/visibilitySlice";
-import {
-  customPromptVSInterface,
-  testSettingsVInterface,
-  themeInterface,
-  themeVInterface,
-} from "./types";
 import { Home } from "./Pages/Home";
+import { RootState } from "./redux/store";
 
 function App() {
   const themeVDispatch = useDispatch();
   const testSettingsVDispatch = useDispatch();
   const customPromptVDispatch = useDispatch();
 
-  const { inVisibleTheme } = themeVSlice.actions;
+  const { inVisibleTheme } = themeVisibilitySlice.actions;
   const { inVisibleTS } = testSettingsVSlice.actions;
-  const { inVisibleCustom } = customPromptVSlice.actions;
+  const { inVisibleCustom } = promptVisibilitySlice.actions;
 
-  const theme = useSelector((state: themeInterface) => state.theme.theme);
+  const theme = useSelector((state: RootState) => state.theme.theme);
   const testSettingsVSelector = useSelector(
-    (state: testSettingsVInterface) => state.testSettingsV.testSettingsV
+    (state: RootState) => state.isTestSettingsVisible.isTestSettingsVisible
   );
   const customPromptVSelector = useSelector(
-    (state: customPromptVSInterface) => state.customPromptV.customPromptV
+    (state: RootState) => state.isPromptVisible.isPromptVisible
   );
-  const themeVSelector = useSelector(
-    (state: themeVInterface) => state.themeV.themeV
-  );
+  const themeVSelector = useSelector((state: RootState) => state.isThemeVisible.isThemeVisible);
 
   return (
     <div

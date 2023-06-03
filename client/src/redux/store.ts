@@ -1,7 +1,7 @@
 import {
-  customPromptVSlice,
+  promptVisibilitySlice,
   testSettingsVSlice,
-  themeVSlice,
+  themeVisibilitySlice,
 } from "./visibilitySlice";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { themeSlice } from "./themeSlice";
@@ -11,16 +11,18 @@ import {
   testModeSlice,
   testModifierSlice,
 } from "./testSettingsSlice";
+import { inputStatusSlice } from "./inputStatusSlice";
 
 const rootReducer = combineReducers({
   theme: themeSlice.reducer,
   testMode: testModeSlice.reducer,
   testModifier: testModifierSlice.reducer,
   testLimiter: testLimiterSlice.reducer,
-  customPromptV: customPromptVSlice.reducer,
-  testSettingsV: testSettingsVSlice.reducer,
-  themeV: themeVSlice.reducer,
-  promptValue: limiterPromptSlice.reducer
+  isPromptVisible: promptVisibilitySlice.reducer,
+  isTestSettingsVisible: testSettingsVSlice.reducer,
+  isThemeVisible: themeVisibilitySlice.reducer,
+  promptValue: limiterPromptSlice.reducer,
+  isInputActive: inputStatusSlice.reducer
 });
 
 const store = configureStore({
@@ -28,3 +30,4 @@ const store = configureStore({
 });
 
 export default store;
+export type RootState = ReturnType<typeof store.getState>;

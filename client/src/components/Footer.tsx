@@ -1,19 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
 import { themeSlice } from "../redux/themeSlice";
-import { themeInterface, themeVInterface } from "../types";
-import { themeVSlice } from "../redux/visibilitySlice";
+import { themeVisibilitySlice } from "../redux/visibilitySlice";
 import { ThemeOption } from "./ThemeOption";
 import { themeSchemes } from "../data/themeSchemeData";
 import { footerFirstColumn, footerSecondColumn } from "../data/footerData";
+import { RootState } from "../redux/store";
 
 export const Footer = () => {
-  const { visibleTheme, inVisibleTheme } = themeVSlice.actions;
+  const { visibleTheme, inVisibleTheme } = themeVisibilitySlice.actions;
   const themeVDispatch = useDispatch();
   const themeDispatch = useDispatch();
-  const theme = useSelector((state: themeInterface) => state.theme.theme);
-  const themeVSelector = useSelector(
-    (state: themeVInterface) => state.themeV.themeV
-  );
+  const theme = useSelector((state: RootState) => state.theme.theme);
+  const themeVSelector = useSelector((state: RootState) => state.isThemeVisible.isThemeVisible);
 
   const handleThemeChange = (
     selectedTheme: (typeof themeSlice.actions)[keyof typeof themeSlice.actions]

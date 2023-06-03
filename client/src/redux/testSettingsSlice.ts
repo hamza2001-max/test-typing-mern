@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const testModeInitialState = {
+const initialTestMode = {
   testMode: "words",
 };
 export const testModeSlice = createSlice({
   name: "testMode",
-  initialState: testModeInitialState,
+  initialState: initialTestMode,
   reducers: {
     time: (state) => {
       state.testMode = "time";
@@ -25,12 +25,12 @@ export const testModeSlice = createSlice({
   },
 });
 
-const testModifierInitialState = {
+const initialTestModifier = {
   testModifier: "",
 };
 export const testModifierSlice = createSlice({
   name: "testModifier",
-  initialState: testModifierInitialState,
+  initialState: initialTestModifier,
   reducers: {
     punctuation: (state) => {
       state.testModifier = "punctuation";
@@ -39,17 +39,17 @@ export const testModifierSlice = createSlice({
       state.testModifier = "numbers";
     },
     reset: () => {
-      return testModifierInitialState;
+      return initialTestModifier;
     },
   },
 });
 
-const testLimiterInitialState = {
+const initialTestLimiter = {
   testLimiter: 25 as string | number,
 };
 export const testLimiterSlice = createSlice({
   name: "testLimiter",
-  initialState: testLimiterInitialState,
+  initialState: initialTestLimiter,
   reducers: {
     testLimiterReducer: (state, action) => {
       state.testLimiter = action.payload;
@@ -57,13 +57,13 @@ export const testLimiterSlice = createSlice({
   },
 });
 
-const limiterPromptInitialState = {
+const initialLimiterPrompt = {
   promptValue: 0,
 };
 
 export const limiterPromptSlice = createSlice({
   name: "promptValue",
-  initialState: limiterPromptInitialState,
+  initialState: initialLimiterPrompt,
   reducers: {
     setLimiterPrompt: (state, action) => {
       state.promptValue = action.payload;
