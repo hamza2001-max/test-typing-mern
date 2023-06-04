@@ -5,87 +5,99 @@
 
 @layer base {
   .light {
-    --color-primary: #bdbdbd;
+    --color-primary: #b7b7b7;
     --color-secondary: #000;
     --color-tertiary: #ff0000;
     --color-fill: #f2f2f2;
+    --color-faded-fill: #e7e7e7;
   }
-
+  
   .dark {
     --color-primary: #444444;
     --color-secondary: #fff;
     --color-tertiary: #ff0000;
     --color-fill: #000;
+    --color-faded-fill: #191919;
   }
-
+  
   .afterDark {
     --color-primary: #99d6ea;
     --color-secondary: #fca6d1;
     --color-tertiary: #e1e7ec;
     --color-fill: #1b1d36;
+    --color-faded-fill: #17182c;
   }
-
+  
   .retrocast {
     --color-primary: #88dbdf;
     --color-secondary: #f3e03b;
     --color-tertiary: #ffffff;
     --color-fill: #07737a;
+    --color-faded-fill: #26858b;
   }
-
+  
   .laser {
     --color-primary: #b82356;
     --color-secondary: #009eaf;
     --color-tertiary: #dbe7e8;
     --color-fill: #221b44;
+    --color-faded-fill: #1e173b;
   }
-
+  
   .matrix {
-    --color-primary: #003b00;
+    --color-primary: #006500;
     --color-secondary: #15ff00;
     --color-tertiary: #d1ffcd;
     --color-fill: #000000;
+    --color-faded-fill: #032000;
   }
-
+  
   .trance {
     --color-primary: #3c4c79;
     --color-secondary: #e51376;
     --color-tertiary: #02d3b0;
     --color-fill: #00021b;
+    --color-faded-fill: #18214c;
   }
-
+  
   .desertOasis {
     --color-primary: #0061fe;
     --color-secondary: #000000;
     --color-tertiary: #76bb40;
     --color-fill: #fff2d5;
+    --color-faded-fill: #eddebc;
   }
-
+  
   .ourTheme {
     --color-primary: #6d0f19;
     --color-secondary: #fcd116;
     --color-tertiary: #ffffff;
     --color-fill: #ce1226;
+    --color-faded-fill: #9f1020;
   }
-
+  
   .tronOrange {
     --color-primary: #ff6600;
     --color-secondary: #fcd116;
     --color-tertiary: #ff0000;
     --color-fill: #0d1c1c;
+    --color-faded-fill: #9c9191;
   }
-
+  
   .soaringSkies {
     --color-primary: #1e107a;
     --color-secondary: #000000;
     --color-tertiary: #55c6f0;
     --color-fill: #fff9f2;
+    --color-faded-fill: #e5ddd4;
   }
-
+  
   .ishtar {
     --color-primary: #847869;
     --color-secondary: #fae1c3;
     --color-tertiary: #91170c;
     --color-fill: #202020;
+    --color-faded-fill: #272727;
   }
 }
 

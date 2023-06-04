@@ -33,8 +33,8 @@ export const TestSettingsSm = () => {
 
   return (
     <section
-      className="w-72 p-4 rounded-xl flex flex-col text-sm bg-custom-fill z-30
-  text-custom-primary border border-custom-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+      className="w-96 p-4 rounded-xl flex flex-col bg-custom-fill z-30
+  text-custom-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
       onClick={(e) => e.stopPropagation()}
     >
       <div className="space-y-6">
@@ -44,8 +44,8 @@ export const TestSettingsSm = () => {
               key={btn.label}
               className={`${
                 btn.label === testModifierSelector
-                  ? "text-custom-primary bg-custom-secondary"
-                  : "text-custom-secondary bg-custom-primary"
+                  ? "text-custom-fill bg-custom-tertiary"
+                  : "text-custom-secondary bg-custom-fadedFill"
               } py-2 rounded-md`}
               onClick={() => {
                 btn.label === testModifierSelector
@@ -63,8 +63,8 @@ export const TestSettingsSm = () => {
               key={btn.label}
               className={`${
                 btn.label === testModeSelector
-                  ? "text-custom-primary bg-custom-secondary"
-                  : "text-custom-secondary bg-custom-primary"
+                  ? "text-custom-fill bg-custom-tertiary"
+                  : "text-custom-secondary bg-custom-fadedFill"
               } py-2 rounded-md`}
               onClick={() => {
                 testModeDispatch(btn.action());
@@ -82,8 +82,8 @@ export const TestSettingsSm = () => {
                 key={index}
                 className={`${
                   option.limit === testLimiterSelector
-                    ? "text-custom-primary bg-custom-secondary"
-                    : "text-custom-secondary bg-custom-primary"
+                    ? "text-custom-fill bg-custom-tertiary"
+                    : "text-custom-secondary bg-custom-fadedFill"
                 } py-2 rounded-md`}
                 onClick={() => testLimiterDispatch(option.action)}
               >
@@ -96,8 +96,8 @@ export const TestSettingsSm = () => {
                 key={index}
                 className={`${
                   option.limit === testLimiterSelector
-                    ? "text-custom-primary bg-custom-secondary"
-                    : "text-custom-secondary bg-custom-primary"
+                    ? "text-custom-fill bg-custom-tertiary"
+                    : "text-custom-secondary bg-custom-fadedFill"
                 } py-2 rounded-md`}
                 onClick={() => {
                   option.limit !== "custom" &&
@@ -117,8 +117,8 @@ export const TestSettingsSm = () => {
                 key={index}
                 className={`${
                   option.limit === testLimiterSelector
-                    ? "text-custom-primary bg-custom-secondary"
-                    : "text-custom-secondary bg-custom-primary"
+                    ? "text-custom-fill bg-custom-tertiary"
+                    : "text-custom-secondary bg-custom-fadedFill"
                 } py-2 rounded-md`}
                 onClick={() => testLimiterDispatch(option.action)}
               >
@@ -131,8 +131,8 @@ export const TestSettingsSm = () => {
                 key={index}
                 className={`${
                   option.limit === testLimiterSelector
-                    ? "text-custom-primary bg-custom-secondary"
-                    : "text-custom-secondary bg-custom-primary"
+                    ? "text-custom-fill bg-custom-tertiary"
+                    : "text-custom-secondary bg-custom-fadedFill"
                 } py-2 rounded-md`}
                 onClick={() => testLimiterDispatch(option.action)}
               >

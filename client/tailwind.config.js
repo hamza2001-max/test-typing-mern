@@ -15,10 +15,11 @@ module.exports = {
       },
       backgroundColor: {
         custom: {
-          fill: 'var(--color-fill)',
           primary: 'var(--color-primary)',
           secondary: 'var(--color-secondary)',
           tertiary: 'var(--color-tertiary)',
+          fill: 'var(--color-fill)',
+          fadedFill: 'var(--color-faded-fill)',
           fadedBlack: 'rgba(0,0,0,.75)'
         }
       },
