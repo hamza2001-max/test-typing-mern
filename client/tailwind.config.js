@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin');
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
@@ -48,15 +49,16 @@ module.exports = {
       },
     },
     plugins: [
-      function ({ addUtilities }) {
-        const extendUnderline = {
-          '.tailUnderline': {
-            'textDecoration': 'underline',
-            'text-decoration-color': 'var(--color-tertiary)',
-          },
-        }
-        addUtilities(extendUnderline)
-      }
+      plugin(function({ addVariant }) {
+        addVariant('hocus', ['&:hover', '&:focus'])
+      })
+      // function ({ addVariant }) {
+      //   addVariant('hocus', ({ modifySelectors, separator }) => {
+      //     modifySelectors(({ className }) => {
+      //       return `.${e(`hocus${separator}${className}`)}:hover, .${e(`hocus${separator}${className}`)}:focus`;
+      //     });
+      //   });
+      // }
     ]
   }
 }

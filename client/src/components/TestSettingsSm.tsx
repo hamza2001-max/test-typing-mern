@@ -46,7 +46,7 @@ export const TestSettingsSm = () => {
                 btn.label === testModifierSelector
                   ? "text-custom-fill bg-custom-tertiary"
                   : "text-custom-secondary bg-custom-fadedFill"
-              } py-2 rounded-md`}
+              } py-2 rounded-md hover:bg-custom-secondary hover:text-custom-primary transition ease-in-out delay-75`}
               onClick={() => {
                 btn.label === testModifierSelector
                   ? testModifierDispatch(testModifierSlice.actions.reset())
@@ -65,7 +65,7 @@ export const TestSettingsSm = () => {
                 btn.label === testModeSelector
                   ? "text-custom-fill bg-custom-tertiary"
                   : "text-custom-secondary bg-custom-fadedFill"
-              } py-2 rounded-md`}
+              } py-2 rounded-md hover:bg-custom-secondary hover:text-custom-primary transition ease-in-out delay-75`}
               onClick={() => {
                 testModeDispatch(btn.action());
                 btn.defaultLimit && testLimiterDispatch(btn.defaultLimit);
@@ -84,7 +84,7 @@ export const TestSettingsSm = () => {
                   option.limit === testLimiterSelector
                     ? "text-custom-fill bg-custom-tertiary"
                     : "text-custom-secondary bg-custom-fadedFill"
-                } py-2 rounded-md`}
+                } py-2 rounded-md hover:bg-custom-secondary hover:text-custom-primary transition ease-in-out delay-75`}
                 onClick={() => testLimiterDispatch(option.action)}
               >
                 {option.limit}
@@ -98,7 +98,7 @@ export const TestSettingsSm = () => {
                   option.limit === testLimiterSelector
                     ? "text-custom-fill bg-custom-tertiary"
                     : "text-custom-secondary bg-custom-fadedFill"
-                } py-2 rounded-md`}
+                } py-2 rounded-md hover:bg-custom-secondary hover:text-custom-primary transition ease-in-out delay-75`}
                 onClick={() => {
                   option.limit !== "custom" &&
                     testLimiterDispatch(option.action);
@@ -119,7 +119,7 @@ export const TestSettingsSm = () => {
                   option.limit === testLimiterSelector
                     ? "text-custom-fill bg-custom-tertiary"
                     : "text-custom-secondary bg-custom-fadedFill"
-                } py-2 rounded-md`}
+                } py-2 rounded-md hover:bg-custom-secondary hover:text-custom-primary transition ease-in-out delay-75`}
                 onClick={() => testLimiterDispatch(option.action)}
               >
                 {option.limit}
@@ -133,7 +133,7 @@ export const TestSettingsSm = () => {
                   option.limit === testLimiterSelector
                     ? "text-custom-fill bg-custom-tertiary"
                     : "text-custom-secondary bg-custom-fadedFill"
-                } py-2 rounded-md`}
+                } py-2 rounded-md hover:bg-custom-secondary hover:text-custom-primary transition ease-in-out delay-75`}
                 onClick={() => testLimiterDispatch(option.action)}
               >
                 {option.limit}

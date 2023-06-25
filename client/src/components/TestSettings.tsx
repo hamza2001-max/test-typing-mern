@@ -4,6 +4,7 @@ import { TestSettingsSm } from "./TestSettingsSm";
 import { useDispatch, useSelector } from "react-redux";
 import { testSettingsVSlice } from "../redux/visibilitySlice";
 import { RootState } from "../redux/store";
+import { TestSettingsMd } from "./TestSettingsMd";
 
 export const TestSettings = () => {
   const testSettingsVSelector = useSelector(
@@ -15,7 +16,7 @@ export const TestSettings = () => {
   return (
     <section className="flex justify-center items-center flex-col">
       <button
-        className="px-8 py-3 rounded-lg flex items-center text-custom-primary bg-custom-fadedFill cursor-pointer hover:text-custom-secondary transition ease-in-out delay-75"
+        className="sm:hidden px-8 py-3 rounded-lg flex items-center text-custom-primary bg-custom-fadedFill cursor-pointer hover:text-custom-secondary transition ease-in-out delay-75"
         onClick={() => {
           testSettingsVSelector === false && testSettingsVDispatch(visibleTS());
         }}
@@ -24,6 +25,7 @@ export const TestSettings = () => {
         Test Setting
       </button>
       {testSettingsVSelector && <TestSettingsSm />}
+      <TestSettingsMd/>
     </section>
   );
 };

@@ -21,15 +21,12 @@ export const Test = () => {
   const testLimiterSelector = useSelector(
     (state: RootState) => state.testLimiter.testLimiter
   );
-  const inputStatusSelector = useSelector(
+  const isInputActiveSelector = useSelector(
     (state: RootState) => state.isInputActive.isInputActive
   );
-  const limiterPromptSelector = useSelector(
+  const promptValueSelector = useSelector(
     (state: RootState) => state.promptValue.promptValue
   );
-
-// console.log(inputStatusSelector);
-
 
   useEffect(() => {
     if (inputRef.current) {
@@ -66,7 +63,7 @@ export const Test = () => {
     }
   }, [inputValue, textWritten, testSentence]);
 
-  const testSentenceCreator = useCallback(() => {
+  const generateTestSentence  = useCallback(() => {
     let prototypeSentence = "";
     if (typeof testLimiterSelector === "number") {
       for (let i = 0; i < testLimiterSelector; i++) {
@@ -78,19 +75,19 @@ export const Test = () => {
       setTestSentence(prototypeSentence);
     }
     if (typeof testLimiterSelector === "string") {
-      console.log(limiterPromptSelector);
-      for (let i = 0; i < limiterPromptSelector; i++) {
+      console.log(promptValueSelector);
+      for (let i = 0; i < promptValueSelector; i++) {
         const randomWord =
           wordsJSON[Math.floor(Math.random() * wordsJSON.length)].word;
         prototypeSentence +=
-          i === limiterPromptSelector - 1 ? randomWord : randomWord + " ";
+          i === promptValueSelector - 1 ? randomWord : randomWord + " ";
       }
       setTestSentence(prototypeSentence);
     }
-  }, [testLimiterSelector, limiterPromptSelector]);
+  }, [testLimiterSelector, promptValueSelector]);
 
   const handleRefresh = useCallback(() => {
-    testSentenceCreator();
+    generateTestSentence ();
     setTextWritten("");
     setInputValue("");
     inputStatusDispatch(active());
@@ -101,11 +98,11 @@ export const Test = () => {
       inputRef.current.disabled = false;
       inputRef.current?.focus();
     }
-  }, [testSentenceCreator, active, inputStatusDispatch]);
+  }, [generateTestSentence , active, inputStatusDispatch]);
 
   useEffect(() => {
-    testSentenceCreator();
-  }, [testLimiterSelector, testSentenceCreator]);
+    generateTestSentence ();
+  }, [testLimiterSelector, generateTestSentence ]);
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -134,14 +131,10 @@ export const Test = () => {
 
   const handleInputBlur = () => {
     inputStatusDispatch(inActive());
-    console.log('hello from blur');
-    
   };
 
   const handleFocusClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    console.log('hello from focus');
-
-    if (!inputStatusSelector) {
+    if (!isInputActiveSelector) {
       inputRef.current?.focus();
       inputStatusDispatch(active());
     }
@@ -153,11 +146,12 @@ export const Test = () => {
         <span className="text-custom-tertiary text-2xl ml-3">
           {textWritten.split(" ").length - 1}/{testSentence.split(" ").length}
         </span>
-        <div className="relative flex justify-center">
-          {!inputStatusSelector && (
-            <div
-              className="text-custom-secondary z-10 absolute w-full h-full backdrop-blur-sm flex justify-center items-center"
-              onClick={handleFocusClick}
+        <div
+          className="relative flex justify-center"
+          onClick={handleFocusClick}
+        >
+          {!isInputActiveSelector && (
+            <div className="text-custom-secondary z-10 absolute w-full h-full backdrop-blur-sm flex justify-center items-center"
             >
               <GiArrowCursor className="text-lg mr-3" />
               Click here to focus

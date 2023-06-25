@@ -8,12 +8,12 @@ export const CurrentFragment = ({
   inputValue,
   currentSentenceWord,
 }: CurrentFragmentInterface) => {
-  const inputStatusSelector = useSelector(
+  const isInputActiveSelector = useSelector(
     (state: RootState) => state.isInputActive.isInputActive
   );
   return (
     <span className="relative">
-      {inputStatusSelector &&
+      {isInputActiveSelector &&
         (currentSentenceWord.length - 1 >= inputValue.length ? (
           <Caret offset={14 * inputValue.length || 0} />
         ) : (
