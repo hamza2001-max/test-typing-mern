@@ -3,15 +3,19 @@ import { themeSlice } from "../redux/themeSlice";
 import { themeVisibilitySlice } from "../redux/visibilitySlice";
 import { ThemeOption } from "./ThemeOption";
 import { themeSchemes } from "../data/themeSchemeData";
-import { footerFirstColumn, footerSecondColumn } from "../data/footerData";
+import { footerData } from "../data/footerData";
 import { RootState } from "../redux/store";
+import { IoIosColorPalette } from "react-icons/io";
+import { VscRepoForked } from "react-icons/vsc";
 
 export const Footer = () => {
   const { visibleTheme, inVisibleTheme } = themeVisibilitySlice.actions;
   const themeVDispatch = useDispatch();
   const themeDispatch = useDispatch();
   const theme = useSelector((state: RootState) => state.theme.theme);
-  const themeVSelector = useSelector((state: RootState) => state.isThemeVisible.isThemeVisible);
+  const themeVSelector = useSelector(
+    (state: RootState) => state.isThemeVisible.isThemeVisible
+  );
 
   const handleThemeChange = (
     selectedTheme: (typeof themeSlice.actions)[keyof typeof themeSlice.actions]
@@ -21,8 +25,8 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="text-sm text-custom-primary px-6 py-6">
-      <p className="w-full flex justify-center mb-5">
+    <footer className="text-sm text-custom-primary px-12 xl:px-52 py-10">
+      <p className="w-full flex justify-center mb-8">
         <span className="px-1 mr-2 bg-custom-primary text-custom-fill rounded-sm">
           tab
         </span>{" "}
@@ -32,41 +36,30 @@ export const Footer = () => {
         </span>{" "}
         = restart test
       </p>
-      <section className="flex justify-between">
-        <div className="flex justify-between w-48">
-          <div className="flex flex-col">
-            {footerFirstColumn.map((row, index) => {
-              return (
-                <span
-                  className="flex items-center cursor-pointer hover:text-custom-secondary transition ease-in-out delay-75"
-                  key={index}
-                >
-                  {row.title}
-                </span>
-              );
-            })}
-          </div>
-          <div className="flex flex-col">
-            {footerSecondColumn.map((row, index) => {
-              return (
-                <span
-                  className="flex items-center cursor-pointer hover:text-custom-secondary transition ease-in-out delay-75"
-                  key={index}
-                >
-                  {row.title}
-                </span>
-              );
-            })}
-          </div>
+      <section className="flex justify-between ">
+        <div className="grid gap-x-2 grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 xl:grid-cols-8">
+          {footerData.map((row, index) => {
+            return (
+              <span
+                className="flex items-center cursor-pointer hover:text-custom-secondary transition ease-in-out delay-75"
+                key={index}
+              >
+                <row.icon className="mr-2" />
+                {row.title}
+              </span>
+            );
+          })}
         </div>
-        <div className="flex flex-col relative">
+        <div className="xl:flex relative">
           <span
-            className="flex items-center cursor-pointer hover:text-custom-secondary transition ease-in-out delay-75"
+            className="flex mr-3 items-center cursor-pointer hover:text-custom-secondary transition ease-in-out delay-75"
             onClick={() => themeVDispatch(visibleTheme())}
           >
+            <IoIosColorPalette className="mr-2" />
             {theme ? theme : "light"}
           </span>
           <span className="flex items-center cursor-pointer hover:text-custom-secondary transition ease-in-out delay-75">
+            <VscRepoForked className="mr-2" />
             version
           </span>
         </div>

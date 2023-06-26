@@ -68,14 +68,14 @@ export const WordChecker = ({
   return (
     <>
       <div
-        className="flex text-custom-primary text-2xl h-30 w-64 overflow-hidden"
+        className="flex text-custom-primary text-2xl lg:text-custom-xl h-30 overflow-hidden"
         onClick={onClick}
         ref={typedSentenceRef}
       >
-        <p className="leading-10">{typedSentence}</p>
+        <p className="leading-10 w-64 xs:w-80 sm:w-99 md:w-100 lg:w-101 xl:w-102">{typedSentence}</p>
       </div>
-      <div className="text-2xl absolute opacity-0 -z-10" ref={divRef}>
-        <p className="w-64">
+      <div className="text-2xl lg:text-custom-xl absolute opacity-0 -z-10" ref={divRef}>
+        <p className="w-64 xs:w-80 sm:w-99 md:w-100 lg:w-101 xl:w-102">
           {testSentence
             .split(" ")
             .slice(0, textWritten.split(" ").length)

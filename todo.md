@@ -1,27 +1,61 @@
-- [ ] Todo
+- [ ] delayed
+  - [ ] when clicked on the text, it blurs for a second.
 
+- [ ] ASAP
+  - [ ] implement the local storage.
+
+- [ ] Todo
+  - [x] include the icons in sm component.
   - [x] complete the customPromptfunctionality.
   - [x] apply the caret to proto.
   - [x] create space in the split sentence.
   - [x] refactor footer into json data.
-  - [ ] code the keyframes for caret in tailwind.
-  - [ ] refactor the component folder structure.
-  - [ ] refactor TestModeWords.tsx as a whole.
+  - [x] code the keyframes for caret in tailwind.
+  - [x] refactor the component folder structure.
+  - [x] refactor TestModeWords.tsx as a whole.
   - [x] create a data folder for the json data.
   - [x] apply blur when one component become visible.
-  - [ ] testSettings.tsx
-    - [ ] make testSettings responsive.
-  - [ ] TestModeWords.tsx
-    - [ ] apply blur to text if input is not on focus.
-  - [ ] TestModeWordsPrompt.tsx
-    - [ ] complete the infinite mode.
+  - [x] make testSettings responsive.
+  - [x] apply blur to text if input is not on focus.
+  - [ ] complete the infinite mode in word prompt.
+  - [x] implement the word scroll.
+  - [x] implement the word counter.
+  - [x] make edge cases for word prompt.
+  - [ ] implement tab + enter = restart test.
+  - [x] hover animations.
+  - [x] make the Home.tsx responsive.
+  - [ ] Add time below word amount in wordPrompt.
+  - [ ] implement multiple test modes.
+  - [ ] hide the number of words written untill first character is written.
+  - [ ] implement the result of a run.
+  - [ ] implement time mode in the word mode if nothing has been written for a long time and make the test invalid.
+  - [ ] make the extra characters appear if there are any.
+
+- [x] Tofix
+  - [x] fix the hover in testSettingsSm.tsx
+  - [x] Improve the variable and file names through gpt.
+    - [x] Test.tsx
+    - [x] CurrentFragment.tsx
+  - [x] when input is greater than the word length, the caret disappears.
+  - [x] problems in scrolltop when written word is larger than the one shown.
+  - [x] change the color problem in TestSettingsSm.tsx
+  - [x] smooth the cutting bondaries.
+  - [x] fix the underline when text moves up.
+    - [x] check the lowest level of scroll, the problem is still there.
 
 - [ ] ideas
+  - [ ] Add a practice mode.
+  - [ ] Difficulty Levels.
+  - [ ] Add sound effects.
   - [ ] create graphs.
+  - [ ] create localstorage.
+  - [ ] create cookies if possible.
   - [ ] create settings.
   - [ ] create multiple users.
   - [ ] create admin.
   - [ ] give admin the ability to make other admins.
   - [ ] give admin dashboard.
+  - [ ] admin can insert new colors.
+  - [ ] implement command line.
   - [x] give multiple color modes.
   - [x] make underline appear only when space is pressed.

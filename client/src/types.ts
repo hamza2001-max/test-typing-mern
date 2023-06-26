@@ -28,7 +28,3 @@ export interface PreviousFragmentInterface {
   inputValue: string;
   writtenWord: string;
 }
-
-export interface IconMappingInterface {
-  [key: string]: IconType;
-}

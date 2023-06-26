@@ -1,29 +1,38 @@
-export const footerFirstColumn = [
-    {
-        title: "Contact"
-    },
-    {
-        title: "Github"
-    },
-    {
-        title: "Twitter"
-    },
-    {
-        title: "Security"
-    },
-];
+import { FiMail, FiGithub } from "react-icons/fi";
+import { FaTwitter, FaShieldAlt, FaDiscord, FaFileContract, FaLock } from "react-icons/fa";
+import { MdSupportAgent } from "react-icons/md";
 
-export const footerSecondColumn = [
+export const footerData = [
     {
-        title: "Support"
+        title: "Contact",
+        icon: FiMail
     },
     {
-        title: "Discord"
+        title: "Github",
+        icon: FiGithub
     },
     {
-        title: "Terms"
+        title: "Twitter",
+        icon: FaTwitter
     },
     {
-        title: "Privacy"
+        title: "Security",
+        icon: FaShieldAlt
     },
-];
+    {
+        title: "Support",
+        icon: MdSupportAgent
+    },
+    {
+        title: "Discord",
+        icon: FaDiscord
+    },
+    {
+        title: "Policies",
+        icon: FaFileContract
+    },
+    {
+        title: "Privacy",
+        icon: FaLock
+    },
+]

@@ -49,21 +49,16 @@ export const Test = () => {
 
   useEffect(() => {
     if (
-      textWritten.split(" ").length - 1 ===
-      testSentence.split(" ").length - 1
+      textWritten.split(" ").length-1  ===
+      testSentence.split(" ").length
     ) {
-      if (
-        inputValue.trim() ===
-        testSentence.split(" ")[testSentence.split(" ").length - 1].trim()
-      ) {
         if (inputRef.current) {
           inputRef.current.disabled = true;
         }
-      }
     }
   }, [inputValue, textWritten, testSentence]);
 
-  const generateTestSentence  = useCallback(() => {
+  const generateTestSentence = useCallback(() => {
     let prototypeSentence = "";
     if (typeof testLimiterSelector === "number") {
       for (let i = 0; i < testLimiterSelector; i++) {
@@ -84,10 +79,11 @@ export const Test = () => {
       }
       setTestSentence(prototypeSentence);
     }
+    setTextWritten("");
   }, [testLimiterSelector, promptValueSelector]);
 
   const handleRefresh = useCallback(() => {
-    generateTestSentence ();
+    generateTestSentence();
     setTextWritten("");
     setInputValue("");
     inputStatusDispatch(active());
@@ -98,11 +94,11 @@ export const Test = () => {
       inputRef.current.disabled = false;
       inputRef.current?.focus();
     }
-  }, [generateTestSentence , active, inputStatusDispatch]);
+  }, [generateTestSentence, active, inputStatusDispatch]);
 
   useEffect(() => {
-    generateTestSentence ();
-  }, [testLimiterSelector, generateTestSentence ]);
+    generateTestSentence();
+  }, [testLimiterSelector, generateTestSentence]);
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -142,8 +138,8 @@ export const Test = () => {
 
   return (
     <section className="relative text-custom-primary flex items-center flex-col mt-5">
-      <div className="w-72">
-        <span className="text-custom-tertiary text-2xl ml-3">
+      <div className="">
+        <span className="text-custom-tertiary text-2xl lg:text-custom-xl">
           {textWritten.split(" ").length - 1}/{testSentence.split(" ").length}
         </span>
         <div
@@ -151,9 +147,8 @@ export const Test = () => {
           onClick={handleFocusClick}
         >
           {!isInputActiveSelector && (
-            <div className="text-custom-secondary z-10 absolute w-full h-full backdrop-blur-sm flex justify-center items-center"
-            >
-              <GiArrowCursor className="text-lg mr-3" />
+            <div className="text-lg lg:text-xl px-3 text-custom-secondary z-10 absolute w-full h-full backdrop-blur-sm flex justify-center items-center">
+              <GiArrowCursor className="mr-3" />
               Click here to focus
             </div>
           )}
@@ -177,7 +172,7 @@ export const Test = () => {
         />
       </div>
       <button
-        className="text-2xl flex justify-center mt-7 hover:text-custom-secondary transition ease-in-out delay-75"
+        className="text-2xl lg:text-custom-xl flex justify-center mt-7 lg:mt-10 hover:text-custom-secondary transition ease-in-out delay-75"
         onClick={handleRefresh}
       >
         <VscDebugRestart />

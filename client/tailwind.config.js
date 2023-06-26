@@ -8,6 +8,9 @@ module.exports = {
       screens: {
         xs: '480px',
       },
+      fontSize: {
+        'custom-xl': '1.7rem'
+      },
       textColor: {
         custom: {
           primary: 'var(--color-primary)',
@@ -41,7 +44,11 @@ module.exports = {
       },
       width: {
         '0.1': '0.12rem',
-        '98': '400px'
+        '98': '400px',
+        '99': '500px',
+        '100': '600px',
+        '101': '800px',
+        '102': '1000px'
       },
       keyframes: {
         pulse: {

@@ -10,7 +10,6 @@ import {
   testSettingsVSlice,
   themeVisibilitySlice,
 } from "../redux/visibilitySlice";
-// import { inputStatusSlice } from "../redux/inputStatusSlice";
 
 export const Home = () => {
   const themeVDispatch = useDispatch();
@@ -33,12 +32,6 @@ export const Home = () => {
   const isPromptVisibleSelector = useSelector(
     (state: RootState) => state.isPromptVisible.isPromptVisible
   );
-  // const inputStatusSelector = useSelector(
-  //   (state: RootState) => state.isInputActive.isInputActive
-  // );
-  // const { inActive } = inputStatusSlice.actions;
-  // const inputStatusDispatch = useDispatch();
-
 
   return (
     <main
@@ -47,7 +40,6 @@ export const Home = () => {
         themeVSelector && themeVDispatch(inVisibleTheme());
         testSettingsVSelector && testSettingsVDispatch(inVisibleTS());
         customPromptVSelector && customPromptVDispatch(inVisibleCustom());
-        // inputStatusSelector && inputStatusDispatch(inActive());
       }}
     >
       {(themeVSelector || testSettingsVSelector || isPromptVisibleSelector) && (
