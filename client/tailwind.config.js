@@ -1,11 +1,13 @@
 /** @type {import('tailwindcss').Config} */
-const plugin = require('tailwindcss/plugin');
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     extend: {
+      screens: {
+        xs: '480px',
+      },
       textColor: {
         custom: {
           primary: 'var(--color-primary)',
@@ -47,18 +49,6 @@ module.exports = {
           '50%': { opacity: '0' },
         },
       },
-    },
-    plugins: [
-      plugin(function({ addVariant }) {
-        addVariant('hocus', ['&:hover', '&:focus'])
-      })
-      // function ({ addVariant }) {
-      //   addVariant('hocus', ({ modifySelectors, separator }) => {
-      //     modifySelectors(({ className }) => {
-      //       return `.${e(`hocus${separator}${className}`)}:hover, .${e(`hocus${separator}${className}`)}:focus`;
-      //     });
-      //   });
-      // }
-    ]
+    }
   }
 }

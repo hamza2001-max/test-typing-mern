@@ -16,7 +16,7 @@ export const TestSettings = () => {
   return (
     <section className="flex justify-center items-center flex-col">
       <button
-        className="sm:hidden px-8 py-3 rounded-lg flex items-center text-custom-primary bg-custom-fadedFill cursor-pointer hover:text-custom-secondary transition ease-in-out delay-75"
+        className="xs:hidden px-8 py-3 rounded-lg flex items-center text-custom-primary bg-custom-fadedFill cursor-pointer hover:text-custom-secondary transition ease-in-out delay-75"
         onClick={() => {
           testSettingsVSelector === false && testSettingsVDispatch(visibleTS());
         }}

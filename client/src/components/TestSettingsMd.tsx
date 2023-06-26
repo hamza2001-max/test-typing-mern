@@ -3,7 +3,7 @@ import {
   testSettingLimiterData,
   testSettingModeData,
   testSettingModifierData,
-} from "../data/testSettingData";
+} from "../data/testSettingsData";
 import { RootState } from "../redux/store";
 import { testModifierSlice } from "../redux/testSettingsSlice";
 import {
@@ -30,43 +30,47 @@ export const TestSettingsMd = () => {
   const customPromptVDispatch = useDispatch();
 
   return (
-    <div className="hidden sm:flex rounded-md bg-custom-fadedFill text-custom-primary cursor-pointer text-sm py-2 px-4">
-      <div className="flex items-center space-x-4">
-        {testSettingModifierData.map((btn) => (
-          <button
-            key={btn.label}
-            className={`${
-              btn.label === testModifierSelector && "text-custom-tertiary"
-            } py-2 rounded-md hover:text-custom-secondary transition ease-in-out delay-75`}
-            onClick={() => {
-              btn.label === testModifierSelector
-                ? testModifierDispatch(testModifierSlice.actions.reset())
-                : testModifierDispatch(btn.action());
-            }}
-          >
-            {btn.label}
-          </button>
-        ))}
-        <div className="bg-custom-fill w-1 h-5"></div>
+    <div className="hidden xs:flex xs:flex-col xs:items-center sm:flex-row rounded-md bg-custom-fadedFill text-custom-primary cursor-pointer text-sm py-1 px-4">
+      <div className="flex items-center space-x-5 md:space-x-4 sm:space-x-2">
+        {testSettingModifierData.map((btn) => {
+          return (
+            <button
+              key={btn.label}
+              className={`${
+                btn.label === testModifierSelector && "text-custom-tertiary"
+              } py-2 rounded-md hover:text-custom-secondary transition ease-in-out delay-75`}
+              onClick={() => {
+                btn.label === testModifierSelector
+                  ? testModifierDispatch(testModifierSlice.actions.reset())
+                  : testModifierDispatch(btn.action());
+              }}
+            >
+              {btn.label}
+            </button>
+          );
+        })}
+        <div className="hidden sm:block bg-custom-fill w-1 h-5 rounded-lg"></div>
       </div>
-      <div className="flex items-center space-x-4 ml-4">
-        {testSettingModeData.map((btn) => (
-          <button
-            key={btn.label}
-            className={`${
-              btn.label === testModeSelector && "text-custom-tertiary"
-            } py-2 rounded-md hover:text-custom-secondary transition ease-in-out delay-75`}
-            onClick={() => {
-              testModeDispatch(btn.action());
-              btn.defaultLimit && testLimiterDispatch(btn.defaultLimit);
-            }}
-          >
-            {btn.label}
-          </button>
-        ))}
-        <div className="bg-custom-fill w-1 h-5"></div>
+      <div className="flex items-center space-x-5 ml-5 md:space-x-4 md:ml-4 sm:space-x-2 sm:ml-2">
+        {testSettingModeData.map((btn) => {
+          return (
+            <button
+              key={btn.label}
+              className={`${
+                btn.label === testModeSelector && "text-custom-tertiary"
+              } py-2 rounded-md hover:text-custom-secondary transition ease-in-out delay-75`}
+              onClick={() => {
+                testModeDispatch(btn.action());
+                btn.defaultLimit && testLimiterDispatch(btn.defaultLimit);
+              }}
+            >
+              {btn.label}
+            </button>
+          );
+        })}
+        <div className="hidden sm:block bg-custom-fill w-1 h-5 rounded-lg"></div>
       </div>
-      <div className="flex items-center space-x-4 ml-4">
+      <div className="flex items-center space-x-5 ml-5 md:space-x-4 md:ml-4 sm:space-x-2 sm:ml-2">
         {testModeSelector === "time" &&
           testSettingLimiterData.time.map((option, index) => (
             <button

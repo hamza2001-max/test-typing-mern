@@ -1,9 +1,10 @@
+import { IconType } from 'react-icons';
+
 export interface ThemeOptionInterface {
   title: string;
   themeClass: string;
   onClick: () => void;
 }
-
 
 export interface CurrentFragmentInterface {
   word: string;
@@ -26,4 +27,8 @@ export interface PreviousFragmentInterface {
   word: string;
   inputValue: string;
   writtenWord: string;
+}
+
+export interface IconMappingInterface {
+  [key: string]: IconType;
 }

@@ -19,11 +19,11 @@ export const testSettingModifierData = [
 ];
 
 export const testSettingModeData = [
-  { label: "time", defaultLimit: testLimiterReducer(30), action: time },
-  { label: "words", defaultLimit: testLimiterReducer(25), action: words },
-  { label: "quote", defaultLimit: testLimiterReducer("medium"), action: quote },
-  { label: "zen", action: zen },
-  { label: "custom", action: custom },
+  { label: "time", defaultLimit: testLimiterReducer(30), action: time, icon: "AiFillClockCircle"},
+  { label: "words", defaultLimit: testLimiterReducer(25), action: words, icon: "TiSortAlphabetically" },
+  { label: "quote", defaultLimit: testLimiterReducer("medium"), action: quote, icon: "FaQuoteRight"},
+  { label: "zen", action: zen, icon: "BsTriangle"},
+  { label: "custom", action: custom, icon: "FaWrench"},
 ];
 
 export const testSettingLimiterData = {
