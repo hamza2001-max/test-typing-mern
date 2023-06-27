@@ -9,11 +9,13 @@ import { RootState } from "../redux/store";
 
 export const Test = () => {
   const [testSentence, setTestSentence] = useState<string>("");
-  const [inputValue, setInputValue] = useState<string>("");
+  const [isRefreshFocused, setIsRefreshFocused] = useState<boolean>(false);
   const [textWritten, setTextWritten] = useState<string>("");
-  const [scrollIndex, setScrollIndex] = useState(3);
-  const [lineHeiInc, setLineHeiInc] = useState(1.25);
+  const [scrollIndex, setScrollIndex] = useState<number>(3);
+  const [inputValue, setInputValue] = useState<string>("");
+  const [lineHeiInc, setLineHeiInc] = useState<number>(1.25);
   const inputRef = useRef<HTMLInputElement>(null);
+  const btnRef = useRef<HTMLButtonElement | null>(null);
 
   const { inActive, active } = inputStatusSlice.actions;
   const inputStatusDispatch = useDispatch();
@@ -46,10 +48,18 @@ export const Test = () => {
       }
     };
 
+    const handleBtnKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Tab") {
+        e.preventDefault();
+        btnRef.current?.focus();
+      }
+    };
     const inputElement = inputRef.current;
     inputElement?.addEventListener("input", handleInputChange);
+    document.addEventListener("keydown", handleBtnKeyDown);
     return () => {
       inputElement?.removeEventListener("input", handleInputChange);
+      document.removeEventListener("keydown", handleBtnKeyDown);
     };
   });
 
@@ -62,47 +72,67 @@ export const Test = () => {
   }, [inputValue, textWritten, testSentence]);
 
   const generateTestSentence = useCallback(() => {
-    const generateRandomNumber = (max: number) => Math.floor(Math.random() * max);
-    const getRandomWord = () => wordsJSON[generateRandomNumber(wordsJSON.length)].word;
-    const getRandomPunctuation = () => punctuationsJSON[generateRandomNumber(punctuationsJSON.length)].punctuation;
-  
+    const generateRandomNumber = (max: number) =>
+      Math.floor(Math.random() * max);
+    const getRandomWord = () =>
+      wordsJSON[generateRandomNumber(wordsJSON.length)].word;
+    const getRandomPunctuation = () =>
+      punctuationsJSON[generateRandomNumber(punctuationsJSON.length)]
+        .punctuation;
+
     let prototypeSentence = "";
     let randomWord = "";
-  
+
     const generateRandomWord = () => {
       randomWord = getRandomWord();
-      const shouldAddPunctuation = testModifierSelector === "punctuation" && generateRandomNumber(10) === 3;
-      const shouldAddNumber = testModifierSelector === "numbers" && generateRandomNumber(10) === 3;
-      const shouldAddDual = testModifierSelector === "dual" && generateRandomNumber(10) === 3;
-  
+      const shouldAddPunctuation =
+        testModifierSelector === "punctuation" &&
+        generateRandomNumber(10) === 3;
+      const shouldAddNumber =
+        testModifierSelector === "numbers" && generateRandomNumber(10) === 3;
+      const shouldAddDual =
+        testModifierSelector === "dual" && generateRandomNumber(10) === 3;
+
       if (shouldAddPunctuation) {
         randomWord = randomWord.concat(getRandomPunctuation());
       } else if (shouldAddNumber) {
         randomWord = generateRandomNumber(9999).toString();
       } else if (shouldAddDual) {
         const randomIndex = generateRandomNumber(2);
-        randomWord = randomIndex === 0 ? randomWord.concat(getRandomPunctuation()) : generateRandomNumber(9999).toString();
+        randomWord =
+          randomIndex === 0
+            ? randomWord.concat(getRandomPunctuation())
+            : generateRandomNumber(9999).toString();
       }
     };
-  
+
     if (typeof testLimiterSelector === "number") {
       for (let i = 0; i < testLimiterSelector; i++) {
         generateRandomWord();
-        prototypeSentence += i === testLimiterSelector - 1 ? randomWord : randomWord + " ";
+        prototypeSentence +=
+          i === testLimiterSelector - 1 ? randomWord : randomWord + " ";
       }
     }
-  
+
     if (typeof testLimiterSelector === "string") {
-      for (let i = 0; i < promptValueSelector; i++) {
-        generateRandomWord();
-        prototypeSentence += i === promptValueSelector - 1 ? randomWord : randomWord + " ";
+      if (promptValueSelector === 0) {
+        for (let i = 0; i < 100; i++) {
+          generateRandomWord();
+          prototypeSentence +=
+            i === promptValueSelector - 1 ? randomWord : randomWord + " ";
+        }
+      } else {
+        for (let i = 0; i < promptValueSelector; i++) {
+          generateRandomWord();
+          prototypeSentence +=
+            i === promptValueSelector - 1 ? randomWord : randomWord + " ";
+        }
       }
     }
 
     setTestSentence(prototypeSentence);
     setTextWritten("");
   }, [testLimiterSelector, promptValueSelector, testModifierSelector]);
-  
 
   const handleRefresh = useCallback(() => {
     generateTestSentence();
@@ -147,23 +177,34 @@ export const Test = () => {
     [inputValue, textWritten, testSentence]
   );
 
+  const handleRefreshKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === "Tab") {
+      e.preventDefault();
+      setIsRefreshFocused(true);
+    }
+  };
+
   const handleInputBlur = () => {
     inputStatusDispatch(inActive());
   };
 
-  const handleFocusClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleFocusClick = () => {
     if (!isInputActiveSelector) {
       inputRef.current?.focus();
       inputStatusDispatch(active());
     }
   };
 
+  isRefreshFocused && console.log("hey");
+
   return (
     <section className="relative text-custom-primary flex items-center flex-col mt-5">
       <div className="">
-        <span className="text-custom-tertiary text-2xl lg:text-custom-xl">
-          {textWritten.split(" ").length - 1}/{testSentence.split(" ").length}
-        </span>
+        {(inputValue || textWritten) && (
+          <span className="text-custom-tertiary text-2xl lg:text-custom-xl">
+            {textWritten.split(" ").length - 1}/{testSentence.split(" ").length}
+          </span>
+        )}
         <div
           className="relative flex justify-center"
           onClick={handleFocusClick}
@@ -194,8 +235,11 @@ export const Test = () => {
         />
       </div>
       <button
-        className="text-2xl lg:text-custom-xl flex justify-center mt-7 lg:mt-10 hover:text-custom-secondary transition ease-in-out delay-75"
+        className="px-8 py-4 rounded-md text-2xl lg:text-custom-xl flex justify-center mt-10
+         hover:text-custom-fill hover:bg-custom-secondary transition ease-in-out delay-75 focus:bg-custom-secondary
+          focus:text-custom-fill outline-none"
         onClick={handleRefresh}
+        ref={btnRef}
       >
         <VscDebugRestart />
       </button>

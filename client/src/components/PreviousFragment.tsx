@@ -5,7 +5,7 @@ export const PreviousFragment = ({
     writtenWord,
     inputValue,
   }: PreviousFragmentInterface) => {
-    let wordContainsUnderline = false;
+    let isWordUnderlined  = false;
   
     if (writtenWord) {
       const prevWords = word.split("").map((letter, thirdIndex) => {
@@ -19,7 +19,7 @@ export const PreviousFragment = ({
                 prevClass = "text-custom-secondary";
               } else {
                 prevClass = "text-custom-tertiary";
-                wordContainsUnderline = true;
+                isWordUnderlined  = true;
               }
             }
           } else {
@@ -27,7 +27,7 @@ export const PreviousFragment = ({
               prevClass = "text-custom-secondary";
             } else {
               prevClass = "text-custom-tertiary";
-              wordContainsUnderline = true;
+              isWordUnderlined  = true;
             }
           }
         }
@@ -42,7 +42,7 @@ export const PreviousFragment = ({
         <span>
           <span
             className={`${
-              wordContainsUnderline && "border-b-3 border-custom-tertiary"
+              isWordUnderlined  && "border-b-3 border-custom-tertiary"
             }`}
           >
             {prevWords}
