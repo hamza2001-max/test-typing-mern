@@ -17,3 +17,15 @@ export const inputStatusSlice = createSlice({
   }
 });  
 
+// export const inputStatusSlice = createSlice({
+//   name: "status",
+//   initialState: initialInputStatus.isInputActive,
+//   reducers: {
+//     inActive: (state) => {
+//       state = false;
+//     },
+//     active: (state) => {
+//       state.isInputActive = true;
+//     }
+//   }
+// });

@@ -20,6 +20,7 @@ export const TestSettingsSm = () => {
 
   const { visibleCustom } = promptVisibilitySlice.actions;
   const { inVisibleTS } = testSettingsVSlice.actions;
+  const { dual, numbers, punctuation } = testModifierSlice.actions;
 
   const testModeSelector = useSelector(
     (state: RootState) => state.testMode.testMode
@@ -42,15 +43,29 @@ export const TestSettingsSm = () => {
           {testSettingModifierData.map((btn) => (
             <button
               key={btn.label}
-              className={`${
-                btn.label === testModifierSelector
-                  ? "text-custom-fill bg-custom-tertiary"
-                  : "text-custom-secondary bg-custom-fadedFill"
-              } py-2 rounded-md hover:bg-custom-secondary hover:text-custom-primary transition ease-in-out delay-75`}
+              className={`
+             bg-custom-fadedFill text-custom-secondary 
+              ${
+                btn.label === testModifierSelector &&
+                "!text-custom-fill bg-custom-tertiary"
+              } 
+              ${
+                testModifierSelector === "dual" &&
+                "!text-custom-fill bg-custom-tertiary"
+              }
+              py-2 rounded-md hover:bg-custom-secondary hover:text-custom-primary transition ease-in-out delay-75`}
               onClick={() => {
-                btn.label === testModifierSelector
+                testModifierSelector === ""
+                  ? testModifierDispatch(btn.action())
+                  : testModifierSelector === "dual"
+                  ? btn.label === "punctuation"
+                    ? testModifierDispatch(numbers())
+                    : testModifierDispatch(punctuation())
+                  : btn.label === testModifierSelector
                   ? testModifierDispatch(testModifierSlice.actions.reset())
-                  : testModifierDispatch(btn.action());
+                  : testModifierSelector &&
+                    testModifierSelector !== btn.label &&
+                    testModifierDispatch(dual());
               }}
             >
               {btn.label}

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { wordsJSON } from "../testJson";
+import { punctuationsJSON, wordsJSON } from "../testJson";
 import { VscDebugRestart } from "react-icons/vsc";
 import { GiArrowCursor } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,6 +17,9 @@ export const Test = () => {
 
   const { inActive, active } = inputStatusSlice.actions;
   const inputStatusDispatch = useDispatch();
+  // const { testLimiter, isInputActive, promptValue, testModifier  } = useSelector(
+  //   (state: RootState) => state
+  // );
 
   const testLimiterSelector = useSelector(
     (state: RootState) => state.testLimiter.testLimiter
@@ -26,6 +29,9 @@ export const Test = () => {
   );
   const promptValueSelector = useSelector(
     (state: RootState) => state.promptValue.promptValue
+  );
+  const testModifierSelector = useSelector(
+    (state: RootState) => state.testModifier.testModifier
   );
 
   useEffect(() => {
@@ -48,39 +54,55 @@ export const Test = () => {
   });
 
   useEffect(() => {
-    if (
-      textWritten.split(" ").length-1  ===
-      testSentence.split(" ").length
-    ) {
-        if (inputRef.current) {
-          inputRef.current.disabled = true;
-        }
+    if (textWritten.split(" ").length - 1 === testSentence.split(" ").length) {
+      if (inputRef.current) {
+        inputRef.current.disabled = true;
+      }
     }
   }, [inputValue, textWritten, testSentence]);
 
   const generateTestSentence = useCallback(() => {
+    const generateRandomNumber = (max: number) => Math.floor(Math.random() * max);
+    const getRandomWord = () => wordsJSON[generateRandomNumber(wordsJSON.length)].word;
+    const getRandomPunctuation = () => punctuationsJSON[generateRandomNumber(punctuationsJSON.length)].punctuation;
+  
     let prototypeSentence = "";
+    let randomWord = "";
+  
+    const generateRandomWord = () => {
+      randomWord = getRandomWord();
+      const shouldAddPunctuation = testModifierSelector === "punctuation" && generateRandomNumber(10) === 3;
+      const shouldAddNumber = testModifierSelector === "numbers" && generateRandomNumber(10) === 3;
+      const shouldAddDual = testModifierSelector === "dual" && generateRandomNumber(10) === 3;
+  
+      if (shouldAddPunctuation) {
+        randomWord = randomWord.concat(getRandomPunctuation());
+      } else if (shouldAddNumber) {
+        randomWord = generateRandomNumber(9999).toString();
+      } else if (shouldAddDual) {
+        const randomIndex = generateRandomNumber(2);
+        randomWord = randomIndex === 0 ? randomWord.concat(getRandomPunctuation()) : generateRandomNumber(9999).toString();
+      }
+    };
+  
     if (typeof testLimiterSelector === "number") {
       for (let i = 0; i < testLimiterSelector; i++) {
-        const randomWord =
-          wordsJSON[Math.floor(Math.random() * wordsJSON.length)].word;
-        prototypeSentence +=
-          i === testLimiterSelector - 1 ? randomWord : randomWord + " ";
+        generateRandomWord();
+        prototypeSentence += i === testLimiterSelector - 1 ? randomWord : randomWord + " ";
       }
-      setTestSentence(prototypeSentence);
     }
+  
     if (typeof testLimiterSelector === "string") {
-      console.log(promptValueSelector);
       for (let i = 0; i < promptValueSelector; i++) {
-        const randomWord =
-          wordsJSON[Math.floor(Math.random() * wordsJSON.length)].word;
-        prototypeSentence +=
-          i === promptValueSelector - 1 ? randomWord : randomWord + " ";
+        generateRandomWord();
+        prototypeSentence += i === promptValueSelector - 1 ? randomWord : randomWord + " ";
       }
-      setTestSentence(prototypeSentence);
     }
+
+    setTestSentence(prototypeSentence);
     setTextWritten("");
-  }, [testLimiterSelector, promptValueSelector]);
+  }, [testLimiterSelector, promptValueSelector, testModifierSelector]);
+  
 
   const handleRefresh = useCallback(() => {
     generateTestSentence();

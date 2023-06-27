@@ -38,6 +38,9 @@ export const testModifierSlice = createSlice({
     numbers: (state) => {
       state.testModifier = "numbers";
     },
+    dual: (state) => {
+      state.testModifier = "dual";
+    },
     reset: () => {
       return initialTestModifier;
     },

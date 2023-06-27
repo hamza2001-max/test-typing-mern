@@ -1,6 +1,5 @@
 import { Footer } from "../components/Footer";
 import { Navigation } from "../components/Navigation";
-import { TestSettings } from "../components/TestSettings";
 import { TestGrounds } from "../components/TestGrounds";
 import { WordsLimiterPrompt } from "../components/WordsLimiterPrompt";
 import { useDispatch, useSelector } from "react-redux";

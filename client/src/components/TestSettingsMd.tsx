@@ -14,6 +14,8 @@ import {
 export const TestSettingsMd = () => {
   const { visibleCustom } = promptVisibilitySlice.actions;
   const { inVisibleTS } = testSettingsVSlice.actions;
+  const { dual, numbers, punctuation } = testModifierSlice.actions;
+
   const testModeSelector = useSelector(
     (state: RootState) => state.testMode.testMode
   );
@@ -23,6 +25,7 @@ export const TestSettingsMd = () => {
   const testLimiterSelector = useSelector(
     (state: RootState) => state.testLimiter.testLimiter
   );
+  
   const testModeDispatch = useDispatch();
   const testModifierDispatch = useDispatch();
   const testLimiterDispatch = useDispatch();
@@ -38,14 +41,23 @@ export const TestSettingsMd = () => {
               key={btn.label}
               className={`${
                 btn.label === testModifierSelector && "text-custom-tertiary"
-              } flex items-center py-2 rounded-md hover:text-custom-secondary transition ease-in-out delay-75`}
+              } ${testModifierSelector === "dual" && "text-custom-tertiary"}
+              flex items-center py-2 rounded-md hover:text-custom-secondary transition ease-in-out delay-75`}
               onClick={() => {
-                btn.label === testModifierSelector
+                testModifierSelector === ""
+                  ? testModifierDispatch(btn.action())
+                  : testModifierSelector === "dual"
+                  ? btn.label === "punctuation"
+                    ? testModifierDispatch(numbers())
+                    : testModifierDispatch(punctuation())
+                  : btn.label === testModifierSelector
                   ? testModifierDispatch(testModifierSlice.actions.reset())
-                  : testModifierDispatch(btn.action());
+                  : testModifierSelector &&
+                    testModifierSelector !== btn.label &&
+                    testModifierDispatch(dual());
               }}
             >
-              <btn.icon className="mr-1"/>
+              <btn.icon className="mr-1" />
               {btn.label}
             </button>
           );
@@ -65,7 +77,7 @@ export const TestSettingsMd = () => {
                 btn.defaultLimit && testLimiterDispatch(btn.defaultLimit);
               }}
             >
-              <btn.icon className="mr-1"/>
+              <btn.icon className="mr-1" />
               {btn.label}
             </button>
           );

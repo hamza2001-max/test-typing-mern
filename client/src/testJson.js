@@ -279,3 +279,27 @@ export const wordsJSON = [
     word: "movie"
   }
 ];
+
+export const punctuationsJSON = [
+  {
+    punctuation: "."
+  },
+  {
+    punctuation: "?"
+  },
+  {
+    punctuation: "!"
+  },
+  {
+    punctuation: ","
+  },
+  {
+    punctuation: ":"
+  },
+  {
+    punctuation: ";"
+  },
+  {
+    punctuation: "-"
+  },
+];
