@@ -3,13 +3,12 @@ import { punctuationsJSON, wordsJSON } from "../testJson";
 import { VscDebugRestart } from "react-icons/vsc";
 import { GiArrowCursor } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
-import { WordChecker } from "./WordChecker";
+import { WordValidator } from "./WordValidator";
 import { inputStatusSlice } from "../redux/inputStatusSlice";
 import { RootState } from "../redux/store";
 
 export const Test = () => {
   const [testSentence, setTestSentence] = useState<string>("");
-  const [isRefreshFocused, setIsRefreshFocused] = useState<boolean>(false);
   const [textWritten, setTextWritten] = useState<string>("");
   const [scrollIndex, setScrollIndex] = useState<number>(3);
   const [inputValue, setInputValue] = useState<string>("");
@@ -22,7 +21,6 @@ export const Test = () => {
   // const { testLimiter, isInputActive, promptValue, testModifier  } = useSelector(
   //   (state: RootState) => state
   // );
-
   const testLimiterSelector = useSelector(
     (state: RootState) => state.testLimiter.testLimiter
   );
@@ -115,23 +113,16 @@ export const Test = () => {
     }
 
     if (typeof testLimiterSelector === "string") {
-      if (promptValueSelector === 0) {
-        for (let i = 0; i < 100; i++) {
-          generateRandomWord();
-          prototypeSentence +=
-            i === promptValueSelector - 1 ? randomWord : randomWord + " ";
-        }
-      } else {
-        for (let i = 0; i < promptValueSelector; i++) {
-          generateRandomWord();
-          prototypeSentence +=
-            i === promptValueSelector - 1 ? randomWord : randomWord + " ";
-        }
+      for (let i = 0; i < promptValueSelector; i++) {
+        generateRandomWord();
+        prototypeSentence +=
+          i === promptValueSelector - 1 ? randomWord : randomWord + " ";
       }
     }
 
     setTestSentence(prototypeSentence);
     setTextWritten("");
+    setInputValue("");
   }, [testLimiterSelector, promptValueSelector, testModifierSelector]);
 
   const handleRefresh = useCallback(() => {
@@ -177,13 +168,6 @@ export const Test = () => {
     [inputValue, textWritten, testSentence]
   );
 
-  const handleRefreshKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-    if (e.key === "Tab") {
-      e.preventDefault();
-      setIsRefreshFocused(true);
-    }
-  };
-
   const handleInputBlur = () => {
     inputStatusDispatch(inActive());
   };
@@ -194,8 +178,6 @@ export const Test = () => {
       inputStatusDispatch(active());
     }
   };
-
-  isRefreshFocused && console.log("hey");
 
   return (
     <section className="relative text-custom-primary flex items-center flex-col mt-5">
@@ -215,7 +197,7 @@ export const Test = () => {
               Click here to focus
             </div>
           )}
-          <WordChecker
+          <WordValidator
             testSentence={testSentence}
             inputValue={inputValue}
             textWritten={textWritten}

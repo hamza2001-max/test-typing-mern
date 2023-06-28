@@ -1,10 +1,11 @@
-import { useDispatch } from "react-redux"
+import { useDispatch } from "react-redux";
+
 
 export const useTestDispatch = () => {
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-const setTestMode = (mode: string) => {
-    
-}
-
-}
+  const setModifier = (modifier: any) => {
+    dispatch(modifier());
+  };
+  return {setModifier};
+};

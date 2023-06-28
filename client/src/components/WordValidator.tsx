@@ -3,7 +3,7 @@ import { WordCheckerInterface } from "../types";
 import { CurrentFragment } from "./CurrentFragment";
 import { PreviousFragment } from "./PreviousFragment";
 
-export const WordChecker = ({
+export const WordValidator = ({
   textWritten,
   inputValue,
   testSentence,
