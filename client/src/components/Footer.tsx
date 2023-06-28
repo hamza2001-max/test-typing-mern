@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { themeSlice } from "../redux/themeSlice";
-import { themeVisibilitySlice } from "../redux/visibilitySlice";
+import { themeVisibilitySlice } from "../redux/themeVisibilitySlice";
 import { ThemeOption } from "./ThemeOption";
 import { themeSchemes } from "../data/themeSchemeData";
 import { footerData } from "../data/footerData";

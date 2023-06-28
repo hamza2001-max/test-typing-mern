@@ -1,13 +1,18 @@
-import {
-  testLimiterSlice,
-  testModeSlice,
-  testModifierSlice,
-} from "../redux/testSettingsSlice";
+import { testLimiterSlice } from "../redux/testLimiterSlice";
+import { testModeSlice } from "../redux/testModeSlice";
+import { testModifierSlice } from "../redux/testModifierSlice";
 import { MdAlternateEmail } from "react-icons/md";
 import { BsTriangle } from "react-icons/bs";
-import { FaHashtag, FaClock, FaQuoteLeft, FaWrench, FaSortAlphaDown } from "react-icons/fa";
+import {
+  FaHashtag,
+  FaClock,
+  FaQuoteLeft,
+  FaWrench,
+  FaSortAlphaDown,
+} from "react-icons/fa";
 
-const { time, words, quote, zen, custom } = testModeSlice.actions;
+const { setTimeMode, setWordsMode, setQuoteMode, setZenMode, setCustomMode } =
+  testModeSlice.actions;
 const { punctuation, numbers } = testModifierSlice.actions;
 const { testLimiterReducer } = testLimiterSlice.actions;
 
@@ -28,23 +33,23 @@ export const testSettingModeData = [
   {
     label: "time",
     defaultLimit: testLimiterReducer(30),
-    action: time,
+    action: setTimeMode,
     icon: FaClock,
   },
   {
     label: "words",
     defaultLimit: testLimiterReducer(25),
-    action: words,
+    action: setWordsMode,
     icon: FaSortAlphaDown,
   },
   {
     label: "quote",
     defaultLimit: testLimiterReducer("medium"),
-    action: quote,
+    action: setQuoteMode,
     icon: FaQuoteLeft,
   },
-  { label: "zen", action: zen, icon: BsTriangle },
-  { label: "custom", action: custom, icon: FaWrench },
+  { label: "zen", action: setZenMode, icon: BsTriangle },
+  { label: "custom", action: setCustomMode, icon: FaWrench },
 ];
 
 export const testSettingLimiterData = {

@@ -4,11 +4,9 @@ import { TestGrounds } from "../components/TestGrounds";
 import { WordsLimiterPrompt } from "../components/WordsLimiterPrompt";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
-import {
-  promptVisibilitySlice,
-  testSettingsVSlice,
-  themeVisibilitySlice,
-} from "../redux/visibilitySlice";
+import { testSettingsVisibilitySlice } from "../redux/testSettingsVisibilitySlice";
+import { promptVisibilitySlice } from "../redux/promptVisibilitySlice";
+import { themeVisibilitySlice } from "../redux/themeVisibilitySlice";
 
 export const Home = () => {
   const themeVDispatch = useDispatch();
@@ -16,7 +14,7 @@ export const Home = () => {
   const customPromptVDispatch = useDispatch();
 
   const { inVisibleTheme } = themeVisibilitySlice.actions;
-  const { inVisibleTS } = testSettingsVSlice.actions;
+  const { inVisibleTS } = testSettingsVisibilitySlice.actions;
   const { inVisibleCustom } = promptVisibilitySlice.actions;
 
   const testSettingsVSelector = useSelector(

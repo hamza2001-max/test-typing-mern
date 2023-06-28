@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { promptVisibilitySlice } from "../redux/visibilitySlice";
-import {
-  limiterPromptSlice,
-  testLimiterSlice,
-} from "../redux/testSettingsSlice";
+import { promptVisibilitySlice } from "../redux/promptVisibilitySlice";
+import { testLimiterSlice } from "../redux/testLimiterSlice";
+import { limiterPromptSlice } from "../redux/limiterPromptSlice";
 
 export const WordsLimiterPrompt = () => {
   const [inputValue, setInputValue] = useState(0);
@@ -34,9 +32,7 @@ export const WordsLimiterPrompt = () => {
           setInputValue(parseInt(e.target.value));
         }}
       />
-      <p className="text-sm">
-        Enter 0 to start infinite mode.
-      </p>
+      <p className="text-sm">Enter 0 to start infinite mode.</p>
       {typeWarning && <p>Value must be a number.</p>}
       <button
         className="w-full rounded-lg py-2 bg-custom-fadedFill text-custom-secondary"

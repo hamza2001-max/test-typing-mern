@@ -5,15 +5,13 @@ import {
   testSettingModifierData,
 } from "../data/testSettingsData";
 import { RootState } from "../redux/store";
-import { testModifierSlice } from "../redux/testSettingsSlice";
-import {
-  promptVisibilitySlice,
-  testSettingsVSlice,
-} from "../redux/visibilitySlice";
+import { testModifierSlice } from "../redux/testModifierSlice";
+import { testSettingsVisibilitySlice } from "../redux/testSettingsVisibilitySlice";
+import { promptVisibilitySlice } from "../redux/promptVisibilitySlice";
 
 export const TestSettingsMd = () => {
   const { visibleCustom } = promptVisibilitySlice.actions;
-  const { inVisibleTS } = testSettingsVSlice.actions;
+  const { inVisibleTS } = testSettingsVisibilitySlice.actions;
   const { dual, numbers, punctuation } = testModifierSlice.actions;
 
   const testModeSelector = useSelector(
@@ -25,7 +23,7 @@ export const TestSettingsMd = () => {
   const testLimiterSelector = useSelector(
     (state: RootState) => state.testLimiter.testLimiter
   );
-  
+
   const testModeDispatch = useDispatch();
   const testModifierDispatch = useDispatch();
   const testLimiterDispatch = useDispatch();

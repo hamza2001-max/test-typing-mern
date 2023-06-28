@@ -4,11 +4,9 @@ import {
   testSettingModifierData,
 } from "../data/testSettingsData";
 import { useDispatch, useSelector } from "react-redux";
-import { testModifierSlice } from "../redux/testSettingsSlice";
-import {
-  promptVisibilitySlice,
-  testSettingsVSlice,
-} from "../redux/visibilitySlice";
+import { testModifierSlice } from "../redux/testModifierSlice";
+import { promptVisibilitySlice } from "../redux/promptVisibilitySlice";
+import { testSettingsVisibilitySlice } from "../redux/testSettingsVisibilitySlice";
 import { RootState } from "../redux/store";
 
 export const TestSettingsSm = () => {
@@ -19,7 +17,7 @@ export const TestSettingsSm = () => {
   const customPromptVDispatch = useDispatch();
 
   const { visibleCustom } = promptVisibilitySlice.actions;
-  const { inVisibleTS } = testSettingsVSlice.actions;
+  const { inVisibleTS } = testSettingsVisibilitySlice.actions;
   const { dual, numbers, punctuation } = testModifierSlice.actions;
 
   const testModeSelector = useSelector(

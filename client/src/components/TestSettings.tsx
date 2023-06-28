@@ -1,8 +1,7 @@
 import { FaCog } from "react-icons/fa";
-// import { testSettingsVInterface } from "../types";
 import { TestSettingsSm } from "./TestSettingsSm";
 import { useDispatch, useSelector } from "react-redux";
-import { testSettingsVSlice } from "../redux/visibilitySlice";
+import { testSettingsVisibilitySlice } from "../redux/testSettingsVisibilitySlice";
 import { RootState } from "../redux/store";
 import { TestSettingsMd } from "./TestSettingsMd";
 
@@ -11,7 +10,7 @@ export const TestSettings = () => {
     (state: RootState) => state.isTestSettingsVisible.isTestSettingsVisible
   );
   const testSettingsVDispatch = useDispatch();
-  const { visibleTS } = testSettingsVSlice.actions;
+  const { visibleTS } = testSettingsVisibilitySlice.actions;
 
   return (
     <section className="flex justify-center items-center flex-col">
