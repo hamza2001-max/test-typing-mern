@@ -1,12 +1,13 @@
 - [ ] delayed
   - [ ] when clicked on the text, it blurs for a second.
+  - [ ] refactor the use of dispatch and selector.
 
 - [ ] ASAP
   - [ ] implement the local storage.
 
 - [ ] Todo
-  - [ ] complete the infinite mode in word prompt.
-  - [ ] in wordprompt make enter accept the input. 
+  - [x] in wordprompt make enter accept the input. 
+  - [x] complete wordPrompt.tsx.
   - [x] implement tab + enter = restart test.
   - [ ] implement all test modes.
   - [x] hide the number of words written untill first character is written.
@@ -15,24 +16,7 @@
   - [ ] make the extra characters appear if there are any.
 
 - [ ] Tofix
-  - [x] refactor the redux folder.
-  - [ ] refactor the use of dispatch and selector.
-  - [ ] refactor the components folder.
-  - [ ] upon channging limiter written text doesnt reset.
-  - [ ] Improve the variable and file names through gpt.
-    - [ ] components
-      - [x] Test.tsx
-      - [x] CurrentFragment.tsx
-      - [x] Footer.tsx
-      - [x] Navigation.tsx
-      - [x] PreviousFragment.tsx
-      - [x] TestGrounds.tsx
-      - [ ] TestSettings.tsx
-      - [ ] TestSettingsMd.tsx
-      - [ ] TestSettingsSm.tsx
-      - [ ] ThemeOption.tsx
-      - [ ] WordChecker.tsx
-      - [ ] WordsLimiter.tsx
+  - [ ] fix the scroll problem due to the inclusion of extra characters by including the extra characters in the hidden section of PreviouFragment.tsx.
 
 - [ ] ideas
   - [ ] Add a practice mode.
@@ -50,6 +34,10 @@
   - [ ] implement command line.
 
 - [ ] completed
+  - [x] refactor the redux folder.
+  - [x] refactor the components folder.
+  - [x] upon channging limiter written text doesnt reset.
+  - [x] Improve the variable and file names through gpt.
   - [x] give multiple color modes.
   - [x] make underline appear only when space is pressed.
   - [x] fix the hover in testSettingsSm.tsx
@@ -79,3 +67,4 @@
   - [x] make edge cases for word prompt.
   - [x] hover animations.
   - [x] make the Home.tsx responsive.
+  - [x] fix the responsive problem of caret.tsx.

@@ -15,6 +15,7 @@ export const WordValidator = ({
 }: WordCheckerInterface) => {
   const divRef = useRef<HTMLDivElement>(null);
   const typedSentenceRef = useRef<HTMLDivElement>(null);
+  let currentSentenceWord = "";
 
   useEffect(() => {
     if (typedSentenceRef.current) {
@@ -42,7 +43,7 @@ export const WordValidator = ({
 
   const typedSentence = testSentence.split(" ").map((word, firstIndex) => {
     const lastWordWrittenIndex = textWritten.split(" ").length - 1;
-    const currentSentenceWord = testSentence.split(" ")[lastWordWrittenIndex];
+    currentSentenceWord = testSentence.split(" ")[lastWordWrittenIndex];
     if (firstIndex === lastWordWrittenIndex) {
       return (
         <CurrentFragment
@@ -65,16 +66,26 @@ export const WordValidator = ({
     }
   });
 
+
+
   return (
     <>
+
       <div
         className="flex text-custom-primary text-2xl lg:text-custom-xl h-30 overflow-hidden"
         onClick={onClick}
         ref={typedSentenceRef}
       >
-        <p className="leading-10 w-64 xs:w-80 sm:w-99 md:w-100 lg:w-101 xl:w-102">{typedSentence}</p>
+        <p className="leading-10 w-64 xs:w-80 sm:w-99 md:w-100 lg:w-101 xl:w-102">
+          {typedSentence}
+
+        </p>
+
       </div>
-      <div className="text-2xl lg:text-custom-xl absolute opacity-0 -z-10" ref={divRef}>
+      <div
+        className="text-2xl lg:text-custom-xl absolute opacity-0 -z-10"
+        ref={divRef}
+      >
         <p className="w-64 xs:w-80 sm:w-99 md:w-100 lg:w-101 xl:w-102">
           {testSentence
             .split(" ")
