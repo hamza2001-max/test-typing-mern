@@ -10,14 +10,16 @@ import { RootState } from "../redux/store";
 export const Test = () => {
   const [testSentence, setTestSentence] = useState("");
   const [textWritten, setTextWritten] = useState("");
+  const [correctWords, setCorrectWords] = useState(0);
+  const [inCorrectWords, setInCorrectWords] = useState(0);
+  const [accuracy, setAccuracy] = useState(0);
   const [scrollIndex, setScrollIndex] = useState(3);
   const [inputValue, setInputValue] = useState("");
   const [lineHeiInc, setLineHeiInc] = useState(1.25);
   const [startTime, setStartTime] = useState(0);
-  const [elapsedTime, setElapsedTime] = useState(0);
+  const [wpm, setWpm] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const btnRef = useRef<HTMLButtonElement | null>(null);
-
 
   const { inActive, active } = inputStatusSlice.actions;
   const inputStatusDispatch = useDispatch();
@@ -65,10 +67,33 @@ export const Test = () => {
     if (textWritten.split(" ").length - 1 === testSentence.split(" ").length) {
       if (inputRef.current) {
         inputRef.current.disabled = true;
-        setElapsedTime((Date.now() - startTime) / 1000);
+        let correctCount = 0;
+        let inCorrectCount = 0;
+        let corChar = 0;
+
+        for (let i = 0; i < testSentence.split(" ").length; i++) {
+          if (textWritten.split(" ")[i] === testSentence.split(" ")[i]) {
+            correctCount++;
+            corChar += textWritten.split(" ")[i].length;
+          } else {
+            inCorrectCount++;
+          }
+        }
+
+        setCorrectWords(correctCount);
+        setInCorrectWords(inCorrectCount);
+        setAccuracy((correctWords / testSentence.split(" ").length) * 100);
+
+        setWpm(
+          Math.round(
+            (corChar + textWritten.split(" ").length) /
+              5 /
+              ((Date.now() - startTime) / 1000 / 60)
+          )
+        );
       }
     }
-  }, [inputValue, textWritten, testSentence, startTime, setElapsedTime]);
+  }, [inputValue, textWritten, testSentence, startTime, setWpm, correctWords]);
 
   const generateTestSentence = useCallback(() => {
     const generateRandomNumber = (max: number) =>
@@ -133,6 +158,10 @@ export const Test = () => {
     inputStatusDispatch(active());
     setScrollIndex(3);
     setLineHeiInc(1.25);
+    setWpm(0);
+    setCorrectWords(0);
+    setInCorrectWords(0);
+    setAccuracy(0);
     if (inputRef.current) {
       inputRef.current.value = "";
       inputRef.current.disabled = false;
@@ -149,7 +178,7 @@ export const Test = () => {
       if (!inputValue && !textWritten) {
         setStartTime(Date.now());
       }
-      if(e.key === "Tab"){
+      if (e.key === "Tab") {
         e.preventDefault();
         btnRef.current?.focus();
       }
@@ -209,6 +238,7 @@ export const Test = () => {
             onClick={handleFocusClick}
           />
         </div>
+        {wpm} {correctWords} {inCorrectWords} {accuracy}
         <input
           type="text"
           className="w-full mt-3 py-2 sr-only"
