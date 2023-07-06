@@ -5,7 +5,6 @@ export interface ThemeOptionInterface {
 }
 
 export interface CurrentFragmentInterface {
-  word: string;
   inputValue: string;
   currentSentenceWord: string;
 }
@@ -25,4 +24,9 @@ export interface PreviousFragmentInterface {
   word: string;
   inputValue: string;
   writtenWord: string;
+}
+
+export interface RemainingLettersInterface {
+  currentSentenceWord: string;
+  inputValue: string;
 }

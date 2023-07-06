@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useRef } from "react";
 import { WordCheckerInterface } from "../types";
 import { CurrentFragment } from "./CurrentFragment";
@@ -48,7 +49,6 @@ export const WordValidator = ({
       return (
         <CurrentFragment
           key={firstIndex}
-          word={word}
           inputValue={inputValue}
           currentSentenceWord={currentSentenceWord}
         />
@@ -66,11 +66,8 @@ export const WordValidator = ({
     }
   });
 
-
-
   return (
     <>
-
       <div
         className="flex text-custom-primary text-2xl lg:text-custom-xl h-30 overflow-hidden"
         onClick={onClick}
@@ -78,22 +75,31 @@ export const WordValidator = ({
       >
         <p className="leading-10 w-64 xs:w-80 sm:w-99 md:w-100 lg:w-101 xl:w-102">
           {typedSentence}
-
         </p>
-
       </div>
-      <div
-        className="text-2xl lg:text-custom-xl absolute opacity-0 -z-10"
-        ref={divRef}
-      >
-        <p className="w-64 xs:w-80 sm:w-99 md:w-100 lg:w-101 xl:w-102">
+      <div className="text-2xl lg:text-custom-xl absolute opacity-0 -z-10" ref={divRef}>
+        <p className="w-64 xs:w-80 sm:w-99 md:w-100 lg:w-101 xl:w-102 ">
           {testSentence
             .split(" ")
             .slice(0, textWritten.split(" ").length)
-            .map((hiddenWord) => hiddenWord)
-            .join(" ")}
+            .map((hiddenWord, index) => {
+              return (
+                <>
+                  <React.Fragment key={index}>
+                    {hiddenWord}
+                    {textWritten.split(" ")[index].length >
+                      hiddenWord.length && (
+                      <span className="text-custom-tertiary border-b-3 border-custom-tertiary">
+                        {textWritten.split(" ")[index].slice(hiddenWord.length, hiddenWord.length+5)}
+                      </span>
+                    )}
+                  </React.Fragment>{" "}
+                </>
+              );
+            })}
         </p>
       </div>
     </>
   );
 };
+

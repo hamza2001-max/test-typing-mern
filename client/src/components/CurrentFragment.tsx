@@ -6,7 +6,6 @@ import { useMediaQuery } from "react-responsive";
 import { RemainingLetters } from "./RemainingLetters";
 
 export const CurrentFragment = ({
-  word,
   inputValue,
   currentSentenceWord,
 }: CurrentFragmentInterface) => {
@@ -33,7 +32,7 @@ export const CurrentFragment = ({
               }
             />
           ))}
-        {word.split("").map((letter, secondIndex) => {
+        {currentSentenceWord.split("").map((letter, secondIndex) => {
           let currentClass = "";
           if (secondIndex <= inputValue.length - 1) {
             if (

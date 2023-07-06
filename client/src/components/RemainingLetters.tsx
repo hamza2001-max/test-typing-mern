@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
-
-interface RemainingLettersInterface {
-  currentSentenceWord: string;
-  inputValue: string;
-}
+import { RemainingLettersInterface } from "../types";
 
 export const RemainingLetters = ({
   currentSentenceWord,
@@ -13,7 +9,12 @@ export const RemainingLetters = ({
 
   useEffect(() => {
     if (inputValue.length > currentSentenceWord.length) {
-      setRemainingLetters(inputValue.slice(currentSentenceWord.length, currentSentenceWord.length+5));
+      setRemainingLetters(
+        inputValue.slice(
+          currentSentenceWord.length,
+          currentSentenceWord.length + 5
+        )
+      );
     } else {
       setRemainingLetters("");
     }

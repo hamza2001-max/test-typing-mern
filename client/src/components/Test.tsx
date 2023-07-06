@@ -8,19 +8,19 @@ import { inputStatusSlice } from "../redux/inputStatusSlice";
 import { RootState } from "../redux/store";
 
 export const Test = () => {
-  const [testSentence, setTestSentence] = useState<string>("");
-  const [textWritten, setTextWritten] = useState<string>("");
-  const [scrollIndex, setScrollIndex] = useState<number>(3);
-  const [inputValue, setInputValue] = useState<string>("");
-  const [lineHeiInc, setLineHeiInc] = useState<number>(1.25);
+  const [testSentence, setTestSentence] = useState("");
+  const [textWritten, setTextWritten] = useState("");
+  const [scrollIndex, setScrollIndex] = useState(3);
+  const [inputValue, setInputValue] = useState("");
+  const [lineHeiInc, setLineHeiInc] = useState(1.25);
+  const [startTime, setStartTime] = useState(0);
+  const [elapsedTime, setElapsedTime] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const btnRef = useRef<HTMLButtonElement | null>(null);
 
+
   const { inActive, active } = inputStatusSlice.actions;
   const inputStatusDispatch = useDispatch();
-  // const { testLimiter, isInputActive, promptValue, testModifier  } = useSelector(
-  //   (state: RootState) => state
-  // );
   const testLimiterSelector = useSelector(
     (state: RootState) => state.testLimiter.testLimiter
   );
@@ -65,9 +65,10 @@ export const Test = () => {
     if (textWritten.split(" ").length - 1 === testSentence.split(" ").length) {
       if (inputRef.current) {
         inputRef.current.disabled = true;
+        setElapsedTime((Date.now() - startTime) / 1000);
       }
     }
-  }, [inputValue, textWritten, testSentence]);
+  }, [inputValue, textWritten, testSentence, startTime, setElapsedTime]);
 
   const generateTestSentence = useCallback(() => {
     const generateRandomNumber = (max: number) =>
@@ -145,6 +146,13 @@ export const Test = () => {
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (!inputValue && !textWritten) {
+        setStartTime(Date.now());
+      }
+      if(e.key === "Tab"){
+        e.preventDefault();
+        btnRef.current?.focus();
+      }
       if (e.key === " ") {
         if (inputValue.trim() === "") {
           e.preventDefault();
@@ -152,20 +160,13 @@ export const Test = () => {
           e.preventDefault();
           setTextWritten((prev) => prev + inputValue + " ");
           setInputValue("");
-          if (
-            textWritten.split(" ").length === testSentence.split(" ").length
-          ) {
-            if (inputRef.current) {
-              inputRef.current.disabled = true;
-            }
-          }
           if (inputRef.current) {
             inputRef.current.value = "";
           }
         }
       }
     },
-    [inputValue, textWritten, testSentence]
+    [inputValue, textWritten]
   );
 
   const handleInputBlur = () => {

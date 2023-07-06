@@ -1,5 +1,4 @@
 import { PreviousFragmentInterface } from "../types";
-// import { RemainingLetters } from "./RemainingLetters";
 
 export const PreviousFragment = ({
   word,
@@ -7,8 +6,6 @@ export const PreviousFragment = ({
   inputValue,
 }: PreviousFragmentInterface) => {
   let isWordUnderlined = false;
-  console.log(writtenWord);
-  console.log(word);
 
   if (writtenWord) {
     const prevWords = word.split("").map((letter, thirdIndex) => {
@@ -51,12 +48,10 @@ export const PreviousFragment = ({
           {prevWords}
         </span>
         {writtenWord.length > word.length && (
-          <span className="text-custom-tertiary border-b-3 border-custom-tertiary">{writtenWord.slice(word.length)}</span>
-        )}
-        {/* <RemainingLetters
-        currentSentenceWord={currentSentenceWord}
-        inputValue={inputValue}
-      /> */}{" "}
+          <span className="text-custom-tertiary border-b-3 border-custom-tertiary">
+            {writtenWord.slice(word.length, word.length+5)}
+          </span>
+        )}{" "}
       </>
     );
   } else {
