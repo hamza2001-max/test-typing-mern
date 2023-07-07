@@ -17,6 +17,7 @@ export const Test = () => {
   const [lineHeiInc, setLineHeiInc] = useState(1.25);
   const [startTime, setStartTime] = useState(0);
   const [isTestFinsished, setIsTestFinsished] = useState(false);
+  const [wpmArray, setWpmArray] = useState<number[]>([]);
 
   const [result, setResult] = useState({
     wpm: 0,
@@ -79,11 +80,11 @@ export const Test = () => {
         inputRef.current.disabled = true;
         setIsTestFinsished(true);
         setResult(calculateResult());
+        console.log(wpmArray);
       }
     }
   }, [inputValue, textWritten, testSentence, startTime]);
 
-  //
   const calculateResult = (): CalculateResultInterface => {
     let correctWords = 0;
     let correctChars = 0;
@@ -117,37 +118,6 @@ export const Test = () => {
       },
       { correctWords, correctChars, incorrectChars, extras, missed }
     );
-
-    // for (let i = 0; i < testSentence.split(" ").length; i++) {
-    //   if (textWritten.split(" ")[i] === testSentence.split(" ")[i]) {
-    //     correctWords++;
-    //     correctChars += textWritten.split(" ")[i].length;
-    //   } else {
-    //     if (
-    //       textWritten.split(" ")[i].length > testSentence.split(" ")[i].length
-    //     ) {
-    //       extras +=
-    //         textWritten.split(" ")[i].length -
-    //         testSentence.split(" ")[i].length;
-    //     } else if (
-    //       textWritten.split(" ")[i].length < testSentence.split(" ")[i].length
-    //     ) {
-    //       missed +=
-    //         testSentence.split(" ")[i].length -
-    //         textWritten.split(" ")[i].length;
-    //     }
-    //     for (let j = 0; j < testSentence.split(" ")[i].split("").length; j++) {
-    //       if (
-    //         testSentence.split(" ")[i].split("")[j] !==
-    //         textWritten.split(" ")[i].split("")[j]
-    //       ) {
-    //         incorrectChars++;
-    //       } else {
-    //         correctChars++;
-    //       }
-    //     }
-    //   }
-    // }
     let accuracy = (resultant.correctWords / testSentenceArray.length) * 100;
     let wpm = Math.round(
       (resultant.correctChars + textWrittenArray.length) /
@@ -155,22 +125,6 @@ export const Test = () => {
         ((Date.now() - startTime) / 1000 / 60)
     );
     let time = Number(((Date.now() - startTime) / 1000).toFixed(2));
-
-    // const newResultant = {
-    //   resultant.extras,
-    //   resultant.missed,
-    // }
-    //  {correctWords, ...resultant} = protoResultant;
-    // delete ProtoResultant.correctWords;
-    // setResult({
-    //   wpm,
-    //   accuracy,
-    //   correctChars,
-    //   incorrectChars,
-    //   extras,
-    //   missed,
-    //   time,
-    // });
 
     return {
       wpm,
@@ -182,7 +136,10 @@ export const Test = () => {
       extras: resultant.extras,
     };
   };
-  //
+
+  useEffect(() => {
+
+  }, [textWritten, setWpmArray, startTime, testSentence]);
 
   const generateTestSentence = useCallback(() => {
     const generateRandomNumber = (max: number) =>
@@ -247,6 +204,8 @@ export const Test = () => {
     inputStatusDispatch(active());
     setScrollIndex(3);
     setLineHeiInc(1.25);
+    setIsTestFinsished(false);
+    setWpmArray([]);
     setResult({
       wpm: 0,
       accuracy: 0,
@@ -282,6 +241,20 @@ export const Test = () => {
         } else {
           e.preventDefault();
           setTextWritten((prev) => prev + inputValue + " ");
+          let correctChars = 0;
+          for (let i = 0; i < textWritten.split(" ").length; i++) {
+            if (textWritten.split(" ")[i] === testSentence.split(" ")[i]) {
+              correctChars += textWritten.split(" ")[i].length;
+            }
+          }
+          setWpmArray((prev) => [
+            ...prev,
+            Math.round(
+              (correctChars + textWritten.split(" ").length) /
+                5 /
+                ((Date.now() - startTime) / 1000 / 60)
+            ),
+          ]);
           setInputValue("");
           if (inputRef.current) {
             inputRef.current.value = "";
@@ -332,11 +305,7 @@ export const Test = () => {
             onClick={handleFocusClick}
           />
         </div>
-        {/* {"wpm " + result.wpm} {"\naccuracy " + result.accuracy}{" "}
-        {"\ncorrectChars " + result.correctChars}{" "}
-        {"\nincorrectChars " + result.incorrectChars}{" "}
-        {"\nextras " + result.extras} {"\nmissed " + result.missed}{" "}
-        {"time " + result.time} */}
+
         <input
           type="text"
           className="w-full mt-3 py-2 sr-only"
@@ -356,6 +325,17 @@ export const Test = () => {
       </button>
     </section>
   ) : (
-    <Result {...result} />
+    <>
+      <Result {...result} />
+      <button
+        className="px-8 py-4 rounded-md text-2xl lg:text-custom-xl flex justify-center mt-10
+         hover:text-custom-fill hover:bg-custom-secondary transition ease-in-out delay-75 focus:bg-custom-secondary
+          focus:text-custom-fill outline-none"
+        onClick={handleRefresh}
+        ref={btnRef}
+      >
+        <VscDebugRestart />
+      </button>
+    </>
   );
 };
