@@ -30,3 +30,13 @@ export interface RemainingLettersInterface {
   currentSentenceWord: string;
   inputValue: string;
 }
+
+export interface CalculateResultInterface {
+  wpm: number;
+  accuracy: number;
+  correctChars: number;
+  incorrectChars: number;
+  extras: number;
+  missed: number;
+  time: number;
+}

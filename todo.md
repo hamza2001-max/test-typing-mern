@@ -1,3 +1,11 @@
+- [ ] Result.
+  - [x] wpm.
+  - [x] extras.
+  - [ ] accuracy.
+  - [ ] correctChars.
+  - [ ] incorrectChars.
+  - [x] missed.
+
 - [ ] delayed
   - [ ] when clicked on the text, it blurs for a second.
   - [ ] refactor the use of dispatch and selector.
@@ -13,10 +21,13 @@
   - [x] hide the number of words written untill first character is written.
   - [ ] implement the result of a run.
   - [ ] implement time mode in the word mode if nothing has been written for a long time and make the test invalid.
-  - [ ] make the extra characters appear if there are any.
+  - [x] make the extra characters appear if there are any.
+  - [x] implement elapsed time.
+  - [x] upon tab in input focus on refresh button.
 
 - [ ] Tofix
-  - [ ] fix the scroll problem due to the inclusion of extra characters by including the extra characters in the hidden section of PreviouFragment.tsx.
+  - [x] fix the scroll problem due to the inclusion of extra characters by including the extra characters in the hidden section of PreviouFragment.tsx.
+  - [ ] refactor the test.tsx into multiple components.
 
 - [ ] ideas
   - [ ] Add a practice mode.
