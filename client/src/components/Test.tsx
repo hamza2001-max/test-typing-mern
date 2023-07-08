@@ -9,6 +9,12 @@ import { RootState } from "../redux/store";
 import { CalculateResultInterface } from "../types";
 import Result from "./Result";
 
+interface wpmArrayInterface {
+  text: string;
+  time: number;
+  wpm: number;
+}
+
 export const Test = () => {
   const [testSentence, setTestSentence] = useState("");
   const [textWritten, setTextWritten] = useState("");
@@ -17,7 +23,8 @@ export const Test = () => {
   const [lineHeiInc, setLineHeiInc] = useState(1.25);
   const [startTime, setStartTime] = useState(0);
   const [isTestFinsished, setIsTestFinsished] = useState(false);
-  const [wpmArray, setWpmArray] = useState<number[]>([]);
+  const [wpmArray, setWpmArray] = useState<wpmArrayInterface[]>([]);
+  const [timeArray, setTimeArray] = useState<number[]>([]);
 
   const [result, setResult] = useState({
     wpm: 0,
@@ -74,13 +81,18 @@ export const Test = () => {
     };
   });
 
+  const sumArr = (wpmArray: number[]): number => {
+    return wpmArray.reduce((total, num) => total + num, 0);
+  };
   useEffect(() => {
     if (textWritten.split(" ").length - 1 === testSentence.split(" ").length) {
       if (inputRef.current) {
         inputRef.current.disabled = true;
         setIsTestFinsished(true);
         setResult(calculateResult());
-        console.log(wpmArray);
+        // let val = sumArr(wpmArray);
+        // console.log(wpmArray);
+        // console.log(val/wpmArray.length);
       }
     }
   }, [inputValue, textWritten, testSentence, startTime]);
@@ -137,9 +149,7 @@ export const Test = () => {
     };
   };
 
-  useEffect(() => {
-
-  }, [textWritten, setWpmArray, startTime, testSentence]);
+  useEffect(() => {}, [textWritten, setWpmArray, startTime, testSentence]);
 
   const generateTestSentence = useCallback(() => {
     const generateRandomNumber = (max: number) =>
@@ -241,20 +251,28 @@ export const Test = () => {
         } else {
           e.preventDefault();
           setTextWritten((prev) => prev + inputValue + " ");
-          let correctChars = 0;
-          for (let i = 0; i < textWritten.split(" ").length; i++) {
-            if (textWritten.split(" ")[i] === testSentence.split(" ")[i]) {
-              correctChars += textWritten.split(" ")[i].length;
-            }
-          }
-          setWpmArray((prev) => [
-            ...prev,
-            Math.round(
-              (correctChars + textWritten.split(" ").length) /
-                5 /
-                ((Date.now() - startTime) / 1000 / 60)
-            ),
-          ]);
+
+          const currentTime = Date.now();
+          setTimeArray((prev) => [...prev, currentTime]);
+
+          const previousTime =
+            timeArray.length > 0 ? timeArray[timeArray.length - 1] : startTime;
+
+          const elapsedTime = (currentTime - previousTime) / 1000;
+
+          const textWrittenArray = textWritten.split(" ");
+
+          const getNewWpmArray = textWrittenArray.map((text, index) => {
+            const time = elapsedTime * ((index + 1) / textWrittenArray.length);
+            const wpm = (textWrittenArray.length / 5 / time) * 60;
+            return {
+              text,
+              time,
+              wpm: wpm.toFixed(2),
+            };
+          });
+
+          console.log(getNewWpmArray);
           setInputValue("");
           if (inputRef.current) {
             inputRef.current.value = "";
