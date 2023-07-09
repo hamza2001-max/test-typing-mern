@@ -9,10 +9,12 @@ import { RootState } from "../redux/store";
 import { CalculateResultInterface } from "../types";
 import Result from "./Result";
 
-interface wpmArrayInterface {
-  text: string;
-  time: number;
+interface wpmArrInterface {
+  word: string;
   wpm: number;
+  errors: number;
+  correctChars: number;
+  time: number;
 }
 
 export const Test = () => {
@@ -23,14 +25,15 @@ export const Test = () => {
   const [lineHeiInc, setLineHeiInc] = useState(1.25);
   const [startTime, setStartTime] = useState(0);
   const [isTestFinsished, setIsTestFinsished] = useState(false);
-  const [wpmArray, setWpmArray] = useState<wpmArrayInterface[]>([]);
+  const [wpmArr, setWpmArr] = useState<wpmArrInterface[]>([]);
+
   const [timeArray, setTimeArray] = useState<number[]>([]);
+  const [elapsedTimeArray, setElapsedTimeArray] = useState<number[]>([]);
 
   const [result, setResult] = useState({
     wpm: 0,
     accuracy: 0,
-    correctChars: 0,
-    incorrectChars: 0,
+    errors: 0,
     extras: 0,
     missed: 0,
     time: 0,
@@ -81,26 +84,83 @@ export const Test = () => {
     };
   });
 
-  const sumArr = (wpmArray: number[]): number => {
-    return wpmArray.reduce((total, num) => total + num, 0);
-  };
+  // const sumArr = (wpmArray: number[]): number => {
+  //   return wpmArray.reduce((total, num) => total + num, 0);
+  // };
+
+  // useEffect(() => {
+  //   console.log(result.wpm);
+  //   console.log(result.time);
+  //   console.log(result.missed);
+  //   console.log(result.extras);
+  //   console.log(result.accuracy);
+  //   console.log(result.errors);
+  // }, [result]);
+
   useEffect(() => {
     if (textWritten.split(" ").length - 1 === testSentence.split(" ").length) {
       if (inputRef.current) {
         inputRef.current.disabled = true;
         setIsTestFinsished(true);
         setResult(calculateResult());
-        // let val = sumArr(wpmArray);
-        // console.log(wpmArray);
-        // console.log(val/wpmArray.length);
+        
       }
     }
   }, [inputValue, textWritten, testSentence, startTime]);
 
+  useEffect(() => {
+    setResult({ ...result, wpm: (result.wpm /= wpmArr.length) });
+  }, [wpmArr]);
+
+
+
+
+  // let remainingFactors = () => {
+  //   console.log(wpmArr);
+
+  //   let wpm = 0;
+  //   let errors = 0;
+  //   let time = 0;
+  //   let result = wpmArr.reduce(
+  //     (acc, item) => {
+  //       acc.wpm += item.wpm;
+  //       acc.errors += item.errors;
+  //       acc.time += item.time;
+  //       return acc;
+  //     },
+  //     { wpm, errors, time }
+  //   );
+  //   result.wpm /= wpmArr.length;
+
+  //   return {
+  //     ...result,
+  //   };
+  // };
+
+  // useEffect(()=>{
+  //   let wpm = 0;
+  //   let errors = 0;
+  //   let time = 0;
+  //   let resultar = wpmArr.reduce(
+  //     (acc, item) => {
+  //       acc.wpm += item.wpm;
+  //       acc.errors += item.errors;
+  //       acc.time += item.time;
+  //       return acc;
+  //     },
+  //     { wpm, errors, time }
+  //   );
+  //   resultar.wpm /= wpmArr.length;
+  //   console.log(resultar.wpm);
+  //   console.log(resultar.time);
+  //   console.log(resultar.errors);
+  // }, wpmArr);
+
   const calculateResult = (): CalculateResultInterface => {
+    let resultantWpm = 0;
+    let resultantErrors = 0;
+    let resultantTime = 0;
     let correctWords = 0;
-    let correctChars = 0;
-    let incorrectChars = 0;
     let extras = 0;
     let missed = 0;
 
@@ -109,9 +169,12 @@ export const Test = () => {
     textWrittenArray.pop();
     const resultant = textWrittenArray.reduce(
       (acc, word, index) => {
+        let correctChars = 0;
+        let errors = 0;
+
         if (word === testSentenceArray[index]) {
           acc.correctWords++;
-          acc.correctChars += word.length;
+          correctChars += word.length;
         } else {
           if (word.length > testSentenceArray[index].length) {
             acc.extras += word.length - testSentenceArray[index].length;
@@ -120,36 +183,42 @@ export const Test = () => {
           }
           for (let j = 0; j < testSentenceArray[index].length; j++) {
             if (testSentenceArray[index][j] !== word[j]) {
-              acc.incorrectChars++;
+              errors++;
             } else {
-              acc.correctChars++;
+              correctChars++;
             }
           }
         }
+        let wpm = Math.round(
+          ((word.length + 1 - errors) / 5 / elapsedTimeArray[index]) * 60
+        );
+        resultantWpm += wpm;
+        resultantErrors += errors;
+        resultantTime += elapsedTimeArray[index];
+        const updatedWpm = {
+          word,
+          wpm,
+          errors,
+          correctChars,
+          time: elapsedTimeArray[index],
+        };
+        setWpmArr((prev) => [...prev, updatedWpm]);
         return acc;
       },
-      { correctWords, correctChars, incorrectChars, extras, missed }
+      { correctWords, extras, missed }
     );
+
     let accuracy = (resultant.correctWords / testSentenceArray.length) * 100;
-    let wpm = Math.round(
-      (resultant.correctChars + textWrittenArray.length) /
-        5 /
-        ((Date.now() - startTime) / 1000 / 60)
-    );
-    let time = Number(((Date.now() - startTime) / 1000).toFixed(2));
 
     return {
-      wpm,
+      wpm: resultantWpm,
+      errors: resultantErrors,
+      time: resultantTime,
       accuracy,
-      time,
-      correctChars: resultant.correctChars,
-      incorrectChars: resultant.incorrectChars,
-      missed: resultant.missed,
-      extras: resultant.extras,
+      extras,
+      missed,
     };
   };
-
-  useEffect(() => {}, [textWritten, setWpmArray, startTime, testSentence]);
 
   const generateTestSentence = useCallback(() => {
     const generateRandomNumber = (max: number) =>
@@ -215,12 +284,13 @@ export const Test = () => {
     setScrollIndex(3);
     setLineHeiInc(1.25);
     setIsTestFinsished(false);
-    setWpmArray([]);
+    setWpmArr([]);
+    setTimeArray([]);
+    setElapsedTimeArray([]);
     setResult({
       wpm: 0,
       accuracy: 0,
-      correctChars: 0,
-      incorrectChars: 0,
+      errors: 0,
       extras: 0,
       missed: 0,
       time: 0,
@@ -251,28 +321,13 @@ export const Test = () => {
         } else {
           e.preventDefault();
           setTextWritten((prev) => prev + inputValue + " ");
-
           const currentTime = Date.now();
-          setTimeArray((prev) => [...prev, currentTime]);
-
           const previousTime =
             timeArray.length > 0 ? timeArray[timeArray.length - 1] : startTime;
-
           const elapsedTime = (currentTime - previousTime) / 1000;
+          setTimeArray((prev) => [...prev, currentTime]);
+          setElapsedTimeArray((prev) => [...prev, elapsedTime]);
 
-          const textWrittenArray = textWritten.split(" ");
-
-          const getNewWpmArray = textWrittenArray.map((text, index) => {
-            const time = elapsedTime * ((index + 1) / textWrittenArray.length);
-            const wpm = (textWrittenArray.length / 5 / time) * 60;
-            return {
-              text,
-              time,
-              wpm: wpm.toFixed(2),
-            };
-          });
-
-          console.log(getNewWpmArray);
           setInputValue("");
           if (inputRef.current) {
             inputRef.current.value = "";

@@ -3,11 +3,10 @@ import { CalculateResultInterface } from "../types";
 import { ResponsiveLine } from "@nivo/line";
 
 const Result = ({
-  wpm,
   accuracy,
+  wpm,
+  errors,
   time,
-  correctChars,
-  incorrectChars,
   missed,
   extras,
 }: CalculateResultInterface) => {
@@ -73,9 +72,9 @@ const Result = ({
       </div>
       <span>time {time}</span>
       <br />
-      <span>correctChars {correctChars}</span>
-      <br />
-      <span>incorrectChars {incorrectChars}</span>
+      {/* <span>correctChars {correctChars}</span>
+      <br /> */}
+      <span>incorrectChars {errors}</span>
       <br />
       <span>missed {missed}</span>
       <br />

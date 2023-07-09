@@ -33,10 +33,9 @@ export interface RemainingLettersInterface {
 
 export interface CalculateResultInterface {
   wpm: number;
+  errors: number;
+  time: number;
   accuracy: number;
-  correctChars: number;
-  incorrectChars: number;
   extras: number;
   missed: number;
-  time: number;
 }
