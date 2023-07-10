@@ -39,3 +39,19 @@ export interface CalculateResultInterface {
   extras: number;
   missed: number;
 }
+
+export interface wpmArrInterface {
+  word: string;
+  wpm: number;
+  errors: number;
+  correctChars: number;
+  time: number;
+}
+
+export interface resultInterface {
+  textWritten: string;
+  testSentence: string;
+  elapsedTimeArray: number[];
+  handleRefreshStatus: boolean;
+  setHandleRefreshStatus: React.Dispatch<React.SetStateAction<boolean>>;
+}

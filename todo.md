@@ -1,15 +1,3 @@
-- [ ] Result.
-  - [x] wpm.
-  - [ ] wpmArray.
-  - [ ] timeArray.
-  - [x] extras.
-  - [x] accuracy.
-  - [x] correctChars.
-  - [x] incorrectChars.
-  - [x] missed.
-  - [ ] total characters written.
-  - [ ] graph.
-
 - [ ] delayed
   - [ ] when clicked on the text, it blurs for a second.
   - [ ] refactor the use of dispatch and selector.
@@ -18,16 +6,26 @@
   - [ ] implement the local storage.
 
 - [ ] Todo
+  - [ ] refactor test.tsx.
+  - [ ] shift the result calculation to Result.tsx.
+  - [ ] refactor calculateResult();
   - [ ] implement all test modes.
   - [ ] implement the result of a run.
   - [ ] implement time mode in the word mode if nothing has been written for a long time and make the test invalid.
   - [ ] solve the div key problem.
-
-- [ ] Tofix
-  - [ ] refactor the test.tsx into multiple components.
+  - [ ] Result Implementation.
+    - [x] wpm.
+    - [x] wpmArray.
+    - [x] timeArray.
+    - [x] extras.
+    - [x] accuracy.
+    - [x] correctChars.
+    - [x] incorrectChars.
+    - [x] missed.
+    - [x] total characters written.
+    - [ ] graph.
 
 - [ ] ideas
-
   - [ ] Add a practice mode.
   - [ ] Difficulty Levels.
   - [ ] Add sound effects.
@@ -44,7 +42,7 @@
 
 - [ ] completed
   - [x] hide the number of words written untill first character is written.
-  - [x] fix the scroll problem due to the inclusion of extra characters by including the extra characters in the hidden section of PreviouFragment.tsx.
+  - [x] fix the scroll problem.
   - [x] make the extra characters appear if there are any.
   - [x] implement elapsed time.
   - [x] upon tab in input focus on refresh button.

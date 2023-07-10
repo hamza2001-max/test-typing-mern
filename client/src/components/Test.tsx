@@ -6,16 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { WordValidator } from "./WordValidator";
 import { inputStatusSlice } from "../redux/inputStatusSlice";
 import { RootState } from "../redux/store";
-import { CalculateResultInterface } from "../types";
 import Result from "./Result";
-
-interface wpmArrInterface {
-  word: string;
-  wpm: number;
-  errors: number;
-  correctChars: number;
-  time: number;
-}
 
 export const Test = () => {
   const [testSentence, setTestSentence] = useState("");
@@ -25,19 +16,9 @@ export const Test = () => {
   const [lineHeiInc, setLineHeiInc] = useState(1.25);
   const [startTime, setStartTime] = useState(0);
   const [isTestFinsished, setIsTestFinsished] = useState(false);
-  const [wpmArr, setWpmArr] = useState<wpmArrInterface[]>([]);
-
+  const [handleRefreshStatus, setHandleRefreshStatus] = useState(false);
   const [timeArray, setTimeArray] = useState<number[]>([]);
   const [elapsedTimeArray, setElapsedTimeArray] = useState<number[]>([]);
-
-  const [result, setResult] = useState({
-    wpm: 0,
-    accuracy: 0,
-    errors: 0,
-    extras: 0,
-    missed: 0,
-    time: 0,
-  });
 
   const inputRef = useRef<HTMLInputElement>(null);
   const btnRef = useRef<HTMLButtonElement | null>(null);
@@ -84,141 +65,14 @@ export const Test = () => {
     };
   });
 
-  // const sumArr = (wpmArray: number[]): number => {
-  //   return wpmArray.reduce((total, num) => total + num, 0);
-  // };
-
-  // useEffect(() => {
-  //   console.log(result.wpm);
-  //   console.log(result.time);
-  //   console.log(result.missed);
-  //   console.log(result.extras);
-  //   console.log(result.accuracy);
-  //   console.log(result.errors);
-  // }, [result]);
-
   useEffect(() => {
     if (textWritten.split(" ").length - 1 === testSentence.split(" ").length) {
       if (inputRef.current) {
         inputRef.current.disabled = true;
         setIsTestFinsished(true);
-        setResult(calculateResult());
-        
       }
     }
   }, [inputValue, textWritten, testSentence, startTime]);
-
-  useEffect(() => {
-    setResult({ ...result, wpm: (result.wpm /= wpmArr.length) });
-  }, [wpmArr]);
-
-
-
-
-  // let remainingFactors = () => {
-  //   console.log(wpmArr);
-
-  //   let wpm = 0;
-  //   let errors = 0;
-  //   let time = 0;
-  //   let result = wpmArr.reduce(
-  //     (acc, item) => {
-  //       acc.wpm += item.wpm;
-  //       acc.errors += item.errors;
-  //       acc.time += item.time;
-  //       return acc;
-  //     },
-  //     { wpm, errors, time }
-  //   );
-  //   result.wpm /= wpmArr.length;
-
-  //   return {
-  //     ...result,
-  //   };
-  // };
-
-  // useEffect(()=>{
-  //   let wpm = 0;
-  //   let errors = 0;
-  //   let time = 0;
-  //   let resultar = wpmArr.reduce(
-  //     (acc, item) => {
-  //       acc.wpm += item.wpm;
-  //       acc.errors += item.errors;
-  //       acc.time += item.time;
-  //       return acc;
-  //     },
-  //     { wpm, errors, time }
-  //   );
-  //   resultar.wpm /= wpmArr.length;
-  //   console.log(resultar.wpm);
-  //   console.log(resultar.time);
-  //   console.log(resultar.errors);
-  // }, wpmArr);
-
-  const calculateResult = (): CalculateResultInterface => {
-    let resultantWpm = 0;
-    let resultantErrors = 0;
-    let resultantTime = 0;
-    let correctWords = 0;
-    let extras = 0;
-    let missed = 0;
-
-    const textWrittenArray = textWritten.split(" ");
-    const testSentenceArray = testSentence.split(" ");
-    textWrittenArray.pop();
-    const resultant = textWrittenArray.reduce(
-      (acc, word, index) => {
-        let correctChars = 0;
-        let errors = 0;
-
-        if (word === testSentenceArray[index]) {
-          acc.correctWords++;
-          correctChars += word.length;
-        } else {
-          if (word.length > testSentenceArray[index].length) {
-            acc.extras += word.length - testSentenceArray[index].length;
-          } else if (word.length < testSentenceArray[index].length) {
-            acc.missed += testSentenceArray[index].length - word.length;
-          }
-          for (let j = 0; j < testSentenceArray[index].length; j++) {
-            if (testSentenceArray[index][j] !== word[j]) {
-              errors++;
-            } else {
-              correctChars++;
-            }
-          }
-        }
-        let wpm = Math.round(
-          ((word.length + 1 - errors) / 5 / elapsedTimeArray[index]) * 60
-        );
-        resultantWpm += wpm;
-        resultantErrors += errors;
-        resultantTime += elapsedTimeArray[index];
-        const updatedWpm = {
-          word,
-          wpm,
-          errors,
-          correctChars,
-          time: elapsedTimeArray[index],
-        };
-        setWpmArr((prev) => [...prev, updatedWpm]);
-        return acc;
-      },
-      { correctWords, extras, missed }
-    );
-
-    let accuracy = (resultant.correctWords / testSentenceArray.length) * 100;
-
-    return {
-      wpm: resultantWpm,
-      errors: resultantErrors,
-      time: resultantTime,
-      accuracy,
-      extras,
-      missed,
-    };
-  };
 
   const generateTestSentence = useCallback(() => {
     const generateRandomNumber = (max: number) =>
@@ -277,6 +131,7 @@ export const Test = () => {
   }, [testLimiterSelector, promptValueSelector, testModifierSelector]);
 
   const handleRefresh = useCallback(() => {
+    setHandleRefreshStatus(true);
     generateTestSentence();
     setTextWritten("");
     setInputValue("");
@@ -284,17 +139,8 @@ export const Test = () => {
     setScrollIndex(3);
     setLineHeiInc(1.25);
     setIsTestFinsished(false);
-    setWpmArr([]);
     setTimeArray([]);
     setElapsedTimeArray([]);
-    setResult({
-      wpm: 0,
-      accuracy: 0,
-      errors: 0,
-      extras: 0,
-      missed: 0,
-      time: 0,
-    });
     if (inputRef.current) {
       inputRef.current.value = "";
       inputRef.current.disabled = false;
@@ -335,7 +181,7 @@ export const Test = () => {
         }
       }
     },
-    [inputValue, textWritten]
+    [inputValue, textWritten, startTime, timeArray]
   );
 
   const handleInputBlur = () => {
@@ -399,7 +245,13 @@ export const Test = () => {
     </section>
   ) : (
     <>
-      <Result {...result} />
+      <Result
+        textWritten={textWritten}
+        testSentence={testSentence}
+        elapsedTimeArray={elapsedTimeArray}
+        handleRefreshStatus={handleRefreshStatus}
+        setHandleRefreshStatus={setHandleRefreshStatus}
+      />
       <button
         className="px-8 py-4 rounded-md text-2xl lg:text-custom-xl flex justify-center mt-10
          hover:text-custom-fill hover:bg-custom-secondary transition ease-in-out delay-75 focus:bg-custom-secondary
