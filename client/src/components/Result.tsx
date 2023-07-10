@@ -1,7 +1,36 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { CalculateResultInterface, resultInterface, wpmArrInterface } from "../types";
+import { useCallback, useEffect, useState } from "react";
+import {
+  CalculateResultInterface,
+  resultInterface,
+  wpmArrInterface,
+} from "../types";
 import { ResponsiveLine } from "@nivo/line";
-// import { CalculateResultInterface } from "../types";
+// import { StringLiteral } from "typescript";
+import tailwindConfig from '../../tailwind.config.js';
+// import "../../tailwind.d.ts";
+// interface TailwindColors {
+//   [key: string]: string;
+// }
+
+// interface TailwindTheme {
+//   textColor: {
+//     [key: string]: TailwindColors;
+//   };
+// }
+
+// interface TailwindConfig {
+//   theme: TailwindTheme;
+// }
+interface axisInterface {
+  x: number;
+  y: number;
+}
+
+interface dataInterface {
+  id: string;
+  color: string;
+  data: axisInterface[];
+}
 
 const Result = ({
   textWritten,
@@ -10,12 +39,6 @@ const Result = ({
   handleRefreshStatus,
   setHandleRefreshStatus,
 }: resultInterface) => {
-  const data = [
-    { id: "hamza", color: "hsl(6, 70%, 50%)", data: [{ x: 2, y: 23 }] },
-    { id: "ali", color: "hsl(148, 70%, 50%)", data: [{ x: 3, y: 24 }] },
-    { id: "turi", color: "hsl(148, 70%, 50%)", data: [{ x: 4, y: 25 }] },
-  ];
-
   const [wpmArr, setWpmArr] = useState<wpmArrInterface[]>([]);
   const [result, setResult] = useState({
     wpm: 0,
@@ -25,11 +48,27 @@ const Result = ({
     missed: 0,
     time: 0,
   });
+
+  const [data, setData] = useState<dataInterface[]>([]);
+  // const data:number[] = [];
+
+  console.log(wpmArr);
   
   useEffect(() => {
-    setResult({ ...result, wpm: (result.wpm /= wpmArr.length) });
+    setData([
+      // ...prev,
+      {
+        id: "Current Test",
+        color: "hsl(0, 100%, 50%)",
+        data: wpmArr.map((element, index) => ({ x: index, y: element.wpm })),
+      },
+    ]);
+  }, [wpmArr]);
+
+  useEffect(() => {
+    setResult({ ...result, wpm: Math.round((result.wpm /= wpmArr.length)) });
   }, [wpmArr, setResult]);
-  
+
   const handleRefresh = useCallback(() => {
     setWpmArr([]);
     setResult({
@@ -122,6 +161,14 @@ const Result = ({
     }
   }, [textWritten, testSentence, calculateResult, setResult]);
 
+  // const textColorCustom: TailwindColors = tailwindConfig.theme?.textColor?.custom;
+// const customColors: string[] = Object.values(textColorCustom);
+  // const customColors = [tailwindConfig.theme?.extend?.textColor]
+  // const customColors = [tailwindConfig.theme?.colors?.blue[500],]
+  // const customColors = [
+  //   tailwindConfig.theme?.get('extend.textColor.custom.secondary')
+  // ];
+  
   return (
     <section className="w-full flex flex-col items-center">
       <div className="flex items-center justify-center">
@@ -131,49 +178,72 @@ const Result = ({
           <span>accuracy {result.accuracy}</span>
         </div>
         <div className="h-96 " style={{ width: "70vw" }}>
-          <ResponsiveLine
-            data={data}
-            margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
-            xScale={{ type: "point" }}
-            yScale={{
-              type: "linear",
-              min: "auto",
-              max: "auto",
-              stacked: true,
-              reverse: false,
-            }}
-            yFormat=" >-.2f"
-            axisTop={null}
-            axisRight={null}
-            axisBottom={{
-              tickSize: 5,
-              tickPadding: 5,
-              tickRotation: 0,
-              legend: "transportation",
-              legendOffset: 36,
-              legendPosition: "middle",
-            }}
-            axisLeft={{
-              tickSize: 5,
-              tickPadding: 5,
-              tickRotation: 0,
-              legend: "count",
-              legendOffset: -40,
-              legendPosition: "middle",
-            }}
-            colors={{ scheme: "nivo" }}
-            enablePoints={false}
-            pointSize={10}
-            pointColor={{ theme: "background" }}
-            pointBorderWidth={2}
-            pointBorderColor={{ from: "serieColor" }}
-            pointLabelYOffset={-12}
-            areaBaselineValue={40}
-            areaOpacity={0.1}
-            useMesh={true}
-            legends={[]}
-            motionConfig="wobbly"
-          />
+        <ResponsiveLine
+        data={data}
+        margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+        xScale={{ type: 'point' }}
+        yScale={{
+            type: 'linear',
+            min: 'auto',
+            max: 'auto',
+            stacked: true,
+            reverse: false
+        }}
+        yFormat=" >-.2f"
+        curve="natural"
+        axisTop={null}
+        axisRight={null}
+        axisBottom={{
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+            legend: 'Time in seconds',
+            legendOffset: 36,
+            legendPosition: 'middle'
+        }}
+        axisLeft={{
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+            legend: 'Word Per Minute',
+            legendOffset: -40,
+            legendPosition: 'middle'
+        }}
+        colors={['#ff0000', '#222222']}
+        pointSize={5}
+        pointColor={{ from: 'color', modifiers: [] }}
+        pointBorderWidth={2}
+        pointBorderColor={{ from: 'serieColor', modifiers: [] }}
+        pointLabelYOffset={-12}
+        useMesh={true}
+        legends={[
+            {
+                anchor: 'bottom-right',
+                direction: 'column',
+                justify: false,
+                translateX: 100,
+                translateY: 0,
+                itemsSpacing: 0,
+                itemDirection: 'left-to-right',
+                itemWidth: 80,
+                itemHeight: 20,
+                itemOpacity: 0.75,
+                symbolSize: 12,
+                symbolShape: 'circle',
+                symbolBorderColor: 'rgba(0, 0, 0, .5)',
+                effects: [
+                    {
+                        on: 'hover',
+                        style: {
+                            itemBackground: 'rgba(0, 0, 0, .03)',
+                            itemOpacity: 1
+                        }
+                    }
+                ]
+            }
+        ]}
+        motionConfig="wobbly"
+    />
         </div>
       </div>
       <span>time {result.time}</span>
