@@ -7,6 +7,7 @@ import { WordValidator } from "./WordValidator";
 import { inputStatusSlice } from "../redux/inputStatusSlice";
 import { RootState } from "../redux/store";
 import Result from "./Result";
+import { TestSettings } from "./TestSettings";
 
 export const Test = () => {
   const [testSentence, setTestSentence] = useState("");
@@ -196,52 +197,56 @@ export const Test = () => {
   };
 
   return !isTestFinsished ? (
-    <section className="relative text-custom-primary flex items-center flex-col mt-5">
-      <div className="">
-        {(inputValue || textWritten) && (
-          <span className="text-custom-tertiary text-2xl lg:text-custom-xl">
-            {textWritten.split(" ").length - 1}/{testSentence.split(" ").length}
-          </span>
-        )}
-        <div
-          className="relative flex justify-center"
-          onClick={handleFocusClick}
-        >
-          {!isInputActiveSelector && (
-            <div className="text-lg lg:text-xl px-3 text-custom-secondary z-10 absolute w-full h-full backdrop-blur-sm flex justify-center items-center">
-              <GiArrowCursor className="mr-3" />
-              Click here to focus
-            </div>
+    <section className="space-y-16">
+      <TestSettings />
+      <div className="relative text-custom-primary flex items-center flex-col mt-5">
+        <div className="">
+          {(inputValue || textWritten) && (
+            <span className="text-custom-tertiary text-2xl lg:text-custom-xl">
+              {textWritten.split(" ").length - 1}/
+              {testSentence.split(" ").length}
+            </span>
           )}
-          <WordValidator
-            testSentence={testSentence}
-            inputValue={inputValue}
-            textWritten={textWritten}
-            scrollIndex={scrollIndex}
-            lineHeiInc={lineHeiInc}
-            setScrollIndex={setScrollIndex}
-            setLineHeiInc={setLineHeiInc}
+          <div
+            className="relative flex justify-center"
             onClick={handleFocusClick}
+          >
+            {!isInputActiveSelector && (
+              <div className="text-lg lg:text-xl px-3 text-custom-secondary z-10 absolute w-full h-full backdrop-blur-sm flex justify-center items-center">
+                <GiArrowCursor className="mr-3" />
+                Click here to focus
+              </div>
+            )}
+            <WordValidator
+              testSentence={testSentence}
+              inputValue={inputValue}
+              textWritten={textWritten}
+              scrollIndex={scrollIndex}
+              lineHeiInc={lineHeiInc}
+              setScrollIndex={setScrollIndex}
+              setLineHeiInc={setLineHeiInc}
+              onClick={handleFocusClick}
+            />
+          </div>
+
+          <input
+            type="text"
+            className="w-full mt-3 py-2 sr-only"
+            ref={inputRef}
+            onKeyDown={handleKeyDown}
+            onBlur={handleInputBlur}
           />
         </div>
-
-        <input
-          type="text"
-          className="w-full mt-3 py-2 sr-only"
-          ref={inputRef}
-          onKeyDown={handleKeyDown}
-          onBlur={handleInputBlur}
-        />
+        <button
+          className="px-8 py-4 rounded-md text-2xl lg:text-custom-xl flex justify-center mt-10
+        hover:text-custom-fill hover:bg-custom-secondary transition ease-in-out delay-75 focus:bg-custom-secondary
+        focus:text-custom-fill outline-none"
+          onClick={handleRefresh}
+          ref={btnRef}
+        >
+          <VscDebugRestart />
+        </button>
       </div>
-      <button
-        className="px-8 py-4 rounded-md text-2xl lg:text-custom-xl flex justify-center mt-10
-         hover:text-custom-fill hover:bg-custom-secondary transition ease-in-out delay-75 focus:bg-custom-secondary
-          focus:text-custom-fill outline-none"
-        onClick={handleRefresh}
-        ref={btnRef}
-      >
-        <VscDebugRestart />
-      </button>
     </section>
   ) : (
     <>

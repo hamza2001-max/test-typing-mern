@@ -34,13 +34,14 @@ export interface RemainingLettersInterface {
 export interface CalculateResultInterface {
   wpm: number;
   errors: number;
+  correctChars: number;
   time: number;
   accuracy: number;
   extras: number;
   missed: number;
 }
 
-export interface wpmArrInterface {
+export interface WpmArrInterface {
   word: string;
   wpm: number;
   errors: number;
@@ -48,7 +49,7 @@ export interface wpmArrInterface {
   time: number;
 }
 
-export interface resultInterface {
+export interface ResultInterface {
   textWritten: string;
   testSentence: string;
   elapsedTimeArray: number[];
@@ -56,13 +57,18 @@ export interface resultInterface {
   setHandleRefreshStatus: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-// export interface axisInterface {
-//   x: number;
-//   y: number;
-// }
+export interface AxisInterface {
+  x: number;
+  y: number;
+}
 
 export interface dataInterface {
   id: string;
   color: string;
-  data: {x: number, y: number}[];
+  data: AxisInterface[];
+}
+
+export interface TooltipInterface {
+  element: string;
+  hover: string;
 }

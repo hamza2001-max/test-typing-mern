@@ -7,8 +7,7 @@ export const TestGrounds = () => {
     (state: RootState) => state.testMode.testMode
   );
   return (
-    <section className="space-y-16">
-      <TestSettings />
+    <section>
       {testModeSelector === "words" && <Test />}
     </section>
   );

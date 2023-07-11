@@ -1,7 +1,7 @@
 import { ResponsiveLine } from "@nivo/line";
 import { dataInterface } from "../typescript/types";
 
-export const LineChart =(props: {data: dataInterface[]}) => {
+export const LineChart =({data}: {data: dataInterface[]}) => {
   const theme = {
     grid: {
       line: {
@@ -12,22 +12,22 @@ export const LineChart =(props: {data: dataInterface[]}) => {
       legend: {
         text: {
           "fontSize": 14,
-          fill: "var(--color-tertiary)",
+          fill: "var(--color-primary)",
         },
       },
       ticks: {
         text: {
           "fontSize": 14,
-          fill: "var(--color-tertiary)",
+          fill: "var(--color-primary)",
           outlineWidth: 0,
         },
       },
     },
   };
   return (
-    <div className="h-96 " style={{ width: "70vw" }}>
+    <div className="h-96 " style={{ width: "90vw" }}>
           <ResponsiveLine
-            data={props.data}
+            data={data}
             theme={theme}
             margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
             xScale={{ type: "point" }}
@@ -58,7 +58,7 @@ export const LineChart =(props: {data: dataInterface[]}) => {
               legendOffset: -40,
               legendPosition: "middle",
             }}
-            colors={["var(--color-secondary)", ""]}
+            colors={["var(--color-tertiary)"]}
             pointSize={5}
             pointColor={{ from: "color", modifiers: [] }}
             pointBorderWidth={2}

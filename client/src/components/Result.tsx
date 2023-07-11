@@ -2,10 +2,12 @@ import { useCallback, useEffect, useState } from "react";
 import {
   CalculateResultInterface,
   dataInterface,
-  resultInterface,
-  wpmArrInterface,
+  ResultInterface,
+  WpmArrInterface,
 } from "../typescript/types";
 import { LineChart } from "./LineChart";
+import { Tooltip } from "./Tooltip";
+// import { Tooltip, TooltipTrigger, TooltipContent } from "@tailwindcss/react";
 
 const Result = ({
   textWritten,
@@ -13,11 +15,13 @@ const Result = ({
   elapsedTimeArray,
   handleRefreshStatus,
   setHandleRefreshStatus,
-}: resultInterface) => {
-  const [wpmArr, setWpmArr] = useState<wpmArrInterface[]>([]);
+}: ResultInterface) => {
+  const [wpmArr, setWpmArr] = useState<WpmArrInterface[]>([]);
+  // const [element, setElement] = useState();
   const [result, setResult] = useState({
     wpm: 0,
     accuracy: 0,
+    correctChars: 0,
     errors: 0,
     extras: 0,
     missed: 0,
@@ -35,6 +39,10 @@ const Result = ({
     ]);
   }, [wpmArr]);
 
+  // useEffect(() => {
+  //   setElement({});
+  // })
+
   useEffect(() => {
     setResult({ ...result, wpm: Math.round((result.wpm /= wpmArr.length)) });
   }, [wpmArr, setResult]);
@@ -44,6 +52,7 @@ const Result = ({
     setResult({
       wpm: 0,
       accuracy: 0,
+      correctChars: 0,
       errors: 0,
       extras: 0,
       missed: 0,
@@ -60,6 +69,7 @@ const Result = ({
     let resultantWpm = 0;
     let resultantErrors = 0;
     let resultantTime = 0;
+    let resultantCorrectChars = 0;
     let correctWords = 0;
     let extras = 0;
     let missed = 0;
@@ -94,6 +104,7 @@ const Result = ({
           ((word.length + 1 - errors) / 5 / elapsedTimeArray[index]) * 60
         );
         resultantWpm += wpm;
+        resultantCorrectChars += correctChars;
         resultantErrors += errors;
         resultantTime += elapsedTimeArray[index];
         setWpmArr((prev) => [
@@ -119,6 +130,7 @@ const Result = ({
       wpm: resultantWpm,
       errors: resultantErrors,
       time: Number(resultantTime.toFixed(2)),
+      correctChars: resultantCorrectChars,
       accuracy,
       extras,
       missed,
@@ -134,25 +146,42 @@ const Result = ({
     <section className="w-full flex flex-col items-center">
       <div className="flex flex-col items-center">
         <div>
-          <div className="flex flex-col">
-            <span>wpm</span>
-            <span>{result.wpm}</span>
+          <div className="flex flex-col items-start">
+            <span className="text-4xl text-custom-primary">wpm</span>
+            <span className="text-7xl text-custom-tertiary">{result.wpm}</span>
           </div>
-          <div>
-            <span>accuracy</span>
-            <span>{result.accuracy}</span>
+          <div className="flex flex-col items-start">
+            <span className="text-4xl text-custom-primary">accuracy</span>
+            <span className="text-7xl text-custom-tertiary">
+              {result.accuracy}%
+            </span>
           </div>
         </div>
         <LineChart data={data} />
       </div>
-      <span>time {result.time}</span>
-      <br />
-      <span>incorrectChars {result.errors}</span>
-      <br />
-      <span>missed {result.missed}</span>
-      <br />
-      <span>extras {result.extras}</span>
-      {/* <button></button> */}
+      <div className="w-full px-7 flex justify-between">
+        <div className="flex flex-col">
+          <span className="text-xl text-custom-primary">time</span>
+          <span className="text-2xl text-custom-tertiary">{result.time}s</span>
+        </div>
+        <div className="flex flex-col">
+          <span className="text-xl text-custom-primary">character</span>
+          <span className="text-2xl text-custom-tertiary">
+            <Tooltip
+              element={
+                result.correctChars.toString() +
+                "/" +
+                result.errors.toString() +
+                "/" +
+                result.extras.toString() +
+                "/" +
+                result.missed.toString()
+              }
+              hover={"correct/errors/extras/missed"}
+            />
+          </span>
+        </div>
+      </div>
     </section>
   );
 };
