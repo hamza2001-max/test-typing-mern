@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { RemainingLettersInterface } from "../types";
+import { RemainingLettersInterface } from "../typescript/types";
 
 export const RemainingLetters = ({
   currentSentenceWord,

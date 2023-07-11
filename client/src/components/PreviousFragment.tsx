@@ -1,4 +1,4 @@
-import { PreviousFragmentInterface } from "../types";
+import { PreviousFragmentInterface } from "../typescript/types";
 
 export const PreviousFragment = ({
   word,

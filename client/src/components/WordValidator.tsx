@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useRef } from "react";
-import { WordCheckerInterface } from "../types";
+import { WordCheckerInterface } from "../typescript/types";
 import { CurrentFragment } from "./CurrentFragment";
 import { PreviousFragment } from "./PreviousFragment";
 

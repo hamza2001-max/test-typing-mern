@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { CurrentFragmentInterface } from "../types";
+import { CurrentFragmentInterface } from "../typescript/types";
 import { Caret } from "./Caret";
 import { RootState } from "../redux/store";
 import { useMediaQuery } from "react-responsive";

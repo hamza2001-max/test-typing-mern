@@ -55,3 +55,14 @@ export interface resultInterface {
   handleRefreshStatus: boolean;
   setHandleRefreshStatus: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+// export interface axisInterface {
+//   x: number;
+//   y: number;
+// }
+
+export interface dataInterface {
+  id: string;
+  color: string;
+  data: {x: number, y: number}[];
+}

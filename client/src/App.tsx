@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Home } from "./Pages/Home";
+import { Home } from "./pages/Home";
 import { RootState } from "./redux/store";
 
 function App() {
