@@ -254,15 +254,6 @@ export const Test = () => {
         elapsedTimeArray={elapsedTimeArray}
         handleRefresh={handleRefresh}
       />
-      {/* <button
-        className="px-8 py-4 rounded-md text-2xl lg:text-custom-xl flex justify-center mt-10
-         hover:text-custom-fill hover:bg-custom-secondary transition ease-in-out delay-75 focus:bg-custom-secondary
-          focus:text-custom-fill outline-none"
-        onClick={handleRefresh}
-        ref={btnRef}
-      >
-        <VscDebugRestart />
-      </button> */}
     </>
   );
 };

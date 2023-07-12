@@ -1,13 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import {
-  // CalculateResultInterface,
   dataInterface,
   ResultInterface,
   WpmArrInterface,
 } from "../typescript/types";
 import { LineChart } from "./LineChart";
 import { Tooltip } from "./Tooltip";
-import { GrFormNext } from "react-icons/gr";
+import { ProceedResult } from "./ProceedResult";
 
 const Result = ({
   textWritten,
@@ -26,7 +25,6 @@ const Result = ({
     time: 0,
   });
   const [exe, setExe] = useState(0);
-
   const [data, setData] = useState<dataInterface[]>([]);
   useEffect(() => {
     setData([
@@ -61,6 +59,7 @@ const Result = ({
     let extras = 0;
     let missed = 0;
     let wpmArrLength = 0;
+    let val: WpmArrInterface[] = [];
 
     const textWrittenArray = textWritten.split(" ");
     const testSentenceArray = testSentence.split(" ");
@@ -96,17 +95,16 @@ const Result = ({
         resultantErrors += errors;
         resultantTime += elapsedTimeArray[index];
         wpmArrLength++;
-        if(wpmArrLength < textWrittenArray.length-1)
-        setWpmArr((prev) => [
-          ...prev,
-          {
+        if (val.length < textWrittenArray.length) {
+          val.push({
             word,
             wpm,
             errors,
             correctChars,
             time: elapsedTimeArray[index],
-          },
-        ]);
+          });
+        }
+        setWpmArr(val);
         return acc;
       },
       { correctWords, extras, missed }
@@ -116,35 +114,29 @@ const Result = ({
     extras = resultant.extras;
     missed = resultant.missed;
 
-    // console.log(wpmArrLength);
-    
     setResult({
-      wpm: resultantWpm / wpmArrLength,
+      wpm: Number((resultantWpm / wpmArrLength).toFixed(2)),
       errors: resultantErrors,
       time: Number(resultantTime.toFixed(2)),
       correctChars: resultantCorrectChars,
-      accuracy,
+      accuracy: Number(accuracy.toFixed(2)),
       extras,
       missed,
     });
-  }, [elapsedTimeArray, testSentence, textWritten]);
+  }, [elapsedTimeArray, testSentence]);
 
   useEffect(() => {
-    if (textWritten.split(" ").length - 1 === testSentence.split(" ").length && exe === 0) {
+    if (
+      textWritten.split(" ").length - 1 === testSentence.split(" ").length &&
+      exe === 0
+    ) {
       calculateResult();
-      setExe(prev => ++prev);
-      console.log(exe);
-      
+      setExe((prev) => ++prev);
     }
   }, [textWritten, testSentence, calculateResult]);
 
-  useEffect(() => {
-    console.log(wpmArr);
-console.log(textWritten);
-
-  }, [wpmArr])
   return (
-    <section className="w-full flex flex-col items-center">
+    <section className="w-full flex flex-col items-center justify-center">
       <div className="flex flex-col items-center">
         <div>
           <div className="flex flex-col items-start">
@@ -167,6 +159,7 @@ console.log(textWritten);
             <Tooltip
               element={result.time.toFixed(0) + "s"}
               hover={result.time + "s"}
+              nowrap={false}
             />
           </span>
         </div>
@@ -184,15 +177,12 @@ console.log(textWritten);
                 result.missed
               }
               hover={"correct/errors/extras/missed"}
+              nowrap={false}
             />
           </span>
         </div>
       </div>
-      <div>
-        <button onClick={handleResultRefresh}>
-          <GrFormNext />
-        </button>
-      </div>
+      <ProceedResult handleResultRefresh={handleResultRefresh} />
     </section>
   );
 };

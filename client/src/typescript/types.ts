@@ -1,3 +1,5 @@
+import { IconType } from "react-icons/lib";
+
 export interface ThemeOptionInterface {
   title: string;
   themeClass: string;
@@ -68,6 +70,12 @@ export interface dataInterface {
 }
 
 export interface TooltipInterface {
-  element: string;
+  element?: string;
   hover: string;
+  icon?: IconType;
+  nowrap: boolean;
+}
+
+export interface ProceedResultInterface {
+  handleResultRefresh: () => void
 }
