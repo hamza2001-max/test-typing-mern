@@ -1,23 +1,21 @@
 import { useCallback, useEffect, useState } from "react";
 import {
-  CalculateResultInterface,
+  // CalculateResultInterface,
   dataInterface,
   ResultInterface,
   WpmArrInterface,
 } from "../typescript/types";
 import { LineChart } from "./LineChart";
 import { Tooltip } from "./Tooltip";
-// import { Tooltip, TooltipTrigger, TooltipContent } from "@tailwindcss/react";
+import { GrFormNext } from "react-icons/gr";
 
 const Result = ({
   textWritten,
   testSentence,
   elapsedTimeArray,
-  handleRefreshStatus,
-  setHandleRefreshStatus,
+  handleRefresh,
 }: ResultInterface) => {
   const [wpmArr, setWpmArr] = useState<WpmArrInterface[]>([]);
-  // const [element, setElement] = useState();
   const [result, setResult] = useState({
     wpm: 0,
     accuracy: 0,
@@ -27,6 +25,7 @@ const Result = ({
     missed: 0,
     time: 0,
   });
+  const [exe, setExe] = useState(0);
 
   const [data, setData] = useState<dataInterface[]>([]);
   useEffect(() => {
@@ -39,15 +38,7 @@ const Result = ({
     ]);
   }, [wpmArr]);
 
-  // useEffect(() => {
-  //   setElement({});
-  // })
-
-  useEffect(() => {
-    setResult({ ...result, wpm: Math.round((result.wpm /= wpmArr.length)) });
-  }, [wpmArr, setResult]);
-
-  const handleRefresh = useCallback(() => {
+  const handleResultRefresh = useCallback(() => {
     setWpmArr([]);
     setResult({
       wpm: 0,
@@ -58,14 +49,10 @@ const Result = ({
       missed: 0,
       time: 0,
     });
-    setHandleRefreshStatus(false);
-  }, [setHandleRefreshStatus]);
+    handleRefresh();
+  }, [handleRefresh]);
 
-  useEffect(() => {
-    handleRefreshStatus && handleRefresh();
-  }, [handleRefreshStatus, handleRefresh]);
-
-  const calculateResult = useCallback((): CalculateResultInterface => {
+  const calculateResult = useCallback(() => {
     let resultantWpm = 0;
     let resultantErrors = 0;
     let resultantTime = 0;
@@ -73,6 +60,7 @@ const Result = ({
     let correctWords = 0;
     let extras = 0;
     let missed = 0;
+    let wpmArrLength = 0;
 
     const textWrittenArray = textWritten.split(" ");
     const testSentenceArray = testSentence.split(" ");
@@ -107,6 +95,8 @@ const Result = ({
         resultantCorrectChars += correctChars;
         resultantErrors += errors;
         resultantTime += elapsedTimeArray[index];
+        wpmArrLength++;
+        if(wpmArrLength < textWrittenArray.length-1)
         setWpmArr((prev) => [
           ...prev,
           {
@@ -117,7 +107,6 @@ const Result = ({
             time: elapsedTimeArray[index],
           },
         ]);
-
         return acc;
       },
       { correctWords, extras, missed }
@@ -126,22 +115,34 @@ const Result = ({
     let accuracy = (resultant.correctWords / testSentenceArray.length) * 100;
     extras = resultant.extras;
     missed = resultant.missed;
-    return {
-      wpm: resultantWpm,
+
+    // console.log(wpmArrLength);
+    
+    setResult({
+      wpm: resultantWpm / wpmArrLength,
       errors: resultantErrors,
       time: Number(resultantTime.toFixed(2)),
       correctChars: resultantCorrectChars,
       accuracy,
       extras,
       missed,
-    };
+    });
   }, [elapsedTimeArray, testSentence, textWritten]);
 
   useEffect(() => {
-    if (textWritten.split(" ").length - 1 === testSentence.split(" ").length) {
-      setResult(calculateResult());
+    if (textWritten.split(" ").length - 1 === testSentence.split(" ").length && exe === 0) {
+      calculateResult();
+      setExe(prev => ++prev);
+      console.log(exe);
+      
     }
-  }, [textWritten, testSentence, calculateResult, setResult]);
+  }, [textWritten, testSentence, calculateResult]);
+
+  useEffect(() => {
+    console.log(wpmArr);
+console.log(textWritten);
+
+  }, [wpmArr])
   return (
     <section className="w-full flex flex-col items-center">
       <div className="flex flex-col items-center">
@@ -162,25 +163,35 @@ const Result = ({
       <div className="w-full px-7 flex justify-between">
         <div className="flex flex-col">
           <span className="text-xl text-custom-primary">time</span>
-          <span className="text-2xl text-custom-tertiary">{result.time}s</span>
+          <span className="text-2xl text-custom-tertiary">
+            <Tooltip
+              element={result.time.toFixed(0) + "s"}
+              hover={result.time + "s"}
+            />
+          </span>
         </div>
         <div className="flex flex-col">
           <span className="text-xl text-custom-primary">character</span>
           <span className="text-2xl text-custom-tertiary">
             <Tooltip
               element={
-                result.correctChars.toString() +
+                result.correctChars +
                 "/" +
-                result.errors.toString() +
+                result.errors +
                 "/" +
-                result.extras.toString() +
+                result.extras +
                 "/" +
-                result.missed.toString()
+                result.missed
               }
               hover={"correct/errors/extras/missed"}
             />
           </span>
         </div>
+      </div>
+      <div>
+        <button onClick={handleResultRefresh}>
+          <GrFormNext />
+        </button>
       </div>
     </section>
   );

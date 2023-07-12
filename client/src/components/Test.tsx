@@ -17,7 +17,6 @@ export const Test = () => {
   const [lineHeiInc, setLineHeiInc] = useState(1.25);
   const [startTime, setStartTime] = useState(0);
   const [isTestFinsished, setIsTestFinsished] = useState(false);
-  const [handleRefreshStatus, setHandleRefreshStatus] = useState(false);
   const [timeArray, setTimeArray] = useState<number[]>([]);
   const [elapsedTimeArray, setElapsedTimeArray] = useState<number[]>([]);
 
@@ -132,7 +131,6 @@ export const Test = () => {
   }, [testLimiterSelector, promptValueSelector, testModifierSelector]);
 
   const handleRefresh = useCallback(() => {
-    setHandleRefreshStatus(true);
     generateTestSentence();
     setTextWritten("");
     setInputValue("");
@@ -254,10 +252,9 @@ export const Test = () => {
         textWritten={textWritten}
         testSentence={testSentence}
         elapsedTimeArray={elapsedTimeArray}
-        handleRefreshStatus={handleRefreshStatus}
-        setHandleRefreshStatus={setHandleRefreshStatus}
+        handleRefresh={handleRefresh}
       />
-      <button
+      {/* <button
         className="px-8 py-4 rounded-md text-2xl lg:text-custom-xl flex justify-center mt-10
          hover:text-custom-fill hover:bg-custom-secondary transition ease-in-out delay-75 focus:bg-custom-secondary
           focus:text-custom-fill outline-none"
@@ -265,7 +262,7 @@ export const Test = () => {
         ref={btnRef}
       >
         <VscDebugRestart />
-      </button>
+      </button> */}
     </>
   );
 };

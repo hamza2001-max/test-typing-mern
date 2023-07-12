@@ -32,7 +32,7 @@ export const Home = () => {
 
   return (
     <main
-      className="h-screen flex flex-col justify-between"
+      className="flex flex-col justify-between"
       onClick={() => {
         themeVSelector && themeVDispatch(inVisibleTheme());
         testSettingsVSelector && testSettingsVDispatch(inVisibleTS());

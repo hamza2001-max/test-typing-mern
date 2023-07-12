@@ -53,8 +53,7 @@ export interface ResultInterface {
   textWritten: string;
   testSentence: string;
   elapsedTimeArray: number[];
-  handleRefreshStatus: boolean;
-  setHandleRefreshStatus: React.Dispatch<React.SetStateAction<boolean>>;
+  handleRefresh: () => void;
 }
 
 export interface AxisInterface {
