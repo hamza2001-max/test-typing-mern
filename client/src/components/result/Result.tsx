@@ -1,17 +1,18 @@
 import { useCallback, useEffect, useState } from "react";
 import {
-  dataInterface,
+  DataInterface,
   ResultInterface,
   WpmArrInterface,
-} from "../typescript/types";
+} from "../../typescript/types";
 import { LineChart } from "./LineChart";
-import { Tooltip } from "./Tooltip";
+import { Tooltip } from "../include/Tooltip";
 import { ProceedResult } from "./ProceedResult";
 
 const Result = ({
   textWritten,
   testSentence,
   elapsedTimeArray,
+  resetState,
   handleRefresh,
 }: ResultInterface) => {
   const [wpmArr, setWpmArr] = useState<WpmArrInterface[]>([]);
@@ -25,7 +26,7 @@ const Result = ({
     time: 0,
   });
   const [exe, setExe] = useState(0);
-  const [data, setData] = useState<dataInterface[]>([]);
+  const [data, setData] = useState<DataInterface[]>([]);
   useEffect(() => {
     setData([
       {
@@ -36,7 +37,7 @@ const Result = ({
     ]);
   }, [wpmArr]);
 
-  const handleResultRefresh = useCallback(() => {
+  const handleResultReset = useCallback(() => {
     setWpmArr([]);
     setResult({
       wpm: 0,
@@ -47,8 +48,13 @@ const Result = ({
       missed: 0,
       time: 0,
     });
+    resetState();
+  }, [resetState]);
+
+  const handleResultRefresh = useCallback(() => {
+    handleResultReset();
     handleRefresh();
-  }, [handleRefresh]);
+  }, [handleRefresh, handleResultReset]);
 
   const calculateResult = useCallback(() => {
     let resultantWpm = 0;
@@ -123,7 +129,7 @@ const Result = ({
       extras,
       missed,
     });
-  }, [elapsedTimeArray, testSentence]);
+  }, [elapsedTimeArray, testSentence, textWritten]);
 
   useEffect(() => {
     if (
@@ -133,7 +139,7 @@ const Result = ({
       calculateResult();
       setExe((prev) => ++prev);
     }
-  }, [textWritten, testSentence, calculateResult]);
+  }, [textWritten, testSentence, calculateResult, exe]);
 
   return (
     <section className="w-full flex flex-col items-center justify-center">
@@ -182,7 +188,7 @@ const Result = ({
           </span>
         </div>
       </div>
-      <ProceedResult handleResultRefresh={handleResultRefresh} />
+      <ProceedResult handleResultRefresh={handleResultRefresh} handleResultReset={handleResultReset}/>
     </section>
   );
 };

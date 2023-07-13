@@ -3,11 +3,11 @@ import {
   testSettingLimiterData,
   testSettingModeData,
   testSettingModifierData,
-} from "../data/testSettingsData";
-import { RootState } from "../redux/store";
-import { testModifierSlice } from "../redux/testModifierSlice";
-import { testSettingsVisibilitySlice } from "../redux/testSettingsVisibilitySlice";
-import { promptVisibilitySlice } from "../redux/promptVisibilitySlice";
+} from "../../data/testSettingsData";
+import { RootState } from "../../redux/store";
+import { testModifierSlice } from "../../redux/testModifierSlice";
+import { testSettingsVisibilitySlice } from "../../redux/testSettingsVisibilitySlice";
+import { promptVisibilitySlice } from "../../redux/promptVisibilitySlice";
 
 export const TestSettingsMd = () => {
   const { visibleCustom } = promptVisibilitySlice.actions;

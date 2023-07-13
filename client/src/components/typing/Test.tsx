@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { punctuationsJSON, wordsJSON } from "../testJson";
+import { punctuationsJSON, wordsJSON } from "../../testJson";
 import { VscDebugRestart } from "react-icons/vsc";
 import { GiArrowCursor } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
 import { WordValidator } from "./WordValidator";
-import { inputStatusSlice } from "../redux/inputStatusSlice";
-import { RootState } from "../redux/store";
-import Result from "./Result";
+import { inputStatusSlice } from "../../redux/inputStatusSlice";
+import { RootState } from "../../redux/store";
+import Result from "../result/Result";
 import { TestSettings } from "./TestSettings";
 
 export const Test = () => {
@@ -130,8 +130,7 @@ export const Test = () => {
     setInputValue("");
   }, [testLimiterSelector, promptValueSelector, testModifierSelector]);
 
-  const handleRefresh = useCallback(() => {
-    generateTestSentence();
+  const resetState = useCallback(() => {
     setTextWritten("");
     setInputValue("");
     inputStatusDispatch(active());
@@ -145,7 +144,13 @@ export const Test = () => {
       inputRef.current.disabled = false;
       inputRef.current?.focus();
     }
-  }, [generateTestSentence, active, inputStatusDispatch]);
+  }, [active, inputStatusDispatch]);
+
+
+  const handleRefresh =useCallback(() => {
+    generateTestSentence();
+    resetState();
+  }, [generateTestSentence, resetState])
 
   useEffect(() => {
     generateTestSentence();
@@ -237,7 +242,7 @@ export const Test = () => {
         </div>
         <button
           className="px-8 py-4 rounded-md text-2xl lg:text-custom-xl flex justify-center mt-10
-        hover:text-custom-fill hover:bg-custom-secondary transition ease-in-out delay-75 focus:bg-custom-secondary
+        hover:text-custom-secondary transition ease-in-out delay-75 focus:bg-custom-secondary
         focus:text-custom-fill outline-none"
           onClick={handleRefresh}
           ref={btnRef}
@@ -252,6 +257,7 @@ export const Test = () => {
         textWritten={textWritten}
         testSentence={testSentence}
         elapsedTimeArray={elapsedTimeArray}
+        resetState={resetState}
         handleRefresh={handleRefresh}
       />
     </>

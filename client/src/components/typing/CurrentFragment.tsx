@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
-import { CurrentFragmentInterface } from "../typescript/types";
+import { CurrentFragmentInterface } from "../../typescript/types";
 import { Caret } from "./Caret";
-import { RootState } from "../redux/store";
+import { RootState } from "../../redux/store";
 import { useMediaQuery } from "react-responsive";
-import { RemainingLetters } from "./RemainingLetters";
+import { CurrentRemainingLetters } from "./CurrentRemainingLetters";
 
 export const CurrentFragment = ({
   inputValue,
@@ -67,7 +67,7 @@ export const CurrentFragment = ({
           );
         })}
       </span>
-      <RemainingLetters
+      <CurrentRemainingLetters
         currentSentenceWord={currentSentenceWord}
         inputValue={inputValue}
       />{" "}

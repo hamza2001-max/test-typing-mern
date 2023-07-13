@@ -1,4 +1,5 @@
-import { PreviousFragmentInterface } from "../typescript/types";
+import { PreviousFragmentInterface } from "../../typescript/types";
+import { PreviousRemainingLetter } from "./PreviousRemainingLetter";
 
 export const PreviousFragment = ({
   word,
@@ -48,9 +49,7 @@ export const PreviousFragment = ({
           {prevWords}
         </span>
         {writtenWord.length > word.length && (
-          <span className="text-custom-tertiary border-b-3 border-custom-tertiary">
-            {writtenWord.slice(word.length, word.length+5)}
-          </span>
+          <PreviousRemainingLetter writtenWord={writtenWord} word={word} />
         )}{" "}
       </>
     );

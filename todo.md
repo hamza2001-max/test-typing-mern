@@ -5,14 +5,28 @@
 - [ ] ASAP
   - [ ] implement the local storage.
 
+- [ ] to fix.
+  - [x] instead of nivo try chart.js.
+  - [x] solve the data problem of nivo. 
+
 - [ ] Todo
-  - [ ] refactor test.tsx.
-  - [ ] shift the result calculation to Result.tsx.
-  - [ ] refactor calculateResult();
+  - [x] Refactor Component Folder Structure.
+  - [x] After completing Result.tsx, apply hover to both Test and Result.
+  - [x] Remove Current Test from graph.
+  - [x] where applicable apply tooltip.tsx.
+  - [x] In PreviousFragment, for remainingLetter make a separate component.
+  - [ ] Apply transition to Tooltip.tsx.
+  - [x] Change the color scheme in Tooltip.tsx.
+  - [x] refactor test.tsx.
+  - [x] shift the result calculation to Result.tsx.
+  - [x] refactor calculateResult();
+  - [ ] complete Result.tsx frontend.
   - [ ] implement all test modes.
   - [ ] implement the result of a run.
   - [ ] implement time mode in the word mode if nothing has been written for a long time and make the test invalid.
   - [ ] solve the div key problem.
+  - [x] change the branching grids to the matching color.
+  - [x] color the graph.
   - [ ] Result Implementation.
     - [x] wpm.
     - [x] wpmArray.

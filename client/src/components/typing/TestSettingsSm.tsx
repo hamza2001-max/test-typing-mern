@@ -2,12 +2,12 @@ import {
   testSettingLimiterData,
   testSettingModeData,
   testSettingModifierData,
-} from "../data/testSettingsData";
+} from "../../data/testSettingsData";
 import { useDispatch, useSelector } from "react-redux";
-import { testModifierSlice } from "../redux/testModifierSlice";
-import { promptVisibilitySlice } from "../redux/promptVisibilitySlice";
-import { testSettingsVisibilitySlice } from "../redux/testSettingsVisibilitySlice";
-import { RootState } from "../redux/store";
+import { testModifierSlice } from "../../redux/testModifierSlice";
+import { promptVisibilitySlice } from "../../redux/promptVisibilitySlice";
+import { testSettingsVisibilitySlice } from "../../redux/testSettingsVisibilitySlice";
+import { RootState } from "../../redux/store";
 
 export const TestSettingsSm = () => {
   const testModeDispatch = useDispatch();

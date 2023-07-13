@@ -28,9 +28,14 @@ export interface PreviousFragmentInterface {
   writtenWord: string;
 }
 
-export interface RemainingLettersInterface {
+export interface CurrentRemainingLettersInterface {
   currentSentenceWord: string;
   inputValue: string;
+}
+
+export interface PreviousRemainingLettersInterface {
+  writtenWord:string; 
+  word:string;
 }
 
 export interface CalculateResultInterface {
@@ -56,6 +61,7 @@ export interface ResultInterface {
   testSentence: string;
   elapsedTimeArray: number[];
   handleRefresh: () => void;
+  resetState: () => void;
 }
 
 export interface AxisInterface {
@@ -63,7 +69,7 @@ export interface AxisInterface {
   y: number;
 }
 
-export interface dataInterface {
+export interface DataInterface {
   id: string;
   color: string;
   data: AxisInterface[];
@@ -77,5 +83,6 @@ export interface TooltipInterface {
 }
 
 export interface ProceedResultInterface {
-  handleResultRefresh: () => void
+  handleResultRefresh: () => void;
+  handleResultReset: () => void;
 }

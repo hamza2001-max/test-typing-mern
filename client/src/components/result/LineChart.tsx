@@ -1,7 +1,7 @@
 import { ResponsiveLine } from "@nivo/line";
-import { dataInterface } from "../typescript/types";
+import { DataInterface } from "../../typescript/types";
 
-export const LineChart = ({ data }: { data: dataInterface[] }) => {
+export const LineChart = ({ data }: { data: DataInterface[] }) => {
   const theme = {
     grid: {
       line: {

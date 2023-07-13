@@ -1,7 +1,7 @@
-import { Footer } from "../components/Footer";
-import { Navigation } from "../components/Navigation";
-import { TestGrounds } from "../components/TestGrounds";
-import { WordsLimiterPrompt } from "../components/WordsLimiterPrompt";
+import { Footer } from "../components/include/Footer";
+import { Navigation } from "../components/include/Navigation";
+import { TestGrounds } from "../components/typing/TestGrounds";
+import { WordsLimiterPrompt } from "../components/typing/WordsLimiterPrompt";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { testSettingsVisibilitySlice } from "../redux/testSettingsVisibilitySlice";

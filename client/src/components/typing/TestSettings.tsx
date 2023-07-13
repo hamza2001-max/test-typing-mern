@@ -1,8 +1,8 @@
 import { FaCog } from "react-icons/fa";
 import { TestSettingsSm } from "./TestSettingsSm";
 import { useDispatch, useSelector } from "react-redux";
-import { testSettingsVisibilitySlice } from "../redux/testSettingsVisibilitySlice";
-import { RootState } from "../redux/store";
+import { testSettingsVisibilitySlice } from "../../redux/testSettingsVisibilitySlice";
+import { RootState } from "../../redux/store";
 import { TestSettingsMd } from "./TestSettingsMd";
 
 export const TestSettings = () => {

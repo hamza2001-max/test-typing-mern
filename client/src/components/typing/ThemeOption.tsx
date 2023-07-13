@@ -1,4 +1,4 @@
-import { ThemeOptionInterface } from "../typescript/types";
+import { ThemeOptionInterface } from "../../typescript/types";
 
 export const ThemeOption = ({
   title,

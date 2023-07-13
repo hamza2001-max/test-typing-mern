@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { themeSlice } from "../redux/themeSlice";
-import { themeVisibilitySlice } from "../redux/themeVisibilitySlice";
-import { ThemeOption } from "./ThemeOption";
-import { themeSchemes } from "../data/themeSchemeData";
-import { footerData } from "../data/footerData";
-import { RootState } from "../redux/store";
+import { themeSlice } from "../../redux/themeSlice";
+import { themeVisibilitySlice } from "../../redux/themeVisibilitySlice";
+import { ThemeOption } from "../typing/ThemeOption";
+import { themeSchemes } from "../../data/themeSchemeData";
+import { footerData } from "../../data/footerData";
+import { RootState } from "../../redux/store";
 import { IoIosColorPalette } from "react-icons/io";
 import { VscRepoForked } from "react-icons/vsc";
 

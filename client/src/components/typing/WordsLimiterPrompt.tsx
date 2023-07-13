@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { promptVisibilitySlice } from "../redux/promptVisibilitySlice";
-import { testLimiterSlice } from "../redux/testLimiterSlice";
-import { limiterPromptSlice } from "../redux/limiterPromptSlice";
+import { promptVisibilitySlice } from "../../redux/promptVisibilitySlice";
+import { testLimiterSlice } from "../../redux/testLimiterSlice";
+import { limiterPromptSlice } from "../../redux/limiterPromptSlice";
 
 export const WordsLimiterPrompt = () => {
   const [inputValue, setInputValue] = useState(0);
