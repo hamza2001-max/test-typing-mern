@@ -71,7 +71,6 @@ export interface AxisInterface {
 
 export interface DataInterface {
   id: string;
-  color: string;
   data: AxisInterface[];
 }
 
@@ -80,6 +79,7 @@ export interface TooltipInterface {
   hover: string;
   icon?: IconType;
   nowrap: boolean;
+  space: string;
 }
 
 export interface ProceedResultInterface {

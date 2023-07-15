@@ -18,27 +18,46 @@ export const ProceedResult = ({
       }
     };
     document.addEventListener("keydown", handleBtnKeyDown);
-
-    return document.removeEventListener("keydown", handleBtnKeyDown);
+    return () => document.removeEventListener("keydown", handleBtnKeyDown);
   });
 
   return (
-    <div className="grid grid-cols-2 gap-y-12 gap-x-12 mt-10 mb-5">
+    <div className="grid grid-cols-2 gap-y-12 gap-x-12 mt-10 mb-5 ">
       <button
-        className="text-2xl px-8 py-4"
+        className="text-2xl px-8 py-4 focus:bg-custom-secondary outline-none rounded-md text-custom-primary hover:text-custom-secondary"
         onClick={handleResultRefresh}
         ref={btnRef}
       >
-        <Tooltip icon={MdNavigateNext} hover="Next Test" nowrap={true} />
+        <Tooltip
+          icon={MdNavigateNext}
+          hover="Next Test"
+          nowrap={true}
+          space="bottom-8"
+        />
       </button>
-      <button className="text-xl px-8 py-4" onClick={handleResultReset}>
-        <Tooltip icon={BsArrowRepeat} hover="Repeat Test" nowrap={true} />
+      <button className="text-xl px-8 py-4 text-custom-primary hover:text-custom-secondary" onClick={handleResultReset}>
+        <Tooltip
+          icon={BsArrowRepeat}
+          hover="Repeat Test"
+          nowrap={true}
+          space="bottom-8"
+        />
       </button>
-      <button className="text-xl px-8 py-4">
-        <Tooltip icon={AiFillWarning} hover="Practice Words" nowrap={true} />
+      <button className="text-xl px-8 py-4 text-custom-primary hover:text-custom-secondary">
+        <Tooltip
+          icon={AiFillWarning}
+          hover="Practice Words"
+          nowrap={true}
+          space="bottom-8"
+        />
       </button>
-      <button className="text-xl px-8 py-4">
-        <Tooltip icon={BsTextLeft} hover="Toggle Word History" nowrap={true} />
+      <button className="text-xl px-8 py-4 text-custom-primary hover:text-custom-secondary">
+        <Tooltip
+          icon={BsTextLeft}
+          hover="Toggle Word History"
+          nowrap={true}
+          space="bottom-8"
+        />
       </button>
     </div>
   );

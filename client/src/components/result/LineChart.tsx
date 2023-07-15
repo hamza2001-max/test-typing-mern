@@ -29,11 +29,11 @@ export const LineChart = ({ data }: { data: DataInterface[] }) => {
     },
   };
   return (
-    <div className="h-96 " style={{ width: "90vw" }}>
+    <div className="h-96 w-[90vw]">
       <ResponsiveLine
         data={data}
         theme={theme}
-        margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+        margin={{ top: 30, right:25, bottom: 50, left: 60 }}
         xScale={{ type: "point" }}
         yScale={{
           type: "linear",
@@ -42,15 +42,14 @@ export const LineChart = ({ data }: { data: DataInterface[] }) => {
           stacked: true,
           reverse: false,
         }}
-        yFormat=" >-.2f"
         curve="natural"
-        axisTop={null}
-        axisRight={null}
         axisBottom={{
-          tickSize: 5,
+          // tickValues: [1, 2],
+          // tickValues: [],
+          // tickRotation: -45,
           tickPadding: 5,
-          tickRotation: 0,
-          legend: "Time in seconds",
+          // tickRotation: 0,
+          legend: "indeces of words",
           legendOffset: 36,
           legendPosition: "middle",
         }}
@@ -65,7 +64,6 @@ export const LineChart = ({ data }: { data: DataInterface[] }) => {
         colors={["var(--color-tertiary)"]}
         pointSize={5}
         pointColor={{ from: "color", modifiers: [] }}
-        pointBorderWidth={2}
         pointBorderColor={{ from: "serieColor", modifiers: [] }}
         pointLabelYOffset={-12}
         useMesh={true}

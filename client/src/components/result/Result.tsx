@@ -27,12 +27,35 @@ const Result = ({
   });
   const [exe, setExe] = useState(0);
   const [data, setData] = useState<DataInterface[]>([]);
+
   useEffect(() => {
+    let data;
+    if (wpmArr.length > 10) {
+      const num = Math.ceil(wpmArr.length / 10);
+      data = [];
+      for (let i = 0; i < wpmArr.length; i += num) {
+        let sum = 0;
+        let count = 0; 
+        for (let j = i; j < i + num && j < wpmArr.length; j++) {
+          sum += wpmArr[j].wpm;
+          count++;
+        }   
+        data.push({
+          x: i / num,
+          y: sum / count,
+        });
+      }
+    } else {
+      data = wpmArr.map((element, index) => ({
+        x: index,
+        y: element.wpm,
+      }));
+    }
+  
     setData([
       {
         id: "Current Test",
-        color: "hsl(0, 100%, 50%)",
-        data: wpmArr.map((element, index) => ({ x: index, y: element.wpm })),
+        data: data,
       },
     ]);
   }, [wpmArr]);
@@ -48,6 +71,7 @@ const Result = ({
       missed: 0,
       time: 0,
     });
+    setData([]);
     resetState();
   }, [resetState]);
 
@@ -94,7 +118,7 @@ const Result = ({
         }
 
         let wpm = Math.round(
-          ((word.length + 1 - errors) / 5 / elapsedTimeArray[index]) * 60
+          (word.length + 1 - errors) / 5 / (elapsedTimeArray[index] / 60)
         );
         resultantWpm += wpm;
         resultantCorrectChars += correctChars;
@@ -121,7 +145,7 @@ const Result = ({
     missed = resultant.missed;
 
     setResult({
-      wpm: Number((resultantWpm / wpmArrLength).toFixed(2)),
+      wpm: Number((resultantWpm / wpmArrLength).toFixed(3)),
       errors: resultantErrors,
       time: Number(resultantTime.toFixed(2)),
       correctChars: resultantCorrectChars,
@@ -145,14 +169,26 @@ const Result = ({
     <section className="w-full flex flex-col items-center justify-center">
       <div className="flex flex-col items-center">
         <div>
-          <div className="flex flex-col items-start">
-            <span className="text-4xl text-custom-primary">wpm</span>
-            <span className="text-7xl text-custom-tertiary">{result.wpm}</span>
+          <div className="flex flex-col items-start mb-4">
+            <span className="text-3xl text-custom-primary">wpm</span>
+            <span className="text-6xl text-custom-tertiary">
+              <Tooltip
+                element={result.wpm.toFixed(0)}
+                hover={result.wpm.toString() + " wpm"}
+                nowrap={true}
+                space="bottom-12"
+              />
+            </span>
           </div>
           <div className="flex flex-col items-start">
-            <span className="text-4xl text-custom-primary">accuracy</span>
-            <span className="text-7xl text-custom-tertiary">
-              {result.accuracy}%
+            <span className="text-3xl text-custom-primary">accuracy</span>
+            <span className="text-6xl text-custom-tertiary">
+              <Tooltip
+                element={result.accuracy.toFixed(0) + "%"}
+                hover={result.accuracy + "%"}
+                nowrap={false}
+                space="bottom-12"
+              />
             </span>
           </div>
         </div>
@@ -166,6 +202,7 @@ const Result = ({
               element={result.time.toFixed(0) + "s"}
               hover={result.time + "s"}
               nowrap={false}
+              space="bottom-8"
             />
           </span>
         </div>
@@ -184,11 +221,15 @@ const Result = ({
               }
               hover={"correct/errors/extras/missed"}
               nowrap={false}
+              space="bottom-8"
             />
           </span>
-        </div>
+        </div> 
       </div>
-      <ProceedResult handleResultRefresh={handleResultRefresh} handleResultReset={handleResultReset}/>
+      <ProceedResult
+        handleResultRefresh={handleResultRefresh}
+        handleResultReset={handleResultReset}
+      />
     </section>
   );
 };
