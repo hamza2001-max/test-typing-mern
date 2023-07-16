@@ -167,8 +167,8 @@ const Result = ({
 
   return (
     <section className="w-full flex flex-col items-center justify-center">
-      <div className="flex flex-col items-center">
-        <div>
+      <div className="flex flex-col items-center sm:flex-row">
+        <div className="xs:flex xs:w-64 sm:w-auto sm:mr-9 xs:justify-between sm:block">
           <div className="flex flex-col items-start mb-4">
             <span className="text-3xl text-custom-primary">wpm</span>
             <span className="text-6xl text-custom-tertiary">
@@ -181,12 +181,12 @@ const Result = ({
             </span>
           </div>
           <div className="flex flex-col items-start">
-            <span className="text-3xl text-custom-primary">accuracy</span>
+            <span className="text-3xl text-custom-primary">acc</span>
             <span className="text-6xl text-custom-tertiary">
               <Tooltip
                 element={result.accuracy.toFixed(0) + "%"}
-                hover={result.accuracy + "%"}
-                nowrap={false}
+                hover={result.accuracy + "% accuracy"}
+                nowrap={true}
                 space="bottom-12"
               />
             </span>
@@ -194,7 +194,7 @@ const Result = ({
         </div>
         <LineChart data={data} />
       </div>
-      <div className="w-full px-7 flex justify-between">
+      <div className="w-full px-9 flex justify-between sm:justify-start sm:space-x-12 md:justify-center md:mt-5">
         <div className="flex flex-col">
           <span className="text-xl text-custom-primary">time</span>
           <span className="text-2xl text-custom-tertiary">

@@ -8,6 +8,7 @@ import { testLimiterSlice } from "./testLimiterSlice";
 import { testModeSlice } from "./testModeSlice";
 import { testModifierSlice } from "./testModifierSlice";
 import { inputStatusSlice } from "./inputStatusSlice";
+import { isTestFinishedSlice } from "./isTestFinishedSlice";
 
 const rootReducer = combineReducers({
   theme: themeSlice.reducer,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   isThemeVisible: themeVisibilitySlice.reducer,
   promptValue: limiterPromptSlice.reducer,
   isInputActive: inputStatusSlice.reducer,
+  isTestFinished: isTestFinishedSlice.reducer
 });
 
 const store = configureStore({

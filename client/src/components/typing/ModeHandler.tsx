@@ -1,13 +1,13 @@
 import { useSelector } from "react-redux";
-import { Test } from "./Test";
+import { MainFrame } from "./MainFrame";
 import { RootState } from "../../redux/store";
-export const TestGrounds = () => {
+export const ModeHandler = () => {
   const testModeSelector = useSelector(
     (state: RootState) => state.testMode.testMode
   );
   return (
     <section>
-      {testModeSelector === "words" && <Test />}
+      {testModeSelector === "words" && <MainFrame />}
     </section>
   );
 };

@@ -1,7 +1,7 @@
 import { Footer } from "../components/include/Footer";
 import { Navigation } from "../components/include/Navigation";
-import { TestGrounds } from "../components/typing/TestGrounds";
-import { WordsLimiterPrompt } from "../components/typing/WordsLimiterPrompt";
+import { ModeHandler } from "../components/typing/ModeHandler";
+import { WordsLimiterPrompt } from "../components/settings/WordsLimiterPrompt";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { testSettingsVisibilitySlice } from "../redux/testSettingsVisibilitySlice";
@@ -29,10 +29,13 @@ export const Home = () => {
   const isPromptVisibleSelector = useSelector(
     (state: RootState) => state.isPromptVisible.isPromptVisible
   );
+  const isTestFinishedSelector = useSelector(
+    (state: RootState) => state.isTestFinished.isTestFinished
+  );
 
   return (
     <main
-      className="flex flex-col justify-between"
+      className={`flex flex-col justify-between ${isTestFinishedSelector ? "h-full" : "h-screen"}`}
       onClick={() => {
         themeVSelector && themeVDispatch(inVisibleTheme());
         testSettingsVSelector && testSettingsVDispatch(inVisibleTS());
@@ -40,11 +43,11 @@ export const Home = () => {
       }}
     >
       {(themeVSelector || testSettingsVSelector || isPromptVisibleSelector) && (
-        <div className="z-20 absolute w-full h-full bg-custom-fadedBlack"></div>
+        <div className="z-20 fixed w-full h-full bg-custom-fadedBlack"></div>
       )}
       <div className="space-y-11">
         <Navigation />
-        <TestGrounds />
+        <ModeHandler />
       </div>
       <Footer />
       {isPromptVisibleSelector === true && <WordsLimiterPrompt />}

@@ -3,7 +3,7 @@ import { TooltipInterface } from "../../typescript/types";
 export const Tooltip = ({ element, hover, icon, nowrap, space }: TooltipInterface) => {
   const IconComponent = icon as React.ComponentType;
   return (
-    <div className="relative flex flex-col items-center group">
+    <div className="relative flex flex-col items-center cursor-pointer group">
       <div className={`absolute ${space} flex flex-col items-center opacity-0 group-hover:opacity-100 duration-300 transition-all group-hover:-translate-y-[0.15rem]`}>
         <span
           className={`relative z-10 p-2 leading-none ${

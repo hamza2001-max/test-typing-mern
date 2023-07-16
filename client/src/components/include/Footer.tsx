@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { themeSlice } from "../../redux/themeSlice";
 import { themeVisibilitySlice } from "../../redux/themeVisibilitySlice";
-import { ThemeOption } from "../typing/ThemeOption";
+import { ThemeOption } from "./ThemeOption";
 import { themeSchemes } from "../../data/themeSchemeData";
 import { footerData } from "../../data/footerData";
 import { RootState } from "../../redux/store";
@@ -66,8 +66,8 @@ export const Footer = () => {
       </section>
       {themeVSelector && (
         <div
-          className="z-30 w-98 p-4 rounded-xl flex flex-col space-y-3 text-xs bg-custom-fill 
-          text-custom-primary border border-custom-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+          className="fixed z-30 w-98 p-4 rounded-xl flex flex-col space-y-3 text-xs bg-custom-fill 
+          text-custom-primary border border-custom-primary top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
           onClick={(e) => e.stopPropagation()}
         >
           {themeSchemes.map((scheme, index) => {

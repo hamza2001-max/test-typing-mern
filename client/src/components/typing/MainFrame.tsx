@@ -7,24 +7,27 @@ import { WordValidator } from "./WordValidator";
 import { inputStatusSlice } from "../../redux/inputStatusSlice";
 import { RootState } from "../../redux/store";
 import Result from "../result/Result";
-import { TestSettings } from "./TestSettings";
+import { TestSettings } from "../settings/TestSettings";
+import { isTestFinishedSlice } from "../../redux/isTestFinishedSlice";
 
-export const Test = () => {
+export const MainFrame = () => {
   const [testSentence, setTestSentence] = useState("");
   const [textWritten, setTextWritten] = useState("");
   const [scrollIndex, setScrollIndex] = useState(3);
   const [inputValue, setInputValue] = useState("");
   const [lineHeiInc, setLineHeiInc] = useState(1.25);
   const [startTime, setStartTime] = useState(0);
-  const [isTestFinsished, setIsTestFinsished] = useState(false);
   const [timeArray, setTimeArray] = useState<number[]>([]);
   const [elapsedTimeArray, setElapsedTimeArray] = useState<number[]>([]);
-
   const inputRef = useRef<HTMLInputElement>(null);
   const btnRef = useRef<HTMLButtonElement | null>(null);
 
   const { inActive, active } = inputStatusSlice.actions;
+  const { testIsFinished, testIsNotFinished } = isTestFinishedSlice.actions;
+
   const inputStatusDispatch = useDispatch();
+  const isTestFinishedDispatch = useDispatch();
+
   const testLimiterSelector = useSelector(
     (state: RootState) => state.testLimiter.testLimiter
   );
@@ -36,6 +39,9 @@ export const Test = () => {
   );
   const testModifierSelector = useSelector(
     (state: RootState) => state.testModifier.testModifier
+  );
+  const isTestFinishedSelector = useSelector(
+    (state: RootState) => state.isTestFinished.isTestFinished
   );
 
   useEffect(() => {
@@ -69,7 +75,7 @@ export const Test = () => {
     if (textWritten.split(" ").length - 1 === testSentence.split(" ").length) {
       if (inputRef.current) {
         inputRef.current.disabled = true;
-        setIsTestFinsished(true);
+        isTestFinishedDispatch(testIsFinished());
       }
     }
   }, [inputValue, textWritten, testSentence, startTime]);
@@ -136,7 +142,7 @@ export const Test = () => {
     inputStatusDispatch(active());
     setScrollIndex(3);
     setLineHeiInc(1.25);
-    setIsTestFinsished(false);
+    isTestFinishedDispatch(testIsNotFinished());
     setTimeArray([]);
     setElapsedTimeArray([]);
     if (inputRef.current) {
@@ -146,11 +152,10 @@ export const Test = () => {
     }
   }, [active, inputStatusDispatch]);
 
-
-  const handleRefresh =useCallback(() => {
+  const handleRefresh = useCallback(() => {
     generateTestSentence();
     resetState();
-  }, [generateTestSentence, resetState])
+  }, [generateTestSentence, resetState]);
 
   useEffect(() => {
     generateTestSentence();
@@ -199,7 +204,7 @@ export const Test = () => {
     }
   };
 
-  return !isTestFinsished ? (
+  return !isTestFinishedSelector ? (
     <section className="space-y-16">
       <TestSettings />
       <div className="relative text-custom-primary flex items-center flex-col mt-5">
@@ -252,14 +257,12 @@ export const Test = () => {
       </div>
     </section>
   ) : (
-    <>
-      <Result
-        textWritten={textWritten}
-        testSentence={testSentence}
-        elapsedTimeArray={elapsedTimeArray}
-        resetState={resetState}
-        handleRefresh={handleRefresh}
-      />
-    </>
+    <Result
+      textWritten={textWritten}
+      testSentence={testSentence}
+      elapsedTimeArray={elapsedTimeArray}
+      resetState={resetState}
+      handleRefresh={handleRefresh}
+    />
   );
 };

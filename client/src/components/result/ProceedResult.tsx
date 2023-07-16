@@ -22,7 +22,7 @@ export const ProceedResult = ({
   });
 
   return (
-    <div className="grid grid-cols-2 gap-y-12 gap-x-12 mt-10 mb-5 ">
+    <div className="grid grid-cols-2 gap-y-12 gap-x-12 mt-10 mb-5 sm:flex">
       <button
         className="text-2xl px-8 py-4 focus:bg-custom-secondary outline-none rounded-md text-custom-primary hover:text-custom-secondary"
         onClick={handleResultRefresh}

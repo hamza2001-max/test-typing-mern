@@ -29,7 +29,7 @@ export const LineChart = ({ data }: { data: DataInterface[] }) => {
     },
   };
   return (
-    <div className="h-96 w-[90vw]">
+    <div className="h-96 w-[90vw] sm:w-[65vw] md:w-[75vw]">
       <ResponsiveLine
         data={data}
         theme={theme}
@@ -44,12 +44,8 @@ export const LineChart = ({ data }: { data: DataInterface[] }) => {
         }}
         curve="natural"
         axisBottom={{
-          // tickValues: [1, 2],
-          // tickValues: [],
-          // tickRotation: -45,
           tickPadding: 5,
-          // tickRotation: 0,
-          legend: "indeces of words",
+          legend: "Indeces Of Words",
           legendOffset: 36,
           legendPosition: "middle",
         }}

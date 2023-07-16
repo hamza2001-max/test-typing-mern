@@ -30,7 +30,7 @@ export const WordsLimiterPrompt = () => {
 
   return (
     <div
-      className="w-98 z-30 space-y-4 p-8 rounded-xl text-custom-primary bg-custom-fill absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+      className="w-98 z-30 space-y-4 p-8 rounded-xl text-custom-primary bg-custom-fill fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
       onClick={(e) => e.stopPropagation()}
     >
       <h1 className="text-xl">Word Amount</h1>
