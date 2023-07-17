@@ -6,14 +6,22 @@ import { RootState } from "../../redux/store";
 import { TestSettingsMd } from "./TestSettingsMd";
 
 export const TestSettings = () => {
+  const { visibleTS } = testSettingsVisibilitySlice.actions;
+  const testSettingsVDispatch = useDispatch();
+
   const testSettingsVSelector = useSelector(
     (state: RootState) => state.isTestSettingsVisible.isTestSettingsVisible
   );
-  const testSettingsVDispatch = useDispatch();
-  const { visibleTS } = testSettingsVisibilitySlice.actions;
+  const testOpacitySelector = useSelector(
+    (state: RootState) => state.testOpacity.testOpacity
+  );
 
   return (
-    <section className="flex justify-center items-center flex-col">
+    <section
+      className={`flex justify-center items-center ${
+        !testOpacitySelector && "opacity-0"
+      } duration-300 transition-all flex-col`}
+    >
       <button
         className="xs:hidden px-8 py-3 rounded-lg flex items-center text-custom-primary bg-custom-fadedFill cursor-pointer hover:text-custom-secondary transition ease-in-out delay-75"
         onClick={() => {
@@ -24,7 +32,7 @@ export const TestSettings = () => {
         Test Setting
       </button>
       {testSettingsVSelector && <TestSettingsSm />}
-      <TestSettingsMd/>
+      <TestSettingsMd />
     </section>
   );
 };

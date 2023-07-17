@@ -10,11 +10,16 @@ import { VscRepoForked } from "react-icons/vsc";
 
 export const Footer = () => {
   const { visibleTheme, inVisibleTheme } = themeVisibilitySlice.actions;
+
   const themeVDispatch = useDispatch();
   const themeDispatch = useDispatch();
+
   const theme = useSelector((state: RootState) => state.theme.theme);
   const themeVSelector = useSelector(
     (state: RootState) => state.isThemeVisible.isThemeVisible
+  );
+  const testOpacitySelector = useSelector(
+    (state: RootState) => state.testOpacity.testOpacity
   );
 
   const handleThemeChange = (
@@ -25,7 +30,11 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="text-sm text-custom-primary px-12 xl:px-52 py-10">
+    <footer
+      className={`${
+        !testOpacitySelector && "opacity-0"
+      } duration-300 transition-all text-sm text-custom-primary px-12 xl:px-52 py-10`}
+    >
       <p className="w-full flex justify-center mb-8">
         <span className="px-1 mr-2 bg-custom-primary text-custom-fill rounded-sm">
           tab

@@ -6,8 +6,9 @@
   - [ ] implement the local storage.
 
 - [ ] Todo
-  - delay the blur effect.
-  - [ ] opacity of testSetting to 0 when test starts and make it reappear if mouse moves.
+  - [ ] apply system effect to text blur.
+  - [ ] delay the blur effect.
+  - [x] opacity of testSetting to 0 when test starts and make it reappear if mouse moves.
   - [ ] implement all test modes.
   - [ ] implement time mode in the word mode if nothing has been written for a long time and make the test invalid. 
   - [ ] implement hot toast.

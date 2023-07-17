@@ -12,7 +12,7 @@ export const WordValidator = ({
   lineHeiInc,
   setScrollIndex,
   setLineHeiInc,
-  onClick,
+  // onClick,
 }: WordCheckerInterface) => {
   const divRef = useRef<HTMLDivElement>(null);
   const typedSentenceRef = useRef<HTMLDivElement>(null);
@@ -70,7 +70,7 @@ export const WordValidator = ({
     <>
       <div
         className="flex text-custom-primary text-2xl lg:text-custom-xl h-30 overflow-hidden"
-        onClick={onClick}
+        // onClick={onClick}
         ref={typedSentenceRef}
       >
         <p className="leading-10 w-64 xs:w-80 sm:w-99 md:w-100 lg:w-101 xl:w-102">

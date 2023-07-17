@@ -9,6 +9,7 @@ import { testModeSlice } from "./testModeSlice";
 import { testModifierSlice } from "./testModifierSlice";
 import { inputStatusSlice } from "./inputStatusSlice";
 import { isTestFinishedSlice } from "./isTestFinishedSlice";
+import { testOpacitySlice } from "./testOpacitySlice";
 
 const rootReducer = combineReducers({
   theme: themeSlice.reducer,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   isThemeVisible: themeVisibilitySlice.reducer,
   promptValue: limiterPromptSlice.reducer,
   isInputActive: inputStatusSlice.reducer,
-  isTestFinished: isTestFinishedSlice.reducer
+  isTestFinished: isTestFinishedSlice.reducer,
+  testOpacity: testOpacitySlice.reducer
 });
 
 const store = configureStore({

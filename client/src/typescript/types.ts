@@ -19,7 +19,7 @@ export interface WordCheckerInterface {
   lineHeiInc: number;
   setScrollIndex: React.Dispatch<React.SetStateAction<number>>;
   setLineHeiInc: React.Dispatch<React.SetStateAction<number>>;
-  onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
+  // onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export interface PreviousFragmentInterface {
