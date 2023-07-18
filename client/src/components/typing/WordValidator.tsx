@@ -1,4 +1,3 @@
-import React from "react";
 import { useEffect, useRef } from "react";
 import { WordCheckerInterface } from "../../typescript/types";
 import { CurrentFragment } from "./CurrentFragment";
@@ -75,24 +74,32 @@ export const WordValidator = ({
           {typedSentence}
         </p>
       </div>
-      <div className="text-2xl lg:text-custom-xl absolute opacity-0 -z-10" ref={divRef}>
+      <div
+        className="text-2xl lg:text-custom-xl absolute opacity-0 -z-10"
+        ref={divRef}
+      >
         <p className="w-64 xs:w-80 sm:w-99 md:w-100 lg:w-101 xl:w-102 ">
           {testSentence
             .split(" ")
             .slice(0, textWritten.split(" ").length)
             .map((hiddenWord, index) => {
               return (
-                <>
-                  <React.Fragment key={index}>
+                <span key={index}>
+                  <span key={index}>
                     {hiddenWord}
                     {textWritten.split(" ")[index].length >
                       hiddenWord.length && (
                       <span className="text-custom-tertiary border-b-3 border-custom-tertiary">
-                        {textWritten.split(" ")[index].slice(hiddenWord.length, hiddenWord.length+5)}
+                        {textWritten
+                          .split(" ")
+                          [index].slice(
+                            hiddenWord.length,
+                            hiddenWord.length + 5
+                          )}
                       </span>
                     )}
-                  </React.Fragment>{" "}
-                </>
+                  </span>{" "}
+                </span>
               );
             })}
         </p>
@@ -100,4 +107,3 @@ export const WordValidator = ({
     </>
   );
 };
-

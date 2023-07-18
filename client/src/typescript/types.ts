@@ -33,8 +33,8 @@ export interface CurrentRemainingLettersInterface {
 }
 
 export interface PreviousRemainingLettersInterface {
-  writtenWord:string; 
-  word:string;
+  writtenWord: string;
+  word: string;
 }
 
 export interface CalculateResultInterface {
@@ -84,4 +84,8 @@ export interface TooltipInterface {
 export interface ProceedResultInterface {
   handleResultRefresh: () => void;
   handleResultReset: () => void;
+}
+
+export interface QuoteJSONInterface {
+  [key: string]: { quote: string; source: string }[];
 }

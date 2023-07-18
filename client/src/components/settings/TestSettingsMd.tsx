@@ -122,7 +122,7 @@ export const TestSettingsMd = () => {
               } py-2 rounded-md hover:text-custom-secondary transition ease-in-out delay-75`}
               onClick={() => testLimiterDispatch(btn.action)}
             >
-              {btn.limit}
+             {typeof btn.limit === "string" ? btn.limit : <btn.limit/>}
             </button>
           ))}
         {testModeSelector === "custom" &&

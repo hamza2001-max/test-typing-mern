@@ -7,7 +7,7 @@ export const ModeHandler = () => {
   );
   return (
     <section>
-      {testModeSelector === "words" && <MainFrame />}
+      <MainFrame />
     </section>
   );
 };

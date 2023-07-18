@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { punctuationsJSON, wordsJSON } from "../../testJson";
+import { punctuationsJSON, quoteJSON, wordsJSON } from "../../testJson";
 import { VscDebugRestart } from "react-icons/vsc";
 import { GiArrowCursor } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
@@ -47,10 +47,9 @@ export const MainFrame = () => {
   const isTestFinishedSelector = useSelector(
     (state: RootState) => state.isTestFinished.isTestFinished
   );
-
-  useEffect(() => {
-    console.log(isInputActiveSelector);
-  }, [isInputActiveSelector]);
+  const testModeSelector = useSelector(
+    (state: RootState) => state.testMode.testMode
+  );
 
   useEffect(() => {
     const testSettingsVisible = () => {
@@ -114,53 +113,74 @@ export const MainFrame = () => {
   ]);
 
   const generateTestSentence = useCallback(() => {
-    const generateRandomNumber = (max: number) =>
-      Math.floor(Math.random() * max);
-    const getRandomWord = () =>
-      wordsJSON[generateRandomNumber(wordsJSON.length)].word;
-    const getRandomPunctuation = () =>
-      punctuationsJSON[generateRandomNumber(punctuationsJSON.length)]
-        .punctuation;
-
     let prototypeSentence = "";
     let randomWord = "";
+    const generateRandomNumber = (max: number) =>
+      Math.floor(Math.random() * max);
+    if (testModeSelector === "words") {
+      const getRandomWord = () =>
+        wordsJSON[generateRandomNumber(wordsJSON.length)].word;
+      const getRandomPunctuation = () =>
+        punctuationsJSON[generateRandomNumber(punctuationsJSON.length)]
+          .punctuation;
 
-    const generateRandomWord = () => {
-      randomWord = getRandomWord();
-      const shouldAddPunctuation =
-        testModifierSelector === "punctuation" &&
-        generateRandomNumber(10) === 3;
-      const shouldAddNumber =
-        testModifierSelector === "numbers" && generateRandomNumber(10) === 3;
-      const shouldAddDual =
-        testModifierSelector === "dual" && generateRandomNumber(10) === 3;
+      const generateRandomWord = () => {
+        randomWord = getRandomWord();
+        const shouldAddPunctuation =
+          testModifierSelector === "punctuation" &&
+          generateRandomNumber(10) === 3;
+        const shouldAddNumber =
+          testModifierSelector === "numbers" && generateRandomNumber(10) === 3;
+        const shouldAddDual =
+          testModifierSelector === "dual" && generateRandomNumber(10) === 3;
 
-      if (shouldAddPunctuation) {
-        randomWord = randomWord.concat(getRandomPunctuation());
-      } else if (shouldAddNumber) {
-        randomWord = generateRandomNumber(9999).toString();
-      } else if (shouldAddDual) {
-        const randomIndex = generateRandomNumber(2);
-        randomWord =
-          randomIndex === 0
-            ? randomWord.concat(getRandomPunctuation())
-            : generateRandomNumber(9999).toString();
+        if (shouldAddPunctuation) {
+          randomWord = randomWord.concat(getRandomPunctuation());
+        } else if (shouldAddNumber) {
+          randomWord = generateRandomNumber(9999).toString();
+        } else if (shouldAddDual) {
+          const randomIndex = generateRandomNumber(2);
+          randomWord =
+            randomIndex === 0
+              ? randomWord.concat(getRandomPunctuation())
+              : generateRandomNumber(9999).toString();
+        }
+      };
+
+      if (typeof testLimiterSelector === "number") {
+        for (let i = 0; i < testLimiterSelector; i++) {
+          generateRandomWord();
+          prototypeSentence +=
+            i === testLimiterSelector - 1 ? randomWord : randomWord + " ";
+        }
       }
-    };
 
-    if (typeof testLimiterSelector === "number") {
-      for (let i = 0; i < testLimiterSelector; i++) {
-        generateRandomWord();
-        prototypeSentence +=
-          i === testLimiterSelector - 1 ? randomWord : randomWord + " ";
+      if (typeof testLimiterSelector === "string") {
+        for (let i = 0; i < promptValueSelector; i++) {
+          generateRandomWord();
+          prototypeSentence +=
+            i === promptValueSelector - 1 ? randomWord : randomWord + " ";
+        }
       }
-    }
+    } else if (testModeSelector === "quote") {
+      if (testLimiterSelector === "all") {
+        const keys = Object.keys(quoteJSON);
+        const randomIndex = Math.floor(Math.random() * keys.length);
+        console.log(
+          quoteJSON[keys[randomIndex]][
+            generateRandomNumber(quoteJSON[keys[randomIndex]].length)
+          ].quote
+        );
 
-    if (typeof testLimiterSelector === "string") {
-      for (let i = 0; i < promptValueSelector; i++) {
-        generateRandomWord();
-        prototypeSentence +=
-          i === promptValueSelector - 1 ? randomWord : randomWord + " ";
+        prototypeSentence =
+          quoteJSON[keys[randomIndex]][
+            generateRandomNumber(quoteJSON[keys[randomIndex]].length)
+          ].quote;
+      } else {
+        prototypeSentence =
+          quoteJSON[testLimiterSelector][
+            generateRandomNumber(quoteJSON[testLimiterSelector].length)
+          ].quote;
       }
     }
 
@@ -280,13 +300,17 @@ export const MainFrame = () => {
             className="w-full mt-3 py-2 sr-only"
             ref={inputRef}
             onKeyDown={handleKeyDown}
+            // onBlur={}
           />
         </div>
         <button
           className="px-8 py-4 rounded-md text-2xl lg:text-custom-xl flex justify-center mt-10
         hover:text-custom-secondary transition ease-in-out delay-75 focus:bg-custom-secondary
         focus:text-custom-fill outline-none"
-          onClick={handleRefresh}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleRefresh();
+          }}
           ref={btnRef}
         >
           <VscDebugRestart />
