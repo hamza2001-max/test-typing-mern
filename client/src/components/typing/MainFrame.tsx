@@ -18,16 +18,13 @@ export const MainFrame = () => {
   const [inputValue, setInputValue] = useState("");
   const [lineHeiInc, setLineHeiInc] = useState(1.25);
   const [startTime, setStartTime] = useState(0);
-  const [isInsideDiv, setIsInsideDiv] = useState(false);
   const [timeArray, setTimeArray] = useState<number[]>([]);
   const [elapsedTimeArray, setElapsedTimeArray] = useState<number[]>([]);
-  // const [textBlur, setTextBlur] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const btnRef = useRef<HTMLButtonElement | null>(null);
-  const divRef = useRef<HTMLDivElement>(null);
 
-  const { inActive, active } = inputStatusSlice.actions;
+  const { active } = inputStatusSlice.actions;
   const { testIsFinished, testIsNotFinished } = isTestFinishedSlice.actions;
   const { noOpacity, opacity } = testOpacitySlice.actions;
 
@@ -38,9 +35,9 @@ export const MainFrame = () => {
   const testLimiterSelector = useSelector(
     (state: RootState) => state.testLimiter.testLimiter
   );
-  // const isInputActiveSelector = useSelector(
-  //   (state: RootState) => state.isInputActive.isInputActive
-  // );
+  const isInputActiveSelector = useSelector(
+    (state: RootState) => state.isInputActive.isInputActive
+  );
   const promptValueSelector = useSelector(
     (state: RootState) => state.promptValue.promptValue
   );
@@ -52,8 +49,8 @@ export const MainFrame = () => {
   );
 
   useEffect(() => {
-    console.log(isInsideDiv);
-  }, [isInsideDiv]);
+    console.log(isInputActiveSelector);
+  }, [isInputActiveSelector]);
 
   useEffect(() => {
     const testSettingsVisible = () => {
@@ -62,18 +59,6 @@ export const MainFrame = () => {
     document.addEventListener("mousemove", testSettingsVisible);
     return () => {
       document.removeEventListener("mouseover", testSettingsVisible);
-    };
-  });
-
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (divRef.current && !divRef.current.contains(e.target as Node)) {
-        setIsInsideDiv(false);
-      }
-    };
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
     };
   });
 
@@ -249,22 +234,10 @@ export const MainFrame = () => {
     [inputValue, textWritten, startTime, timeArray]
   );
 
-  // const handleInputBlur = () => {
-  //   inputStatusDispatch(inActive());
-  // };
-
-  // const handleFocusClick = () => {
-  //   if (!isInputActiveSelector) {
-  //     inputRef.current?.focus();
-  //     inputStatusDispatch(active());
-  //   }
-  // };
-    const handleDivClick = () => {
-      inputRef.current?.focus();
-      setIsInsideDiv(true);
-    }
-
-
+  const handleFocusClick = () => {
+    inputRef.current?.focus();
+    inputStatusDispatch(active());
+  };
 
   return !isTestFinishedSelector ? (
     <section className="space-y-16">
@@ -279,14 +252,14 @@ export const MainFrame = () => {
           )}
           <div
             className="relative flex justify-center"
-            onClick={() => handleDivClick()}
-
-            // onClick={handleFocusClick}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleFocusClick();
+            }}
           >
-            {!isInsideDiv && (
+            {!isInputActiveSelector && (
               <div
                 className={`text-lg lg:text-xl px-3 text-custom-secondary z-10 absolute w-full h-full backdrop-blur-sm flex justify-center items-center`}
-                ref={divRef}
               >
                 <GiArrowCursor className="mr-3" />
                 Click here to focus
@@ -300,7 +273,6 @@ export const MainFrame = () => {
               lineHeiInc={lineHeiInc}
               setScrollIndex={setScrollIndex}
               setLineHeiInc={setLineHeiInc}
-              // onClick={handleFocusClick}
             />
           </div>
           <input
@@ -308,7 +280,6 @@ export const MainFrame = () => {
             className="w-full mt-3 py-2 sr-only"
             ref={inputRef}
             onKeyDown={handleKeyDown}
-            // onBlur={handleInputBlur}
           />
         </div>
         <button
