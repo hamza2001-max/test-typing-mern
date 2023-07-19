@@ -7,6 +7,8 @@ import {
 import { LineChart } from "./LineChart";
 import { Tooltip } from "../include/Tooltip";
 import { ProceedResult } from "./ProceedResult";
+import { RootState } from "../../redux/store";
+import { useSelector } from "react-redux";
 
 const Result = ({
   textWritten,
@@ -14,8 +16,11 @@ const Result = ({
   elapsedTimeArray,
   resetState,
   handleRefresh,
+  source,
 }: ResultInterface) => {
   const [wpmArr, setWpmArr] = useState<WpmArrInterface[]>([]);
+  const [exe, setExe] = useState(0);
+  const [data, setData] = useState<DataInterface[]>([]);
   const [result, setResult] = useState({
     wpm: 0,
     accuracy: 0,
@@ -25,8 +30,10 @@ const Result = ({
     missed: 0,
     time: 0,
   });
-  const [exe, setExe] = useState(0);
-  const [data, setData] = useState<DataInterface[]>([]);
+
+  const testModeSelector = useSelector(
+    (state: RootState) => state.testMode.testMode
+  );
 
   useEffect(() => {
     let data;
@@ -35,11 +42,11 @@ const Result = ({
       data = [];
       for (let i = 0; i < wpmArr.length; i += num) {
         let sum = 0;
-        let count = 0; 
+        let count = 0;
         for (let j = i; j < i + num && j < wpmArr.length; j++) {
           sum += wpmArr[j].wpm;
           count++;
-        }   
+        }
         data.push({
           x: i / num,
           y: sum / count,
@@ -51,7 +58,7 @@ const Result = ({
         y: element.wpm,
       }));
     }
-  
+
     setData([
       {
         id: "Current Test",
@@ -165,6 +172,8 @@ const Result = ({
     }
   }, [textWritten, testSentence, calculateResult, exe]);
 
+  console.log(source);
+
   return (
     <section className="w-full flex flex-col items-center justify-center">
       <div className="flex flex-col items-center sm:flex-row">
@@ -224,7 +233,13 @@ const Result = ({
               space="bottom-8"
             />
           </span>
-        </div> 
+        </div>
+        {testModeSelector === "quote" && (
+          <div className="flex flex-col">
+            <span className="text-xl text-custom-primary">source</span>
+            <span className="text-2xl text-custom-tertiary">{source}</span>
+          </div>
+        )}
       </div>
       <ProceedResult
         handleResultRefresh={handleResultRefresh}

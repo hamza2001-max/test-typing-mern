@@ -10,16 +10,18 @@ import Result from "../result/Result";
 import { TestSettings } from "../settings/TestSettings";
 import { isTestFinishedSlice } from "../../redux/isTestFinishedSlice";
 import { testOpacitySlice } from "../../redux/testOpacitySlice";
+import { TypingInfo } from "./TypingInfo";
 
 export const MainFrame = () => {
   const [testSentence, setTestSentence] = useState("");
   const [textWritten, setTextWritten] = useState("");
-  const [scrollIndex, setScrollIndex] = useState(3);
   const [inputValue, setInputValue] = useState("");
+  const [source, setSource] = useState("");
   const [lineHeiInc, setLineHeiInc] = useState(1.25);
+  const [scrollIndex, setScrollIndex] = useState(3);
   const [startTime, setStartTime] = useState(0);
-  const [timeArray, setTimeArray] = useState<number[]>([]);
   const [elapsedTimeArray, setElapsedTimeArray] = useState<number[]>([]);
+  const [timeArray, setTimeArray] = useState<number[]>([]);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const btnRef = useRef<HTMLButtonElement | null>(null);
@@ -52,16 +54,6 @@ export const MainFrame = () => {
   );
 
   useEffect(() => {
-    const testSettingsVisible = () => {
-      testOpacityDispatch(opacity());
-    };
-    document.addEventListener("mousemove", testSettingsVisible);
-    return () => {
-      document.removeEventListener("mouseover", testSettingsVisible);
-    };
-  });
-
-  useEffect(() => {
     if (inputRef.current) {
       if (inputValue) {
         testOpacityDispatch(noOpacity());
@@ -87,12 +79,19 @@ export const MainFrame = () => {
         btnRef.current?.focus();
       }
     };
+
+    const testSettingsVisible = () => {
+      testOpacityDispatch(opacity());
+    };
+
     const inputElement = inputRef.current;
     inputElement?.addEventListener("input", handleInputChange);
     document.addEventListener("keydown", handleBtnKeyDown);
+    document.addEventListener("mousemove", testSettingsVisible);
     return () => {
       inputElement?.removeEventListener("input", handleInputChange);
       document.removeEventListener("keydown", handleBtnKeyDown);
+      document.addEventListener("mousemove", testSettingsVisible);
     };
   });
 
@@ -117,7 +116,7 @@ export const MainFrame = () => {
     let randomWord = "";
     const generateRandomNumber = (max: number) =>
       Math.floor(Math.random() * max);
-    if (testModeSelector === "words") {
+    if (testModeSelector === "words" || testModeSelector === "time") {
       const getRandomWord = () =>
         wordsJSON[generateRandomNumber(wordsJSON.length)].word;
       const getRandomPunctuation = () =>
@@ -147,47 +146,56 @@ export const MainFrame = () => {
         }
       };
 
-      if (typeof testLimiterSelector === "number") {
-        for (let i = 0; i < testLimiterSelector; i++) {
-          generateRandomWord();
-          prototypeSentence +=
-            i === testLimiterSelector - 1 ? randomWord : randomWord + " ";
+      if (testModeSelector === "words") {
+        if (typeof testLimiterSelector === "number") {
+          for (let i = 0; i < testLimiterSelector; i++) {
+            generateRandomWord();
+            prototypeSentence +=
+              i === testLimiterSelector - 1 ? randomWord : randomWord + " ";
+          }
+        } else if (typeof testLimiterSelector === "string") {
+          for (let i = 0; i < promptValueSelector; i++) {
+            generateRandomWord();
+            prototypeSentence +=
+              i === promptValueSelector - 1 ? randomWord : randomWord + " ";
+          }
         }
+        setTestSentence(prototypeSentence);
+        setTextWritten("");
+        setInputValue("");
       }
-
-      if (typeof testLimiterSelector === "string") {
-        for (let i = 0; i < promptValueSelector; i++) {
-          generateRandomWord();
-          prototypeSentence +=
-            i === promptValueSelector - 1 ? randomWord : randomWord + " ";
+      if (testModeSelector === "time") {
+        if (typeof testLimiterSelector === "number") {
+          for (let i = 0; i < 400; i++) {
+            generateRandomWord();
+            prototypeSentence +=
+              i === testLimiterSelector - 1 ? randomWord : randomWord + " ";
+          }
         }
+        setTestSentence(prototypeSentence);
       }
     } else if (testModeSelector === "quote") {
       if (testLimiterSelector === "all") {
         const keys = Object.keys(quoteJSON);
         const randomIndex = Math.floor(Math.random() * keys.length);
-        console.log(
-          quoteJSON[keys[randomIndex]][
-            generateRandomNumber(quoteJSON[keys[randomIndex]].length)
-          ].quote
-        );
-
-        prototypeSentence =
-          quoteJSON[keys[randomIndex]][
-            generateRandomNumber(quoteJSON[keys[randomIndex]].length)
-          ].quote;
+        let rand = generateRandomNumber(quoteJSON[keys[randomIndex]].length);
+        prototypeSentence = quoteJSON[keys[randomIndex]][rand].quote;
+        setSource(quoteJSON[keys[randomIndex]][rand].source);
       } else {
-        prototypeSentence =
-          quoteJSON[testLimiterSelector][
-            generateRandomNumber(quoteJSON[testLimiterSelector].length)
-          ].quote;
+        let rand = generateRandomNumber(quoteJSON[testLimiterSelector].length);
+        prototypeSentence = quoteJSON[testLimiterSelector][rand].quote;
+        setSource(quoteJSON[testLimiterSelector][rand].source);
       }
+      setTestSentence(prototypeSentence);
+      setTextWritten("");
+      setInputValue("");
     }
-
-    setTestSentence(prototypeSentence);
-    setTextWritten("");
-    setInputValue("");
-  }, [testLimiterSelector, promptValueSelector, testModifierSelector]);
+  }, [
+    testLimiterSelector,
+    promptValueSelector,
+    testModifierSelector,
+    testModeSelector,
+  ]);
 
   const resetState = useCallback(() => {
     setTextWritten("");
@@ -263,13 +271,22 @@ export const MainFrame = () => {
     <section className="space-y-16">
       <TestSettings />
       <div className="relative text-custom-primary flex items-center flex-col mt-5">
-        <div className="">
-          {(inputValue || textWritten) && (
-            <span className="text-custom-tertiary text-2xl lg:text-custom-xl">
-              {textWritten.split(" ").length - 1}/
-              {testSentence.split(" ").length}
-            </span>
-          )}
+        <div>
+          {testModeSelector === "time"
+            ? typeof testLimiterSelector === "number" && (
+                <TypingInfo
+                  initialCount={testLimiterSelector}
+                  inputValue={inputValue}
+                  textWritten={textWritten}
+                  testSentence={testSentence}
+                />
+              )
+            : (inputValue || textWritten) && (
+                <span className="text-custom-tertiary text-2xl lg:text-custom-xl">
+                  {textWritten.split(" ").length - 1}/
+                  {testSentence.split(" ").length}
+                </span>
+              )}
           <div
             className="relative flex justify-center"
             onClick={(e) => {
@@ -300,7 +317,6 @@ export const MainFrame = () => {
             className="w-full mt-3 py-2 sr-only"
             ref={inputRef}
             onKeyDown={handleKeyDown}
-            // onBlur={}
           />
         </div>
         <button
@@ -319,6 +335,7 @@ export const MainFrame = () => {
     </section>
   ) : (
     <Result
+      source={source}
       textWritten={textWritten}
       testSentence={testSentence}
       elapsedTimeArray={elapsedTimeArray}

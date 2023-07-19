@@ -56,6 +56,7 @@ export interface WpmArrInterface {
 }
 
 export interface ResultInterface {
+  source: string;
   textWritten: string;
   testSentence: string;
   elapsedTimeArray: number[];
@@ -88,4 +89,11 @@ export interface ProceedResultInterface {
 
 export interface QuoteJSONInterface {
   [key: string]: { quote: string; source: string }[];
+}
+
+export interface TypingInfoInterface {
+  initialCount: number;
+  inputValue: string;
+  textWritten: string;
+  testSentence: string;
 }

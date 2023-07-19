@@ -37,12 +37,15 @@ export const TestSettingsSm = () => {
       onClick={(e) => e.stopPropagation()}
     >
       <div className="space-y-6">
-        <div className="flex flex-col space-y-2">
-          {testSettingModifierData.map((btn) => (
-            <button
-              key={btn.label}
-              className={`
-             bg-custom-fadedFill text-custom-secondary 
+        {(testModeSelector === "time" ||
+          testModeSelector === "words" ||
+          testModeSelector === "custom") && (
+          <div className="flex flex-col space-y-2">
+            {testSettingModifierData.map((btn) => (
+              <button
+                key={btn.label}
+                className={`
+              bg-custom-fadedFill text-custom-secondary 
               ${
                 btn.label === testModifierSelector &&
                 "!text-custom-fill bg-custom-tertiary"
@@ -52,24 +55,25 @@ export const TestSettingsSm = () => {
                 "!text-custom-fill bg-custom-tertiary"
               }
               py-2 rounded-md hover:bg-custom-secondary hover:text-custom-primary transition ease-in-out delay-75`}
-              onClick={() => {
-                testModifierSelector === ""
-                  ? testModifierDispatch(btn.action())
-                  : testModifierSelector === "dual"
-                  ? btn.label === "punctuation"
-                    ? testModifierDispatch(numbers())
-                    : testModifierDispatch(punctuation())
-                  : btn.label === testModifierSelector
-                  ? testModifierDispatch(testModifierSlice.actions.reset())
-                  : testModifierSelector &&
-                    testModifierSelector !== btn.label &&
-                    testModifierDispatch(dual());
-              }}
-            >
-              {btn.label}
-            </button>
-          ))}
-        </div>
+                onClick={() => {
+                  testModifierSelector === ""
+                    ? testModifierDispatch(btn.action())
+                    : testModifierSelector === "dual"
+                    ? btn.label === "punctuation"
+                      ? testModifierDispatch(numbers())
+                      : testModifierDispatch(punctuation())
+                    : btn.label === testModifierSelector
+                    ? testModifierDispatch(testModifierSlice.actions.reset())
+                    : testModifierSelector &&
+                      testModifierSelector !== btn.label &&
+                      testModifierDispatch(dual());
+                }}
+              >
+                {btn.label}
+              </button>
+            ))}
+          </div>
+        )}
         <div className="flex flex-col space-y-2">
           {testSettingModeData.map((btn) => (
             <button
@@ -135,11 +139,7 @@ export const TestSettingsSm = () => {
                 } py-2 rounded-md hover:bg-custom-secondary hover:text-custom-primary transition ease-in-out delay-75`}
                 onClick={() => testLimiterDispatch(option.action)}
               >
-                {typeof option.limit === "string" ? (
-                  option.limit
-                ) : (
-                  "Search"
-                )}
+                {typeof option.limit === "string" ? option.limit : "Search"}
               </button>
             ))}
           {testModeSelector === "custom" &&
