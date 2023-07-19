@@ -1,36 +1,42 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { TypingInfoInterface } from "../../typescript/types";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { useTimer } from "../../hooks/useTimer";
 export const TypingInfo = ({
-  initialCount,
   inputValue,
   textWritten,
   testSentence,
+  resetTimer,
+  setResetTimer,
 }: TypingInfoInterface) => {
-  
-  
+  const { countdown, startTimer, resetCountDown } = useTimer();
   const testModeSelector = useSelector(
     (state: RootState) => state.testMode.testMode
-    );
-    const testLimiterSelector = useSelector(
-      (state: RootState) => state.testLimiter.testLimiter
-      );
-      const {countdown}= useTimer(typeof testLimiterSelector === "number" && testLimiterSelector);
+  );
+
+  useEffect(() => {
+    if (resetTimer) {
+      resetCountDown();
+      setResetTimer(false);
+    }
+    if (inputValue) {
+      startTimer();
+    }
+  }, [inputValue, startTimer, resetCountDown, resetTimer, setResetTimer]);
 
   return (
     <>
-      {testModeSelector === "time"
-        ? typeof testLimiterSelector === "number" && (
-            <span>{countdown}</span>
-          )
-        : (inputValue || textWritten) && (
-            <span className="text-custom-tertiary text-2xl lg:text-custom-xl">
-              {textWritten.split(" ").length - 1}/
-              {testSentence.split(" ").length}
-            </span>
-          )}
+      {(inputValue || textWritten) &&
+        (testModeSelector === "time" ? (
+          <span className="text-custom-tertiary text-2xl lg:text-custom-xl">
+            {countdown}
+          </span>
+        ) : (
+          <span className="text-custom-tertiary text-2xl lg:text-custom-xl">
+            {textWritten.split(" ").length - 1}/{testSentence.split(" ").length}
+          </span>
+        ))}
     </>
   );
 };

@@ -1,18 +1,17 @@
-- [ ] delayed
-  - [ ] when clicked on the text, it blurs for a second.
-  - [ ] refactor the use of dispatch and selector.
-
 - [ ] ASAP
   - [ ] implement the local storage.
 
 - [ ] Todo
-  - [ ] apply system effect to text blur.
+  - [x] complete useTimer.tsx.
+  - [ ] remove custom from time and words.
+  - [ ] when the blur is on the text is still typable.
   - [ ] delay the blur effect.
   - [x] opacity of testSetting to 0 when test starts and make it reappear if mouse moves.
   - [ ] implement all test modes.
-  - [ ] implement time mode in the word mode if nothing has been written for a long time and make the test invalid. 
+  - [ ] implement test mode.
+  - [ ] implement time mode in the word mode if nothing has been written for a long time and make the test invalid.
   - [ ] implement hot toast.
-  - [ ] solve the div key problem.
+  - [x] solve the div key problem.
 
 - [ ] ideas
   - [ ] Add a practice mode.
@@ -89,7 +88,8 @@
   - [x] solved the x axis problem on Linechart.
   - [x] complete Result.tsx frontend.
   - [x] implement the result of a run.
-  - [x] solve the data problem of nivo. 
+  - [x] when clicked on the text, it blurs for a second.
+  - [x] solve the data problem of nivo.
     - [x] Result Implementation.
     - [x] wpm.
     - [x] wpmArray.

@@ -11,6 +11,7 @@ import { TestSettings } from "../settings/TestSettings";
 import { isTestFinishedSlice } from "../../redux/isTestFinishedSlice";
 import { testOpacitySlice } from "../../redux/testOpacitySlice";
 import { TypingInfo } from "./TypingInfo";
+import { useTimer } from "../../hooks/useTimer";
 
 export const MainFrame = () => {
   const [testSentence, setTestSentence] = useState("");
@@ -22,6 +23,8 @@ export const MainFrame = () => {
   const [startTime, setStartTime] = useState(0);
   const [elapsedTimeArray, setElapsedTimeArray] = useState<number[]>([]);
   const [timeArray, setTimeArray] = useState<number[]>([]);
+  const [resetTimer, setResetTimer] = useState(false);
+  const { countdown } = useTimer();
 
   const inputRef = useRef<HTMLInputElement>(null);
   const btnRef = useRef<HTMLButtonElement | null>(null);
@@ -207,6 +210,8 @@ export const MainFrame = () => {
     testOpacityDispatch(opacity());
     setTimeArray([]);
     setElapsedTimeArray([]);
+    // resetTimer();
+    setResetTimer(true);
     if (inputRef.current) {
       inputRef.current.value = "";
       inputRef.current.disabled = false;
@@ -214,11 +219,14 @@ export const MainFrame = () => {
     }
   }, [
     active,
+    opacity,
+    testIsNotFinished,
     inputStatusDispatch,
     isTestFinishedDispatch,
-    testIsNotFinished,
     testOpacityDispatch,
-    opacity,
+    setResetTimer,
+
+    // resetTimer,
   ]);
 
   const handleRefresh = useCallback(() => {
@@ -272,21 +280,13 @@ export const MainFrame = () => {
       <TestSettings />
       <div className="relative text-custom-primary flex items-center flex-col mt-5">
         <div>
-          {testModeSelector === "time"
-            ? typeof testLimiterSelector === "number" && (
-                <TypingInfo
-                  initialCount={testLimiterSelector}
-                  inputValue={inputValue}
-                  textWritten={textWritten}
-                  testSentence={testSentence}
-                />
-              )
-            : (inputValue || textWritten) && (
-                <span className="text-custom-tertiary text-2xl lg:text-custom-xl">
-                  {textWritten.split(" ").length - 1}/
-                  {testSentence.split(" ").length}
-                </span>
-              )}
+          <TypingInfo
+            inputValue={inputValue}
+            textWritten={textWritten}
+            testSentence={testSentence}
+            resetTimer={resetTimer}
+            setResetTimer={setResetTimer}
+          />
           <div
             className="relative flex justify-center"
             onClick={(e) => {
@@ -337,7 +337,11 @@ export const MainFrame = () => {
     <Result
       source={source}
       textWritten={textWritten}
-      testSentence={testSentence}
+      testSentence={
+        testModeSelector === "time"
+          ? testSentence.slice(0, textWritten.split(" ").length)
+          : testSentence
+      }
       elapsedTimeArray={elapsedTimeArray}
       resetState={resetState}
       handleRefresh={handleRefresh}
