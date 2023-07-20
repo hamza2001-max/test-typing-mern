@@ -6,12 +6,8 @@ import {
 } from "../../data/testSettingsData";
 import { RootState } from "../../redux/store";
 import { testModifierSlice } from "../../redux/testModifierSlice";
-import { testSettingsVisibilitySlice } from "../../redux/testSettingsVisibilitySlice";
-import { promptVisibilitySlice } from "../../redux/promptVisibilitySlice";
 
 export const TestSettingsMd = () => {
-  const { visibleCustom } = promptVisibilitySlice.actions;
-  const { inVisibleTS } = testSettingsVisibilitySlice.actions;
   const { dual, numbers, punctuation } = testModifierSlice.actions;
 
   const testModeSelector = useSelector(
@@ -27,9 +23,6 @@ export const TestSettingsMd = () => {
   const testModeDispatch = useDispatch();
   const testModifierDispatch = useDispatch();
   const testLimiterDispatch = useDispatch();
-  const testSettingsVDispatch = useDispatch();
-  const customPromptVDispatch = useDispatch();
-
   return (
     <div className="hidden xs:flex xs:flex-col xs:items-center md:flex-row rounded-md bg-custom-fadedFill text-custom-primary cursor-pointer text-sm py-1 px-4">
       {(testModeSelector === "time" ||
@@ -107,11 +100,7 @@ export const TestSettingsMd = () => {
                 btn.limit === testLimiterSelector && "text-custom-tertiary"
               } py-2 rounded-md hover:text-custom-secondary transition ease-in-out delay-75`}
               onClick={() => {
-                btn.limit !== "custom" && testLimiterDispatch(btn.action);
-                if (btn.limit === "custom") {
-                  customPromptVDispatch(visibleCustom());
-                  testSettingsVDispatch(inVisibleTS());
-                }
+                testLimiterDispatch(btn.action);
               }}
             >
               {btn.limit}

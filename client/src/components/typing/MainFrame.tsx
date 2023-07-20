@@ -23,8 +23,7 @@ export const MainFrame = () => {
   const [startTime, setStartTime] = useState(0);
   const [elapsedTimeArray, setElapsedTimeArray] = useState<number[]>([]);
   const [timeArray, setTimeArray] = useState<number[]>([]);
-  const [resetTimer, setResetTimer] = useState(false);
-  const { countdown } = useTimer();
+  const { countDown, startCountDown, resetCountDown } = useTimer();
 
   const inputRef = useRef<HTMLInputElement>(null);
   const btnRef = useRef<HTMLButtonElement | null>(null);
@@ -55,6 +54,14 @@ export const MainFrame = () => {
   const testModeSelector = useSelector(
     (state: RootState) => state.testMode.testMode
   );
+
+  useEffect(() => {
+    if (testModeSelector === "time") {
+      if (inputValue) {
+        startCountDown();
+      }
+    }
+  }, [inputValue, startCountDown, testModeSelector]);
 
   useEffect(() => {
     if (inputRef.current) {
@@ -99,19 +106,20 @@ export const MainFrame = () => {
   });
 
   useEffect(() => {
-    if (textWritten.split(" ").length - 1 === testSentence.split(" ").length) {
+    if (textWritten.split(" ").length - 1 === testSentence.split(" ").length || countDown === 0){
       if (inputRef.current) {
         inputRef.current.disabled = true;
         isTestFinishedDispatch(testIsFinished());
       }
     }
   }, [
+    countDown,
+    startTime,
     inputValue,
     textWritten,
     testSentence,
-    startTime,
-    isTestFinishedDispatch,
     testIsFinished,
+    isTestFinishedDispatch,
   ]);
 
   const generateTestSentence = useCallback(() => {
@@ -210,8 +218,7 @@ export const MainFrame = () => {
     testOpacityDispatch(opacity());
     setTimeArray([]);
     setElapsedTimeArray([]);
-    // resetTimer();
-    setResetTimer(true);
+    resetCountDown();
     if (inputRef.current) {
       inputRef.current.value = "";
       inputRef.current.disabled = false;
@@ -221,12 +228,10 @@ export const MainFrame = () => {
     active,
     opacity,
     testIsNotFinished,
+    resetCountDown,
+    testOpacityDispatch,
     inputStatusDispatch,
     isTestFinishedDispatch,
-    testOpacityDispatch,
-    setResetTimer,
-
-    // resetTimer,
   ]);
 
   const handleRefresh = useCallback(() => {
@@ -270,6 +275,10 @@ export const MainFrame = () => {
     [inputValue, textWritten, startTime, timeArray]
   );
 
+  useEffect(() => {
+    !isInputActiveSelector && inputRef.current?.blur();
+  }, [isInputActiveSelector]);
+
   const handleFocusClick = () => {
     inputRef.current?.focus();
     inputStatusDispatch(active());
@@ -281,11 +290,10 @@ export const MainFrame = () => {
       <div className="relative text-custom-primary flex items-center flex-col mt-5">
         <div>
           <TypingInfo
+            countDown={countDown}
             inputValue={inputValue}
             textWritten={textWritten}
             testSentence={testSentence}
-            resetTimer={resetTimer}
-            setResetTimer={setResetTimer}
           />
           <div
             className="relative flex justify-center"

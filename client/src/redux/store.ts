@@ -1,4 +1,3 @@
-import { promptVisibilitySlice } from "./promptVisibilitySlice";
 import { testSettingsVisibilitySlice } from "./testSettingsVisibilitySlice";
 import { themeVisibilitySlice } from "./themeVisibilitySlice";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
@@ -16,7 +15,6 @@ const rootReducer = combineReducers({
   testMode: testModeSlice.reducer,
   testModifier: testModifierSlice.reducer,
   testLimiter: testLimiterSlice.reducer,
-  isPromptVisible: promptVisibilitySlice.reducer,
   isTestSettingsVisible: testSettingsVisibilitySlice.reducer,
   isThemeVisible: themeVisibilitySlice.reducer,
   promptValue: limiterPromptSlice.reducer,

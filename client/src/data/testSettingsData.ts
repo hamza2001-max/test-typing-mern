@@ -70,10 +70,6 @@ export const testSettingLimiterData = {
       limit: 120,
       action: testLimiterReducer(120),
     },
-    {
-      limit: "custom",
-      action: testLimiterReducer("custom"),
-    },
   ],
   words: [
     {
@@ -91,10 +87,6 @@ export const testSettingLimiterData = {
     {
       limit: 100,
       action: testLimiterReducer(100),
-    },
-    {
-      limit: "custom",
-      action: testLimiterReducer("custom"),
     },
   ],
   quote: [

@@ -92,9 +92,8 @@ export interface QuoteJSONInterface {
 }
 
 export interface TypingInfoInterface {
+  countDown: number;
   inputValue: string;
   textWritten: string;
   testSentence: string;
-  resetTimer: boolean;
-  setResetTimer: React.Dispatch<React.SetStateAction<boolean>>;
 }

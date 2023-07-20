@@ -1,33 +1,23 @@
 import { Footer } from "../components/include/Footer";
 import { Navigation } from "../components/include/Navigation";
 import { ModeHandler } from "../components/typing/ModeHandler";
-import { WordsLimiterPrompt } from "../components/settings/WordsLimiterPrompt";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { testSettingsVisibilitySlice } from "../redux/testSettingsVisibilitySlice";
-import { promptVisibilitySlice } from "../redux/promptVisibilitySlice";
 import { themeVisibilitySlice } from "../redux/themeVisibilitySlice";
 
 export const Home = () => {
   const themeVDispatch = useDispatch();
   const testSettingsVDispatch = useDispatch();
-  const customPromptVDispatch = useDispatch();
 
   const { inVisibleTheme } = themeVisibilitySlice.actions;
   const { inVisibleTS } = testSettingsVisibilitySlice.actions;
-  const { inVisibleCustom } = promptVisibilitySlice.actions;
 
   const testSettingsVSelector = useSelector(
     (state: RootState) => state.isTestSettingsVisible.isTestSettingsVisible
   );
-  const customPromptVSelector = useSelector(
-    (state: RootState) => state.isPromptVisible.isPromptVisible
-  );
   const themeVSelector = useSelector(
     (state: RootState) => state.isThemeVisible.isThemeVisible
-  );
-  const isPromptVisibleSelector = useSelector(
-    (state: RootState) => state.isPromptVisible.isPromptVisible
   );
   const isTestFinishedSelector = useSelector(
     (state: RootState) => state.isTestFinished.isTestFinished
@@ -39,10 +29,9 @@ export const Home = () => {
       onClick={() => {
         themeVSelector && themeVDispatch(inVisibleTheme());
         testSettingsVSelector && testSettingsVDispatch(inVisibleTS());
-        customPromptVSelector && customPromptVDispatch(inVisibleCustom());
       }}
     >
-      {(themeVSelector || testSettingsVSelector || isPromptVisibleSelector) && (
+      {(themeVSelector || testSettingsVSelector) && (
         <div className="z-20 fixed w-full h-full bg-custom-fadedBlack"></div>
       )}
       <div className="space-y-11">
@@ -50,7 +39,6 @@ export const Home = () => {
         <ModeHandler />
       </div>
       <Footer />
-      {isPromptVisibleSelector === true && <WordsLimiterPrompt />}
     </main>
   );
 };

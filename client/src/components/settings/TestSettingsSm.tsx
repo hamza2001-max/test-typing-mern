@@ -5,19 +5,13 @@ import {
 } from "../../data/testSettingsData";
 import { useDispatch, useSelector } from "react-redux";
 import { testModifierSlice } from "../../redux/testModifierSlice";
-import { promptVisibilitySlice } from "../../redux/promptVisibilitySlice";
-import { testSettingsVisibilitySlice } from "../../redux/testSettingsVisibilitySlice";
 import { RootState } from "../../redux/store";
 
 export const TestSettingsSm = () => {
   const testModeDispatch = useDispatch();
   const testModifierDispatch = useDispatch();
   const testLimiterDispatch = useDispatch();
-  const testSettingsVDispatch = useDispatch();
-  const customPromptVDispatch = useDispatch();
 
-  const { visibleCustom } = promptVisibilitySlice.actions;
-  const { inVisibleTS } = testSettingsVisibilitySlice.actions;
   const { dual, numbers, punctuation } = testModifierSlice.actions;
 
   const testModeSelector = useSelector(
@@ -117,12 +111,7 @@ export const TestSettingsSm = () => {
                     : "text-custom-secondary bg-custom-fadedFill"
                 } py-2 rounded-md hover:bg-custom-secondary hover:text-custom-primary transition ease-in-out delay-75`}
                 onClick={() => {
-                  option.limit !== "custom" &&
-                    testLimiterDispatch(option.action);
-                  if (option.limit === "custom") {
-                    customPromptVDispatch(visibleCustom());
-                    testSettingsVDispatch(inVisibleTS());
-                  }
+                  testLimiterDispatch(option.action);
                 }}
               >
                 {option.limit}
