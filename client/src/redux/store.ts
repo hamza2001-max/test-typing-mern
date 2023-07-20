@@ -8,7 +8,6 @@ import { testModifierSlice } from "./testModifierSlice";
 import { inputStatusSlice } from "./inputStatusSlice";
 import { isTestFinishedSlice } from "./isTestFinishedSlice";
 import { testOpacitySlice } from "./testOpacitySlice";
-
 const rootReducer = combineReducers({
   theme: themeSlice.reducer,
   testMode: testModeSlice.reducer,

@@ -31,18 +31,6 @@ const Result = ({
     time: 0,
   });
 
-  useEffect(() => {
-    console.log(textWritten);
-    console.log(testSentence);
-    console.log(elapsedTimeArray);
-  }, [textWritten, testSentence, elapsedTimeArray]);
-
-  useEffect(() => {
-    console.log(wpmArr);
-    console.log(data);
-    console.log(result);
-  }, [wpmArr, data, result]);
-
   const testModeSelector = useSelector(
     (state: RootState) => state.testMode.testMode
   );

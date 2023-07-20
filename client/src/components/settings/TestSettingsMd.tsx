@@ -77,7 +77,9 @@ export const TestSettingsMd = () => {
             </button>
           );
         })}
-        <div className="hidden md:block bg-custom-fill w-1 h-5 rounded-lg"></div>
+        {testModeSelector !== "zen" && (
+          <div className="hidden md:block bg-custom-fill w-1 h-5 rounded-lg"></div>
+        )}
       </div>
       <div className="flex items-center space-x-5 ml-5 lg:space-x-4 lg:ml-4 md:space-x-2 md:ml-2">
         {testModeSelector === "time" &&

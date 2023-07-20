@@ -8,7 +8,7 @@ type countDownStatusType = "idle" | "running" | "finished";
 export const useTimer = (): useTimerInterface => {
   const [countDownStatus, setCountDownStatus] =
     useState<countDownStatusType>("idle");
-  const [countDown, setCountDown] = useState<number>(0);
+  const [countDown, setCountDown] = useState<number>(30);
 
   const testLimiterSelector = useSelector(
     (state: RootState) => state.testLimiter.testLimiter
@@ -43,8 +43,6 @@ export const useTimer = (): useTimerInterface => {
     const timerId = setInterval(() => {
       if (countDownStatus === "running" && countDown > 0) {
         setCountDown((prev) => prev - 1);
-      } else if (countDown === 0) {
-        setCountDownStatus("finished");
       }
     }, 1000);
     return () => clearInterval(timerId);

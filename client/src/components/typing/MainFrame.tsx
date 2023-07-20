@@ -53,6 +53,10 @@ export const MainFrame = () => {
   );
 
   useEffect(() => {
+    console.log(isTestFinishedSelector);
+  }, [isTestFinishedSelector]);
+  
+  useEffect(() => {
     if (testModeSelector === "time") {
       if (inputValue) {
         startCountDown();
@@ -273,8 +277,6 @@ export const MainFrame = () => {
   };
 
   return !isTestFinishedSelector ? (
-    <section className="space-y-16">
-      <TestSettings />
       <div className="relative text-custom-primary flex items-center flex-col mt-5">
         <div>
           <TypingInfo
@@ -328,14 +330,16 @@ export const MainFrame = () => {
           <VscDebugRestart />
         </button>
       </div>
-    </section>
   ) : (
     <Result
       source={source}
       textWritten={textWritten}
       testSentence={
         testModeSelector === "time"
-          ? testSentence.split(" ").slice(0, textWritten.split(" ").length-1).join(" ")
+          ? testSentence
+              .split(" ")
+              .slice(0, textWritten.split(" ").length - 1)
+              .join(" ")
           : testSentence
       }
       elapsedTimeArray={elapsedTimeArray}
