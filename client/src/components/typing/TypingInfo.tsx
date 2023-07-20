@@ -10,7 +10,6 @@ export const TypingInfo = ({
   const testModeSelector = useSelector(
     (state: RootState) => state.testMode.testMode
   );
-
   return (
     <>
       {(inputValue || textWritten) &&

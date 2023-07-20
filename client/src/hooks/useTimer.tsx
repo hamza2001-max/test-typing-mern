@@ -1,18 +1,14 @@
-import { useEffect, useState, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
+import { useTimerInterface } from "../typescript/types";
 
-type timeStatusType = "idle" | "running" | "finished";
-
-interface useTimerInterface {
-  countDown: number;
-  startCountDown: () => void;
-  resetCountDown: () => void;
-}
+type countDownStatusType = "idle" | "running" | "finished";
 
 export const useTimer = (): useTimerInterface => {
-  const [status, setStatus] = useState<timeStatusType>("idle");
-  const [countDown, setCountDown] = useState(0);
+  const [countDownStatus, setCountDownStatus] =
+    useState<countDownStatusType>("idle");
+  const [countDown, setCountDown] = useState<number>(0);
 
   const testLimiterSelector = useSelector(
     (state: RootState) => state.testLimiter.testLimiter
@@ -21,40 +17,51 @@ export const useTimer = (): useTimerInterface => {
     (state: RootState) => state.testMode.testMode
   );
 
+  const isTestLimiterValid =
+    typeof testLimiterSelector === "number" && testLimiterSelector > 0;
+
   useEffect(() => {
-    if (typeof testLimiterSelector === "number") {
+    if (isTestLimiterValid) {
       setCountDown(testLimiterSelector);
     }
-  }, [testLimiterSelector]);
+  }, [testLimiterSelector, isTestLimiterValid]);
 
   const startCountDown = () => {
-    setStatus("running");
+    if (isTestLimiterValid) {
+      setCountDownStatus("running");
+    }
   };
 
-  const resetCountDown= useCallback(() => {
-    if (typeof testLimiterSelector === "number") {
+  const resetCountDown = useCallback(() => {
+    if (isTestLimiterValid) {
       setCountDown(testLimiterSelector);
-      setStatus("idle");
+      setCountDownStatus("idle");
     }
-  }, [testLimiterSelector]);
+  }, [isTestLimiterValid, testLimiterSelector]);
 
   useEffect(() => {
-    let timerId: NodeJS.Timeout;
-    if (status === "running" && countDown > 0) {
-      timerId = setInterval(() => {
+    const timerId = setInterval(() => {
+      if (countDownStatus === "running" && countDown > 0) {
         setCountDown((prev) => prev - 1);
-      }, 1000);
-    } else if (countDown === 0) {
-      setStatus("finished");
-    }
+      } else if (countDown === 0) {
+        setCountDownStatus("finished");
+      }
+    }, 1000);
     return () => clearInterval(timerId);
-  }, [countDown, status]);
+  }, [countDown, countDownStatus]);
+
+  useEffect(() => {
+    if (countDown === 0) {
+      setCountDownStatus("finished");
+    }
+  }, [countDown]);
 
   useEffect(() => {
     resetCountDown();
   }, [testModeSelector, resetCountDown]);
 
   return {
+    countDownStatus,
     countDown,
     resetCountDown,
     startCountDown,

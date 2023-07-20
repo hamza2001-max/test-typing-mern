@@ -2,13 +2,16 @@
   - [ ] implement the local storage.
 
 - [ ] Todo
+  - [ ] in time mode sometimes the tab functionality doesnt work properly.
   - [x] complete useTimer.tsx.
-  - [ ] remove custom from time and words.
-  - [ ] when the blur is on the text is still typable.
+  - [x] remove custom from time and words.
+  - [x] when the blur is on the text is still typable.
   - [ ] delay the blur effect.
   - [x] opacity of testSetting to 0 when test starts and make it reappear if mouse moves.
   - [ ] implement all test modes.
-  - [ ] implement test mode.
+  - [x] implement time mode.
+  - [x] fix time result issue.
+  - [ ] fix the issue with time mode result.
   - [ ] implement time mode in the word mode if nothing has been written for a long time and make the test invalid.
   - [ ] implement hot toast.
   - [x] solve the div key problem.

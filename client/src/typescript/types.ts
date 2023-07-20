@@ -97,3 +97,10 @@ export interface TypingInfoInterface {
   textWritten: string;
   testSentence: string;
 }
+
+export interface useTimerInterface {
+  countDownStatus: string;
+  countDown: number;
+  startCountDown: () => void;
+  resetCountDown: () => void;
+}

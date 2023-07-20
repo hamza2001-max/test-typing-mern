@@ -42,9 +42,6 @@ export const MainFrame = () => {
   const isInputActiveSelector = useSelector(
     (state: RootState) => state.isInputActive.isInputActive
   );
-  const promptValueSelector = useSelector(
-    (state: RootState) => state.promptValue.promptValue
-  );
   const testModifierSelector = useSelector(
     (state: RootState) => state.testModifier.testModifier
   );
@@ -106,7 +103,10 @@ export const MainFrame = () => {
   });
 
   useEffect(() => {
-    if (textWritten.split(" ").length - 1 === testSentence.split(" ").length || countDown === 0){
+    if (
+      textWritten.split(" ").length - 1 === testSentence.split(" ").length ||
+      countDown === 0
+    ) {
       if (inputRef.current) {
         inputRef.current.disabled = true;
         isTestFinishedDispatch(testIsFinished());
@@ -164,12 +164,6 @@ export const MainFrame = () => {
             prototypeSentence +=
               i === testLimiterSelector - 1 ? randomWord : randomWord + " ";
           }
-        } else if (typeof testLimiterSelector === "string") {
-          for (let i = 0; i < promptValueSelector; i++) {
-            generateRandomWord();
-            prototypeSentence +=
-              i === promptValueSelector - 1 ? randomWord : randomWord + " ";
-          }
         }
         setTestSentence(prototypeSentence);
         setTextWritten("");
@@ -179,8 +173,7 @@ export const MainFrame = () => {
         if (typeof testLimiterSelector === "number") {
           for (let i = 0; i < 400; i++) {
             generateRandomWord();
-            prototypeSentence +=
-              i === testLimiterSelector - 1 ? randomWord : randomWord + " ";
+            prototypeSentence += randomWord + " ";
           }
         }
         setTestSentence(prototypeSentence);
@@ -201,12 +194,7 @@ export const MainFrame = () => {
       setTextWritten("");
       setInputValue("");
     }
-  }, [
-    testLimiterSelector,
-    promptValueSelector,
-    testModifierSelector,
-    testModeSelector,
-  ]);
+  }, [testLimiterSelector, testModifierSelector, testModeSelector]);
 
   const resetState = useCallback(() => {
     setTextWritten("");
@@ -347,7 +335,7 @@ export const MainFrame = () => {
       textWritten={textWritten}
       testSentence={
         testModeSelector === "time"
-          ? testSentence.slice(0, textWritten.split(" ").length)
+          ? testSentence.split(" ").slice(0, textWritten.split(" ").length-1).join(" ")
           : testSentence
       }
       elapsedTimeArray={elapsedTimeArray}

@@ -31,6 +31,18 @@ const Result = ({
     time: 0,
   });
 
+  useEffect(() => {
+    console.log(textWritten);
+    console.log(testSentence);
+    console.log(elapsedTimeArray);
+  }, [textWritten, testSentence, elapsedTimeArray]);
+
+  useEffect(() => {
+    console.log(wpmArr);
+    console.log(data);
+    console.log(result);
+  }, [wpmArr, data, result]);
+
   const testModeSelector = useSelector(
     (state: RootState) => state.testMode.testMode
   );
@@ -171,8 +183,6 @@ const Result = ({
       setExe((prev) => ++prev);
     }
   }, [textWritten, testSentence, calculateResult, exe]);
-
-  console.log(source);
 
   return (
     <section className="w-full flex flex-col items-center justify-center">
