@@ -7,10 +7,9 @@ import { WordValidator } from "./WordValidator";
 import { inputStatusSlice } from "../../redux/inputStatusSlice";
 import { RootState } from "../../redux/store";
 import Result from "../result/Result";
-import { TestSettings } from "../settings/TestSettings";
 import { isTestFinishedSlice } from "../../redux/isTestFinishedSlice";
 import { testOpacitySlice } from "../../redux/testOpacitySlice";
-import { TypingInfo } from "./TypingInfo";
+import { MainFrameProgress } from "./MainFrameProgress";
 import { useTimer } from "../../hooks/useTimer";
 
 export const MainFrame = () => {
@@ -53,9 +52,10 @@ export const MainFrame = () => {
   );
 
   useEffect(() => {
-    console.log(isTestFinishedSelector);
-  }, [isTestFinishedSelector]);
-  
+    setTextWritten("");
+    setInputValue("");
+  }, [testModeSelector, testLimiterSelector, testModifierSelector]);
+
   useEffect(() => {
     if (testModeSelector === "time") {
       if (inputValue) {
@@ -277,59 +277,59 @@ export const MainFrame = () => {
   };
 
   return !isTestFinishedSelector ? (
-      <div className="relative text-custom-primary flex items-center flex-col mt-5">
-        <div>
-          <TypingInfo
-            countDown={countDown}
-            inputValue={inputValue}
-            textWritten={textWritten}
-            testSentence={testSentence}
-          />
-          <div
-            className="relative flex justify-center"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleFocusClick();
-            }}
-          >
-            {!isInputActiveSelector && (
-              <div
-                className={`text-lg lg:text-xl px-3 text-custom-secondary z-10 absolute w-full h-full backdrop-blur-sm flex justify-center items-center`}
-              >
-                <GiArrowCursor className="mr-3" />
-                Click here to focus
-              </div>
-            )}
-            <WordValidator
-              testSentence={testSentence}
-              inputValue={inputValue}
-              textWritten={textWritten}
-              scrollIndex={scrollIndex}
-              lineHeiInc={lineHeiInc}
-              setScrollIndex={setScrollIndex}
-              setLineHeiInc={setLineHeiInc}
-            />
-          </div>
-          <input
-            type="text"
-            className="w-full mt-3 py-2 sr-only"
-            ref={inputRef}
-            onKeyDown={handleKeyDown}
-          />
-        </div>
-        <button
-          className="px-8 py-4 rounded-md text-2xl lg:text-custom-xl flex justify-center mt-10
-        hover:text-custom-secondary transition ease-in-out delay-75 focus:bg-custom-secondary
-        focus:text-custom-fill outline-none"
+    <div className="relative text-custom-primary flex items-center flex-col mt-5">
+      <div>
+        <MainFrameProgress
+          countDown={countDown}
+          inputValue={inputValue}
+          textWritten={textWritten}
+          testSentence={testSentence}
+        />
+        <div
+          className="relative flex justify-center"
           onClick={(e) => {
             e.stopPropagation();
-            handleRefresh();
+            handleFocusClick();
           }}
-          ref={btnRef}
         >
-          <VscDebugRestart />
-        </button>
+          {!isInputActiveSelector && (
+            <div
+              className={`text-lg lg:text-xl px-3 text-custom-secondary z-10 absolute w-full h-full backdrop-blur-sm flex justify-center items-center`}
+            >
+              <GiArrowCursor className="mr-3" />
+              Click here to focus
+            </div>
+          )}
+          <WordValidator
+            testSentence={testSentence}
+            inputValue={inputValue}
+            textWritten={textWritten}
+            scrollIndex={scrollIndex}
+            lineHeiInc={lineHeiInc}
+            setScrollIndex={setScrollIndex}
+            setLineHeiInc={setLineHeiInc}
+          />
+        </div>
+        <input
+          type="text"
+          className="w-full mt-3 py-2 sr-only"
+          ref={inputRef}
+          onKeyDown={handleKeyDown}
+        />
       </div>
+      <button
+        className="px-8 py-4 rounded-md text-2xl lg:text-custom-xl flex justify-center mt-10
+        hover:text-custom-secondary transition ease-in-out delay-75 focus:bg-custom-secondary
+        focus:text-custom-fill outline-none"
+        onClick={(e) => {
+          e.stopPropagation();
+          handleRefresh();
+        }}
+        ref={btnRef}
+      >
+        <VscDebugRestart />
+      </button>
+    </div>
   ) : (
     <Result
       source={source}

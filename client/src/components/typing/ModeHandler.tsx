@@ -2,8 +2,8 @@ import { useSelector } from "react-redux";
 import { MainFrame } from "./MainFrame";
 import { RootState } from "../../redux/store";
 import { TestSettings } from "../settings/TestSettings";
-import { ZenMode } from "./ZenMode";
-import { CustomMode } from "./CustomMode";
+import { ZenFrame } from "./ZenFrame";
+import { CustomFrame } from "./CustomFrame";
 
 const getModeComponent = (testModeSelector: string) => {
   switch (testModeSelector) {
@@ -12,9 +12,9 @@ const getModeComponent = (testModeSelector: string) => {
     case "quote":
       return <MainFrame />;
     case "zen":
-      return <ZenMode />;
+      return <ZenFrame />;
     case "custom":
-      return <CustomMode />;
+      return <CustomFrame />;
     default:
       return null;
   }

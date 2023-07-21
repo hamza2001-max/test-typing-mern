@@ -11,7 +11,8 @@
   - [ ] implement all test modes.
   - [x] implement time mode.
   - [x] fix time result issue.
-  - [ ] fix the issue with time mode result.
+  - [ ] implement the zen mode.
+  - [x] fix the issue with time mode result.
   - [ ] implement time mode in the word mode if nothing has been written for a long time and make the test invalid.
   - [ ] implement hot toast.
   - [x] solve the div key problem.
