@@ -1,26 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  testMode: "words",
+  testFrame: "words",
 };
-export const testModeSlice = createSlice({
-  name: "testMode",
+export const testFrameSlice = createSlice({
+  name: "testFrame",
   initialState,
   reducers: {
     setTimeMode: (state) => {
-      state.testMode = "time";
+      state.testFrame = "time";
     },
     setWordsMode: (state) => {
-      state.testMode = "words";
+      state.testFrame = "words";
     },
     setQuoteMode: (state) => {
-      state.testMode = "quote";
+      state.testFrame = "quote";
     },
     setZenMode: (state) => {
-      state.testMode = "zen";
+      state.testFrame = "zen";
     },
     setCustomMode: (state) => {
-      state.testMode = "custom";
+      state.testFrame = "custom";
     },
   },
 });

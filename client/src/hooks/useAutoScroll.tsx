@@ -1,6 +1,14 @@
-import { useEffect, useRef } from "react";
-
-export const useAutoScroll = () => {
+import { useEffect, useRef, useState } from "react";
+interface useAutoScrollInterface {
+  testSentence: string;
+  textWritten: string;
+}
+export const useAutoScroll = ({
+  testSentence,
+  textWritten,
+}: useAutoScrollInterface) => {
+  const [lineHeiInc, setLineHeiInc] = useState(1.25);
+  const [scrollIndex, setScrollIndex] = useState(3);
   const divRef = useRef<HTMLDivElement>(null);
   const typedSentenceRef = useRef<HTMLDivElement>(null);
 
@@ -27,5 +35,11 @@ export const useAutoScroll = () => {
       }
     }
   }, [textWritten, lineHeiInc, scrollIndex, setScrollIndex, setLineHeiInc]);
-  return <div>useAutoScroll</div>;
+
+  return {
+    divRef,
+    typedSentenceRef,
+    setLineHeiInc,
+    setScrollIndex
+  };
 };

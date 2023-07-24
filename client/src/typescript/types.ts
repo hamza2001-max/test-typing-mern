@@ -15,10 +15,6 @@ export interface WordCheckerInterface {
   inputValue: string;
   testSentence: string;
   textWritten: string;
-  scrollIndex: number;
-  lineHeiInc: number;
-  setScrollIndex: React.Dispatch<React.SetStateAction<number>>;
-  setLineHeiInc: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export interface PreviousFragmentInterface {

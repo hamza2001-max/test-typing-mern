@@ -1,5 +1,5 @@
 import { testLimiterSlice } from "../redux/testLimiterSlice";
-import { testModeSlice } from "../redux/testModeSlice";
+import { testFrameSlice } from "../redux/testFrameSlice";
 import { testModifierSlice } from "../redux/testModifierSlice";
 import { MdAlternateEmail } from "react-icons/md";
 import { BsSearch, BsTriangle } from "react-icons/bs";
@@ -12,7 +12,7 @@ import {
 } from "react-icons/fa";
 
 const { setTimeMode, setWordsMode, setQuoteMode, setZenMode, setCustomMode } =
-  testModeSlice.actions;
+  testFrameSlice.actions;
 const { punctuation, numbers } = testModifierSlice.actions;
 const { testLimiterReducer } = testLimiterSlice.actions;
 

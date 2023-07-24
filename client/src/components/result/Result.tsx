@@ -7,8 +7,7 @@ import {
 import { LineChart } from "./LineChart";
 import { Tooltip } from "../include/Tooltip";
 import { ProceedResult } from "./ProceedResult";
-import { RootState } from "../../redux/store";
-import { useSelector } from "react-redux";
+import { useRedux } from "../../hooks/useRedux";
 
 const Result = ({
   textWritten,
@@ -18,6 +17,7 @@ const Result = ({
   handleRefresh,
   source,
 }: ResultInterface) => {
+  const { testFrameSelector } = useRedux();
   const [wpmArr, setWpmArr] = useState<WpmArrInterface[]>([]);
   const [exe, setExe] = useState(0);
   const [data, setData] = useState<DataInterface[]>([]);
@@ -31,9 +31,6 @@ const Result = ({
     time: 0,
   });
 
-  const testModeSelector = useSelector(
-    (state: RootState) => state.testMode.testMode
-  );
 
   useEffect(() => {
     let data;
@@ -232,7 +229,7 @@ const Result = ({
             />
           </span>
         </div>
-        {testModeSelector === "quote" && (
+        {testFrameSelector === "quote" && (
           <div className="flex flex-col">
             <span className="text-xl text-custom-primary">source</span>
             <span className="text-2xl text-custom-tertiary">{source}</span>

@@ -1,26 +1,21 @@
-import { useDispatch, useSelector } from "react-redux";
 import { themeSlice } from "../../redux/themeSlice";
 import { themeVisibilitySlice } from "../../redux/themeVisibilitySlice";
 import { ThemeOption } from "./ThemeOption";
 import { themeSchemes } from "../../data/themeSchemeData";
 import { footerData } from "../../data/footerData";
-import { RootState } from "../../redux/store";
 import { IoIosColorPalette } from "react-icons/io";
 import { VscRepoForked } from "react-icons/vsc";
+import { useRedux } from "../../hooks/useRedux";
 
 export const Footer = () => {
   const { visibleTheme, inVisibleTheme } = themeVisibilitySlice.actions;
-
-  const themeVDispatch = useDispatch();
-  const themeDispatch = useDispatch();
-
-  const theme = useSelector((state: RootState) => state.theme.theme);
-  const themeVSelector = useSelector(
-    (state: RootState) => state.isThemeVisible.isThemeVisible
-  );
-  const testOpacitySelector = useSelector(
-    (state: RootState) => state.testOpacity.testOpacity
-  );
+  const {
+    themeSelector,
+    themeVSelector,
+    testOpacitySelector,
+    themeDispatch,
+    themeVDispatch,
+  } = useRedux();
 
   const handleThemeChange = (
     selectedTheme: (typeof themeSlice.actions)[keyof typeof themeSlice.actions]
@@ -65,7 +60,7 @@ export const Footer = () => {
             onClick={() => themeVDispatch(visibleTheme())}
           >
             <IoIosColorPalette className="mr-2" />
-            {theme ? theme : "light"}
+            {themeSelector ? themeSelector : "light"}
           </span>
           <span className="flex items-center cursor-pointer hover:text-custom-secondary transition ease-in-out delay-75">
             <VscRepoForked className="mr-2" />

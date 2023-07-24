@@ -43,5 +43,8 @@ export const themeSlice = createSlice({
     ishtar: (state) => {
       state.theme = "ishtar";
     },
+    bingsu: (state) => {
+      state.theme = "bingsu";
+    },
   },
 });

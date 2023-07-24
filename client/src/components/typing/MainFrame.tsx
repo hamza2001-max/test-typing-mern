@@ -2,27 +2,34 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { punctuationsJSON, quoteJSON, wordsJSON } from "../../testJson";
 import { VscDebugRestart } from "react-icons/vsc";
 import { GiArrowCursor } from "react-icons/gi";
-import { useDispatch, useSelector } from "react-redux";
 import { WordValidator } from "./WordValidator";
 import { inputStatusSlice } from "../../redux/inputStatusSlice";
-import { RootState } from "../../redux/store";
 import Result from "../result/Result";
 import { isTestFinishedSlice } from "../../redux/isTestFinishedSlice";
 import { testOpacitySlice } from "../../redux/testOpacitySlice";
 import { MainFrameProgress } from "./MainFrameProgress";
 import { useTimer } from "../../hooks/useTimer";
+import { useRedux } from "../../hooks/useRedux";
 
 export const MainFrame = () => {
   const [testSentence, setTestSentence] = useState("");
   const [textWritten, setTextWritten] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [source, setSource] = useState("");
-  const [lineHeiInc, setLineHeiInc] = useState(1.25);
-  const [scrollIndex, setScrollIndex] = useState(3);
   const [startTime, setStartTime] = useState(0);
   const [elapsedTimeArray, setElapsedTimeArray] = useState<number[]>([]);
   const [timeArray, setTimeArray] = useState<number[]>([]);
   const { countDown, startCountDown, resetCountDown } = useTimer();
+  const {
+    testLimiterSelector,
+    isInputActiveSelector,
+    testModifierSelector,
+    isTestFinishedSelector,
+    testFrameSelector,
+    isTestFinishedDispatch,
+    inputStatusDispatch,
+    testOpacityDispatch,
+  } = useRedux();
 
   const inputRef = useRef<HTMLInputElement>(null);
   const btnRef = useRef<HTMLButtonElement | null>(null);
@@ -31,38 +38,18 @@ export const MainFrame = () => {
   const { testIsFinished, testIsNotFinished } = isTestFinishedSlice.actions;
   const { noOpacity, opacity } = testOpacitySlice.actions;
 
-  const inputStatusDispatch = useDispatch();
-  const isTestFinishedDispatch = useDispatch();
-  const testOpacityDispatch = useDispatch();
-
-  const testLimiterSelector = useSelector(
-    (state: RootState) => state.testLimiter.testLimiter
-  );
-  const isInputActiveSelector = useSelector(
-    (state: RootState) => state.isInputActive.isInputActive
-  );
-  const testModifierSelector = useSelector(
-    (state: RootState) => state.testModifier.testModifier
-  );
-  const isTestFinishedSelector = useSelector(
-    (state: RootState) => state.isTestFinished.isTestFinished
-  );
-  const testModeSelector = useSelector(
-    (state: RootState) => state.testMode.testMode
-  );
-
   useEffect(() => {
     setTextWritten("");
     setInputValue("");
-  }, [testModeSelector, testLimiterSelector, testModifierSelector]);
+  }, [testFrameSelector, testLimiterSelector, testModifierSelector]);
 
   useEffect(() => {
-    if (testModeSelector === "time") {
+    if (testFrameSelector === "time") {
       if (inputValue) {
         startCountDown();
       }
     }
-  }, [inputValue, startCountDown, testModeSelector]);
+  }, [inputValue, startCountDown, testFrameSelector]);
 
   useEffect(() => {
     if (inputRef.current) {
@@ -131,7 +118,7 @@ export const MainFrame = () => {
     let randomWord = "";
     const generateRandomNumber = (max: number) =>
       Math.floor(Math.random() * max);
-    if (testModeSelector === "words" || testModeSelector === "time") {
+    if (testFrameSelector === "words" || testFrameSelector === "time") {
       const getRandomWord = () =>
         wordsJSON[generateRandomNumber(wordsJSON.length)].word;
       const getRandomPunctuation = () =>
@@ -161,7 +148,7 @@ export const MainFrame = () => {
         }
       };
 
-      if (testModeSelector === "words") {
+      if (testFrameSelector === "words") {
         if (typeof testLimiterSelector === "number") {
           for (let i = 0; i < testLimiterSelector; i++) {
             generateRandomWord();
@@ -173,7 +160,7 @@ export const MainFrame = () => {
         setTextWritten("");
         setInputValue("");
       }
-      if (testModeSelector === "time") {
+      if (testFrameSelector === "time") {
         if (typeof testLimiterSelector === "number") {
           for (let i = 0; i < 400; i++) {
             generateRandomWord();
@@ -182,7 +169,7 @@ export const MainFrame = () => {
         }
         setTestSentence(prototypeSentence);
       }
-    } else if (testModeSelector === "quote") {
+    } else if (testFrameSelector === "quote") {
       if (testLimiterSelector === "all") {
         const keys = Object.keys(quoteJSON);
         const randomIndex = Math.floor(Math.random() * keys.length);
@@ -198,14 +185,12 @@ export const MainFrame = () => {
       setTextWritten("");
       setInputValue("");
     }
-  }, [testLimiterSelector, testModifierSelector, testModeSelector]);
+  }, [testLimiterSelector, testModifierSelector, testFrameSelector]);
 
   const resetState = useCallback(() => {
     setTextWritten("");
     setInputValue("");
     inputStatusDispatch(active());
-    setScrollIndex(3);
-    setLineHeiInc(1.25);
     isTestFinishedDispatch(testIsNotFinished());
     testOpacityDispatch(opacity());
     setTimeArray([]);
@@ -304,16 +289,13 @@ export const MainFrame = () => {
             testSentence={testSentence}
             inputValue={inputValue}
             textWritten={textWritten}
-            scrollIndex={scrollIndex}
-            lineHeiInc={lineHeiInc}
-            setScrollIndex={setScrollIndex}
-            setLineHeiInc={setLineHeiInc}
           />
         </div>
         <input
           type="text"
           className="w-full mt-3 py-2 sr-only"
           ref={inputRef}
+          spellCheck={false}
           onKeyDown={handleKeyDown}
         />
       </div>
@@ -335,7 +317,7 @@ export const MainFrame = () => {
       source={source}
       textWritten={textWritten}
       testSentence={
-        testModeSelector === "time"
+        testFrameSelector === "time"
           ? testSentence
               .split(" ")
               .slice(0, textWritten.split(" ").length - 1)

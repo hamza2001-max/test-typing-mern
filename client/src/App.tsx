@@ -1,19 +1,14 @@
-import { useDispatch, useSelector } from "react-redux";
 import { Home } from "./pages/Home";
-import { RootState } from "./redux/store";
 import { inputStatusSlice } from "./redux/inputStatusSlice";
+import { useRedux } from "./hooks/useRedux";
 
 function App() {
-  const theme = useSelector((state: RootState) => state.theme.theme);
   const { inActive } = inputStatusSlice.actions;
-
-  const inputStatusDispatch = useDispatch();
-  const isInputActiveSelector = useSelector(
-    (state: RootState) => state.isInputActive.isInputActive
-  );
+  const { isInputActiveSelector, themeSelector, inputStatusDispatch } =
+    useRedux();
   return (
     <div
-      className={`${theme} App relative bg-custom-fill`}
+      className={`${themeSelector} App relative bg-custom-fill`}
       onClick={() => isInputActiveSelector && inputStatusDispatch(inActive())}
     >
       <Home />

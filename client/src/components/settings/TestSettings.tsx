@@ -1,20 +1,13 @@
 import { FaCog } from "react-icons/fa";
 import { TestSettingsSm } from "./TestSettingsSm";
-import { useDispatch, useSelector } from "react-redux";
 import { testSettingsVisibilitySlice } from "../../redux/testSettingsVisibilitySlice";
-import { RootState } from "../../redux/store";
 import { TestSettingsMd } from "./TestSettingsMd";
+import { useRedux } from "../../hooks/useRedux";
 
 export const TestSettings = () => {
   const { visibleTS } = testSettingsVisibilitySlice.actions;
-  const testSettingsVDispatch = useDispatch();
-
-  const testSettingsVSelector = useSelector(
-    (state: RootState) => state.isTestSettingsVisible.isTestSettingsVisible
-  );
-  const testOpacitySelector = useSelector(
-    (state: RootState) => state.testOpacity.testOpacity
-  );
+  const { testSettingsVSelector, testOpacitySelector, testSettingsVDispatch } =
+    useRedux();
 
   return (
     <section

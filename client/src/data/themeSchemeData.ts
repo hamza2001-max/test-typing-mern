@@ -61,4 +61,9 @@ export const themeSchemes = [
     themeClass: "ishtar",
     theme: themeSlice.actions.ishtar,
   },
+  {
+    title: "bingsu",
+    themeClass: "bingsu",
+    theme: themeSlice.actions.bingsu,
+  },
 ];

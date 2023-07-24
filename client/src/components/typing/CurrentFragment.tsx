@@ -1,35 +1,33 @@
-import { useSelector } from "react-redux";
+import { useEffect, useRef } from "react";
 import { CurrentFragmentInterface } from "../../typescript/types";
 import { Caret } from "./Caret";
-import { RootState } from "../../redux/store";
 import { useMediaQuery } from "react-responsive";
 import { CurrentRemainingLetters } from "./CurrentRemainingLetters";
+import { useRedux } from "../../hooks/useRedux";
 
 export const CurrentFragment = ({
   inputValue,
   currentSentenceWord,
 }: CurrentFragmentInterface) => {
-  let constant = 14.38;
+  let caretConstRef = useRef(14.38);
+  const { isInputActiveSelector } = useRedux();
   const isBreakpointLarge = useMediaQuery({ query: "(min-width: 1024px)" });
-  const isInputActiveSelector = useSelector(
-    (state: RootState) => state.isInputActive.isInputActive
-  );
 
-  if (isBreakpointLarge) {
-    constant = 16.3;
-  }
+  useEffect(() => {
+    if (isBreakpointLarge) {
+      caretConstRef.current = 16.3;
+    }
+  }, [isBreakpointLarge]);
 
   return (
     <>
       <span className="relative">
         {isInputActiveSelector &&
           (currentSentenceWord.length + 5 >= inputValue.length ? (
-            <Caret offset={constant * inputValue.length} />
+            <Caret offset={caretConstRef.current * inputValue.length} />
           ) : (
             <Caret
-              offset={
-                constant * (currentSentenceWord.length +5)
-              }
+              offset={caretConstRef.current * (currentSentenceWord.length + 5)}
             />
           ))}
         {currentSentenceWord.split("").map((letter, secondIndex) => {

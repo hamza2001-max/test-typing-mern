@@ -1,11 +1,10 @@
-import { useSelector } from "react-redux";
 import { MainFrame } from "./MainFrame";
-import { RootState } from "../../redux/store";
 import { TestSettings } from "../settings/TestSettings";
 import { ZenFrame } from "./ZenFrame";
 import { CustomFrame } from "./CustomFrame";
+import { useRedux } from "../../hooks/useRedux";
 
-const getModeComponent = (testModeSelector: string) => {
+const getFrameComponent = (testModeSelector: string) => {
   switch (testModeSelector) {
     case "words":
     case "time":
@@ -20,15 +19,12 @@ const getModeComponent = (testModeSelector: string) => {
   }
 };
 
-export const ModeHandler = () => {
-  const testModeSelector = useSelector(
-    (state: RootState) => state.testMode.testMode
-  );
-
+export const FrameHandler = () => {
+  const {testFrameSelector} = useRedux();
   return (
     <section className="space-y-16">
       <TestSettings />
-      {getModeComponent(testModeSelector)}
+      {getFrameComponent(testFrameSelector)}
     </section>
   );
 };

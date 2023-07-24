@@ -43,7 +43,7 @@ export const PreviousFragment = ({
       <>
         <span
           className={`${
-            isWordUnderlined && "border-b-3 border-custom-tertiary"
+            isWordUnderlined && "border-b-2 border-custom-tertiary"
           }`}
         >
           {prevWords}

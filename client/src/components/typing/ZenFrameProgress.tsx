@@ -1,9 +1,15 @@
-export const ZenFrameProgress = ({ txtArValue }: { txtArValue: string }) => {
+export const ZenFrameProgress = ({
+  textWritten,
+  inputValue,
+}: {
+  textWritten: string;
+  inputValue: string;
+}) => {
   return (
     <>
-      {txtArValue && (
+      {(inputValue || textWritten) && (
         <span className="text-custom-tertiary text-2xl lg:text-custom-xl">
-          {txtArValue.split(" ").length - 1}
+          {textWritten.split(" ").length - 1}
         </span>
       )}
     </>

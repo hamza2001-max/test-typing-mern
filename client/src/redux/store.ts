@@ -3,14 +3,14 @@ import { themeVisibilitySlice } from "./themeVisibilitySlice";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { themeSlice } from "./themeSlice";
 import { testLimiterSlice } from "./testLimiterSlice";
-import { testModeSlice } from "./testModeSlice";
+import { testFrameSlice } from "./testFrameSlice";
 import { testModifierSlice } from "./testModifierSlice";
 import { inputStatusSlice } from "./inputStatusSlice";
 import { isTestFinishedSlice } from "./isTestFinishedSlice";
 import { testOpacitySlice } from "./testOpacitySlice";
 const rootReducer = combineReducers({
   theme: themeSlice.reducer,
-  testMode: testModeSlice.reducer,
+  testFrame: testFrameSlice.reducer,
   testModifier: testModifierSlice.reducer,
   testLimiter: testLimiterSlice.reducer,
   isTestSettingsVisible: testSettingsVisibilitySlice.reducer,

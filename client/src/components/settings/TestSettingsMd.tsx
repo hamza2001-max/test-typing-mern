@@ -1,33 +1,28 @@
-import { useDispatch, useSelector } from "react-redux";
 import {
   testSettingLimiterData,
   testSettingModeData,
   testSettingModifierData,
 } from "../../data/testSettingsData";
-import { RootState } from "../../redux/store";
 import { testModifierSlice } from "../../redux/testModifierSlice";
+import { useRedux } from "../../hooks/useRedux";
 
 export const TestSettingsMd = () => {
   const { dual, numbers, punctuation } = testModifierSlice.actions;
+  const {
+    testFrameSelector,
+    testLimiterSelector,
+    testModifierSelector,
+    testFrameDispatch,
+    testLimiterDispatch,
+    testModifierDispatch,
+  } = useRedux();
 
-  const testModeSelector = useSelector(
-    (state: RootState) => state.testMode.testMode
-  );
-  const testModifierSelector = useSelector(
-    (state: RootState) => state.testModifier.testModifier
-  );
-  const testLimiterSelector = useSelector(
-    (state: RootState) => state.testLimiter.testLimiter
-  );
 
-  const testModeDispatch = useDispatch();
-  const testModifierDispatch = useDispatch();
-  const testLimiterDispatch = useDispatch();
   return (
     <div className="hidden xs:flex xs:flex-col xs:items-center md:flex-row rounded-md bg-custom-fadedFill text-custom-primary cursor-pointer text-sm py-1 px-4">
-      {(testModeSelector === "time" ||
-        testModeSelector === "words" ||
-        testModeSelector === "custom") && (
+      {(testFrameSelector === "time" ||
+        testFrameSelector === "words" ||
+        testFrameSelector === "custom") && (
         <div className="flex items-center space-x-5 lg:space-x-4 md:space-x-2">
           {testSettingModifierData.map((btn) => {
             return (
@@ -65,10 +60,10 @@ export const TestSettingsMd = () => {
             <button
               key={btn.label}
               className={`${
-                btn.label === testModeSelector && "text-custom-tertiary"
+                btn.label === testFrameSelector && "text-custom-tertiary"
               } flex items-center py-2 rounded-md hover:text-custom-secondary transition ease-in-out delay-75`}
               onClick={() => {
-                testModeDispatch(btn.action());
+                testFrameDispatch(btn.action());
                 btn.defaultLimit && testLimiterDispatch(btn.defaultLimit);
               }}
             >
@@ -77,12 +72,12 @@ export const TestSettingsMd = () => {
             </button>
           );
         })}
-        {testModeSelector !== "zen" && (
+        {testFrameSelector !== "zen" && (
           <div className="hidden md:block bg-custom-fill w-1 h-5 rounded-lg"></div>
         )}
       </div>
       <div className="flex items-center space-x-5 ml-5 lg:space-x-4 lg:ml-4 md:space-x-2 md:ml-2">
-        {testModeSelector === "time" &&
+        {testFrameSelector === "time" &&
           testSettingLimiterData.time.map((btn, index) => (
             <button
               key={index}
@@ -94,7 +89,7 @@ export const TestSettingsMd = () => {
               {btn.limit}
             </button>
           ))}
-        {testModeSelector === "words" &&
+        {testFrameSelector === "words" &&
           testSettingLimiterData.words.map((btn, index) => (
             <button
               key={index}
@@ -108,7 +103,7 @@ export const TestSettingsMd = () => {
               {btn.limit}
             </button>
           ))}
-        {testModeSelector === "quote" &&
+        {testFrameSelector === "quote" &&
           testSettingLimiterData.quote.map((btn, index) => (
             <button
               key={index}
@@ -120,7 +115,7 @@ export const TestSettingsMd = () => {
               {typeof btn.limit === "string" ? btn.limit : <btn.limit />}
             </button>
           ))}
-        {testModeSelector === "custom" &&
+        {testFrameSelector === "custom" &&
           testSettingLimiterData.custom.map((btn, index) => (
             <button
               key={index}

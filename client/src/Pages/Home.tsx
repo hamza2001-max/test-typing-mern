@@ -1,31 +1,26 @@
 import { Footer } from "../components/include/Footer";
 import { Navigation } from "../components/include/Navigation";
-import { ModeHandler } from "../components/typing/ModeHandler";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../redux/store";
+import { FrameHandler } from "../components/typing/FrameHandler";
 import { testSettingsVisibilitySlice } from "../redux/testSettingsVisibilitySlice";
 import { themeVisibilitySlice } from "../redux/themeVisibilitySlice";
+import { useRedux } from "../hooks/useRedux";
 
 export const Home = () => {
-  const themeVDispatch = useDispatch();
-  const testSettingsVDispatch = useDispatch();
-
   const { inVisibleTheme } = themeVisibilitySlice.actions;
   const { inVisibleTS } = testSettingsVisibilitySlice.actions;
-
-  const testSettingsVSelector = useSelector(
-    (state: RootState) => state.isTestSettingsVisible.isTestSettingsVisible
-  );
-  const themeVSelector = useSelector(
-    (state: RootState) => state.isThemeVisible.isThemeVisible
-  );
-  const isTestFinishedSelector = useSelector(
-    (state: RootState) => state.isTestFinished.isTestFinished
-  );
+  const {
+    testSettingsVSelector,
+    themeVSelector,
+    isTestFinishedSelector,
+    testSettingsVDispatch,
+    themeVDispatch,
+  } = useRedux();
 
   return (
     <main
-      className={`flex flex-col justify-between ${isTestFinishedSelector ? "h-full" : "h-screen"}`}
+      className={`flex flex-col justify-between ${
+        isTestFinishedSelector ? "h-full" : "h-screen"
+      }`}
       onClick={() => {
         themeVSelector && themeVDispatch(inVisibleTheme());
         testSettingsVSelector && testSettingsVDispatch(inVisibleTS());
@@ -36,7 +31,7 @@ export const Home = () => {
       )}
       <div className="space-y-11">
         <Navigation />
-        <ModeHandler />
+        <FrameHandler />
       </div>
       <Footer />
     </main>

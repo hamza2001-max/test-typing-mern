@@ -99,6 +99,14 @@
     --color-fill: #202020;
     --color-faded-fill: #272727;
   }
+
+  .bingsu {
+    --color-primary: #83616e;
+    --color-secondary: #48373d;
+    --color-tertiary: #ebe6ea;
+    --color-fill: #b8a7aa;
+    --color-faded-fill: #ab989e;
+  }
 }
 
 body {

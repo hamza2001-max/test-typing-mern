@@ -1,23 +1,23 @@
 - [ ] ASAP
+
   - [ ] implement the local storage.
 
 - [ ] Todo
-  - [ ] in time mode sometimes the tab functionality doesnt work properly.
-  - [x] complete useTimer.tsx.
-  - [x] remove custom from time and words.
-  - [x] when the blur is on the text is still typable.
+  - [x] Refactor Redux.
+  - [ ] implement custom frame.tsx.
+  - [ ] when result is visible and the frame is changes the result doesnt disappear.
+  - [ ] in mainFrame apply tooltip where necessary.
+  - [ ] scroll problem in zenFrame.tsx.
+  - [ ] implement custom frame.
+  - [ ] in time mode sometimes the tab functionality doesnt work properly, try to use useRef for it.
   - [ ] delay the blur effect.
-  - [x] opacity of testSetting to 0 when test starts and make it reappear if mouse moves.
   - [ ] implement all test modes.
-  - [x] implement time mode.
-  - [x] fix time result issue.
-  - [ ] implement the zen mode.
-  - [x] fix the issue with time mode result.
   - [ ] implement time mode in the word mode if nothing has been written for a long time and make the test invalid.
   - [ ] implement hot toast.
-  - [x] solve the div key problem.
+
 
 - [ ] ideas
+
   - [ ] Add a practice mode.
   - [ ] Difficulty Levels.
   - [ ] Add sound effects.
@@ -92,6 +92,17 @@
   - [x] solved the x axis problem on Linechart.
   - [x] complete Result.tsx frontend.
   - [x] implement the result of a run.
+ - [x] fix the divRef problem in zen mode.
+  - [x] implement useAutoScroll.tsx.
+  - [x] complete useTimer.tsx.
+  - [x] remove custom from time and words.
+  - [x] when the blur is on the text is still typable.
+  - [x] opacity of testSetting to 0 when test starts and make it reappear if mouse moves.
+  - [x] implement time mode.
+  - [x] fix time result issue.
+  - [x] fix the issue with time mode result.
+  - [x] implement zenMode.tsx.
+  - [x] solve the div key problem.
   - [x] when clicked on the text, it blurs for a second.
   - [x] solve the data problem of nivo.
     - [x] Result Implementation.
