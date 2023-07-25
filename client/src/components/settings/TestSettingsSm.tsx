@@ -5,18 +5,24 @@ import {
 } from "../../data/testSettingsData";
 import { testModifierSlice } from "../../redux/testModifierSlice";
 import { useRedux } from "../../hooks/useRedux";
+import { isCusLimVisibilitySlice } from "../../redux/cusLimVisibility";
+import { testSettingsVisibilitySlice } from "../../redux/testSettingsVisibilitySlice";
 
 export const TestSettingsSm = () => {
   const { dual, numbers, punctuation } = testModifierSlice.actions;
+  const { inVisibleTS } = testSettingsVisibilitySlice.actions;
+  const { visibleCus } = isCusLimVisibilitySlice.actions;
   const {
     testFrameSelector,
     testLimiterSelector,
     testModifierSelector,
+    testSettingsVDispatch,
     testFrameDispatch,
+    isCusLimVisibleDispatch,
     testLimiterDispatch,
     testModifierDispatch,
   } = useRedux();
-  
+
   return (
     <section
       className="w-96 p-4 rounded-xl flex flex-col bg-custom-fill z-30
@@ -129,12 +135,12 @@ export const TestSettingsSm = () => {
               testSettingLimiterData.custom.map((option, index) => (
                 <button
                   key={index}
-                  className={`${
-                    option.limit === testLimiterSelector
-                      ? "text-custom-fill bg-custom-tertiary"
-                      : "text-custom-secondary bg-custom-fadedFill"
-                  } py-2 rounded-md hover:bg-custom-secondary hover:text-custom-primary transition ease-in-out delay-75`}
-                  onClick={() => testLimiterDispatch(option.action)}
+                  className={`text-custom-secondary bg-custom-fadedFill py-2 rounded-md hover:bg-custom-secondary hover:text-custom-primary transition ease-in-out delay-75`}
+                  onClick={() => {
+                    testLimiterDispatch(option.action);
+                    isCusLimVisibleDispatch(visibleCus());
+                    testSettingsVDispatch(inVisibleTS());
+                  }}
                 >
                   {option.limit}
                 </button>

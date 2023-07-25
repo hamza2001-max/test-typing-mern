@@ -1,4 +1,4 @@
-import { WordCheckerInterface } from "../../typescript/types";
+import { WordValidatorInterface } from "../../typescript/types";
 import { CurrentFragment } from "./CurrentFragment";
 import { PreviousFragment } from "./PreviousFragment";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
@@ -7,7 +7,11 @@ export const WordValidator = ({
   textWritten,
   inputValue,
   testSentence,
-}: WordCheckerInterface) => {
+  // lineHeiInc,
+  // scrollIndex,
+  // setLineHeiInc,
+  // setScrollIndex
+}: WordValidatorInterface) => {
   const {divRef, typedSentenceRef} = useAutoScroll({textWritten, testSentence});
   let currentSentenceWord = "";
 
@@ -49,7 +53,7 @@ export const WordValidator = ({
         className="text-2xl lg:text-custom-xl absolute opacity-0 -z-10"
         ref={divRef}
       >
-        <p className="leading-10 w-64 xs:w-80 sm:w-99 md:w-100 lg:w-101 xl:w-102 ">
+        <p className="w-64 xs:w-80 sm:w-99 md:w-100 lg:w-101 xl:w-102 ">
           {testSentence
             .split(" ")
             .slice(0, textWritten.split(" ").length)

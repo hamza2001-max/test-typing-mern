@@ -8,16 +8,18 @@ import { testModifierSlice } from "./testModifierSlice";
 import { inputStatusSlice } from "./inputStatusSlice";
 import { isTestFinishedSlice } from "./isTestFinishedSlice";
 import { testOpacitySlice } from "./testOpacitySlice";
+import { isCusLimVisibilitySlice } from "./cusLimVisibility";
 const rootReducer = combineReducers({
   theme: themeSlice.reducer,
   testFrame: testFrameSlice.reducer,
   testModifier: testModifierSlice.reducer,
   testLimiter: testLimiterSlice.reducer,
-  isTestSettingsVisible: testSettingsVisibilitySlice.reducer,
+  isTestSetVisible: testSettingsVisibilitySlice.reducer,
   isThemeVisible: themeVisibilitySlice.reducer,
   isInputActive: inputStatusSlice.reducer,
   isTestFinished: isTestFinishedSlice.reducer,
-  testOpacity: testOpacitySlice.reducer
+  testOpacity: testOpacitySlice.reducer,
+  isCusLimVisible: isCusLimVisibilitySlice.reducer,
 });
 
 const store = configureStore({

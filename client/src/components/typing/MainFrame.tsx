@@ -10,6 +10,7 @@ import { testOpacitySlice } from "../../redux/testOpacitySlice";
 import { MainFrameProgress } from "./MainFrameProgress";
 import { useTimer } from "../../hooks/useTimer";
 import { useRedux } from "../../hooks/useRedux";
+import { CustomLimiter } from "./CustomLimiter";
 
 export const MainFrame = () => {
   const [testSentence, setTestSentence] = useState("");
@@ -26,6 +27,7 @@ export const MainFrame = () => {
     testModifierSelector,
     isTestFinishedSelector,
     testFrameSelector,
+    isCusLimVisibleSelector,
     isTestFinishedDispatch,
     inputStatusDispatch,
     testOpacityDispatch,
@@ -263,6 +265,7 @@ export const MainFrame = () => {
 
   return !isTestFinishedSelector ? (
     <div className="relative text-custom-primary flex items-center flex-col mt-5">
+      {isCusLimVisibleSelector && <CustomLimiter />}
       <div>
         <MainFrameProgress
           countDown={countDown}

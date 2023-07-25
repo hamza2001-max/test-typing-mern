@@ -11,7 +11,7 @@ export interface CurrentFragmentInterface {
   currentSentenceWord: string;
 }
 
-export interface WordCheckerInterface {
+export interface WordValidatorInterface {
   inputValue: string;
   testSentence: string;
   textWritten: string;
@@ -99,4 +99,9 @@ export interface useTimerInterface {
   countDown: number;
   startCountDown: () => void;
   resetCountDown: () => void;
+}
+
+export interface useAutoScrollInterface {
+  testSentence: string;
+  textWritten: string;
 }

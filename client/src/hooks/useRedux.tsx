@@ -19,7 +19,7 @@ export const useRedux = () => {
     (state: RootState) => state.testOpacity.testOpacity
   );
   const testSettingsVSelector = useSelector(
-    (state: RootState) => state.isTestSettingsVisible.isTestSettingsVisible
+    (state: RootState) => state.isTestSetVisible.isTestSettingsVisible
   );
   const isInputActiveSelector = useSelector(
     (state: RootState) => state.isInputActive.isInputActive
@@ -27,8 +27,12 @@ export const useRedux = () => {
   const isTestFinishedSelector = useSelector(
     (state: RootState) => state.isTestFinished.isTestFinished
   );
+  const isCusLimVisibleSelector = useSelector(
+    (state: RootState) => state.isCusLimVisible.isCusLimVisible
+  );
 
   const themeVDispatch = useDispatch();
+  const isCusLimVisibleDispatch = useDispatch();
   const themeDispatch = useDispatch();
   const testFrameDispatch = useDispatch();
   const testModifierDispatch = useDispatch();
@@ -39,9 +43,10 @@ export const useRedux = () => {
   const testSettingsVDispatch = useDispatch();
 
   return {
-    themeSelector,
     themeVSelector,
+    isCusLimVisibleSelector,
     testFrameSelector,
+    themeSelector,
     isInputActiveSelector,
     testOpacitySelector,
     testModifierSelector,
@@ -55,6 +60,7 @@ export const useRedux = () => {
     inputStatusDispatch,
     isTestFinishedDispatch,
     themeVDispatch,
+    isCusLimVisibleDispatch,
     testOpacityDispatch,
     testLimiterDispatch,
   };

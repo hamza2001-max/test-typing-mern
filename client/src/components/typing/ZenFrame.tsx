@@ -140,7 +140,6 @@ export const ZenFrame = () => {
           e.stopPropagation();
           handleRefresh();
         }}
-        // ref={btnRef}
       >
         <VscDebugRestart />
       </button>

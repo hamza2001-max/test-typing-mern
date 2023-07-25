@@ -1,10 +1,13 @@
-- [ ] ASAP
-
-  - [ ] implement the local storage.
-
 - [ ] Todo
+  - [ ] sometimes zenFrame doesnt scroll.
+  - [x] solve the scroll error.
+  - [ ] implement the local storage.
   - [x] Refactor Redux.
   - [ ] implement custom frame.tsx.
+  - [ ] implement Custom Save.
+  - [ ] implement Custom Saved list.
+  - [ ] implement textGenerator for custom.
+  - [ ] implement punctuation, number and dual for custom.
   - [ ] when result is visible and the frame is changes the result doesnt disappear.
   - [ ] in mainFrame apply tooltip where necessary.
   - [ ] scroll problem in zenFrame.tsx.
@@ -19,9 +22,9 @@
 - [ ] ideas
 
   - [ ] Add a practice mode.
-  - [ ] Difficulty Levels.
+  - [x] Difficulty Levels.
   - [ ] Add sound effects.
-  - [ ] create graphs.
+  - [x] create graphs.
   - [ ] create localstorage.
   - [ ] create cookies if possible.
   - [ ] create settings.

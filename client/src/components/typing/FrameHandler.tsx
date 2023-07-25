@@ -1,7 +1,6 @@
 import { MainFrame } from "./MainFrame";
 import { TestSettings } from "../settings/TestSettings";
 import { ZenFrame } from "./ZenFrame";
-import { CustomFrame } from "./CustomFrame";
 import { useRedux } from "../../hooks/useRedux";
 
 const getFrameComponent = (testModeSelector: string) => {
@@ -9,11 +8,10 @@ const getFrameComponent = (testModeSelector: string) => {
     case "words":
     case "time":
     case "quote":
+    case "custom":
       return <MainFrame />;
     case "zen":
       return <ZenFrame />;
-    case "custom":
-      return <CustomFrame />;
     default:
       return null;
   }

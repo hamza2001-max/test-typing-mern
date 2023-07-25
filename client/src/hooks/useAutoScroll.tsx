@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-interface useAutoScrollInterface {
-  testSentence: string;
-  textWritten: string;
-}
+import { useAutoScrollInterface } from "../typescript/types";
+
 export const useAutoScroll = ({
   testSentence,
   textWritten,
@@ -15,6 +13,8 @@ export const useAutoScroll = ({
   useEffect(() => {
     if (typedSentenceRef.current) {
       typedSentenceRef.current.scrollTop = 0;
+      setLineHeiInc(1.25);
+      setScrollIndex(3);
     }
   }, [testSentence]);
 
@@ -25,11 +25,13 @@ export const useAutoScroll = ({
       const lineHeight = parseInt(
         window.getComputedStyle(divElement).lineHeight || "0"
       );
-      const lines = Math.floor(divHeight / lineHeight);
+      let lines = Math.floor(divHeight / lineHeight) - 1 ;
+      console.log("lines " + lines);
+      console.log("scrollIndex " + scrollIndex);
       if (lines === scrollIndex) {
         if (typedSentenceRef.current) {
           typedSentenceRef.current.scrollTop = lineHeight * lineHeiInc;
-          setScrollIndex((prev) => ++prev);
+          setScrollIndex((prev) => (prev += 1));
           setLineHeiInc((prev) => prev + 1.25);
         }
       }
@@ -40,6 +42,6 @@ export const useAutoScroll = ({
     divRef,
     typedSentenceRef,
     setLineHeiInc,
-    setScrollIndex
+    setScrollIndex,
   };
 };
