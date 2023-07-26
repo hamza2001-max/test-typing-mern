@@ -6,7 +6,6 @@ import { footerData } from "../../data/footerData";
 import { IoIosColorPalette } from "react-icons/io";
 import { VscRepoForked } from "react-icons/vsc";
 import { useRedux } from "../../hooks/useRedux";
-// import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 export const Footer = () => {
   const {
@@ -16,15 +15,12 @@ export const Footer = () => {
     themeDispatch,
     themeVDispatch,
   } = useRedux();
-  // const [theme, setTheme] = useLocalStorage("theme", "light");
   const { visibleTheme, inVisibleTheme } = themeVisibilitySlice.actions;
-
   const handleThemeChange = (
     selectedTheme: (typeof themeSlice.actions)[keyof typeof themeSlice.actions]
   ) => {
     themeDispatch(selectedTheme());
     themeVDispatch(inVisibleTheme());
-    // setTheme(selectedTheme());
   };
 
   return (
@@ -33,16 +29,6 @@ export const Footer = () => {
         !testOpacitySelector && "opacity-0"
       } duration-300 transition-all text-sm text-custom-primary px-12 xl:px-52 py-10`}
     >
-      <p className="w-full flex justify-center mb-8">
-        <span className="px-1 mr-2 bg-custom-primary text-custom-fill rounded-sm">
-          tab
-        </span>{" "}
-        +{" "}
-        <span className="px-1 mx-2 bg-custom-primary text-custom-fill rounded-sm">
-          enter
-        </span>{" "}
-        = restart test
-      </p>
       <section className="flex justify-between ">
         <div className="grid gap-x-2 grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 xl:grid-cols-8">
           {footerData.map((row, index) => {

@@ -7,10 +7,6 @@ export const WordValidator = ({
   textWritten,
   inputValue,
   testSentence,
-  // lineHeiInc,
-  // scrollIndex,
-  // setLineHeiInc,
-  // setScrollIndex
 }: WordValidatorInterface) => {
   const {divRef, typedSentenceRef} = useAutoScroll({textWritten, testSentence});
   let currentSentenceWord = "";

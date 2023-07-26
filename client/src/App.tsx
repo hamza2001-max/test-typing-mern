@@ -1,17 +1,18 @@
-import { Home } from "./pages/Home";
-import { inputStatusSlice } from "./redux/inputStatusSlice";
+import { Route, Routes } from "react-router-dom";
 import { useRedux } from "./hooks/useRedux";
+import { Home } from "./pages/Home";
+import { About } from "./pages/About";
+import { Account } from "./pages/Account";
 
 function App() {
-  const { inActive } = inputStatusSlice.actions;
-  const { isInputActiveSelector, themeSelector, inputStatusDispatch } =
-    useRedux();
+  const { themeSelector } = useRedux();
   return (
-    <div
-      className={`${themeSelector} App relative bg-custom-fill`}
-      onClick={() => isInputActiveSelector && inputStatusDispatch(inActive())}
-    >
-      <Home />
+    <div className={`${themeSelector} App relative bg-custom-fill`}>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/About" element={<About />} />
+        <Route path="/Account" element={<Account />} />
+      </Routes>
     </div>
   );
 }

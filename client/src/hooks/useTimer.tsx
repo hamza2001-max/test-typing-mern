@@ -3,7 +3,6 @@ import { useTimerInterface } from "../typescript/types";
 import { useRedux } from "./useRedux";
 
 type countDownStatusType = "idle" | "running" | "finished";
-
 export const useTimer = (): useTimerInterface => {
   const [countDownStatus, setCountDownStatus] =
     useState<countDownStatusType>("idle");
