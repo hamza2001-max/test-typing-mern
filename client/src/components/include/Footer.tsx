@@ -6,7 +6,7 @@ import { footerData } from "../../data/footerData";
 import { IoIosColorPalette } from "react-icons/io";
 import { VscRepoForked } from "react-icons/vsc";
 import { useRedux } from "../../hooks/useRedux";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
+// import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 export const Footer = () => {
   const {
@@ -16,7 +16,7 @@ export const Footer = () => {
     themeDispatch,
     themeVDispatch,
   } = useRedux();
-  const [theme, setTheme] = useLocalStorage("theme", "light");
+  // const [theme, setTheme] = useLocalStorage("theme", "light");
   const { visibleTheme, inVisibleTheme } = themeVisibilitySlice.actions;
 
   const handleThemeChange = (
@@ -24,7 +24,7 @@ export const Footer = () => {
   ) => {
     themeDispatch(selectedTheme());
     themeVDispatch(inVisibleTheme());
-    setTheme(selectedTheme());
+    // setTheme(selectedTheme());
   };
 
   return (
