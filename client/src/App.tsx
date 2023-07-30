@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { useRedux } from "./hooks/useRedux";
 import { Home } from "./pages/Home";
 import { About } from "./pages/About";
+import { Auth } from "./pages/Auth";
 import { Account } from "./pages/Account";
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/About" element={<About />} />
+        <Route path="/Auth" element={<Auth />} />
         <Route path="/Account" element={<Account />} />
       </Routes>
     </div>

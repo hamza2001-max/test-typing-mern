@@ -1,5 +1,5 @@
 import { MainFrame } from "./MainFrame";
-import { TestSettings } from "../settings/TestSettings";
+import { TestSettings } from "./TestSettings";
 import { ZenFrame } from "./ZenFrame";
 import { useRedux } from "../../hooks/useRedux";
 

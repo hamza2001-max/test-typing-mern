@@ -3,10 +3,10 @@ import { Navigation } from "../components/include/Navigation";
 
 export const About = () => {
   return (
-    <section className="flex flex-col justify-between h-screen">
+    <section className="flex flex-col justify-between h-full lg:h-screen">
       <Navigation />
       <section className="xl:px-52">
-        <div className="flex flex-col items-center text-custom-primary mb-12">
+        <div className="flex flex-col items-center text-custom-primary mb-10 md:mb-14 lg:mb-10">
           <span>Its a website to check your wpm.</span>
           <span>A copy of monkeyType.</span>
           <span>By Hamza.</span>

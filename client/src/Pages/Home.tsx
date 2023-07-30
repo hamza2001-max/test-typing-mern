@@ -1,6 +1,6 @@
 import { Footer } from "../components/include/Footer";
 import { Navigation } from "../components/include/Navigation";
-import { FrameHandler } from "../components/typing/FrameHandler";
+import { FrameHandler } from "../components/home/FrameHandler";
 import { testSettingsVisibilitySlice } from "../redux/testSettingsVisibilitySlice";
 import { themeVisibilitySlice } from "../redux/themeVisibilitySlice";
 import { useRedux } from "../hooks/useRedux";

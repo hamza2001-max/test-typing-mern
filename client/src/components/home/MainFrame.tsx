@@ -4,7 +4,7 @@ import { VscDebugRestart } from "react-icons/vsc";
 import { GiArrowCursor } from "react-icons/gi";
 import { WordValidator } from "./WordValidator";
 import { inputStatusSlice } from "../../redux/inputStatusSlice";
-import Result from "../result/Result";
+import Result from "./Result";
 import { isTestFinishedSlice } from "../../redux/isTestFinishedSlice";
 import { testOpacitySlice } from "../../redux/testOpacitySlice";
 import { MainFrameProgress } from "./MainFrameProgress";

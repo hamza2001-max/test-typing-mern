@@ -23,9 +23,12 @@ export const Navigation = () => {
           </Link>
         </div>
       </div>
-      <Link to={"/Account"}>
-        <FaUser className="text-custom-primary cursor-pointer hover:text-custom-secondary transition ease-in-out delay-75" />
-      </Link>
+      <div className="flex items-center">
+        <Link to={"/Account"}>Account</Link>
+        <Link to={"/Account"}>
+          <FaUser className="text-sm xs:text-xl text-custom-primary cursor-pointer hover:text-custom-secondary transition ease-in-out delay-75" />
+        </Link>
+      </div>
     </nav>
   );
 };
