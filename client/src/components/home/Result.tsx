@@ -4,7 +4,7 @@ import {
   ResultInterface,
   WpmArrInterface,
 } from "../../typescript/types";
-import { LineChart } from "./LineChart";
+import { LineChart } from "../include/LineChart";
 import { Tooltip } from "../include/Tooltip";
 import { ProceedResult } from "./ProceedResult";
 import { useRedux } from "../../hooks/useRedux";

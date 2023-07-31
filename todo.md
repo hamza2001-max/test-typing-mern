@@ -1,7 +1,11 @@
 - [ ] Todo
+  - [ ] theme doesnt disappear in account.tsx
+  - [ ] in LineChart.tsx make the x axis label dynamic.
+  - [ ] continue cusLimitPrompt and savedList.
+  - [ ] style cusLimiter on large.
   - [ ] sometimes zenFrame doesnt scroll.
   - [x] solve the scroll error.
-  - [ ] implement the local storage.
+  - [x] implement the local storage.
   - [x] Refactor Redux.
   - [ ] implement custom frame.tsx.
   - [ ] implement Custom Save.
@@ -25,7 +29,7 @@
   - [x] Difficulty Levels.
   - [ ] Add sound effects.
   - [x] create graphs.
-  - [ ] create localstorage.
+  - [x] create localstorage.
   - [ ] create cookies if possible.
   - [ ] create settings.
   - [ ] create multiple users.

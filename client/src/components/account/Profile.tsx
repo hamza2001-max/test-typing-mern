@@ -13,7 +13,7 @@ export const Profile = () => {
         </div>
         <div className="h-40 w-2 bg-custom-fill hidden sm:block rounded-lg"></div>
       </div>
-      <div className="mt-5 sm:mt-0 md:flex-row sm:w-full sm:px-4 space-y-2 xs:space-y-0 xs:flex xs:justify-between sm:flex-col md:px-16">
+      <div className="mt-5 sm:mt-0 md:flex-row sm:w-full sm:px-4 space-y-2 xs:space-y-0 xs:flex xs:justify-between sm:flex-col md:px-8 lg:mx-16">
         <div className="flex flex-col">
           <span className="text-xs whitespace-nowrap">tests started</span>
           <span className="text-custom-secondary text-3xl">value</span>
