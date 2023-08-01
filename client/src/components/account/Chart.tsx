@@ -35,7 +35,7 @@ export const Chart = () => {
           <button>60 seconds</button>
           <button>120 seconds</button>
         </div>
-        <LineChart data={data} />
+        <LineChart data={data} xLegend="Iteration Of Tests"/>
       </div>
       <div>
         <div className="w-[80vw] flex justify-between">
@@ -44,7 +44,7 @@ export const Chart = () => {
           <button>50 words</button>
           <button>100 words</button>
         </div>
-        <LineChart data={data} />
+        <LineChart data={data} xLegend="Iteration Of Tests"/>
       </div>
     </div>
   );

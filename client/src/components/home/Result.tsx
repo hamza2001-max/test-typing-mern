@@ -33,28 +33,10 @@ const Result = ({
 
 
   useEffect(() => {
-    let data;
-    if (wpmArr.length > 10) {
-      const num = Math.ceil(wpmArr.length / 10);
-      data = [];
-      for (let i = 0; i < wpmArr.length; i += num) {
-        let sum = 0;
-        let count = 0;
-        for (let j = i; j < i + num && j < wpmArr.length; j++) {
-          sum += wpmArr[j].wpm;
-          count++;
-        }
-        data.push({
-          x: i / num,
-          y: sum / count,
-        });
-      }
-    } else {
-      data = wpmArr.map((element, index) => ({
-        x: index,
-        y: element.wpm,
-      }));
-    }
+    let data = wpmArr.map((element, index) => ({
+      x: index,
+      y: element.wpm,
+    }));
 
     setData([
       {
@@ -196,7 +178,7 @@ const Result = ({
             </span>
           </div>
         </div>
-        <LineChart data={data} />
+        <LineChart data={data} xLegend="Indeces Of Words"/>
       </div>
       <div className="w-full px-9 flex justify-between sm:justify-start sm:space-x-12 md:justify-center md:mt-5">
         <div className="flex flex-col">

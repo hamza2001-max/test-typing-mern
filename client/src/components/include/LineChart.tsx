@@ -1,7 +1,9 @@
 import { ResponsiveLine } from "@nivo/line";
 import { DataInterface } from "../../typescript/types";
+import { useMediaQuery } from "react-responsive";
 
-export const LineChart = ({ data }: { data: DataInterface[] }) => {
+export const LineChart = ({ data, xLegend }: { data: DataInterface[], xLegend:string }) => {
+  const isBreakpointMedium = useMediaQuery({ query: "(min-width: 768px)" });
   const theme = {
     grid: {
       line: {
@@ -33,8 +35,10 @@ export const LineChart = ({ data }: { data: DataInterface[] }) => {
       <ResponsiveLine
         data={data}
         theme={theme}
-        margin={{ top: 30, right:25, bottom: 50, left: 60 }}
-        xScale={{ type: "point" }}
+        margin={{ top: 30, right: 25, bottom: 50, left: 60 }}
+        xScale={{ type: "linear" }}
+        lineWidth={isBreakpointMedium ? 2 : 1.3}
+        pointSize={isBreakpointMedium ? 6 : 4}
         yScale={{
           type: "linear",
           min: "auto",
@@ -44,8 +48,9 @@ export const LineChart = ({ data }: { data: DataInterface[] }) => {
         }}
         curve="natural"
         axisBottom={{
+          tickValues: 10,
           tickPadding: 5,
-          legend: "Indeces Of Words",
+          legend: xLegend,
           legendOffset: 36,
           legendPosition: "middle",
         }}
@@ -58,7 +63,6 @@ export const LineChart = ({ data }: { data: DataInterface[] }) => {
           legendPosition: "middle",
         }}
         colors={["var(--color-tertiary)"]}
-        pointSize={5}
         pointColor={{ from: "color", modifiers: [] }}
         pointBorderColor={{ from: "serieColor", modifiers: [] }}
         pointLabelYOffset={-12}
