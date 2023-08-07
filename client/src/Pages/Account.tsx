@@ -3,6 +3,7 @@ import { Footer } from "../components/include/Footer";
 import { Profile } from "../components/account/Profile";
 import { PersonalBest } from "../components/account/PersonalBest";
 import { Chart } from "../components/account/Chart";
+import { History } from "../components/account/History";
 export const Account = () => {
   return (
     <section>
@@ -14,6 +15,7 @@ export const Account = () => {
           <PersonalBest variable={[10, 25, 50, 100]} category="words" />
         </div>
         <Chart />
+        <History/>
       </section>
       <Footer />
     </section>

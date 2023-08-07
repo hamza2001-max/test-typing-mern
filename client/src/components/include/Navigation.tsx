@@ -25,7 +25,7 @@ export const Navigation = () => {
       </div>
       <div className="flex items-center">
         <Link to={"/Account"}>Account</Link>
-        <Link to={"/Account"}>
+        <Link to={"/Auth"}>
           <FaUser className="text-sm xs:text-xl text-custom-primary cursor-pointer hover:text-custom-secondary transition ease-in-out delay-75" />
         </Link>
       </div>

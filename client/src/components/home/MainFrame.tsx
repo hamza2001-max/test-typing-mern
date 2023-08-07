@@ -1,16 +1,16 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { punctuationsJSON, quoteJSON, wordsJSON } from "../../testJson";
+import { punctuationsJSON, quoteJSON, wordsJSON } from "../../data/textData";
 import { VscDebugRestart } from "react-icons/vsc";
 import { GiArrowCursor } from "react-icons/gi";
 import { WordValidator } from "./WordValidator";
 import { inputStatusSlice } from "../../redux/inputStatusSlice";
-import Result from "./Result";
 import { isTestFinishedSlice } from "../../redux/isTestFinishedSlice";
 import { testOpacitySlice } from "../../redux/testOpacitySlice";
 import { MainFrameProgress } from "./MainFrameProgress";
 import { useTimer } from "../../hooks/useTimer";
 import { useRedux } from "../../hooks/useRedux";
 import { CustomLimiter } from "./CustomLimiter";
+import Result from "./Result";
 
 export const MainFrame = () => {
   const [testSentence, setTestSentence] = useState("");

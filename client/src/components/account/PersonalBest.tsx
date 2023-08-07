@@ -5,9 +5,9 @@ interface PersonalBestInterface {
 export const PersonalBest = ({ category, variable }: PersonalBestInterface) => {
   return (
     <section className="bg-custom-fadedFill text-custom-primary p-5 rounded-lg lg:w-[38vw] grid grid-cols-2 xs:grid-cols-4">
-      {variable.map((val) => {
+      {variable.map((val, index) => {
         return (
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center" key={index}>
             <span className="text-xs">
               {val} {category}
             </span>
