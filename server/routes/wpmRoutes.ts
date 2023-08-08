@@ -1,6 +1,6 @@
 export {};
 const express= require("express");
-const {getAllWpmRecord, postWpm} = require("../controllers/wpmConroller")
+const {getAllWpmRecord, postWpm} = require("../controllers/wpmController")
 
 const wpmRoute = express.Router();
 wpmRoute.get('/', getAllWpmRecord);

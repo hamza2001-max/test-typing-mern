@@ -18,10 +18,10 @@ const getFrameComponent = (testModeSelector: string) => {
 };
 
 export const FrameHandler = () => {
-  const {testFrameSelector} = useRedux();
+  const {testFrameSelector, isTestFinishedSelector} = useRedux();
   return (
     <section className="space-y-16">
-      <TestSettings />
+      {!isTestFinishedSelector && <TestSettings />}
       {getFrameComponent(testFrameSelector)}
     </section>
   );

@@ -11,6 +11,7 @@ import { useTimer } from "../../hooks/useTimer";
 import { useRedux } from "../../hooks/useRedux";
 import { CustomLimiter } from "./CustomLimiter";
 import Result from "./Result";
+import { Tooltip } from "../include/Tooltip";
 
 export const MainFrame = () => {
   const [testSentence, setTestSentence] = useState("");
@@ -94,6 +95,7 @@ export const MainFrame = () => {
       document.addEventListener("mousemove", testSettingsVisible);
     };
   });
+
 
   useEffect(() => {
     if (
@@ -312,7 +314,13 @@ export const MainFrame = () => {
         }}
         ref={btnRef}
       >
-        <VscDebugRestart />
+        <Tooltip
+          icon={VscDebugRestart}
+          hover={"Restart Test"}
+          nowrap={true}
+          space="bottom-8"
+        />
+
       </button>
     </div>
   ) : (
@@ -322,9 +330,9 @@ export const MainFrame = () => {
       testSentence={
         testFrameSelector === "time"
           ? testSentence
-              .split(" ")
-              .slice(0, textWritten.split(" ").length - 1)
-              .join(" ")
+            .split(" ")
+            .slice(0, textWritten.split(" ").length - 1)
+            .join(" ")
           : testSentence
       }
       elapsedTimeArray={elapsedTimeArray}

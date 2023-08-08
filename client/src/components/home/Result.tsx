@@ -8,6 +8,21 @@ import { LineChart } from "../include/LineChart";
 import { Tooltip } from "../include/Tooltip";
 import { ProceedResult } from "./ProceedResult";
 import { useRedux } from "../../hooks/useRedux";
+import axios from "axios";
+import { useMutation } from "react-query";
+import { queryClient } from "../..";
+
+interface mutationInterface {
+  wpm: number;
+  accuracy: number,
+  correctChars: number,
+  error: number,
+  extras: number,
+  missed: number,
+  mode: string,
+  limiter: number | string,
+  time: number,
+}
 
 const Result = ({
   textWritten,
@@ -17,9 +32,8 @@ const Result = ({
   handleRefresh,
   source,
 }: ResultInterface) => {
-  const { testFrameSelector } = useRedux();
+  const { testFrameSelector, testLimiterSelector } = useRedux();
   const [wpmArr, setWpmArr] = useState<WpmArrInterface[]>([]);
-  const [exe, setExe] = useState(0);
   const [data, setData] = useState<DataInterface[]>([]);
   const [result, setResult] = useState({
     wpm: 0,
@@ -30,7 +44,6 @@ const Result = ({
     missed: 0,
     time: 0,
   });
-
 
   useEffect(() => {
     let data = wpmArr.map((element, index) => ({
@@ -45,6 +58,13 @@ const Result = ({
       },
     ]);
   }, [wpmArr]);
+
+  const mutationFunction = async (record: mutationInterface) => {
+    const postRecord = await axios.post("http://localhost:7000/api/wpm/", record).catch((err) => {
+      console.log(err);
+    })
+    return postRecord;
+  }
 
   const handleResultReset = useCallback(() => {
     setWpmArr([]);
@@ -65,6 +85,16 @@ const Result = ({
     handleResultReset();
     handleRefresh();
   }, [handleRefresh, handleResultReset]);
+
+  const { mutate } = useMutation({
+    mutationFn: mutationFunction,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["wpmRecord"] });
+    },
+    onError: () => {
+      console.error("error received from useMutation");
+    }
+  })
 
   const calculateResult = useCallback(() => {
     let resultantWpm = 0;
@@ -104,8 +134,9 @@ const Result = ({
         }
 
         let wpm = Math.round(
-          (word.length + 1 - errors) / 5 / (elapsedTimeArray[index] / 60)
+          (word.length - errors) / 5 / (elapsedTimeArray[index] / 60)
         );
+
         resultantWpm += wpm;
         resultantCorrectChars += correctChars;
         resultantErrors += errors;
@@ -139,17 +170,31 @@ const Result = ({
       extras,
       missed,
     });
-  }, [elapsedTimeArray, testSentence, textWritten]);
+
+    mutate(
+      {
+        wpm: Number((resultantWpm / wpmArrLength).toFixed(3)),
+        accuracy: Number(accuracy.toFixed(2)),
+        time: Number(resultantTime.toFixed(2)),
+        correctChars: resultantCorrectChars,
+        error: resultantErrors,
+        extras,
+        missed,
+        limiter: testLimiterSelector,
+        mode: testFrameSelector
+      }
+    );
+  }, [elapsedTimeArray, testSentence, textWritten, mutate, testLimiterSelector, testFrameSelector]);
+
+
 
   useEffect(() => {
     if (
-      textWritten.split(" ").length - 1 === testSentence.split(" ").length &&
-      exe === 0
+      textWritten.split(" ").length - 1 === testSentence.split(" ").length
     ) {
       calculateResult();
-      setExe((prev) => ++prev);
     }
-  }, [textWritten, testSentence, calculateResult, exe]);
+  }, [textWritten, testSentence, calculateResult]);
 
   return (
     <section className="w-full flex flex-col items-center justify-center">
@@ -178,7 +223,7 @@ const Result = ({
             </span>
           </div>
         </div>
-        <LineChart data={data} xLegend="Indeces Of Words"/>
+        <LineChart data={data} xLegend="Indeces Of Words" />
       </div>
       <div className="w-full px-9 flex justify-between sm:justify-start sm:space-x-12 md:justify-center md:mt-5">
         <div className="flex flex-col">

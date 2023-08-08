@@ -3,13 +3,19 @@ import { FaCrown } from "react-icons/fa";
 import { FaInfo } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
+// import { useRedux } from "../../hooks/useRedux";
+// import { isTestFinishedSlice } from "../../redux/isTestFinishedSlice";
 
 export const Navigation = () => {
+  // const { isTestFinishedDispatch } = useRedux();
+  // const { testIsFinished, testIsNotFinished } = isTestFinishedSlice.actions;
   return (
     <nav className="flex justify-between items-center px-12 py-6">
       <div className="flex items-center">
         <Link to={"/"}>
-          <span className="text-lg sm:text-2xl mr-5 text-custom-secondary font-semibold">
+          <span className="text-lg sm:text-2xl mr-5 text-custom-secondary font-semibold"
+          // onClick={() => {isTestFinishedDispatch(testIsNotFinished())}}
+          >
             typeTesting
           </span>
         </Link>

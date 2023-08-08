@@ -1,45 +1,43 @@
 - [ ] Todo
-  - [ ] theme doesnt disappear in account.tsx
-  - [ ] in LineChart.tsx make the x axis label dynamic.
+  - [ ] make the data available for account graphs.
   - [ ] continue cusLimitPrompt and savedList.
   - [ ] style cusLimiter on large.
   - [ ] sometimes zenFrame doesnt scroll.
-  - [x] solve the scroll error.
-  - [x] implement the local storage.
-  - [x] Refactor Redux.
   - [ ] implement custom frame.tsx.
   - [ ] implement Custom Save.
   - [ ] implement Custom Saved list.
   - [ ] implement textGenerator for custom.
   - [ ] implement punctuation, number and dual for custom.
-  - [ ] when result is visible and the frame is changes the result doesnt disappear.
-  - [ ] in mainFrame apply tooltip where necessary.
   - [ ] scroll problem in zenFrame.tsx.
   - [ ] implement custom frame.
   - [ ] in time mode sometimes the tab functionality doesnt work properly, try to use useRef for it.
-  - [ ] delay the blur effect.
   - [ ] implement all test modes.
   - [ ] implement time mode in the word mode if nothing has been written for a long time and make the test invalid.
-  - [ ] implement hot toast.
-
 
 - [ ] ideas
-
   - [ ] Add a practice mode.
-  - [x] Difficulty Levels.
-  - [ ] Add sound effects.
-  - [x] create graphs.
-  - [x] create localstorage.
   - [ ] create cookies if possible.
-  - [ ] create settings.
   - [ ] create multiple users.
-  - [ ] create admin.
-  - [ ] give admin the ability to make other admins.
-  - [ ] give admin dashboard.
-  - [ ] admin can insert new colors.
-  - [ ] implement command line.
 
 - [ ] completed
+  - [x] Difficulty Levels.
+  - [x] create graphs.
+  - [x] create localstorage.
+  - [x] create settings.
+  - [x] remove on focus bg change.
+  - [x] make the data available for result graph.
+  - [x] post data to backend.
+  - [x] receive data from backend.
+  - [x] connect backend with frontend.
+  - [x] initiate backend.
+  - [x] remove testSettings from Result.tsx.
+  - [x] make the mouse hover function for result disable when setting and footer disappear.
+  - [x] theme doesnt disappear in account.tsx
+  - [x] in LineChart.tsx make the x axis label dynamic.
+  - [x] solve the scroll error.
+  - [x] implement the local storage.
+  - [x] Refactor Redux.
+  - [x] in mainFrame apply tooltip where necessary.
   - [x] hide the number of words written untill first character is written.
   - [x] fix the scroll problem.
   - [x] make the extra characters appear if there are any.

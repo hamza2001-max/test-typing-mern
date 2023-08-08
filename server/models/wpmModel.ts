@@ -32,7 +32,7 @@ const wpmSchema = new Schema({
     required: "true",
   },
   limiter: {
-    type: "number",
+    type: Schema.Types.Mixed,
     required: "true",
   },
   time: {

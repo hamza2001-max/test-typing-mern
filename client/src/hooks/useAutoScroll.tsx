@@ -26,8 +26,6 @@ export const useAutoScroll = ({
         window.getComputedStyle(divElement).lineHeight || "0"
       );
       let lines = Math.floor(divHeight / lineHeight) - 1 ;
-      console.log("lines " + lines);
-      console.log("scrollIndex " + scrollIndex);
       if (lines === scrollIndex) {
         if (typedSentenceRef.current) {
           typedSentenceRef.current.scrollTop = lineHeight * lineHeiInc;

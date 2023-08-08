@@ -6,11 +6,13 @@ import { footerData } from "../../data/footerData";
 import { IoIosColorPalette } from "react-icons/io";
 import { VscRepoForked } from "react-icons/vsc";
 import { useRedux } from "../../hooks/useRedux";
+import { Tooltip } from "./Tooltip";
 
 export const Footer = () => {
   const {
     themeSelector,
     themeVSelector,
+    isTestFinishedSelector,
     testOpacitySelector,
     themeDispatch,
     themeVDispatch,
@@ -25,9 +27,8 @@ export const Footer = () => {
 
   return (
     <footer
-      className={`${
-        !testOpacitySelector && "opacity-0"
-      } duration-300 transition-all text-sm text-custom-primary px-12 xl:px-52 py-10`}
+      className={`${!testOpacitySelector && !isTestFinishedSelector && "opacity-0"
+        } duration-300 transition-all text-sm text-custom-primary px-12 xl:px-52 py-10`}
     >
       <p className="w-full flex justify-center mb-8">
         <span className="px-1 mr-2 bg-custom-primary text-custom-fill rounded-sm">
@@ -59,7 +60,12 @@ export const Footer = () => {
             onClick={() => themeVDispatch(visibleTheme())}
           >
             <IoIosColorPalette className="mr-2" />
-            {themeSelector ? themeSelector : "light"}
+            <Tooltip
+              element={themeSelector ? themeSelector : "light"}
+              hover={"Select Theme"}
+              nowrap={true}
+              space="bottom-8"
+            />
           </span>
           <span className="flex items-center cursor-pointer hover:text-custom-secondary transition ease-in-out delay-75">
             <VscRepoForked className="mr-2" />

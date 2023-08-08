@@ -10,5 +10,6 @@ export const useGetData = () => {
             throw err;
         }
     });
+    
     return { data, isLoading, error };
 }
