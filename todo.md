@@ -1,4 +1,5 @@
 - [ ] Todo
+  - [ ] complete UserModel static function 
   - [ ] instead of 7000 use env.PORT.
   - [ ] make the data available for account graphs.
   - [ ] continue cusLimitPrompt and savedList.

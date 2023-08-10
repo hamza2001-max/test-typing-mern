@@ -1,4 +1,3 @@
-const userModel = require("../models/userModel");
 import { Request, Response } from "express";
 const jwt = require("jsonwebtoken");
 const userSchema = require("../models/userModel");
@@ -10,23 +9,23 @@ const generateToken = (_id: string) => {
 const signup = async (req: Request, res: Response) => {
   const { email, password, username } = req.body;
   try {
-    const newUser = userSchema.signup(email, password, username);
+    const newUser = await userSchema.signup({ email, password, username });
     let token = generateToken(newUser._id);
     res.status(200).json({ email, token });
-  } catch (err) {
-    res.status(400).json(err);
+  } catch (err: any) {
+    res.status(400).json({ error: err.message });
   }
 };
 
 const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
   try {
-    const user = await userModel.login(email, password);
+    const user = await userSchema.login({ email, password });
     let token = generateToken(user._id);
     res.status(200).json({ email, token });
-  } catch (error: any) {
-    res.status(400).json({ error: error.message });
+  } catch (err: any) {
+    res.status(400).json({ error: err.message });
   }
 };
 
-module.exports = {signup, login};
+module.exports = { signup, login };

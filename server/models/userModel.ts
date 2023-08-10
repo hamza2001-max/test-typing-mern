@@ -1,4 +1,6 @@
-import { userSchemaInterface } from "../typescript/types";
+import {
+  IStatics
+} from "../types";
 
 export {};
 const mongoose = require("mongoose");
@@ -23,8 +25,7 @@ const userSchema = new Schema({
     type: "string",
     required: true,
     minlength: 8,
-    maxlength: 30,
-    select: false,
+    maxlength: 150,
   },
   joinedDate: {
     type: "date",
@@ -36,17 +37,17 @@ const userSchema = new Schema({
   },
 });
 
-userSchema.static.signup = async function ({
+userSchema.statics.signup = async function ({
   email,
   password,
   username,
-}: userSchemaInterface) {
+}: IStatics) {
   try {
     if (!email || !password || !username) {
       throw new Error("Please fill the required fields");
     }
-    if(!validator.isLength(username, {min: 3, max: 30})){
-        throw new Error("The length of username should be between 3 and 30.")
+    if (!validator.isLength(username, { min: 3, max: 30 })) {
+      throw new Error("The length of username should be between 3 and 30.");
     }
     if (!validator.isEmail(email)) {
       throw new Error("Provide enter a valid email address.");
@@ -61,28 +62,34 @@ userSchema.static.signup = async function ({
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
     const user = await this.create({ email, password: hash, username });
+    user.profilePicture = "default-profile-image.jpg";
+    user.joinedDate = Date.now;
     return user;
   } catch (err) {
     throw err;
   }
 };
 
-userSchema.static.login = async function ({email, password}:userSchemaInterface){
-    try {
-        if (!email || !password) {
-          throw new Error("Please fill the required fields");
-        }
-        const user = await this.findOne({email});
-        if(!user){
-            throw new Error("User does not exist.");
-        }
-        const match = await bcrypt.compare(password, user.password);
-        if(!match){
-            throw new Error("wrong Password");
-        }
-      } catch (err) {
-        throw err;
-      }
-}
+userSchema.statics.login = async function ({
+  email,
+  password,
+}: IStatics) {
+  try {
+    if (!email || !password) {
+      throw new Error("Please fill the required fields");
+    }
+    const user = await this.findOne({ email }).select("+password");
+    if (!user) {
+      throw new Error("User does not exist.");
+    }
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) {
+      throw new Error("wrong Password");
+    }
+    return user;
+  } catch (err) {
+    throw err;
+  }
+};
 
 module.exports = mongoose.model("UserSchema", userSchema);
