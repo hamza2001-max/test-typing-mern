@@ -1,4 +1,7 @@
 - [ ] Todo
+  - [ ] complete useAuth.tsx
+  - [ ] make username unique.
+  - [ ] apply types to authorization.ts
   - [ ] complete UserModel static function 
   - [ ] instead of 7000 use env.PORT.
   - [ ] make the data available for account graphs.
