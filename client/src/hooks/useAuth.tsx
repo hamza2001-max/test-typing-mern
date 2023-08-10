@@ -30,5 +30,5 @@ export const useAuth = (account: IUseAuth) => {
         }
     });
 
-    return mutate;
+    return {mutate};
 }
