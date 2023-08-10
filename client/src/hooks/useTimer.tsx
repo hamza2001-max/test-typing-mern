@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
-import { useTimerInterface } from "../typescript/types";
+import { IUseTimer } from "../types";
 import { useRedux } from "./useRedux";
 
 type countDownStatusType = "idle" | "running" | "finished";
-export const useTimer = (): useTimerInterface => {
+export const useTimer = (): IUseTimer => {
   const [countDownStatus, setCountDownStatus] =
     useState<countDownStatusType>("idle");
   const [countDown, setCountDown] = useState<number>(30);

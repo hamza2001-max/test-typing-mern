@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { useAutoScrollInterface } from "../typescript/types";
+import { IUseAutoScroll } from "../types";
 
 export const useAutoScroll = ({
   testSentence,
   textWritten,
-}: useAutoScrollInterface) => {
+}: IUseAutoScroll) => {
   const [lineHeiInc, setLineHeiInc] = useState(1.25);
   const [scrollIndex, setScrollIndex] = useState(3);
   const divRef = useRef<HTMLDivElement>(null);

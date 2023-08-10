@@ -2,13 +2,13 @@ import { useRef, useEffect } from "react";
 import { Tooltip } from "../include/Tooltip";
 import { BsArrowRepeat, BsTextLeft } from "react-icons/bs";
 import { AiFillWarning } from "react-icons/ai";
-import { ProceedResultInterface } from "../../typescript/types";
+import { IProceedResult } from "../../types";
 import { MdNavigateNext } from "react-icons/md";
 
 export const ProceedResult = ({
   handleResultRefresh,
   handleResultReset,
-}: ProceedResultInterface) => {
+}: IProceedResult) => {
   const btnRef = useRef<HTMLButtonElement | null>(null);
   useEffect(() => {
     const handleBtnKeyDown = (e: KeyboardEvent) => {

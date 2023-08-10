@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { CurrentFragmentInterface } from "../../typescript/types";
+import { ICurrentFragment } from "../../types";
 import { Caret } from "./Caret";
 import { useMediaQuery } from "react-responsive";
 import { CurrentRemainingLetters } from "./CurrentRemainingLetters";
@@ -8,7 +8,7 @@ import { useRedux } from "../../hooks/useRedux";
 export const CurrentFragment = ({
   inputValue,
   currentSentenceWord,
-}: CurrentFragmentInterface) => {
+}: ICurrentFragment) => {
   let caretConstRef = useRef(14.38);
   const { isInputActiveSelector } = useRedux();
   const isBreakpointLarge = useMediaQuery({ query: "(min-width: 1024px)" });

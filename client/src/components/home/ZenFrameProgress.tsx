@@ -1,10 +1,9 @@
+import { IZenFrameProgress } from "../../types";
+
 export const ZenFrameProgress = ({
   textWritten,
   inputValue,
-}: {
-  textWritten: string;
-  inputValue: string;
-}) => {
+}: IZenFrameProgress) => {
   return (
     <>
       {(inputValue || textWritten) && (

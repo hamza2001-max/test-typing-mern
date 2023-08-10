@@ -1,6 +1,6 @@
-import { TooltipInterface } from "../../typescript/types";
+import { ITooltip } from "../../types";
 
-export const Tooltip = ({ element, hover, icon, nowrap, space }: TooltipInterface) => {
+export const Tooltip = ({ element, hover, icon, nowrap, space }: ITooltip) => {
   const IconComponent = icon as React.ComponentType;
   return (
     <div className="relative flex flex-col items-center cursor-pointer group">

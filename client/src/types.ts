@@ -1,39 +1,39 @@
 import { IconType } from "react-icons/lib";
 
-export interface ThemeOptionInterface {
+export interface IThemeOption {
   title: string;
   themeClass: string;
   onClick: () => void;
 }
 
-export interface CurrentFragmentInterface {
+export interface ICurrentFragment {
   inputValue: string;
   currentSentenceWord: string;
 }
 
-export interface WordValidatorInterface {
+export interface IWordValidator {
   inputValue: string;
   testSentence: string;
   textWritten: string;
 }
 
-export interface PreviousFragmentInterface {
+export interface IPreviousFragment {
   word: string;
   inputValue: string;
   writtenWord: string;
 }
 
-export interface CurrentRemainingLettersInterface {
+export interface ICurrentRemainingLetters {
   currentSentenceWord: string;
   inputValue: string;
 }
 
-export interface PreviousRemainingLettersInterface {
+export interface IPreviousRemainingLetters {
   writtenWord: string;
   word: string;
 }
 
-export interface CalculateResultInterface {
+export interface ICalculateResult {
   wpm: number;
   errors: number;
   correctChars: number;
@@ -43,7 +43,7 @@ export interface CalculateResultInterface {
   missed: number;
 }
 
-export interface WpmArrInterface {
+export interface IWpmArr {
   word: string;
   wpm: number;
   errors: number;
@@ -51,7 +51,7 @@ export interface WpmArrInterface {
   time: number;
 }
 
-export interface ResultInterface {
+export interface IResult {
   source: string;
   textWritten: string;
   testSentence: string;
@@ -65,12 +65,12 @@ export interface AxisInterface {
   y: number;
 }
 
-export interface DataInterface {
+export interface IData {
   id: string;
   data: AxisInterface[];
 }
 
-export interface TooltipInterface {
+export interface ITooltip {
   element?: string;
   hover: string;
   icon?: IconType;
@@ -78,30 +78,45 @@ export interface TooltipInterface {
   space: string;
 }
 
-export interface ProceedResultInterface {
+export interface IProceedResult {
   handleResultRefresh: () => void;
   handleResultReset: () => void;
 }
 
-export interface QuoteJSONInterface {
+export interface IQuoteJSON {
   [key: string]: { quote: string; source: string }[];
 }
 
-export interface TypingInfoInterface {
+export interface ITypingInfo {
   countDown: number;
   inputValue: string;
   textWritten: string;
   testSentence: string;
 }
 
-export interface useTimerInterface {
+export interface IUseTimer {
   countDownStatus: string;
   countDown: number;
   startCountDown: () => void;
   resetCountDown: () => void;
 }
 
-export interface useAutoScrollInterface {
+export interface IUseAutoScroll {
   testSentence: string;
   textWritten: string;
+}
+
+export interface IPersonalBest {
+  category: string;
+  variable: number[];
+}
+
+export interface ILineChart {
+  data: IData[],
+  xLegend: string
+}
+
+export interface IZenFrameProgress {
+  textWritten: string;
+  inputValue: string;
 }

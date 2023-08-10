@@ -1,11 +1,11 @@
-import { PreviousFragmentInterface } from "../../typescript/types";
+import { IPreviousFragment } from "../../types";
 import { PreviousRemainingLetter } from "./PreviousRemainingLetter";
 
 export const PreviousFragment = ({
   word,
   writtenWord,
   inputValue,
-}: PreviousFragmentInterface) => {
+}: IPreviousFragment) => {
   let isWordUnderlined = false;
 
   if (writtenWord) {

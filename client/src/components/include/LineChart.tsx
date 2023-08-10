@@ -1,8 +1,8 @@
 import { ResponsiveLine } from "@nivo/line";
-import { DataInterface } from "../../typescript/types";
+import { ILineChart } from "../../types";
 import { useMediaQuery } from "react-responsive";
 
-export const LineChart = ({ data, xLegend }: { data: DataInterface[], xLegend:string }) => {
+export const LineChart = ({ data, xLegend }:ILineChart) => {
   const isBreakpointMedium = useMediaQuery({ query: "(min-width: 768px)" });
   const theme = {
     grid: {

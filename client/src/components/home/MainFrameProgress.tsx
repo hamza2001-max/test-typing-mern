@@ -1,11 +1,11 @@
-import { TypingInfoInterface } from "../../typescript/types";
+import { ITypingInfo } from "../../types";
 import { useRedux } from "../../hooks/useRedux";
 export const MainFrameProgress = ({
   countDown,
   inputValue,
   textWritten,
   testSentence,
-}: TypingInfoInterface) => {
+}: ITypingInfo) => {
   const { testFrameSelector } = useRedux();
   return (
     <>

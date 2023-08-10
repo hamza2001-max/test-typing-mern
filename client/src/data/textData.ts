@@ -1,4 +1,4 @@
-import { QuoteJSONInterface } from "../typescript/types";
+import { IQuoteJSON } from "../types";
 
 export const wordsJSON = [
   {
@@ -284,7 +284,7 @@ export const punctuationsJSON = [
 
 
 
-export const quoteJSON:QuoteJSONInterface = {
+export const quoteJSON:IQuoteJSON = {
   short: [
     {
       quote: "The only way to do great work is to love what you do.",

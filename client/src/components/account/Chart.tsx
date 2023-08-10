@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { LineChart } from "../include/LineChart";
-import { DataInterface } from "../../typescript/types";
+import { IData } from "../../types";
 
 export const Chart = () => {
-  const [data,] = useState<DataInterface[]>([
+  const [data,] = useState<IData[]>([
     {
       id: "value",
       data: [

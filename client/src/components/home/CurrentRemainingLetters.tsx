@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { CurrentRemainingLettersInterface } from "../../typescript/types";
+import { ICurrentRemainingLetters } from "../../types";
 
 export const CurrentRemainingLetters = ({
   currentSentenceWord,
   inputValue,
-}: CurrentRemainingLettersInterface) => {
+}: ICurrentRemainingLetters) => {
   const [remainingLetters, setRemainingLetters] = useState<string>("");
 
   useEffect(() => {

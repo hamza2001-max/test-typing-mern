@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import {
-  DataInterface,
-  ResultInterface,
-  WpmArrInterface,
-} from "../../typescript/types";
+  IData,
+  IResult,
+  IWpmArr,
+} from "../../types";
 import { LineChart } from "../include/LineChart";
 import { Tooltip } from "../include/Tooltip";
 import { ProceedResult } from "./ProceedResult";
@@ -31,10 +31,10 @@ const Result = ({
   resetState,
   handleRefresh,
   source,
-}: ResultInterface) => {
+}: IResult) => {
   const { testFrameSelector, testLimiterSelector } = useRedux();
-  const [wpmArr, setWpmArr] = useState<WpmArrInterface[]>([]);
-  const [data, setData] = useState<DataInterface[]>([]);
+  const [wpmArr, setWpmArr] = useState<IWpmArr[]>([]);
+  const [data, setData] = useState<IData[]>([]);
   const [result, setResult] = useState({
     wpm: 0,
     accuracy: 0,
@@ -105,7 +105,7 @@ const Result = ({
     let extras = 0;
     let missed = 0;
     let wpmArrLength = 0;
-    let val: WpmArrInterface[] = [];
+    let val: IWpmArr[] = [];
 
     const textWrittenArray = textWritten.split(" ");
     const testSentenceArray = testSentence.split(" ");

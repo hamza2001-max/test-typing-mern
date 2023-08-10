@@ -1,10 +1,10 @@
-import { ThemeOptionInterface } from "../../typescript/types";
+import { IThemeOption } from "../../types";
 
 export const ThemeOption = ({
   title,
   themeClass,
   onClick,
-}: ThemeOptionInterface) => {
+}: IThemeOption) => {
   return (
     <div className="flex justify-between cursor-pointer" onClick={onClick}>
       <span>{title}</span>

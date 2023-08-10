@@ -1,4 +1,4 @@
-import { WordValidatorInterface } from "../../typescript/types";
+import { IWordValidator } from "../../types";
 import { CurrentFragment } from "./CurrentFragment";
 import { PreviousFragment } from "./PreviousFragment";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
@@ -7,7 +7,7 @@ export const WordValidator = ({
   textWritten,
   inputValue,
   testSentence,
-}: WordValidatorInterface) => {
+}: IWordValidator) => {
   const {divRef, typedSentenceRef} = useAutoScroll({textWritten, testSentence});
   let currentSentenceWord = "";
 
