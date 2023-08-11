@@ -1,23 +1,25 @@
 import { useMutation } from "react-query";
 import { queryClient } from "..";
+import { useRedux } from "./useRedux";
+import { authSlice } from "../redux/authSlice";
+import { IUseAuth } from "../types";
 import axios from "axios";
 
-interface IUseAuth {
-    username?: string;
-    email: string;
-    password: string;
-}
+export const useAuth = () => {
+    const { authDispatch } = useRedux();
+    const { signup } = authSlice.actions;
 
-export const useAuth = (account: IUseAuth) => {
-    const mutationFunction = async () => {
-        const postRecord = await axios.post("http://localhost:7000/api/use/signup", account, {
+    const mutationFunction = async (account: IUseAuth) => {
+        const user = await axios.post("http://localhost:7000/api/user/signup", account, {
             headers: {
                 "Content-Type": "application/json",
             }
+        }).then((response) => {
+            authDispatch(signup(response.data));
         }).catch((err) => {
             console.log(err);
         })
-        return postRecord;
+        return user;
     }
 
     const { mutate } = useMutation({
@@ -30,5 +32,5 @@ export const useAuth = (account: IUseAuth) => {
         }
     });
 
-    return {mutate};
+    return { mutate };
 }

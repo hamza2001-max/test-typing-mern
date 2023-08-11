@@ -120,3 +120,9 @@ export interface IZenFrameProgress {
   textWritten: string;
   inputValue: string;
 }
+
+export interface IUseAuth {
+  username?: string;
+  email: string;
+  password: string;
+}

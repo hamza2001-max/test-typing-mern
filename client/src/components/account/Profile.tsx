@@ -1,15 +1,22 @@
 import { BsFillPersonFill } from "react-icons/bs";
 import { MdEdit } from "react-icons/md";
 import { Tooltip } from "../include/Tooltip";
+import { useRedux } from "../../hooks/useRedux";
+import {  useEffect } from "react";
+import { format } from 'date-fns';
 
 export const Profile = () => {
+  const { authSelector } = useRedux();
+  const joinedDate = authSelector?.joinedDate;
+  const formattedJoinedDate = joinedDate ? format(joinedDate, 'MMM dd, yyyy') : '';
   return (
     <section className="bg-custom-fadedFill text-custom-primary p-5 mx-7 rounded-lg sm:flex sm:items-center w-[80vw]">
       <div className="flex items-center">
         <BsFillPersonFill className="bg-custom-primary text-custom-fadedFill w-20 h-20 rounded-full p-2" />
         <div className="flex flex-col ml-5 sm:mr-4">
-          <span className="text-custom-secondary text-3xl">Name</span>
-          <span className="text-xs">Joined Date</span>
+          <span className="text-custom-secondary text-3xl">{authSelector?.profilePicture}</span>
+          <span className="text-custom-secondary text-3xl">{authSelector?.username}</span>
+          <span className="text-xs">Joined {formattedJoinedDate}</span>
         </div>
         <div className="h-40 w-2 bg-custom-fill hidden sm:block rounded-lg"></div>
       </div>

@@ -3,6 +3,7 @@ import { RootState } from "../redux/store";
 
 export const useRedux = () => {
   const themeSelector = useSelector((state: RootState) => state.theme.theme);
+  const authSelector = useSelector((state: RootState) => state.auth.user);
   const testFrameSelector = useSelector(
     (state: RootState) => state.testFrame.testFrame
   );
@@ -31,6 +32,7 @@ export const useRedux = () => {
     (state: RootState) => state.isCusLimVisible.isCusLimVisible
   );
 
+  const authDispatch = useDispatch();
   const themeVDispatch = useDispatch();
   const isCusLimVisibleDispatch = useDispatch();
   const themeDispatch = useDispatch();
@@ -49,11 +51,13 @@ export const useRedux = () => {
     themeSelector,
     isInputActiveSelector,
     testOpacitySelector,
+    authSelector,
     testModifierSelector,
     testLimiterSelector,
     testSettingsVSelector,
     isTestFinishedSelector,
     testSettingsVDispatch,
+    authDispatch,
     testModifierDispatch,
     testFrameDispatch,
     themeDispatch,

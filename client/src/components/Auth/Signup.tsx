@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FiUserPlus } from "react-icons/fi";
 import { useAuth } from "../../hooks/useAuth";
+import { useRedux } from "../../hooks/useRedux";
 
 export const Signup = () => {
   const [username, setUsername] = useState("");
@@ -8,7 +9,13 @@ export const Signup = () => {
   const [verEmail, setVerEmail] = useState("");
   const [pwd, setPwd] = useState("");
   const [verPwd, setVerPwd] = useState("");
-  const {mutate} = useAuth({username, email, password:pwd});
+  const { mutate } = useAuth();
+  const { authSelector } = useRedux();
+
+  useEffect(() => {
+    console.log(authSelector?.username);
+    console.log(authSelector?.token);
+  }, [authSelector]);
 
   const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -42,7 +49,7 @@ export const Signup = () => {
           className="px-2 text-custom-tertiary placeholder:text-custom-primary h-9 rounded-md bg-custom-fadedFill outline-none"
           placeholder="password"
           onChange={(e) => setPwd(e.target.value)}
-          
+
         />
         <input
           type="password"
@@ -51,7 +58,7 @@ export const Signup = () => {
           onChange={(e) => setVerPwd(e.target.value)}
         />
         <button className="text-custom-tertiary h-9 rounded-md flex items-center justify-center bg-custom-fadedFill">
-          <FiUserPlus className="mr-2"/> Sign Up
+          <FiUserPlus className="mr-2" /> Sign Up
         </button>
       </div>
     </form>

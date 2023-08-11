@@ -11,6 +11,7 @@ import { testOpacitySlice } from "./testOpacitySlice";
 import { isCusLimVisibilitySlice } from "./cusLimVisibility";
 import { loadState, saveState } from "./localStorageState";
 import { authSlice } from "./authSlice";
+
 const rootReducer = combineReducers({
   auth: authSlice.reducer,
   theme: themeSlice.reducer,
@@ -29,6 +30,10 @@ const persistedState = loadState();
 const store = configureStore({
   reducer: rootReducer,
   preloadedState: persistedState,
+  middleware: (getDefaultMiddleware) =>
+  getDefaultMiddleware({
+    serializableCheck: false,
+  }),
 });
 
 store.subscribe(() => {

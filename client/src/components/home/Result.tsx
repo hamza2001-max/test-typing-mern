@@ -1,16 +1,16 @@
 import { useCallback, useEffect, useState } from "react";
+import { LineChart } from "../include/LineChart";
+import { Tooltip } from "../include/Tooltip";
+import { ProceedResult } from "./ProceedResult";
+import { useRedux } from "../../hooks/useRedux";
+import { useMutation } from "react-query";
+import { queryClient } from "../..";
+import axios from "axios";
 import {
   IData,
   IResult,
   IWpmArr,
 } from "../../types";
-import { LineChart } from "../include/LineChart";
-import { Tooltip } from "../include/Tooltip";
-import { ProceedResult } from "./ProceedResult";
-import { useRedux } from "../../hooks/useRedux";
-import axios from "axios";
-import { useMutation } from "react-query";
-import { queryClient } from "../..";
 
 interface mutationInterface {
   wpm: number;
@@ -59,13 +59,7 @@ const Result = ({
     ]);
   }, [wpmArr]);
 
-  const mutationFunction = async (record: mutationInterface) => {
-    const postRecord = await axios.post("http://localhost:7000/api/wpm/", record).catch((err) => {
-      console.log(err);
-    })
-    return postRecord;
-  }
-
+  
   const handleResultReset = useCallback(() => {
     setWpmArr([]);
     setResult({
@@ -80,6 +74,13 @@ const Result = ({
     setData([]);
     resetState();
   }, [resetState]);
+  
+  const mutationFunction = async (record: mutationInterface) => {
+    const postRecord = await axios.post("http://localhost:7000/api/wpm/", record).catch((err) => {
+      console.log(err);
+    })
+    return postRecord;
+  }
 
   const handleResultRefresh = useCallback(() => {
     handleResultReset();
@@ -185,8 +186,6 @@ const Result = ({
       }
     );
   }, [elapsedTimeArray, testSentence, textWritten, mutate, testLimiterSelector, testFrameSelector]);
-
-
 
   useEffect(() => {
     if (
