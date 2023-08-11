@@ -1,4 +1,5 @@
 import { useMutation } from "react-query";
+import { useState } from "react";
 import { queryClient } from "..";
 import { useRedux } from "./useRedux";
 import { authSlice } from "../redux/authSlice";
@@ -7,6 +8,7 @@ import axios from "axios";
 
 export const useAuth = () => {
     const { authDispatch } = useRedux();
+    const [error, setError] = useState<string[]>([]);
     const { signup } = authSlice.actions;
 
     const mutationFunction = async (account: IUseAuth) => {
@@ -16,8 +18,8 @@ export const useAuth = () => {
             }
         }).then((response) => {
             authDispatch(signup(response.data));
-        }).catch((err) => {
-            console.log(err);
+        }).catch((error) => {
+            console.error(error);
         })
         return user;
     }
@@ -32,5 +34,5 @@ export const useAuth = () => {
         }
     });
 
-    return { mutate };
+    return { mutate, setError, error };
 }

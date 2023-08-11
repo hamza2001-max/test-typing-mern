@@ -1,4 +1,5 @@
 - [ ] Todo
+  - [ ] in signup handle the error for the same user.
   - [ ] complete useAuth.tsx
   - [ ] make username unique.
   - [ ] apply types to authorization.ts
