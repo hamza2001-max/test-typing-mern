@@ -1,5 +1,9 @@
 - [ ] Todo
-  - [ ] in signup handle the error for the same user.
+  - [ ] create logout.
+  - [x] changed routes after signingup.
+  - [x] handled errors from the backednd.
+  - [ ] test the joinedDate property of the account. 
+  - [x] in signup handle the error for the same user.
   - [ ] complete useAuth.tsx
   - [ ] make username unique.
   - [ ] apply types to authorization.ts

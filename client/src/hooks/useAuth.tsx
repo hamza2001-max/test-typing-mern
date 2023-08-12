@@ -6,10 +6,10 @@ import { authSlice } from "../redux/authSlice";
 import { IUseAuth } from "../types";
 import axios from "axios";
 
-export const useAuth = () => {
+export const useAuth = (access:"signup" | "login") => {
     const { authDispatch } = useRedux();
     const [error, setError] = useState<string[]>([]);
-    const { signup } = authSlice.actions;
+    const { signup, login } = authSlice.actions;
 
     const handleErrors = (newErr: string, shouldAdd: boolean) => {
         if (shouldAdd) {
@@ -20,12 +20,13 @@ export const useAuth = () => {
     };
 
     const mutationFunction = async (account: IUseAuth) => {
-        const user = await axios.post("http://localhost:7000/api/user/signup", account, {
+        const user = await axios.post(`http://localhost:7000/api/user/${access}`, account, {
             headers: {
                 "Content-Type": "application/json",
             }
         }).then((response) => {
-            authDispatch(signup(response.data));
+            access === "signup" && authDispatch(signup(response.data));
+            access === "login" && authDispatch(login(response.data));
         }).catch(error => {
             handleErrors(error.response.data.error, true);
         });

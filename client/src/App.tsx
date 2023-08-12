@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { useRedux } from "./hooks/useRedux";
 import { Home } from "./pages/Home";
 import { About } from "./pages/About";
@@ -7,7 +7,7 @@ import { Account } from "./pages/Account";
 import { themeVisibilitySlice } from "./redux/themeVisibilitySlice";
 
 function App() {
-  const { themeSelector, themeVSelector, themeVDispatch } = useRedux();
+  const { themeSelector, themeVSelector, themeVDispatch, authSelector } = useRedux();
   const { inVisibleTheme } = themeVisibilitySlice.actions;
 
   return (
@@ -21,8 +21,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/About" element={<About />} />
-        <Route path="/Auth" element={<Auth />} />
-        <Route path="/Account" element={<Account />} />
+        <Route path="/Auth" element={!authSelector ? <Auth />: <Navigate to={"/"}/>} />
+        <Route path="/Account" element={authSelector ? <Account />: <Navigate to={"/"}/>} />
       </Routes>
     </div>
   );

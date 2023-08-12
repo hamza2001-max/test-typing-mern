@@ -8,7 +8,7 @@ export const Auth = () => {
     <div className="h-full sm:h-screen flex flex-col justify-between">
       <Navigation />
       <div className="flex justify-center">
-        <div className="flex flex-col sm:flex-row sm:justify-between items-center space-y-16 sm:space-y-0 sm:w-[80vw] md:w-[70vw] lg:w-[60vw] xl:w-[50vw]">
+        <div className="flex flex-col sm:flex-row sm:justify-between items-start space-y-16 sm:space-y-0 sm:w-[80vw] md:w-[70vw] lg:w-[60vw] xl:w-[50vw]">
           <Signup />
           <Login />
         </div>
