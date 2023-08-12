@@ -4,11 +4,17 @@ import { FiLogIn } from "react-icons/fi";
 import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import jwt_decode from "jwt-decode";
+// import { authSlice } from "../../redux/authSlice";
+// import { useRedux } from "../../hooks/useRedux";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
-  const { mutate, error, setError } = useAuth("login");
+  const { mutate, error, setError, handleErrors } = useAuth("login");
+  // const { signup, login } = authSlice.actions;
+  // const { authDispatch } = useRedux();
+
   const navigate = useNavigate();
 
   const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
@@ -17,13 +23,6 @@ export const Login = () => {
     mutate({ email, password: pwd });
     navigate('/Account');
   }
-
-  const responseMessage = (response: any) => {
-    console.log(response);
-  };
-  const errorMessage = () => {
-    console.log("an error has occured ");
-  };
 
   return (
     <form onSubmit={submitForm}>
@@ -51,7 +50,14 @@ export const Login = () => {
           <AiOutlineGoogle className="mr-2" /> Google Login
           <div className="absolute w-full opacity-0">
             <GoogleOAuthProvider clientId="19915083809-jnviefjfere0tiqaim77gargq2m50lf2.apps.googleusercontent.com">
-              <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
+              <GoogleLogin onSuccess={(credentialRespose) => {
+                if (credentialRespose.credential) {
+                  var decoded = jwt_decode(credentialRespose?.credential);
+                  console.log(decoded);
+                }
+              }} onError={() => {
+                handleErrors("error occured in GoogleLogin", true);
+              }} />
             </GoogleOAuthProvider>
           </div>
         </button>
