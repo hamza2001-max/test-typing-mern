@@ -11,6 +11,14 @@ export const useAuth = () => {
     const [error, setError] = useState<string[]>([]);
     const { signup } = authSlice.actions;
 
+    const handleErrors = (newErr: string, shouldAdd: boolean) => {
+        if (shouldAdd) {
+            setError(err => [...err, newErr]);
+        } else {
+            setError(prevErrors => prevErrors.filter(olderr => olderr !== newErr));
+        }
+    };
+
     const mutationFunction = async (account: IUseAuth) => {
         const user = await axios.post("http://localhost:7000/api/user/signup", account, {
             headers: {
@@ -18,9 +26,9 @@ export const useAuth = () => {
             }
         }).then((response) => {
             authDispatch(signup(response.data));
-        }).catch((error) => {
-            console.error(error);
-        })
+        }).catch(error => {
+            handleErrors(error.response.data.error, true);
+        });
         return user;
     }
 
@@ -34,5 +42,5 @@ export const useAuth = () => {
         }
     });
 
-    return { mutate, setError, error };
+    return { mutate, setError, error, handleErrors };
 }

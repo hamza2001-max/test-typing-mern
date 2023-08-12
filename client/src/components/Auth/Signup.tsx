@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FiUserPlus } from "react-icons/fi";
 import { useAuth } from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 export const Signup = () => {
   const [username, setUsername] = useState("");
@@ -8,16 +9,9 @@ export const Signup = () => {
   const [verEmail, setVerEmail] = useState("");
   const [pwd, setPwd] = useState("");
   const [verPwd, setVerPwd] = useState("");
-  const { mutate, error, setError } = useAuth();
+  const { mutate, error, setError, handleErrors } = useAuth();
+  const navigate = useNavigate();
   const pwdRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=.*[a-zA-Z])(?=.*[!@#$%^&*(),.?\":{}|<>]).{8,150}$/;
-
-  const handleErrors = (newErr: string, shouldAdd: boolean) => {
-    if (shouldAdd) {
-      setError(err => [...err, newErr]);
-    } else {
-      setError(prevErrors => prevErrors.filter(olderr => olderr !== newErr));
-    }
-  };
 
   const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -57,7 +51,9 @@ export const Signup = () => {
         handleErrors("Username length should be between 3 and 35 letters", false);
       }
     } else {
-      mutate({ username, email, password: pwd });
+        mutate({ username, email, password: pwd });
+        setError([]);
+        navigate('/Account');
     }
   }
 
