@@ -1,20 +1,12 @@
-import { AiOutlineGoogle } from "react-icons/ai";
-import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { FiLogIn } from "react-icons/fi";
 import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import jwt_decode from "jwt-decode";
-// import { authSlice } from "../../redux/authSlice";
-// import { useRedux } from "../../hooks/useRedux";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
-  const { mutate, error, setError, handleErrors } = useAuth("login");
-  // const { signup, login } = authSlice.actions;
-  // const { authDispatch } = useRedux();
-
+  const { mutate, error, setError } = useAuth("login");
   const navigate = useNavigate();
 
   const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
@@ -46,22 +38,6 @@ export const Login = () => {
         />
         <button className="text-custom-tertiary h-9 rounded-md flex items-center justify-center bg-custom-fadedFill">
           <FiLogIn className="mr-2" />Login
-        </button>
-        <span className="text-custom-tertiary flex justify-center">or</span>
-        <button className="relative text-custom-tertiary h-9 rounded-md flex items-center justify-center bg-custom-fadedFill">
-          <AiOutlineGoogle className="mr-2" /> Google Login
-          <div className="absolute w-full opacity-0">
-            <GoogleOAuthProvider clientId="19915083809-jnviefjfere0tiqaim77gargq2m50lf2.apps.googleusercontent.com">
-              <GoogleLogin onSuccess={(credentialRespose) => {
-                if (credentialRespose.credential) {
-                  var decoded = jwt_decode(credentialRespose?.credential);
-                  console.log(decoded);
-                }
-              }} onError={() => {
-                handleErrors("error occured in GoogleLogin", true);
-              }} />
-            </GoogleOAuthProvider>
-          </div>
         </button>
         {error.length > 0 && <span className="text-xs text-custom-secondary">*{error.join(', ')}*</span>}
       </div>

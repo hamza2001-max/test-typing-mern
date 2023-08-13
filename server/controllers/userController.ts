@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Request, Response } from "express";
 const jwt = require("jsonwebtoken");
 const userSchema = require("../models/userModel");
@@ -24,14 +23,6 @@ const signup = async (req: Request, res: Response) => {
 };
 
 const login = async (req: Request, res: Response) => {
-  // if (req.body.googleAccessToken) {
-  //   const { googleAccessToken } = req.body;
-  //   axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
-  //     headers: {
-  //       Authorization: `Bearer ${googleAccessToken}`,
-  //     },
-  //   });
-  // }
   const { email, password } = req.body;
   try {
     const user = await userSchema.login({ email, password });
