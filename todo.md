@@ -1,14 +1,21 @@
 - [ ] Todo
-  - [ ] create logout.
+  - [x] implement signup.
+  - [x] implement login.
+  - [x] solve the consent screen problem.
+  - [ ] implement googleAuth.
+  - [ ] implement googleAuth in backend.
+  - [ ] implement practice mode.
+  - [ ] solve the double posting of data in Result.tsx.
+  - [ ] when you click on navigation make result disappear.
+  - [x] create logout.
   - [x] changed routes after signingup.
   - [x] handled errors from the backednd.
   - [ ] test the joinedDate property of the account. 
   - [x] in signup handle the error for the same user.
-  - [ ] complete useAuth.tsx
+  - [x] complete useAuth.tsx
   - [ ] make username unique.
-  - [ ] apply types to authorization.ts
-  - [ ] complete UserModel static function 
-  - [ ] instead of 7000 use env.PORT.
+  - [x] complete UserModel static function 
+  - [x] instead of 7000 use env.PORT.
   - [ ] make the data available for account graphs.
   - [ ] continue cusLimitPrompt and savedList.
   - [ ] style cusLimiter on large.
@@ -25,9 +32,8 @@
   - [ ] implement time mode in the word mode if nothing has been written for a long time and make the test invalid.
 
 - [ ] ideas
-  - [ ] Add a practice mode.
   - [ ] create cookies if possible.
-  - [ ] create multiple users.
+  - [x] create multiple users.
 
 - [ ] completed
   - [x] Difficulty Levels.

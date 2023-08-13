@@ -51,9 +51,11 @@ export const Signup = () => {
         handleErrors("Username length should be between 3 and 35 letters", false);
       }
     } else {
-        mutate({ username, email, password: pwd });
-        setError([]);
+      setError([]);
+      mutate({ username, email, password: pwd });
+      if (!error) {
         navigate('/Account');
+      }
     }
   }
 

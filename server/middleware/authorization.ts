@@ -1,9 +1,13 @@
 export {};
 const jwt = require("jsonwebtoken");
+import { NextFunction, Response } from "express";
 const userModel = require("../models/userModel");
-// const {Request, Response} = require("express")
 
-export const authorization = async (req: any, res: any, next: any) => {
+export const authorization = async (
+  req: any,
+  res: Response,
+  next: NextFunction
+) => {
   let { authorization } = req.headers;
   if (!authorization) {
     return res.status(401).json({ error: "Authorization token required." });

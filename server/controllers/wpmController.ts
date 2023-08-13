@@ -1,16 +1,15 @@
 export {};
-import { Response, Request } from "express";
-import { IExtendsRequest } from "../types";
+import { Response } from "express";
 const WpmSchema = require("../models/wpmModel");
 
-const getAllWpmRecord = async (req: IExtendsRequest, res: Response) => {
+const getAllWpmRecord = async (req: any, res: Response) => {
   const userId = req.user?._id;
-  const wpmRecord = await WpmSchema.find().sort({ createdAt: -1 });
+  const wpmRecord = await WpmSchema.find({userId}).sort({ createdAt: -1 });
   res.status(200).json(wpmRecord);
 };
 
-const postWpm = async (req1: IExtendsRequest, req2: Request, res: Response) => {
-  const userId = req1.user?._id;
+const postWpm = async (req: any, res: Response) => {
+  const userId = req.user?._id;
   const {
     wpm,
     accuracy,
@@ -21,7 +20,7 @@ const postWpm = async (req1: IExtendsRequest, req2: Request, res: Response) => {
     mode,
     limiter,
     time,
-  } = req2.body;
+  } = req.body;
   try {
     const wpmRecord = await WpmSchema.create({
       wpm,

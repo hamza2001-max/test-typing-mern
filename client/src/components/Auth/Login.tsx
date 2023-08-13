@@ -21,7 +21,9 @@ export const Login = () => {
     e.preventDefault();
     setError([]);
     mutate({ email, password: pwd });
-    navigate('/Account');
+    if (!error) {
+      navigate('/Account');
+    }
   }
 
   return (

@@ -4,7 +4,10 @@ import { Profile } from "../components/account/Profile";
 import { PersonalBest } from "../components/account/PersonalBest";
 import { Chart } from "../components/account/Chart";
 import { History } from "../components/account/History";
+import { useGetData } from "../hooks/useGetData";
 export const Account = () => {
+  const { data } = useGetData();
+
   return (
     <section>
       <Navigation />
@@ -15,7 +18,7 @@ export const Account = () => {
           <PersonalBest variable={[10, 25, 50, 100]} category="words" />
         </div>
         <Chart />
-        <History/>
+        {data.length > 0 && <History />}
       </section>
       <Footer />
     </section>

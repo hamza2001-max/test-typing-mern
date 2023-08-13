@@ -35,6 +35,7 @@ const Result = ({
   const { testFrameSelector, testLimiterSelector } = useRedux();
   const [wpmArr, setWpmArr] = useState<IWpmArr[]>([]);
   const [data, setData] = useState<IData[]>([]);
+  const { authSelector } = useRedux();
   const [result, setResult] = useState({
     wpm: 0,
     accuracy: 0,
@@ -59,7 +60,7 @@ const Result = ({
     ]);
   }, [wpmArr]);
 
-  
+
   const handleResultReset = useCallback(() => {
     setWpmArr([]);
     setResult({
@@ -74,9 +75,13 @@ const Result = ({
     setData([]);
     resetState();
   }, [resetState]);
-  
+
   const mutationFunction = async (record: mutationInterface) => {
-    const postRecord = await axios.post("http://localhost:7000/api/wpm/", record).catch((err) => {
+    const postRecord = await axios.post("http://localhost:7000/api/wpm/", record, {
+      headers: {
+        Authorization: `Bearer ${authSelector?.token}`,
+      }
+    }).catch((err) => {
       console.log(err);
     })
     return postRecord;
@@ -172,20 +177,22 @@ const Result = ({
       missed,
     });
 
-    mutate(
-      {
-        wpm: Number((resultantWpm / wpmArrLength).toFixed(3)),
-        accuracy: Number(accuracy.toFixed(2)),
-        time: Number(resultantTime.toFixed(2)),
-        correctChars: resultantCorrectChars,
-        error: resultantErrors,
-        extras,
-        missed,
-        limiter: testLimiterSelector,
-        mode: testFrameSelector
-      }
-    );
-  }, [elapsedTimeArray, testSentence, textWritten, mutate, testLimiterSelector, testFrameSelector]);
+    if (authSelector) {
+      mutate(
+        {
+          wpm: Number((resultantWpm / wpmArrLength).toFixed(3)),
+          accuracy: Number(accuracy.toFixed(2)),
+          time: Number(resultantTime.toFixed(2)),
+          correctChars: resultantCorrectChars,
+          error: resultantErrors,
+          extras,
+          missed,
+          limiter: testLimiterSelector,
+          mode: testFrameSelector
+        }
+      );
+    }
+  }, [elapsedTimeArray, testSentence, textWritten, mutate, testLimiterSelector, testFrameSelector, authSelector]);
 
   useEffect(() => {
     if (

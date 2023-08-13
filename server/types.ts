@@ -12,7 +12,3 @@ export interface IUser {
   joinedDate: Date;
   profilePicture: string;
 }
-
-export interface IExtendsRequest extends Request {
-  user: IUser;
-}
