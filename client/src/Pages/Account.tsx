@@ -18,7 +18,7 @@ export const Account = () => {
           <PersonalBest variable={[10, 25, 50, 100]} category="words" />
         </div>
         <Chart />
-        {data.length > 0 && <History />}
+        {data?.length > 0 && <History />}
       </section>
       <Footer />
     </section>

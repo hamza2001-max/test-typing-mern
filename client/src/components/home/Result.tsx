@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
 import { LineChart } from "../include/LineChart";
 import { Tooltip } from "../include/Tooltip";
 import { ProceedResult } from "./ProceedResult";
@@ -36,6 +36,7 @@ const Result = ({
   const [wpmArr, setWpmArr] = useState<IWpmArr[]>([]);
   const [data, setData] = useState<IData[]>([]);
   const { authSelector } = useRedux();
+  const exe = useRef(0);
   const [result, setResult] = useState({
     wpm: 0,
     accuracy: 0,
@@ -74,6 +75,7 @@ const Result = ({
     });
     setData([]);
     resetState();
+    exe.current = 0;
   }, [resetState]);
 
   const mutationFunction = async (record: mutationInterface) => {
@@ -167,7 +169,7 @@ const Result = ({
     extras = resultant.extras;
     missed = resultant.missed;
 
-    setResult({
+    return {
       wpm: Number((resultantWpm / wpmArrLength).toFixed(3)),
       errors: resultantErrors,
       time: Number(resultantTime.toFixed(2)),
@@ -175,32 +177,35 @@ const Result = ({
       accuracy: Number(accuracy.toFixed(2)),
       extras,
       missed,
-    });
-
-    if (authSelector) {
-      mutate(
-        {
-          wpm: Number((resultantWpm / wpmArrLength).toFixed(3)),
-          accuracy: Number(accuracy.toFixed(2)),
-          time: Number(resultantTime.toFixed(2)),
-          correctChars: resultantCorrectChars,
-          error: resultantErrors,
-          extras,
-          missed,
-          limiter: testLimiterSelector,
-          mode: testFrameSelector
-        }
-      );
     }
-  }, [elapsedTimeArray, testSentence, textWritten, mutate, testLimiterSelector, testFrameSelector, authSelector]);
+  }, [elapsedTimeArray, testSentence, textWritten]);
 
   useEffect(() => {
     if (
       textWritten.split(" ").length - 1 === testSentence.split(" ").length
     ) {
-      calculateResult();
+      if (exe.current == 0) {
+        let endResult = calculateResult();
+        setResult(endResult);
+        if (authSelector) {
+          mutate({
+            wpm: endResult.wpm,
+            accuracy: endResult.accuracy,
+            time: endResult.time,
+            correctChars: endResult.correctChars,
+            error: endResult.errors,
+            extras: endResult.extras,
+            missed: endResult.missed,
+            limiter: testLimiterSelector,
+            mode: testFrameSelector
+          });
+          exe.current += 1;
+        }
+      }
     }
-  }, [textWritten, testSentence, calculateResult]);
+  }, [textWritten, testSentence, calculateResult, mutate,
+    testLimiterSelector,
+    testFrameSelector, authSelector]);
 
   return (
     <section className="w-full flex flex-col items-center justify-center">

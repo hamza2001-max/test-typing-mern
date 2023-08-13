@@ -37,16 +37,17 @@ export const History = () => {
             </thead>
             <tbody>
                 {
-                    data?.map((wpmRow: wpmRowInterface, index: number) => {
-                        return (<tr key={index} className={`${index % 2 === 1 ? "bg-custom-fadedFill" : "bg-custom-fill"} text-custom-secondary text-center`}>
-                            <td className="py-3">{wpmRow.wpm}</td>
-                            <td className="py-3">{wpmRow.accuracy}%</td>
-                            <td className="py-3">{wpmRow.correctChars}/{wpmRow.error}/{wpmRow.extras}/{wpmRow.missed}</td>
-                            <td className="py-3">{wpmRow.time}s</td>
-                            <td className="py-3">{wpmRow.mode}</td>
-                            <td className="py-3">{wpmRow.limiter}</td>
-                        </tr>)
-                    })
+                    data?.length > 0 ?
+                        data?.map((wpmRow: wpmRowInterface, index: number) => {
+                            return (<tr key={index} className={`${index % 2 === 1 ? "bg-custom-fadedFill" : "bg-custom-fill"} text-custom-secondary text-center`}>
+                                <td className="py-3">{wpmRow.wpm}</td>
+                                <td className="py-3">{wpmRow.accuracy}%</td>
+                                <td className="py-3">{wpmRow.correctChars}/{wpmRow.error}/{wpmRow.extras}/{wpmRow.missed}</td>
+                                <td className="py-3">{wpmRow.time}s</td>
+                                <td className="py-3">{wpmRow.mode}</td>
+                                <td className="py-3">{wpmRow.limiter}</td>
+                            </tr>)
+                        }) : <td>No History Yet.</td>
                 }
             </tbody>
         </table>

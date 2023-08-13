@@ -5,15 +5,20 @@
   - [ ] implement googleAuth.
   - [ ] implement googleAuth in backend.
   - [ ] implement practice mode.
-  - [ ] solve the double posting of data in Result.tsx.
-  - [ ] when you click on navigation make result disappear.
+  - [ ] set up all the necessary dynamic value for Account tsx.
+  - [ ] add functionality to the edit button in Profile.tsx.
+  - [ ] create a graph for quote in Profile.tsx as well.
+  - [ ] improve wpm calculation.
+  - [x] solve the data problem.
+  - [x] solve the double posting of data in Result.tsx.
+  - [x] when you click on navigation make result disappear.
   - [x] create logout.
   - [x] changed routes after signingup.
   - [x] handled errors from the backednd.
-  - [ ] test the joinedDate property of the account. 
+  - [x] test the joinedDate property of the account. 
   - [x] in signup handle the error for the same user.
   - [x] complete useAuth.tsx
-  - [ ] make username unique.
+  - [x] make username unique.
   - [x] complete UserModel static function 
   - [x] instead of 7000 use env.PORT.
   - [ ] make the data available for account graphs.

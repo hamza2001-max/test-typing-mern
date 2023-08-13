@@ -12,6 +12,7 @@ const userSchema = new Schema({
   username: {
     type: "string",
     required: true,
+    unique: true,
     minLength: 3,
     maxlength: 35,
   },
@@ -58,6 +59,10 @@ userSchema.statics.signup = async function ({
     const existingUser = await this.findOne({ email });
     if (existingUser) {
       throw new Error("User already exist with this email id.");
+    }
+    const existingUN = await this.findOne({ username });
+    if(existingUN){
+      throw new Error("username must be unique");
     }
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
