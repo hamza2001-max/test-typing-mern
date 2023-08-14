@@ -124,7 +124,7 @@ export interface IZenFrameProgress {
 export interface IUseAuth {
   username?: string;
   email: string;
-  password: string;
+  password?: string;
 }
 
 export interface IRecordMutation {
@@ -137,4 +137,11 @@ export interface IRecordMutation {
   mode: string,
   limiter: number | string,
   time: number,
+}
+
+export interface IUpdProfileMutation {
+  userId: number;
+  testStd: number;
+  testCpl: number;
+  timeTyping: number;
 }

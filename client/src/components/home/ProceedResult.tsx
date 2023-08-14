@@ -24,7 +24,8 @@ export const ProceedResult = ({
   return (
     <div className="grid grid-cols-2 gap-y-12 gap-x-12 mt-10 mb-5 sm:flex">
       <button
-        className="text-2xl px-8 py-4  outline-none rounded-md text-custom-primary hover:text-custom-secondary"
+        className="text-2xl px-8 py-4  outline-none rounded-md text-custom-primary hover:text-custom-secondary focus:bg-custom-secondary
+        focus:text-custom-fill"
         onClick={handleResultRefresh}
         ref={btnRef}
       >
@@ -35,7 +36,8 @@ export const ProceedResult = ({
           space="bottom-8"
         />
       </button>
-      <button className="text-xl px-8 py-4 text-custom-primary hover:text-custom-secondary" onClick={handleResultReset}>
+      <button className="text-xl px-8 py-4 text-custom-primary hover:text-custom-secondary  focus:bg-custom-secondary
+        focus:text-custom-fill" onClick={handleResultReset}>
         <Tooltip
           icon={BsArrowRepeat}
           hover="Repeat Test"
@@ -43,7 +45,8 @@ export const ProceedResult = ({
           space="bottom-8"
         />
       </button>
-      <button className="text-xl px-8 py-4 text-custom-primary hover:text-custom-secondary">
+      <button className="text-xl px-8 py-4 text-custom-primary hover:text-custom-secondary  focus:bg-custom-secondary
+        focus:text-custom-fill">
         <Tooltip
           icon={AiFillWarning}
           hover="Practice Words"
@@ -51,7 +54,8 @@ export const ProceedResult = ({
           space="bottom-8"
         />
       </button>
-      <button className="text-xl px-8 py-4 text-custom-primary hover:text-custom-secondary">
+      <button className="text-xl px-8 py-4 text-custom-primary hover:text-custom-secondary focus:bg-custom-secondary
+        focus:text-custom-fill">
         <Tooltip
           icon={BsTextLeft}
           hover="Toggle Word History"

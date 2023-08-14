@@ -259,7 +259,7 @@ export const MainFrame = () => {
         }
       }
     },
-    [inputValue, textWritten, startTime, timeArray, authDispatch, incTestStd]
+    [inputValue, authSelector, textWritten, startTime, timeArray, authDispatch, incTestStd]
   );
 
   useEffect(() => {

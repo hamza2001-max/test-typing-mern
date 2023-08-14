@@ -13,7 +13,7 @@ export const Profile = () => {
       <div className="flex items-center">
         {authSelector?.profilePicture ? <span className="text-custom-secondary text-3xl">{authSelector?.profilePicture}</span> : <BsFillPersonFill className="bg-custom-primary text-custom-fadedFill min-w-[5rem] min-h-[5rem] rounded-full p-2" />}
         <div className="flex flex-col ml-5 sm:mr-4">
-          <span className="text-custom-secondary text-3xl">{authSelector?.username.charAt(0).toUpperCase() + authSelector!.username.slice(1)}</span>
+          <span className="text-custom-secondary text-3xl capitalize">{authSelector?.username}</span>
           <span className="text-xs">Joined {formattedJoinedDate?.toString()}</span>
         </div>
         <div className="h-40 w-2 bg-custom-fill hidden sm:block rounded-lg"></div>

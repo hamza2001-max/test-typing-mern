@@ -46,6 +46,29 @@ const login = async (req: Request, res: Response) => {
   }
 };
 
+const googleLogin = async (req: Request, res: Response) => {
+  const { email } = req.body;
+  try {
+    const user = await userSchema.findOne({ email });
+    if (!user) {
+      throw new Error("User does not exist, sign up first.");
+    }
+    let token = generateToken(user._id);
+    res.status(200).json({
+      userId: user._id,
+      username: user.username,
+      token,
+      joinedDate: user.joinedDate,
+      profilePicture: user.profilePicture,
+      testStd: user.testStd,
+      testCpl: user.testCpl,
+      timeTyping: user.timeTyping,
+    });
+  } catch (err: any) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
 const updateProfile = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { testStd, testCpl, timeTyping } = req.body;
@@ -56,10 +79,10 @@ const updateProfile = async (req: Request, res: Response) => {
       updateInfo.testCpl = await testCpl;
       updateInfo.timeTyping = await timeTyping;
       await updateInfo.save();
-    } catch (error: any) {
-      res.status(400).json({ error: error.message });
+    } catch (err: any) {
+      res.status(400).json({ error: err.message });
     }
   });
 };
 
-module.exports = { signup, login, updateProfile };
+module.exports = { signup, login, updateProfile, googleLogin };

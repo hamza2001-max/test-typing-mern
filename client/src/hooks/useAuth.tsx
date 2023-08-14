@@ -6,7 +6,7 @@ import { authSlice } from "../redux/authSlice";
 import { IUseAuth } from "../types";
 import axios from "axios";
 
-export const useAuth = (access:"signup" | "login") => {
+export const useAuth = (access: "signup" | "login" | "googleLogin") => {
     const { authDispatch } = useRedux();
     const [error, setError] = useState<string[]>([]);
     const { signup, login } = authSlice.actions;
@@ -26,9 +26,9 @@ export const useAuth = (access:"signup" | "login") => {
             }
         }).then((response) => {
             access === "signup" && authDispatch(signup(response.data));
-            access === "login" && authDispatch(login(response.data));
+            (access === "login" || access === "googleLogin") && authDispatch(login(response.data));
         }).catch(error => {
-            handleErrors(error.response.data.error, true);
+            handleErrors(error?.response.data.error, true);
         });
         return user;
     }

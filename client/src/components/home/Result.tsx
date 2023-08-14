@@ -3,6 +3,7 @@ import { LineChart } from "../include/LineChart";
 import { Tooltip } from "../include/Tooltip";
 import { ProceedResult } from "./ProceedResult";
 import { useRedux } from "../../hooks/useRedux";
+import { authSlice } from "../../redux/authSlice";
 import { useMutation } from "react-query";
 import { queryClient } from "../..";
 import axios from "axios";
@@ -12,14 +13,6 @@ import {
   IResult,
   IWpmArr,
 } from "../../types";
-import { authSlice } from "../../redux/authSlice";
-
-interface IUpdProfileMutation {
-  userId: number;
-  testStd: number;
-  testCpl: number;
-  timeTyping: number;
-}
 
 const Result = ({
   textWritten,
@@ -29,11 +22,8 @@ const Result = ({
   handleRefresh,
   source,
 }: IResult) => {
-  const { testFrameSelector, testLimiterSelector, authDispatch } = useRedux();
   const [wpmArr, setWpmArr] = useState<IWpmArr[]>([]);
   const [data, setData] = useState<IData[]>([]);
-  const { authSelector } = useRedux();
-  const exe = useRef(0);
   const [result, setResult] = useState({
     wpm: 0,
     accuracy: 0,
@@ -43,6 +33,9 @@ const Result = ({
     missed: 0,
     time: 0,
   });
+  const { testFrameSelector, testLimiterSelector, authDispatch } = useRedux();
+  const { authSelector } = useRedux();
+  const exe = useRef(0);
 
   const { incTestCpl, updateTimeTyping } = authSlice.actions;
 
@@ -93,31 +86,10 @@ const Result = ({
     return postRecord;
   }
 
-  const updProfileMutationFn = async ({ userId, testCpl, testStd, timeTyping }: IUpdProfileMutation) => {
-    const updateProfile = axios.put(`http://localhost:7000/api/user/updateProfile/${userId}`, { userId, testCpl, testStd, timeTyping }, {
-      headers: {
-        'Authorization': `Bearer ${authSelector?.token}`,
-      }
-    }).catch((error) => {
-      console.log(error);
-    })
-    return updateProfile;
-  }
-
-  const { mutate: recordMutate } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: recordMutationFn,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["wpmRecord"] });
-    },
-    onError: () => {
-      console.error("error received from useMutation");
-    }
-  });
-
-  const { mutate: updProfileMutate } = useMutation({
-    mutationFn: updProfileMutationFn,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["user"] });
     },
     onError: () => {
       console.error("error received from useMutation");
@@ -200,28 +172,6 @@ const Result = ({
     }
   }, [elapsedTimeArray, testSentence, textWritten]);
 
-
-  const calculateMutation = () => {
-    let endResult = calculateResult();
-    recordMutate({
-      wpm: endResult.wpm,
-      accuracy: endResult.accuracy,
-      time: endResult.time,
-      correctChars: endResult.correctChars,
-      error: endResult.errors,
-      extras: endResult.extras,
-      missed: endResult.missed,
-      limiter: testLimiterSelector,
-      mode: testFrameSelector
-    });
-    updProfileMutate({
-      testStd: authSelector!.testStd,
-      testCpl: authSelector!.testCpl,
-      timeTyping: authSelector!.timeTyping,
-      userId: authSelector!.userId
-    })
-  }
-
   useEffect(() => {
     if (
       textWritten.split(" ").length - 1 === testSentence.split(" ").length
@@ -230,18 +180,26 @@ const Result = ({
         let endResult = calculateResult();
         setResult(endResult);
         if (authSelector) {
-          authDispatch(incTestCpl());
-          authDispatch(updateTimeTyping(endResult.time))
-          calculateMutation();
+          authDispatch(incTestCpl())
+          authDispatch(updateTimeTyping(endResult.time));
+          mutate({
+            wpm: endResult.wpm,
+            mode: testFrameSelector,
+            extras: endResult.extras,
+            time: endResult.time,
+            missed: endResult.missed,
+            correctChars: endResult.correctChars,
+            accuracy: endResult.accuracy,
+            limiter: testLimiterSelector,
+            error: endResult.errors,
+          });
           exe.current += 1;
         }
       }
     }
-  }, [textWritten, testSentence, calculateResult, recordMutate,
+  }, [textWritten, testSentence, calculateResult, mutate,
     testLimiterSelector,
     testFrameSelector, authSelector]);
-
-
 
   return (
     <section className="w-full flex flex-col items-center justify-center">

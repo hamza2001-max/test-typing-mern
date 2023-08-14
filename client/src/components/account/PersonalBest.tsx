@@ -1,6 +1,12 @@
 import { IPersonalBest } from "../../types";
 
 export const PersonalBest = ({ category, variable }: IPersonalBest) => {
+  const highestSeparator = () => {
+    let highWpm15wds = 0;
+    // if(data){
+    //   data.
+    // }
+  }
   return (
     <section className="bg-custom-fadedFill text-custom-primary p-5 rounded-lg lg:w-[38vw] grid grid-cols-2 xs:grid-cols-4">
       {variable.map((val, index) => {

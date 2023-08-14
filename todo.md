@@ -1,17 +1,19 @@
 - [ ] Todo
   - [x] solve the cors problem.
   - [x] implement updateProfile.
-  - [ ] solve the profile delay problem.
+  - [x] solve the profile delay problem.
+  - [x] solve the proceedResultProblem.
   - [ ] reset the state when changing from result to home through nav.
   - [ ] do some researche about queryClient.invalidateQueries({ queryKey: ["user"] });
   - [x] implement signup.
   - [x] implement login.
   - [x] solve the consent screen problem.
-  - [ ] implement googleAuth.
-  - [ ] implement googleAuth in backend.
+  - [x] implement googleAuth.
+  - [x] implement googleAuth in backend.
   - [ ] implement practice mode.
   - [ ] set up all the necessary dynamic value for Account tsx.
   - [ ] add functionality to the edit button in Profile.tsx.
+  - [ ] add graphs for other records.
   - [ ] create a graph for quote in Profile.tsx as well.
   - [ ] improve wpm calculation.
   - [x] solve the data problem.
