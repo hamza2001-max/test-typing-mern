@@ -10,8 +10,9 @@ import { MainFrameProgress } from "./MainFrameProgress";
 import { useTimer } from "../../hooks/useTimer";
 import { useRedux } from "../../hooks/useRedux";
 import { CustomLimiter } from "./CustomLimiter";
-import Result from "./Result";
 import { Tooltip } from "../include/Tooltip";
+import Result from "./Result";
+import { authSlice } from "../../redux/authSlice";
 
 export const MainFrame = () => {
   const [testSentence, setTestSentence] = useState("");
@@ -25,12 +26,14 @@ export const MainFrame = () => {
   const {
     testLimiterSelector,
     isInputActiveSelector,
+    authSelector,
     testModifierSelector,
     isTestFinishedSelector,
     testFrameSelector,
     isCusLimVisibleSelector,
     isTestFinishedDispatch,
     inputStatusDispatch,
+    authDispatch,
     testOpacityDispatch,
   } = useRedux();
 
@@ -39,6 +42,7 @@ export const MainFrame = () => {
 
   const { active } = inputStatusSlice.actions;
   const { testIsFinished, testIsNotFinished } = isTestFinishedSlice.actions;
+  const { incTestStd } = authSlice.actions;
   const { noOpacity, opacity } = testOpacitySlice.actions;
 
   useEffect(() => {
@@ -164,6 +168,7 @@ export const MainFrame = () => {
         setTextWritten("");
         setInputValue("");
       }
+
       if (testFrameSelector === "time") {
         if (typeof testLimiterSelector === "number") {
           for (let i = 0; i < 400; i++) {
@@ -228,6 +233,7 @@ export const MainFrame = () => {
     (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (!inputValue && !textWritten) {
         setStartTime(Date.now());
+        authSelector && authDispatch(incTestStd());
       }
       if (e.key === "Tab") {
         e.preventDefault();
@@ -253,7 +259,7 @@ export const MainFrame = () => {
         }
       }
     },
-    [inputValue, textWritten, startTime, timeArray]
+    [inputValue, textWritten, startTime, timeArray, authDispatch, incTestStd]
   );
 
   useEffect(() => {

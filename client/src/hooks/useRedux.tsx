@@ -37,12 +37,15 @@ export const useRedux = () => {
   const isCusLimVisibleDispatch = useDispatch();
   const themeDispatch = useDispatch();
   const testFrameDispatch = useDispatch();
+  const userTimeDispatch = useDispatch();
   const testModifierDispatch = useDispatch();
   const isTestFinishedDispatch = useDispatch();
+  const testCplDispatch = useDispatch();
   const testLimiterDispatch = useDispatch();
   const inputStatusDispatch = useDispatch();
   const testOpacityDispatch = useDispatch();
   const testSettingsVDispatch = useDispatch();
+  const testStdDispatch = useDispatch();
 
   return {
     themeVSelector,
@@ -62,10 +65,13 @@ export const useRedux = () => {
     testFrameDispatch,
     themeDispatch,
     inputStatusDispatch,
+    testStdDispatch,
     isTestFinishedDispatch,
     themeVDispatch,
     isCusLimVisibleDispatch,
     testOpacityDispatch,
+    userTimeDispatch,
+    testCplDispatch,
     testLimiterDispatch,
   };
 };

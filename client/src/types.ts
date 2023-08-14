@@ -126,3 +126,15 @@ export interface IUseAuth {
   email: string;
   password: string;
 }
+
+export interface IRecordMutation {
+  wpm: number;
+  accuracy: number,
+  correctChars: number,
+  error: number,
+  extras: number,
+  missed: number,
+  mode: string,
+  limiter: number | string,
+  time: number,
+}

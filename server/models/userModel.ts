@@ -1,6 +1,4 @@
-import {
-  IStatics
-} from "../types";
+import { IStatics } from "../types";
 
 export {};
 const mongoose = require("mongoose");
@@ -36,6 +34,18 @@ const userSchema = new Schema({
     type: "String",
     default: "",
   },
+  testStd: {
+    type: "number",
+    default: 0
+  },
+  testCpl: {
+    type: "number",
+    default: 0
+  },
+  timeTyping: {
+    type: "number",
+    default: 0
+  },
 });
 
 userSchema.statics.signup = async function ({
@@ -61,23 +71,23 @@ userSchema.statics.signup = async function ({
       throw new Error("User already exist with this email id.");
     }
     const existingUN = await this.findOne({ username });
-    if(existingUN){
+    if (existingUN) {
       throw new Error("username must be unique");
     }
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
     const user = await this.create({ email, password: hash, username });
     user.joinedDate = Date.now;
+    user.testStd = 0;
+    user.testCpl = 0;
+    user.timeTyping = 0;
     return user;
   } catch (err) {
     throw err;
   }
 };
 
-userSchema.statics.login = async function ({
-  email,
-  password,
-}: IStatics) {
+userSchema.statics.login = async function ({ email, password }: IStatics) {
   try {
     if (!email || !password) {
       throw new Error("Please fill the required fields");

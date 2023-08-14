@@ -2,6 +2,7 @@ import { FiLogIn } from "react-icons/fi";
 import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { GoogleAuth } from "./GoogleAuth";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -39,6 +40,8 @@ export const Login = () => {
         <button className="text-custom-tertiary h-9 rounded-md flex items-center justify-center bg-custom-fadedFill">
           <FiLogIn className="mr-2" />Login
         </button>
+        <span className="text-custom-tertiary flex justify-center">or</span>
+        <GoogleAuth />
         {error.length > 0 && <span className="text-xs text-custom-secondary">*{error.join(', ')}*</span>}
       </div>
     </form>

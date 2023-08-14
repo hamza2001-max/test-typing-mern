@@ -12,13 +12,14 @@ import { isCusLimVisibilitySlice } from "./cusLimVisibility";
 import { loadState, saveState } from "./localStorageState";
 import { authSlice } from "./authSlice";
 
+
 const rootReducer = combineReducers({
   auth: authSlice.reducer,
   theme: themeSlice.reducer,
+  isTestSetVisible: testSettingsVisibilitySlice.reducer,
   testFrame: testFrameSlice.reducer,
   testModifier: testModifierSlice.reducer,
   testLimiter: testLimiterSlice.reducer,
-  isTestSetVisible: testSettingsVisibilitySlice.reducer,
   isThemeVisible: themeVisibilitySlice.reducer,
   isInputActive: inputStatusSlice.reducer,
   isTestFinished: isTestFinishedSlice.reducer,

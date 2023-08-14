@@ -8,20 +8,17 @@ import { queryClient } from "../..";
 import axios from "axios";
 import {
   IData,
+  IRecordMutation,
   IResult,
   IWpmArr,
 } from "../../types";
+import { authSlice } from "../../redux/authSlice";
 
-interface mutationInterface {
-  wpm: number;
-  accuracy: number,
-  correctChars: number,
-  error: number,
-  extras: number,
-  missed: number,
-  mode: string,
-  limiter: number | string,
-  time: number,
+interface IUpdProfileMutation {
+  userId: number;
+  testStd: number;
+  testCpl: number;
+  timeTyping: number;
 }
 
 const Result = ({
@@ -32,7 +29,7 @@ const Result = ({
   handleRefresh,
   source,
 }: IResult) => {
-  const { testFrameSelector, testLimiterSelector } = useRedux();
+  const { testFrameSelector, testLimiterSelector, authDispatch } = useRedux();
   const [wpmArr, setWpmArr] = useState<IWpmArr[]>([]);
   const [data, setData] = useState<IData[]>([]);
   const { authSelector } = useRedux();
@@ -46,6 +43,8 @@ const Result = ({
     missed: 0,
     time: 0,
   });
+
+  const { incTestCpl, updateTimeTyping } = authSlice.actions;
 
   useEffect(() => {
     let data = wpmArr.map((element, index) => ({
@@ -78,7 +77,12 @@ const Result = ({
     exe.current = 0;
   }, [resetState]);
 
-  const mutationFunction = async (record: mutationInterface) => {
+  const handleResultRefresh = useCallback(() => {
+    handleResultReset();
+    handleRefresh();
+  }, [handleRefresh, handleResultReset]);
+
+  const recordMutationFn = async (record: IRecordMutation) => {
     const postRecord = await axios.post("http://localhost:7000/api/wpm/", record, {
       headers: {
         Authorization: `Bearer ${authSelector?.token}`,
@@ -89,20 +93,36 @@ const Result = ({
     return postRecord;
   }
 
-  const handleResultRefresh = useCallback(() => {
-    handleResultReset();
-    handleRefresh();
-  }, [handleRefresh, handleResultReset]);
+  const updProfileMutationFn = async ({ userId, testCpl, testStd, timeTyping }: IUpdProfileMutation) => {
+    const updateProfile = axios.put(`http://localhost:7000/api/user/updateProfile/${userId}`, { userId, testCpl, testStd, timeTyping }, {
+      headers: {
+        'Authorization': `Bearer ${authSelector?.token}`,
+      }
+    }).catch((error) => {
+      console.log(error);
+    })
+    return updateProfile;
+  }
 
-  const { mutate } = useMutation({
-    mutationFn: mutationFunction,
+  const { mutate: recordMutate } = useMutation({
+    mutationFn: recordMutationFn,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["wpmRecord"] });
     },
     onError: () => {
       console.error("error received from useMutation");
     }
-  })
+  });
+
+  const { mutate: updProfileMutate } = useMutation({
+    mutationFn: updProfileMutationFn,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+    },
+    onError: () => {
+      console.error("error received from useMutation");
+    }
+  });
 
   const calculateResult = useCallback(() => {
     let resultantWpm = 0;
@@ -180,6 +200,28 @@ const Result = ({
     }
   }, [elapsedTimeArray, testSentence, textWritten]);
 
+
+  const calculateMutation = () => {
+    let endResult = calculateResult();
+    recordMutate({
+      wpm: endResult.wpm,
+      accuracy: endResult.accuracy,
+      time: endResult.time,
+      correctChars: endResult.correctChars,
+      error: endResult.errors,
+      extras: endResult.extras,
+      missed: endResult.missed,
+      limiter: testLimiterSelector,
+      mode: testFrameSelector
+    });
+    updProfileMutate({
+      testStd: authSelector!.testStd,
+      testCpl: authSelector!.testCpl,
+      timeTyping: authSelector!.timeTyping,
+      userId: authSelector!.userId
+    })
+  }
+
   useEffect(() => {
     if (
       textWritten.split(" ").length - 1 === testSentence.split(" ").length
@@ -188,24 +230,18 @@ const Result = ({
         let endResult = calculateResult();
         setResult(endResult);
         if (authSelector) {
-          mutate({
-            wpm: endResult.wpm,
-            accuracy: endResult.accuracy,
-            time: endResult.time,
-            correctChars: endResult.correctChars,
-            error: endResult.errors,
-            extras: endResult.extras,
-            missed: endResult.missed,
-            limiter: testLimiterSelector,
-            mode: testFrameSelector
-          });
+          authDispatch(incTestCpl());
+          authDispatch(updateTimeTyping(endResult.time))
+          calculateMutation();
           exe.current += 1;
         }
       }
     }
-  }, [textWritten, testSentence, calculateResult, mutate,
+  }, [textWritten, testSentence, calculateResult, recordMutate,
     testLimiterSelector,
     testFrameSelector, authSelector]);
+
+
 
   return (
     <section className="w-full flex flex-col items-center justify-center">
