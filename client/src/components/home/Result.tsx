@@ -162,7 +162,7 @@ const Result = ({
     missed = resultant.missed;
 
     return {
-      wpm: Number((resultantWpm / wpmArrLength).toFixed(3)),
+      wpm: Number((resultantWpm / wpmArrLength).toFixed(2)),
       errors: resultantErrors,
       time: Number(resultantTime.toFixed(2)),
       correctChars: resultantCorrectChars,

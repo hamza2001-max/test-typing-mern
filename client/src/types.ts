@@ -109,6 +109,7 @@ export interface IUseAutoScroll {
 export interface IPersonalBest {
   category: string;
   variable: number[];
+  accessory: string;
 }
 
 export interface ILineChart {
@@ -144,4 +145,17 @@ export interface IUpdProfileMutation {
   testStd: number;
   testCpl: number;
   timeTyping: number;
+}
+
+export interface  wpmRowInterface {
+  _id: number;
+  wpm: number;
+  accuracy: number;
+  correctChars: number;
+  error: number;
+  extras: number;
+  missed: number;
+  time: number;
+  mode: string;
+  limiter: number;
 }

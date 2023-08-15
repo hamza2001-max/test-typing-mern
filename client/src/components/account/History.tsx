@@ -1,18 +1,6 @@
 import { useGetData } from "../../hooks/useGetData";
+import { wpmRowInterface } from "../../types";
 import { Tooltip } from "../include/Tooltip";
-
-interface wpmRowInterface {
-    _id: number;
-    wpm: number;
-    accuracy: number;
-    correctChars: number;
-    error: number;
-    extras: number;
-    missed: number;
-    time: number;
-    mode: string;
-    limiter: number;
-}
 
 export const History = () => {
     const { data } = useGetData();

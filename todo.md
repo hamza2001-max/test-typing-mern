@@ -1,4 +1,5 @@
 - [ ] Todo
+  - [x] implement highestSeparator.
   - [x] solve the cors problem.
   - [x] implement updateProfile.
   - [x] solve the profile delay problem.

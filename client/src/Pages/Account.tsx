@@ -14,8 +14,8 @@ export const Account = () => {
       <section className="flex flex-col items-center space-y-10">
         <Profile />
         <div className="space-y-10 lg:space-y-0 lg:flex w-[80vw] lg:justify-between">
-          <PersonalBest variable={[15, 30, 60, 120]} category="seconds" />
-          <PersonalBest variable={[10, 25, 50, 100]} category="words" />
+          <PersonalBest variable={[15, 30, 60, 120]} category="time" accessory="seconds"/>
+          <PersonalBest variable={[10, 25, 50, 100]} category="words" accessory="words"/>
         </div>
         <Chart />
         {data?.length > 0 && <History />}
