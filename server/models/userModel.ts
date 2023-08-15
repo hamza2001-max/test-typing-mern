@@ -12,7 +12,7 @@ const userSchema = new Schema({
     required: true,
     unique: true,
     minLength: 3,
-    maxlength: 35,
+    maxlength: 10,
   },
   email: {
     type: "string",
@@ -58,7 +58,7 @@ userSchema.statics.signup = async function ({
       throw new Error("Please fill the required fields");
     }
     if (!validator.isLength(username, { min: 3, max: 30 })) {
-      throw new Error("The length of username should be between 3 and 30.");
+      throw new Error("The length of username should be between 3 and 10.");
     }
     if (!validator.isEmail(email)) {
       throw new Error("Provide enter a valid email address.");
