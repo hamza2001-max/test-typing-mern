@@ -2,7 +2,7 @@ import { Navigation } from "../components/include/Navigation";
 import { Footer } from "../components/include/Footer";
 import { Profile } from "../components/account/Profile";
 import { PersonalBest } from "../components/account/PersonalBest";
-import { Chart } from "../components/account/Chart";
+import { HistoryGraphs } from "../components/account/HistoryGraphs";
 import { History } from "../components/account/History";
 import { useGetData } from "../hooks/useGetData";
 export const Account = () => {
@@ -14,10 +14,12 @@ export const Account = () => {
       <section className="flex flex-col items-center space-y-10">
         <Profile />
         <div className="space-y-10 lg:space-y-0 lg:flex w-[80vw] lg:justify-between">
-          <PersonalBest variable={[15, 30, 60, 120]} category="time" accessory="seconds"/>
-          <PersonalBest variable={[10, 25, 50, 100]} category="words" accessory="words"/>
+          <PersonalBest variable={[15, 30, 60, 120]} category="time" accessory="seconds" />
+          <PersonalBest variable={[10, 25, 50, 100]} category="words" accessory="words" />
         </div>
-        <Chart />
+        <HistoryGraphs variable={[15, 30, 60, 120]} category="time" deft={30} accessory="sec" />
+        <HistoryGraphs variable={[10, 25, 50, 100]} category="words" deft={25} accessory="wds" />
+        <HistoryGraphs variable={["all", "short", "medium", "long", "thicc"]} category="quote" deft={"short"}/>
         {data?.length > 0 && <History />}
       </section>
       <Footer />

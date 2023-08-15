@@ -1,5 +1,5 @@
 import { useGetData } from "../../hooks/useGetData";
-import { wpmRowInterface } from "../../types";
+import { IwpmRow } from "../../types";
 import { Tooltip } from "../include/Tooltip";
 
 export const History = () => {
@@ -25,7 +25,7 @@ export const History = () => {
             </thead>
             <tbody>
                 {
-                    data?.map((wpmRow: wpmRowInterface, index: number) => {
+                    data?.map((wpmRow: IwpmRow, index: number) => {
                         return (<tr key={index} className={`${index % 2 === 1 ? "bg-custom-fadedFill" : "bg-custom-fill"} text-custom-secondary text-center`}>
                             <td className="py-3">{wpmRow.wpm}</td>
                             <td className="py-3">{wpmRow.accuracy}%</td>

@@ -60,14 +60,14 @@ export interface IResult {
   resetState: () => void;
 }
 
-export interface AxisInterface {
+export interface IAxios {
   x: number;
   y: number;
 }
 
 export interface IData {
   id: string;
-  data: AxisInterface[];
+  data: IAxios[];
 }
 
 export interface ITooltip {
@@ -147,7 +147,7 @@ export interface IUpdProfileMutation {
   timeTyping: number;
 }
 
-export interface  wpmRowInterface {
+export interface IwpmRow{
   _id: number;
   wpm: number;
   accuracy: number;
@@ -158,4 +158,11 @@ export interface  wpmRowInterface {
   time: number;
   mode: string;
   limiter: number;
+}
+
+export interface IHistoryGraphs {
+  variable: number[] | string[];
+  category: string;
+  deft: number | string;
+  accessory?: string;
 }

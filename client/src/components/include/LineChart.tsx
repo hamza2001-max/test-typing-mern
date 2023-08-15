@@ -59,7 +59,7 @@ export const LineChart = ({ data, xLegend }:ILineChart) => {
           tickPadding: 5,
           tickRotation: 0,
           legend: "Word Per Minute",
-          legendOffset: -40,
+          legendOffset: -55,
           legendPosition: "middle",
         }}
         colors={["var(--color-tertiary)"]}

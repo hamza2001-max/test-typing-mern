@@ -1,5 +1,5 @@
 import { useGetData } from "../../hooks/useGetData";
-import { IPersonalBest, wpmRowInterface } from "../../types";
+import { IPersonalBest, IwpmRow } from "../../types";
 
 export const PersonalBest = ({ category, variable, accessory }: IPersonalBest) => {
   const { data } = useGetData();
@@ -12,7 +12,7 @@ export const PersonalBest = ({ category, variable, accessory }: IPersonalBest) =
     let highestWpms: typeof accInit[] = [];
     if (data) {
       variable.forEach((limit, index) => {
-        highestWpms[index] = data.reduce((acc: typeof accInit, wpmRow: wpmRowInterface) => {
+        highestWpms[index] = data.reduce((acc: typeof accInit, wpmRow: IwpmRow) => {
           if ((wpmRow.mode === category && wpmRow.limiter === limit) && (wpmRow.wpm > acc.wpm && wpmRow.accuracy > acc.accuracy)) {
             return { wpm: wpmRow.wpm, accuracy: wpmRow.accuracy };
           }
@@ -31,8 +31,8 @@ export const PersonalBest = ({ category, variable, accessory }: IPersonalBest) =
             <span className="text-xs">
               {val} {accessory}
             </span>
-            <span className="text-custom-secondary text-2xl">{highestWpmSeparator()[index].wpm === 0 ? "-" : highestWpmSeparator()[index].wpm}</span>
-            <span className="text-custom-secondary text-lg">{highestWpmSeparator()[index].accuracy === 0 ? "-" : highestWpmSeparator()[index].accuracy + "%"}</span>
+            <span className="text-custom-secondary text-2xl">{highestWpmSeparator()[index] && (highestWpmSeparator()[index].wpm === 0 ? "-" : highestWpmSeparator()[index].wpm)}</span>
+            <span className="text-custom-secondary text-lg">{highestWpmSeparator()[index] && (highestWpmSeparator()[index].accuracy === 0 ? "-" : highestWpmSeparator()[index].accuracy + "%")}</span>
           </div>
         );
       })}

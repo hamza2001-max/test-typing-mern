@@ -2,7 +2,7 @@ import { testLimiterSlice } from "../redux/testLimiterSlice";
 import { testFrameSlice } from "../redux/testFrameSlice";
 import { testModifierSlice } from "../redux/testModifierSlice";
 import { MdAlternateEmail } from "react-icons/md";
-import { BsSearch, BsTriangle } from "react-icons/bs";
+import { BsTriangle } from "react-icons/bs";
 import {
   FaHashtag,
   FaClock,
@@ -109,10 +109,6 @@ export const testSettingLimiterData = {
     {
       limit: "thicc",
       action: testLimiterReducer("thicc"),
-    },
-    {
-      limit: BsSearch,
-      action: testLimiterReducer("search"),
     },
   ],
   custom: [

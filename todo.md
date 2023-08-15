@@ -1,34 +1,15 @@
 - [ ] Todo
-  - [x] implement highestSeparator.
-  - [x] solve the cors problem.
-  - [x] implement updateProfile.
-  - [x] solve the profile delay problem.
-  - [x] solve the proceedResultProblem.
+  - [ ] solve the problem with bg when terminal is on.
+  - [ ] instead of 7000 use env.PORT.
   - [ ] reset the state when changing from result to home through nav.
   - [ ] do some researche about queryClient.invalidateQueries({ queryKey: ["user"] });
-  - [x] implement signup.
-  - [x] implement login.
-  - [x] solve the consent screen problem.
-  - [x] implement googleAuth.
-  - [x] implement googleAuth in backend.
   - [ ] implement practice mode.
-  - [ ] set up all the necessary dynamic value for Account tsx.
   - [ ] add functionality to the edit button in Profile.tsx.
-  - [ ] add graphs for other records.
-  - [ ] create a graph for quote in Profile.tsx as well.
+  - [x] set up all the necessary dynamic value for Account tsx.
+  - [x] add graphs for other records.
+  - [x] create a graph for quote in Profile.tsx as well.
+  - [ ] implement textGenerate in custome mode.
   - [ ] improve wpm calculation.
-  - [x] solve the data problem.
-  - [x] solve the double posting of data in Result.tsx.
-  - [x] when you click on navigation make result disappear.
-  - [x] create logout.
-  - [x] changed routes after signingup.
-  - [x] handled errors from the backednd.
-  - [x] test the joinedDate property of the account. 
-  - [x] in signup handle the error for the same user.
-  - [x] complete useAuth.tsx
-  - [x] make username unique.
-  - [x] complete UserModel static function 
-  - [x] instead of 7000 use env.PORT.
   - [ ] make the data available for account graphs.
   - [ ] continue cusLimitPrompt and savedList.
   - [ ] style cusLimiter on large.
@@ -46,9 +27,31 @@
 
 - [ ] ideas
   - [ ] create cookies if possible.
-  - [x] create multiple users.
+  - [ ] try to add load btn in History.tsx.
 
 - [ ] completed
+  - [x] create multiple users.
+  - [x] implement highestSeparator.
+  - [x] solve the cors problem.
+  - [x] implement updateProfile.
+  - [x] solve the profile delay problem.
+  - [x] solve the proceedResultProblem.
+  - [x] implement signup.
+  - [x] implement login.
+  - [x] solve the consent screen problem.
+  - [x] implement googleAuth.
+  - [x] implement googleAuth in backend.
+  - [x] solve the data problem.
+  - [x] solve the double posting of data in Result.tsx.
+  - [x] when you click on navigation make result disappear.
+  - [x] create logout.
+  - [x] changed routes after signingup.
+  - [x] handled errors from the backednd.
+  - [x] test the joinedDate property of the account.
+  - [x] in signup handle the error for the same user.
+  - [x] complete useAuth.tsx
+  - [x] make username unique.
+  - [x] complete UserModel static function
   - [x] Difficulty Levels.
   - [x] create graphs.
   - [x] create localstorage.
@@ -126,27 +129,27 @@
   - [x] solved the x axis problem on Linechart.
   - [x] complete Result.tsx frontend.
   - [x] implement the result of a run.
- - [x] fix the divRef problem in zen mode.
-  - [x] implement useAutoScroll.tsx.
-  - [x] complete useTimer.tsx.
-  - [x] remove custom from time and words.
-  - [x] when the blur is on the text is still typable.
-  - [x] opacity of testSetting to 0 when test starts and make it reappear if mouse moves.
-  - [x] implement time mode.
-  - [x] fix time result issue.
-  - [x] fix the issue with time mode result.
-  - [x] implement zenMode.tsx.
-  - [x] solve the div key problem.
-  - [x] when clicked on the text, it blurs for a second.
-  - [x] solve the data problem of nivo.
-    - [x] Result Implementation.
-    - [x] wpm.
-    - [x] wpmArray.
-    - [x] timeArray.
-    - [x] extras.
-    - [x] accuracy.
-    - [x] correctChars.
-    - [x] incorrectChars.
-    - [x] missed.
-    - [x] total characters written.
-    - [x] graph.
+- [x] fix the divRef problem in zen mode.
+- [x] implement useAutoScroll.tsx.
+- [x] complete useTimer.tsx.
+- [x] remove custom from time and words.
+- [x] when the blur is on the text is still typable.
+- [x] opacity of testSetting to 0 when test starts and make it reappear if mouse moves.
+- [x] implement time mode.
+- [x] fix time result issue.
+- [x] fix the issue with time mode result.
+- [x] implement zenMode.tsx.
+- [x] solve the div key problem.
+- [x] when clicked on the text, it blurs for a second.
+- [x] solve the data problem of nivo.
+  - [x] Result Implementation.
+  - [x] wpm.
+  - [x] wpmArray.
+  - [x] timeArray.
+  - [x] extras.
+  - [x] accuracy.
+  - [x] correctChars.
+  - [x] incorrectChars.
+  - [x] missed.
+  - [x] total characters written.
+  - [x] graph.

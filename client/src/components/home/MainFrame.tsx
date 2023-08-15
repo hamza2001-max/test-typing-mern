@@ -185,7 +185,8 @@ export const MainFrame = () => {
         let rand = generateRandomNumber(quoteJSON[keys[randomIndex]].length);
         prototypeSentence = quoteJSON[keys[randomIndex]][rand].quote;
         setSource(quoteJSON[keys[randomIndex]][rand].source);
-      } else {
+      } 
+      else {
         let rand = generateRandomNumber(quoteJSON[testLimiterSelector].length);
         prototypeSentence = quoteJSON[testLimiterSelector][rand].quote;
         setSource(quoteJSON[testLimiterSelector][rand].source);

@@ -33,49 +33,46 @@ export const TestSettingsSm = () => {
         {(testFrameSelector === "time" ||
           testFrameSelector === "words" ||
           testFrameSelector === "custom") && (
-          <div className="flex flex-col space-y-2">
-            {testSettingModifierData.map((btn) => (
-              <button
-                key={btn.label}
-                className={`
+            <div className="flex flex-col space-y-2">
+              {testSettingModifierData.map((btn) => (
+                <button
+                  key={btn.label}
+                  className={`
               bg-custom-fadedFill text-custom-secondary 
-              ${
-                btn.label === testModifierSelector &&
-                "!text-custom-fill bg-custom-tertiary"
-              } 
-              ${
-                testModifierSelector === "dual" &&
-                "!text-custom-fill bg-custom-tertiary"
-              }
+              ${btn.label === testModifierSelector &&
+                    "!text-custom-fill bg-custom-tertiary"
+                    } 
+              ${testModifierSelector === "dual" &&
+                    "!text-custom-fill bg-custom-tertiary"
+                    }
               py-2 rounded-md hover:bg-custom-secondary hover:text-custom-primary transition ease-in-out delay-75`}
-                onClick={() => {
-                  testModifierSelector === ""
-                    ? testModifierDispatch(btn.action())
-                    : testModifierSelector === "dual"
-                    ? btn.label === "punctuation"
-                      ? testModifierDispatch(numbers())
-                      : testModifierDispatch(punctuation())
-                    : btn.label === testModifierSelector
-                    ? testModifierDispatch(testModifierSlice.actions.reset())
-                    : testModifierSelector &&
-                      testModifierSelector !== btn.label &&
-                      testModifierDispatch(dual());
-                }}
-              >
-                {btn.label}
-              </button>
-            ))}
-          </div>
-        )}
+                  onClick={() => {
+                    testModifierSelector === ""
+                      ? testModifierDispatch(btn.action())
+                      : testModifierSelector === "dual"
+                        ? btn.label === "punctuation"
+                          ? testModifierDispatch(numbers())
+                          : testModifierDispatch(punctuation())
+                        : btn.label === testModifierSelector
+                          ? testModifierDispatch(testModifierSlice.actions.reset())
+                          : testModifierSelector &&
+                          testModifierSelector !== btn.label &&
+                          testModifierDispatch(dual());
+                  }}
+                >
+                  {btn.label}
+                </button>
+              ))}
+            </div>
+          )}
         <div className="flex flex-col space-y-2">
           {testSettingModeData.map((btn) => (
             <button
               key={btn.label}
-              className={`${
-                btn.label === testFrameSelector
-                  ? "text-custom-fill bg-custom-tertiary"
-                  : "text-custom-secondary bg-custom-fadedFill"
-              } py-2 rounded-md hover:bg-custom-secondary hover:text-custom-primary transition ease-in-out delay-75`}
+              className={`${btn.label === testFrameSelector
+                ? "text-custom-fill bg-custom-tertiary"
+                : "text-custom-secondary bg-custom-fadedFill"
+                } py-2 rounded-md hover:bg-custom-secondary hover:text-custom-primary transition ease-in-out delay-75`}
               onClick={() => {
                 testFrameDispatch(btn.action());
                 btn.defaultLimit && testLimiterDispatch(btn.defaultLimit);
@@ -91,11 +88,10 @@ export const TestSettingsSm = () => {
               testSettingLimiterData.time.map((option, index) => (
                 <button
                   key={index}
-                  className={`${
-                    option.limit === testLimiterSelector
-                      ? "text-custom-fill bg-custom-tertiary"
-                      : "text-custom-secondary bg-custom-fadedFill"
-                  } py-2 rounded-md hover:bg-custom-secondary hover:text-custom-primary transition ease-in-out delay-75`}
+                  className={`${option.limit === testLimiterSelector
+                    ? "text-custom-fill bg-custom-tertiary"
+                    : "text-custom-secondary bg-custom-fadedFill"
+                    } py-2 rounded-md hover:bg-custom-secondary hover:text-custom-primary transition ease-in-out delay-75`}
                   onClick={() => testLimiterDispatch(option.action)}
                 >
                   {option.limit}
@@ -105,11 +101,10 @@ export const TestSettingsSm = () => {
               testSettingLimiterData.words.map((option, index) => (
                 <button
                   key={index}
-                  className={`${
-                    option.limit === testLimiterSelector
-                      ? "text-custom-fill bg-custom-tertiary"
-                      : "text-custom-secondary bg-custom-fadedFill"
-                  } py-2 rounded-md hover:bg-custom-secondary hover:text-custom-primary transition ease-in-out delay-75`}
+                  className={`${option.limit === testLimiterSelector
+                    ? "text-custom-fill bg-custom-tertiary"
+                    : "text-custom-secondary bg-custom-fadedFill"
+                    } py-2 rounded-md hover:bg-custom-secondary hover:text-custom-primary transition ease-in-out delay-75`}
                   onClick={() => {
                     testLimiterDispatch(option.action);
                   }}
@@ -121,14 +116,13 @@ export const TestSettingsSm = () => {
               testSettingLimiterData.quote.map((option, index) => (
                 <button
                   key={index}
-                  className={`${
-                    option.limit === testLimiterSelector
-                      ? "text-custom-fill bg-custom-tertiary"
-                      : "text-custom-secondary bg-custom-fadedFill"
-                  } py-2 rounded-md hover:bg-custom-secondary hover:text-custom-primary transition ease-in-out delay-75`}
+                  className={`${option.limit === testLimiterSelector
+                    ? "text-custom-fill bg-custom-tertiary"
+                    : "text-custom-secondary bg-custom-fadedFill"
+                    } py-2 rounded-md hover:bg-custom-secondary hover:text-custom-primary transition ease-in-out delay-75`}
                   onClick={() => testLimiterDispatch(option.action)}
                 >
-                  {typeof option.limit === "string" ? option.limit : "Search"}
+                  {option.limit}
                 </button>
               ))}
             {testFrameSelector === "custom" &&
