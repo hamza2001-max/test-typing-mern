@@ -19,8 +19,5 @@ export const testFrameSlice = createSlice({
     setZenMode: (state) => {
       state.testFrame = "zen";
     },
-    setCustomMode: (state) => {
-      state.testFrame = "custom";
-    },
   },
 });

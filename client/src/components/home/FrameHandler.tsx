@@ -8,7 +8,6 @@ const getFrameComponent = (testModeSelector: string) => {
     case "words":
     case "time":
     case "quote":
-    case "custom":
       return <MainFrame />;
     case "zen":
       return <ZenFrame />;
@@ -18,7 +17,7 @@ const getFrameComponent = (testModeSelector: string) => {
 };
 
 export const FrameHandler = () => {
-  const {testFrameSelector, isTestFinishedSelector} = useRedux();
+  const { testFrameSelector, isTestFinishedSelector } = useRedux();
   return (
     <section className="space-y-16">
       {!isTestFinishedSelector && <TestSettings />}

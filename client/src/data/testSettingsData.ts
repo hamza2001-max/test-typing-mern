@@ -7,11 +7,10 @@ import {
   FaHashtag,
   FaClock,
   FaQuoteLeft,
-  FaWrench,
   FaSortAlphaDown,
 } from "react-icons/fa";
 
-const { setTimeMode, setWordsMode, setQuoteMode, setZenMode, setCustomMode } =
+const { setTimeMode, setWordsMode, setQuoteMode, setZenMode } =
   testFrameSlice.actions;
 const { punctuation, numbers } = testModifierSlice.actions;
 const { testLimiterReducer } = testLimiterSlice.actions;
@@ -49,7 +48,6 @@ export const testSettingModeData = [
     icon: FaQuoteLeft,
   },
   { label: "zen", action: setZenMode, icon: BsTriangle },
-  { label: "custom", action: setCustomMode, icon: FaWrench },
 ];
 
 export const testSettingLimiterData = {
@@ -109,12 +107,6 @@ export const testSettingLimiterData = {
     {
       limit: "thicc",
       action: testLimiterReducer("thicc"),
-    },
-  ],
-  custom: [
-    {
-      limit: "change",
-      action: testLimiterReducer("change"),
     },
   ],
 };

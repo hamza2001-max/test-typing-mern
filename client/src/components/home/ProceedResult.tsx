@@ -1,7 +1,6 @@
 import { useRef, useEffect } from "react";
 import { Tooltip } from "../include/Tooltip";
 import { BsArrowRepeat, BsTextLeft } from "react-icons/bs";
-import { AiFillWarning } from "react-icons/ai";
 import { IProceedResult } from "../../types";
 import { MdNavigateNext } from "react-icons/md";
 
@@ -22,7 +21,7 @@ export const ProceedResult = ({
   });
 
   return (
-    <div className="grid grid-cols-2 gap-y-12 gap-x-12 mt-10 mb-5 sm:flex">
+    <div className="gap-x-12 mt-10 mb-5 sm:flex">
       <button
         className="text-2xl px-8 py-4  outline-none rounded-md text-custom-primary hover:text-custom-secondary focus:bg-custom-secondary
         focus:text-custom-fill"
@@ -41,24 +40,6 @@ export const ProceedResult = ({
         <Tooltip
           icon={BsArrowRepeat}
           hover="Repeat Test"
-          nowrap={true}
-          space="bottom-8"
-        />
-      </button>
-      <button className="text-xl px-8 py-4 text-custom-primary hover:text-custom-secondary  focus:bg-custom-secondary
-        focus:text-custom-fill">
-        <Tooltip
-          icon={AiFillWarning}
-          hover="Practice Words"
-          nowrap={true}
-          space="bottom-8"
-        />
-      </button>
-      <button className="text-xl px-8 py-4 text-custom-primary hover:text-custom-secondary focus:bg-custom-secondary
-        focus:text-custom-fill">
-        <Tooltip
-          icon={BsTextLeft}
-          hover="Toggle Word History"
           nowrap={true}
           space="bottom-8"
         />

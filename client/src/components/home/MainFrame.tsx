@@ -9,7 +9,6 @@ import { testOpacitySlice } from "../../redux/testOpacitySlice";
 import { MainFrameProgress } from "./MainFrameProgress";
 import { useTimer } from "../../hooks/useTimer";
 import { useRedux } from "../../hooks/useRedux";
-import { CustomLimiter } from "./CustomLimiter";
 import { Tooltip } from "../include/Tooltip";
 import Result from "./Result";
 import { authSlice } from "../../redux/authSlice";
@@ -30,7 +29,6 @@ export const MainFrame = () => {
     testModifierSelector,
     isTestFinishedSelector,
     testFrameSelector,
-    isCusLimVisibleSelector,
     isTestFinishedDispatch,
     inputStatusDispatch,
     authDispatch,
@@ -185,7 +183,7 @@ export const MainFrame = () => {
         let rand = generateRandomNumber(quoteJSON[keys[randomIndex]].length);
         prototypeSentence = quoteJSON[keys[randomIndex]][rand].quote;
         setSource(quoteJSON[keys[randomIndex]][rand].source);
-      } 
+      }
       else {
         let rand = generateRandomNumber(quoteJSON[testLimiterSelector].length);
         prototypeSentence = quoteJSON[testLimiterSelector][rand].quote;
@@ -274,7 +272,7 @@ export const MainFrame = () => {
 
   return !isTestFinishedSelector ? (
     <div className="relative text-custom-primary flex items-center flex-col mt-5">
-      {isCusLimVisibleSelector && <CustomLimiter />}
+      {/* {isCusLimVisibleSelector && <CustomLimiter />} */}
       <div>
         <MainFrameProgress
           countDown={countDown}

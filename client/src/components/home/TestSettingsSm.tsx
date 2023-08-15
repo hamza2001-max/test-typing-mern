@@ -5,20 +5,14 @@ import {
 } from "../../data/testSettingsData";
 import { testModifierSlice } from "../../redux/testModifierSlice";
 import { useRedux } from "../../hooks/useRedux";
-import { isCusLimVisibilitySlice } from "../../redux/cusLimVisibility";
-import { testSettingsVisibilitySlice } from "../../redux/testSettingsVisibilitySlice";
 
 export const TestSettingsSm = () => {
   const { dual, numbers, punctuation } = testModifierSlice.actions;
-  const { inVisibleTS } = testSettingsVisibilitySlice.actions;
-  const { visibleCus } = isCusLimVisibilitySlice.actions;
   const {
     testFrameSelector,
     testLimiterSelector,
     testModifierSelector,
-    testSettingsVDispatch,
     testFrameDispatch,
-    isCusLimVisibleDispatch,
     testLimiterDispatch,
     testModifierDispatch,
   } = useRedux();
@@ -121,20 +115,6 @@ export const TestSettingsSm = () => {
                     : "text-custom-secondary bg-custom-fadedFill"
                     } py-2 rounded-md hover:bg-custom-secondary hover:text-custom-primary transition ease-in-out delay-75`}
                   onClick={() => testLimiterDispatch(option.action)}
-                >
-                  {option.limit}
-                </button>
-              ))}
-            {testFrameSelector === "custom" &&
-              testSettingLimiterData.custom.map((option, index) => (
-                <button
-                  key={index}
-                  className={`text-custom-secondary bg-custom-fadedFill py-2 rounded-md hover:bg-custom-secondary hover:text-custom-primary transition ease-in-out delay-75`}
-                  onClick={() => {
-                    testLimiterDispatch(option.action);
-                    isCusLimVisibleDispatch(visibleCus());
-                    testSettingsVDispatch(inVisibleTS());
-                  }}
                 >
                   {option.limit}
                 </button>

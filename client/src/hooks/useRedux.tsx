@@ -28,13 +28,9 @@ export const useRedux = () => {
   const isTestFinishedSelector = useSelector(
     (state: RootState) => state.isTestFinished.isTestFinished
   );
-  const isCusLimVisibleSelector = useSelector(
-    (state: RootState) => state.isCusLimVisible.isCusLimVisible
-  );
 
   const authDispatch = useDispatch();
   const themeVDispatch = useDispatch();
-  const isCusLimVisibleDispatch = useDispatch();
   const themeDispatch = useDispatch();
   const testFrameDispatch = useDispatch();
   const userTimeDispatch = useDispatch();
@@ -49,7 +45,6 @@ export const useRedux = () => {
 
   return {
     themeVSelector,
-    isCusLimVisibleSelector,
     testFrameSelector,
     themeSelector,
     isInputActiveSelector,
@@ -68,7 +63,6 @@ export const useRedux = () => {
     testStdDispatch,
     isTestFinishedDispatch,
     themeVDispatch,
-    isCusLimVisibleDispatch,
     testOpacityDispatch,
     userTimeDispatch,
     testCplDispatch,

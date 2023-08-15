@@ -1,35 +1,16 @@
 - [ ] Todo
   - [ ] solve the problem with bg when terminal is on.
   - [ ] instead of 7000 use env.PORT.
-  - [ ] reset the state when changing from result to home through nav.
   - [ ] do some researche about queryClient.invalidateQueries({ queryKey: ["user"] });
-  - [ ] implement practice mode.
   - [ ] add functionality to the edit button in Profile.tsx.
+  - [ ] improve wpm calculation.
+
+- [ ] completed
   - [x] set up all the necessary dynamic value for Account tsx.
   - [x] add graphs for other records.
   - [x] create a graph for quote in Profile.tsx as well.
-  - [ ] implement textGenerate in custome mode.
-  - [ ] improve wpm calculation.
-  - [ ] make the data available for account graphs.
-  - [ ] continue cusLimitPrompt and savedList.
-  - [ ] style cusLimiter on large.
-  - [ ] sometimes zenFrame doesnt scroll.
-  - [ ] implement custom frame.tsx.
-  - [ ] implement Custom Save.
-  - [ ] implement Custom Saved list.
-  - [ ] implement textGenerator for custom.
-  - [ ] implement punctuation, number and dual for custom.
-  - [ ] scroll problem in zenFrame.tsx.
-  - [ ] implement custom frame.
-  - [ ] in time mode sometimes the tab functionality doesnt work properly, try to use useRef for it.
-  - [ ] implement all test modes.
-  - [ ] implement time mode in the word mode if nothing has been written for a long time and make the test invalid.
-
-- [ ] ideas
-  - [ ] create cookies if possible.
-  - [ ] try to add load btn in History.tsx.
-
-- [ ] completed
+  - [x] implement all test modes.
+  - [x] make the data available for account graphs.
   - [x] create multiple users.
   - [x] implement highestSeparator.
   - [x] solve the cors problem.
