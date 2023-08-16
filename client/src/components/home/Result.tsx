@@ -134,7 +134,7 @@ const Result = ({
         }
 
         let wpm = Math.round(
-          (word.length - errors) / 5 / (elapsedTimeArray[index] / 60)
+          (((word.length - errors) / (elapsedTimeArray[index]) * 60) / 5)
         );
 
         resultantWpm += wpm;

@@ -11,7 +11,7 @@ export const Profile = () => {
   return (
     <section className="bg-custom-fadedFill text-custom-primary p-5 mx-7 rounded-lg sm:flex sm:items-center w-[80vw]">
       <div className="flex items-center">
-        {authSelector?.profilePicture ? <span className="text-custom-secondary text-3xl">{authSelector?.profilePicture}</span> : <BsFillPersonFill className="bg-custom-primary text-custom-fadedFill min-w-[5rem] min-h-[5rem] rounded-full p-2" />}
+        <BsFillPersonFill className="bg-custom-primary text-custom-fadedFill min-w-[5rem] min-h-[5rem] rounded-full p-2" />
         <div className="flex flex-col ml-5 sm:mr-4">
           <span className="text-custom-secondary text-3xl capitalize">{authSelector?.username}</span>
           <span className="text-xs">Joined {formattedJoinedDate?.toString()}</span>
@@ -32,14 +32,6 @@ export const Profile = () => {
           <span className="text-custom-secondary text-3xl">{authSelector?.timeTyping === 0 ? "-" : authSelector?.timeTyping.toFixed(2) + "s"}</span>
         </div>
       </div>
-      <button className="w-full sm:w-auto flex justify-center text-xl mt-2 outline-none text-custom-primary hover:text-custom-secondary">
-        <Tooltip
-          icon={MdEdit}
-          hover="Edit Profile"
-          nowrap={true}
-          space="bottom-8"
-        />
-      </button>
     </section>
   );
 };

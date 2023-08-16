@@ -75,7 +75,7 @@ export const Navigation = () => {
         {authSelector ? <Link to={"/Account"} onClick={linkHandler}>
           <div className="mr-5 flex group" >
             <FaUser className="mr-1 text-sm xs:text-xl text-custom-primary cursor-pointer group-hover:text-custom-secondary transition ease-in-out delay-75"></FaUser>
-            <span className="text-custom-primary cursor-pointer group-hover:text-custom-secondary transition ease-in-out delay-75 capitalize">{authSelector?.username}</span>
+            <span className="text-custom-primary cursor-pointer group-hover:text-custom-secondary transition ease-in-out delay-75 capitalize hidden xs:block">{authSelector?.username}</span>
           </div>
         </Link>
           : <Link to={"/Auth"} onClick={linkHandler}>

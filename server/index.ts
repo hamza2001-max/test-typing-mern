@@ -5,7 +5,6 @@ const cors = require("cors");
 const wpmRoute = require("./routes/wpmRoutes");
 const userRoute = require("./routes/userRoutes");
 
-
 const app = express();
 app.use(cors());
 app.use(express.json());

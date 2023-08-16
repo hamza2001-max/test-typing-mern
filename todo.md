@@ -1,115 +1,108 @@
-- [ ] Todo
-  - [ ] solve the problem with bg when terminal is on.
-  - [ ] instead of 7000 use env.PORT.
-  - [ ] do some researche about queryClient.invalidateQueries({ queryKey: ["user"] });
-  - [ ] add functionality to the edit button in Profile.tsx.
-  - [ ] improve wpm calculation.
-
-- [ ] completed
-  - [x] set up all the necessary dynamic value for Account tsx.
-  - [x] add graphs for other records.
-  - [x] create a graph for quote in Profile.tsx as well.
-  - [x] implement all test modes.
-  - [x] make the data available for account graphs.
-  - [x] create multiple users.
-  - [x] implement highestSeparator.
-  - [x] solve the cors problem.
-  - [x] implement updateProfile.
-  - [x] solve the profile delay problem.
-  - [x] solve the proceedResultProblem.
-  - [x] implement signup.
-  - [x] implement login.
-  - [x] solve the consent screen problem.
-  - [x] implement googleAuth.
-  - [x] implement googleAuth in backend.
-  - [x] solve the data problem.
-  - [x] solve the double posting of data in Result.tsx.
-  - [x] when you click on navigation make result disappear.
-  - [x] create logout.
-  - [x] changed routes after signingup.
-  - [x] handled errors from the backednd.
-  - [x] test the joinedDate property of the account.
-  - [x] in signup handle the error for the same user.
-  - [x] complete useAuth.tsx
-  - [x] make username unique.
-  - [x] complete UserModel static function
-  - [x] Difficulty Levels.
-  - [x] create graphs.
-  - [x] create localstorage.
-  - [x] create settings.
-  - [x] remove on focus bg change.
-  - [x] make the data available for result graph.
-  - [x] post data to backend.
-  - [x] receive data from backend.
-  - [x] connect backend with frontend.
-  - [x] initiate backend.
-  - [x] remove testSettings from Result.tsx.
-  - [x] make the mouse hover function for result disable when setting and footer disappear.
-  - [x] theme doesnt disappear in account.tsx
-  - [x] in LineChart.tsx make the x axis label dynamic.
-  - [x] solve the scroll error.
-  - [x] implement the local storage.
-  - [x] Refactor Redux.
-  - [x] in mainFrame apply tooltip where necessary.
-  - [x] hide the number of words written untill first character is written.
-  - [x] fix the scroll problem.
-  - [x] make the extra characters appear if there are any.
-  - [x] implement elapsed time.
-  - [x] upon tab in input focus on refresh button.
-  - [x] in wordprompt make enter accept the input.
-  - [x] complete wordPrompt.tsx.
-  - [x] implement tab + enter = restart test.
-  - [x] refactor the redux folder.
-  - [x] refactor the components folder.
-  - [x] upon channging limiter written text doesnt reset.
-  - [x] Improve the variable and file names through gpt.
-  - [x] give multiple color modes.
-  - [x] make underline appear only when space is pressed.
-  - [x] fix the hover in testSettingsSm.tsx
-  - [x] when input is greater than the word length, the caret disappears.
-  - [x] problems in scrolltop when written word is larger than the one shown.
-  - [x] change the color problem in TestSettingsSm.tsx
-  - [x] smooth the cutting bondaries.
-  - [x] fix the underline when text moves up.
-  - [x] check the lowest level of scroll, the problem is still there.
-  - [x] include the icons in sm component.
-  - [x] complete the customPromptfunctionality.
-  - [x] apply the caret to proto.
-  - [x] create space in the split sentence.
-  - [x] refactor footer into json data.
-  - [x] code the keyframes for caret in tailwind.
-  - [x] refactor the component folder structure.
-  - [x] refactor TestModeWords.tsx as a whole.
-  - [x] create a data folder for the json data.
-  - [x] apply blur when one component become visible.
-  - [x] make testSettings responsive.
-  - [x] apply blur to text if input is not on focus.
-  - [x] implemetn punctuations.
-  - [x] implemetn numbers.
-  - [x] implement dual.
-  - [x] implement the word scroll.
-  - [x] implement the word counter.
-  - [x] make edge cases for word prompt.
-  - [x] hover animations.
-  - [x] make the Home.tsx responsive.
-  - [x] fix the responsive problem of caret.tsx.
-  - [x] change the branching grids to the matching color.
-  - [x] color the graph.
-  - [x] Refactor Component Folder Structure.
-  - [x] After completing Result.tsx, apply hover to both Test and Result.
-  - [x] Remove Current Test from graph.
-  - [x] where applicable apply tooltip.tsx.
-  - [x] In PreviousFragment, for remainingLetter make a separate component.
-  - [x] Apply transition to Tooltip.tsx.
-  - [x] Change the color scheme in Tooltip.tsx.
-  - [x] refactor test.tsx.
-  - [x] shift the result calculation to Result.tsx.
-  - [x] refactor calculateResult();
-  - [x] instead of nivo try chart.js.
-  - [x] fix the bg problem.
-  - [x] solved the x axis problem on Linechart.
-  - [x] complete Result.tsx frontend.
-  - [x] implement the result of a run.
+- [x] set up all the necessary dynamic value for Account tsx.
+- [x] solved the scroll problem.
+- [x] add graphs for other records.
+- [x] create a graph for quote in Profile.tsx as well.
+- [x] implement all test modes.
+- [x] make the data available for account graphs.
+- [x] create multiple users.
+- [x] implement highestSeparator.
+- [x] solve the cors problem.
+- [x] implement updateProfile.
+- [x] solve the profile delay problem.
+- [x] solve the proceedResultProblem.
+- [x] implement signup.
+- [x] implement login.
+- [x] solve the consent screen problem.
+- [x] implement googleAuth.
+- [x] implement googleAuth in backend.
+- [x] solve the data problem.
+- [x] solve the double posting of data in Result.tsx.
+- [x] when you click on navigation make result disappear.
+- [x] create logout.
+- [x] changed routes after signingup.
+- [x] handled errors from the backednd.
+- [x] test the joinedDate property of the account.
+- [x] in signup handle the error for the same user.
+- [x] complete useAuth.tsx
+- [x] make username unique.
+- [x] complete UserModel static function
+- [x] Difficulty Levels.
+- [x] create graphs.
+- [x] create localstorage.
+- [x] create settings.
+- [x] remove on focus bg change.
+- [x] make the data available for result graph.
+- [x] post data to backend.
+- [x] receive data from backend.
+- [x] connect backend with frontend.
+- [x] initiate backend.
+- [x] remove testSettings from Result.tsx.
+- [x] make the mouse hover function for result disable when setting and footer disappear.
+- [x] theme doesnt disappear in account.tsx
+- [x] in LineChart.tsx make the x axis label dynamic.
+- [x] solve the scroll error.
+- [x] implement the local storage.
+- [x] Refactor Redux.
+- [x] in mainFrame apply tooltip where necessary.
+- [x] hide the number of words written untill first character is written.
+- [x] fix the scroll problem.
+- [x] make the extra characters appear if there are any.
+- [x] implement elapsed time.
+- [x] upon tab in input focus on refresh button.
+- [x] in wordprompt make enter accept the input.
+- [x] complete wordPrompt.tsx.
+- [x] implement tab + enter = restart test.
+- [x] refactor the redux folder.
+- [x] refactor the components folder.
+- [x] upon channging limiter written text doesnt reset.
+- [x] Improve the variable and file names through gpt.
+- [x] give multiple color modes.
+- [x] make underline appear only when space is pressed.
+- [x] fix the hover in testSettingsSm.tsx
+- [x] when input is greater than the word length, the caret disappears.
+- [x] problems in scrolltop when written word is larger than the one shown.
+- [x] change the color problem in TestSettingsSm.tsx
+- [x] smooth the cutting bondaries.
+- [x] fix the underline when text moves up.
+- [x] check the lowest level of scroll, the problem is still there.
+- [x] include the icons in sm component.
+- [x] complete the customPromptfunctionality.
+- [x] apply the caret to proto.
+- [x] create space in the split sentence.
+- [x] refactor footer into json data.
+- [x] code the keyframes for caret in tailwind.
+- [x] refactor the component folder structure.
+- [x] refactor TestModeWords.tsx as a whole.
+- [x] create a data folder for the json data.
+- [x] apply blur when one component become visible.
+- [x] make testSettings responsive.
+- [x] apply blur to text if input is not on focus.
+- [x] implemetn punctuations.
+- [x] implemetn numbers.
+- [x] implement dual.
+- [x] implement the word scroll.
+- [x] implement the word counter.
+- [x] make edge cases for word prompt.
+- [x] hover animations.
+- [x] make the Home.tsx responsive.
+- [x] fix the responsive problem of caret.tsx.
+- [x] change the branching grids to the matching color.
+- [x] color the graph.
+- [x] Refactor Component Folder Structure.
+- [x] After completing Result.tsx, apply hover to both Test and Result.
+- [x] Remove Current Test from graph.
+- [x] where applicable apply tooltip.tsx.
+- [x] In PreviousFragment, for remainingLetter make a separate component.
+- [x] Apply transition to Tooltip.tsx.
+- [x] Change the color scheme in Tooltip.tsx.
+- [x] refactor test.tsx.
+- [x] shift the result calculation to Result.tsx.
+- [x] refactor calculateResult();
+- [x] instead of nivo try chart.js.
+- [x] fix the bg problem.
+- [x] solved the x axis problem on Linechart.
+- [x] complete Result.tsx frontend.
+- [x] implement the result of a run.
 - [x] fix the divRef problem in zen mode.
 - [x] implement useAutoScroll.tsx.
 - [x] complete useTimer.tsx.

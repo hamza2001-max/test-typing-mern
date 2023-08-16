@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 const jwt = require("jsonwebtoken");
 const userSchema = require("../models/userModel");
-const multer = require("multer");
 
 const generateToken = (_id: string) => {
   return jwt.sign({ _id }, process.env.SECRET_KEY, { expiresIn: "3d" });
@@ -17,7 +16,6 @@ const signup = async (req: Request, res: Response) => {
       username,
       token,
       joinedDate: newUser.joinedDate,
-      profilePicture: newUser.profilePicture,
       testStd: newUser.testStd,
       testCpl: newUser.testCpl,
       timeTyping: newUser.timeTyping,
@@ -37,7 +35,6 @@ const login = async (req: Request, res: Response) => {
       username: user.username,
       token,
       joinedDate: user.joinedDate,
-      profilePicture: user.profilePicture,
       testStd: user.testStd,
       testCpl: user.testCpl,
       timeTyping: user.timeTyping,
@@ -60,7 +57,6 @@ const googleLogin = async (req: Request, res: Response) => {
       username: user.username,
       token,
       joinedDate: user.joinedDate,
-      profilePicture: user.profilePicture,
       testStd: user.testStd,
       testCpl: user.testCpl,
       timeTyping: user.timeTyping,
@@ -86,19 +82,9 @@ const updateProfile = async (req: Request, res: Response) => {
   });
 };
 
-const storage = multer.diskStorage({
-  destination: function(req:any, file:any, cb:any) {
-    cb(null, "public/assets");
-  },
-  filename: function (req:any, file:any, cb:any) {
-    cb(null, file.originalname);
-  }
-});
-
-const upload = multer({storage});
-
-const uploadPicture = async(req:Request, res:Response) => {
-  const {profilePicture} = req.body;
-}
-
-module.exports = { signup, login, updateProfile, googleLogin, upload, uploadPicture };
+module.exports = {
+  signup,
+  login,
+  updateProfile,
+  googleLogin,
+};

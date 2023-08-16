@@ -6,7 +6,7 @@ export const useAutoScroll = ({
   textWritten,
 }: IUseAutoScroll) => {
   const [lineHeiInc, setLineHeiInc] = useState(1.25);
-  const [scrollIndex, setScrollIndex] = useState(3);
+  const [scrollIndex, setScrollIndex] = useState(2);
   const divRef = useRef<HTMLDivElement>(null);
   const typedSentenceRef = useRef<HTMLDivElement>(null);
 
@@ -14,7 +14,7 @@ export const useAutoScroll = ({
     if (typedSentenceRef.current) {
       typedSentenceRef.current.scrollTop = 0;
       setLineHeiInc(1.25);
-      setScrollIndex(3);
+      setScrollIndex(2);
     }
   }, [testSentence]);
 

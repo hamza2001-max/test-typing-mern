@@ -5,7 +5,6 @@ interface IAuthState {
   username: string;
   token: string;
   joinedDate: Date;
-  profilePicture: string;
   testStd: number;
   testCpl: number;
   timeTyping: number;

@@ -30,10 +30,6 @@ const userSchema = new Schema({
     type: "date",
     default: Date.now,
   },
-  profilePicture: {
-    type: "String",
-    default: "",
-  },
   testStd: {
     type: "number",
     default: 0
