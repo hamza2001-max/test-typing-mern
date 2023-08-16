@@ -134,8 +134,12 @@ const Result = ({
         }
 
         let wpm = Math.round(
-          (((word.length - errors) / (elapsedTimeArray[index]) * 60) / 5)
+          (((word.length - errors - acc.extras - acc.missed) / (elapsedTimeArray[index]) * 60) / 5)
         );
+
+        if (wpm < 0) {
+          wpm = 0;
+        }
 
         resultantWpm += wpm;
         resultantCorrectChars += correctChars;

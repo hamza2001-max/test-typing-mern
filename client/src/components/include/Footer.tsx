@@ -28,7 +28,7 @@ export const Footer = () => {
   return (
     <footer
       className={`${!testOpacitySelector && !isTestFinishedSelector && "opacity-0"
-        } duration-300 transition-all text-sm text-custom-primary px-12 xl:px-52 py-10`}
+        } duration-300 transition-all text-sm text-custom-primary px-12 xl:px-52 py-4 lg:py-10`}
     >
       <p className="w-full flex justify-center mb-8">
         <span className="px-1 mr-2 bg-custom-primary text-custom-fill rounded-sm">

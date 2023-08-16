@@ -11,7 +11,7 @@
     --color-fill: #ffffff;
     --color-faded-fill: #e7e7e7;
   }
-  
+
   .dark {
     --color-primary: #444444;
     --color-secondary: #fff;
@@ -19,7 +19,7 @@
     --color-fill: #000;
     --color-faded-fill: #191919;
   }
-  
+
   .afterDark {
     --color-primary: #99d6ea;
     --color-secondary: #fca6d1;
@@ -27,7 +27,7 @@
     --color-fill: #1b1d36;
     --color-faded-fill: #17182c;
   }
-  
+
   .retrocast {
     --color-primary: #88dbdf;
     --color-secondary: #f3e03b;
@@ -35,7 +35,7 @@
     --color-fill: #07737a;
     --color-faded-fill: #26858b;
   }
-  
+
   .laser {
     --color-primary: #b82356;
     --color-secondary: #009eaf;
@@ -43,7 +43,7 @@
     --color-fill: #221b44;
     --color-faded-fill: #1e173b;
   }
-  
+
   .matrix {
     --color-primary: #006500;
     --color-secondary: #15ff00;
@@ -51,7 +51,7 @@
     --color-fill: #000000;
     --color-faded-fill: #032000;
   }
-  
+
   .trance {
     --color-primary: #3c4c79;
     --color-secondary: #e51376;
@@ -59,7 +59,7 @@
     --color-fill: #00021b;
     --color-faded-fill: #18214c;
   }
-  
+
   .desertOasis {
     --color-primary: #0061fe;
     --color-secondary: #000000;
@@ -67,7 +67,7 @@
     --color-fill: #fff2d5;
     --color-faded-fill: #eddebc;
   }
-  
+
   .ourTheme {
     --color-primary: #6d0f19;
     --color-secondary: #fcd116;
@@ -75,7 +75,7 @@
     --color-fill: #ce1226;
     --color-faded-fill: #9f1020;
   }
-  
+
   .tronOrange {
     --color-primary: #ff4800;
     --color-secondary: #fcd116;
@@ -83,7 +83,7 @@
     --color-fill: #0d1c1c;
     --color-faded-fill: #faa571;
   }
-  
+
   .soaringSkies {
     --color-primary: #1e107a;
     --color-secondary: #000000;
@@ -91,7 +91,7 @@
     --color-fill: #fff9f2;
     --color-faded-fill: #e5ddd4;
   }
-  
+
   .ishtar {
     --color-primary: #847869;
     --color-secondary: #fae1c3;
@@ -100,12 +100,36 @@
     --color-faded-fill: #272727;
   }
 
-  .bingsu {
-    --color-primary: #83616e;
-    --color-secondary: #48373d;
-    --color-tertiary: #ebe6ea;
-    --color-fill: #b8a7aa;
-    --color-faded-fill: #ab989e;
+  .aurora {
+    --color-primary: #245c69;
+    --color-secondary: #ffffff;
+    --color-tertiary: #00e980;
+    --color-fill: #011926;
+    --color-faded-fill: #000c13;
+  }
+
+  .earthSong {
+    --color-primary: #f5ae2d;
+    --color-secondary: #e6c7a8;
+    --color-tertiary: #509452;
+    --color-fill: #1d1b18;
+    --color-faded-fill: #292521;
+  }
+
+  .ryujinScales {
+    --color-primary: #ffbc90;
+    --color-secondary: #ffe4bc;
+    --color-tertiary: #f17754;
+    --color-fill: #081426;
+    --color-faded-fill: #040e1d;
+  }
+
+  .evilEye {
+    --color-primary: #01589f;
+    --color-secondary: #171718;
+    --color-tertiary: #f7f2ea;
+    --color-fill: #0084c2;
+    --color-faded-fill: #0c79be;
   }
 }
 

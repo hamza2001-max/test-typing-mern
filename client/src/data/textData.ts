@@ -256,6 +256,36 @@ export const wordsJSON = [
   {
     word: "movie",
   },
+  {
+    word: "app",
+  },
+  {
+    word: "application",
+  },
+  {
+    word: "sick",
+  },
+  {
+    word: "great",
+  },
+  {
+    word: "humor",
+  },
+  {
+    word: "immune",
+  },
+  {
+    word: "moral",
+  },
+  {
+    word: "immoral",
+  },
+  {
+    word: "generate",
+  },
+  {
+    word: "default",
+  },
 ];
 
 export const punctuationsJSON = [

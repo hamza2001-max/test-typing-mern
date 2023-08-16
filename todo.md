@@ -1,4 +1,6 @@
 - [x] set up all the necessary dynamic value for Account tsx.
+- [x] solve the bg problem.
+- [x] get more themes
 - [x] solved the scroll problem.
 - [x] add graphs for other records.
 - [x] create a graph for quote in Profile.tsx as well.

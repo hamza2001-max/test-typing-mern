@@ -56,12 +56,15 @@ export const Navigation = () => {
     <nav className="flex justify-between items-center px-12 py-6">
       <div className="flex items-center">
         <Link to={"/"} onClick={linkHandler}>
-          <span className="text-lg sm:text-2xl mr-10 text-custom-secondary font-semibold"
-          >
-            typeTesting
-          </span>
+          <div className="flex flex-col">
+            <span className="text-xs -mb-1 text-custom-primary">Test Your Typing</span>
+            <span className="text-lg sm:text-2xl mr-10 text-custom-secondary font-semibold"
+            >
+              typeTesting
+            </span>
+          </div>
         </Link>
-        <div className="text-sm xs:text-xl flex justify-between w-14 xs:w-24 items-end text-custom-primary">
+        <div className="text-sm xs:text-xl flex justify-between w-14 xs:w-20 items-end text-custom-primary">
           <Link to={"/"} onClick={linkHandler}>
             <FaKeyboard className="cursor-pointer hover:text-custom-secondary transition ease-in-out delay-75" />
           </Link>

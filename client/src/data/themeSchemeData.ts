@@ -62,8 +62,23 @@ export const themeSchemes = [
     theme: themeSlice.actions.ishtar,
   },
   {
-    title: "bingsu",
-    themeClass: "bingsu",
-    theme: themeSlice.actions.bingsu,
+    title: "aurora",
+    themeClass: "aurora",
+    theme: themeSlice.actions.aurora,
+  },
+  {
+    title: "earth song",
+    themeClass: "earthSong",
+    theme: themeSlice.actions.earthSong,
+  },
+  {
+    title: "ryujin scales",
+    themeClass: "ryujinScales",
+    theme: themeSlice.actions.ryujinScales,
+  },
+  {
+    title: "evileye",
+    themeClass: "evilEye",
+    theme: themeSlice.actions.evilEye,
   },
 ];

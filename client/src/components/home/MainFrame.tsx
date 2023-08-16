@@ -303,7 +303,7 @@ export const MainFrame = () => {
         </div>
         <input
           type="text"
-          className="w-full mt-3 py-2 sr-only"
+          className="mt-3 py-2 sr-only"
           ref={inputRef}
           spellCheck={false}
           onKeyDown={handleKeyDown}
