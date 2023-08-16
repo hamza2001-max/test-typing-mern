@@ -11,7 +11,7 @@ export const Signup = () => {
   const [verPwd, setVerPwd] = useState("");
   const { mutate, error, setError, handleErrors } = useAuth("signup");
   const navigate = useNavigate();
-  const pwdRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=.*[a-zA-Z])(?=.*[!@#$%^&*(),.?\":{}|<>]).{8,150}$/;
+  const pwdRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=.*[a-zA-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,150}$/;
 
   const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

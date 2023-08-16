@@ -180,7 +180,7 @@ const Result = ({
     if (
       textWritten.split(" ").length - 1 === testSentence.split(" ").length
     ) {
-      if (exe.current == 0) {
+      if (exe.current === 0) {
         let endResult = calculateResult();
         setResult(endResult);
         if (authSelector) {
@@ -202,7 +202,7 @@ const Result = ({
       }
     }
   }, [textWritten, testSentence, calculateResult, mutate,
-    testLimiterSelector,
+    testLimiterSelector, authDispatch, incTestCpl, updateTimeTyping,
     testFrameSelector, authSelector]);
 
   return (
