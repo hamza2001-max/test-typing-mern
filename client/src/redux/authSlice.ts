@@ -1,18 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-interface IAuthState {
-  userId: number;
-  username: string;
-  token: string;
-  joinedDate: Date;
-  testStd: number;
-  testCpl: number;
-  timeTyping: number;
-}
-
-interface IAuthSlice {
-  user: IAuthState | null;
-}
+import { IAuthSlice } from "../types";
 
 const initialState: IAuthSlice = {
   user: null,

@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import { Tooltip } from "../include/Tooltip";
-import { BsArrowRepeat, BsTextLeft } from "react-icons/bs";
+import { BsArrowRepeat } from "react-icons/bs";
 import { IProceedResult } from "../../types";
 import { MdNavigateNext } from "react-icons/md";
 

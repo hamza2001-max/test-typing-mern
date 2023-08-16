@@ -1,5 +1,4 @@
 import { FaKeyboard } from "react-icons/fa";
-import { FaCrown } from "react-icons/fa";
 import { FaInfo } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";

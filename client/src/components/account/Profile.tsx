@@ -1,6 +1,4 @@
 import { BsFillPersonFill } from "react-icons/bs";
-import { MdEdit } from "react-icons/md";
-import { Tooltip } from "../include/Tooltip";
 import { useRedux } from "../../hooks/useRedux";
 
 export const Profile = () => {

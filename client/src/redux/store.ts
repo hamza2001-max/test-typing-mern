@@ -11,7 +11,6 @@ import { testOpacitySlice } from "./testOpacitySlice";
 import { loadState, saveState } from "./localStorageState";
 import { authSlice } from "./authSlice";
 
-
 const rootReducer = combineReducers({
   auth: authSlice.reducer,
   theme: themeSlice.reducer,

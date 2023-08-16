@@ -166,3 +166,17 @@ export interface IHistoryGraphs {
   deft: number | string;
   accessory?: string;
 }
+
+export interface IAuthState {
+  userId: number;
+  username: string;
+  token: string;
+  joinedDate: Date;
+  testStd: number;
+  testCpl: number;
+  timeTyping: number;
+}
+
+export interface IAuthSlice {
+  user: IAuthState | null;
+}
