@@ -76,7 +76,7 @@ const Result = ({
   }, [handleRefresh, handleResultReset]);
 
   const recordMutationFn = async (record: IRecordMutation) => {
-    const postRecord = await axios.post("https://testTyping.vercel.app/api/wpm/", record, {
+    const postRecord = await axios.post("http://localhost:7000/api/wpm/", record, {
       headers: {
         Authorization: `Bearer ${authSelector?.token}`,
       }

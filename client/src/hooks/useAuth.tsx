@@ -20,7 +20,7 @@ export const useAuth = (access: "signup" | "login" | "googleLogin") => {
     };
 
     const mutationFunction = async (account: IUseAuth) => {
-        const user = await axios.post(`https://testTyping.vercel.app/api/user/${access}`, account, {
+        const user = await axios.post(`http://localhost:7000/api/user/${access}`, account, {
             headers: {
                 "Content-Type": "application/json",
             }
