@@ -1,6 +1,6 @@
 {
   "version": 2,
   "name": "testTyping",
-  "builds": [{ "src": "index.ts", "use": "@vercel/node" }],
-  "routes": [{ "src": "/(.*)", "dest": "/index.ts" }]
+  "builds": [{ "src": "index.js", "use": "@vercel/node" }],
+  "routes": [{ "src": "/(.*)", "dest": "/index.js" }]
 }
