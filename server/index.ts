@@ -6,7 +6,14 @@ const wpmRoute = require("./routes/wpmRoutes");
 const userRoute = require("./routes/userRoutes");
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://testTyping.vercel.app"],
+    methods: ["POST", "GET", "PUT"],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 app.use("/api/wpm/", wpmRoute);
 app.use("/api/user/", userRoute);

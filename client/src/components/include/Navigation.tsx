@@ -17,7 +17,7 @@ export const Navigation = () => {
   const { logout } = authSlice.actions;
 
   const updProfileMutationFn = async ({ userId, testCpl, testStd, timeTyping }: IUpdProfileMutation) => {
-    const updateProfile = axios.put(`http://localhost:7000/api/user/updateProfile/${userId}`, { userId, testCpl, testStd, timeTyping }, {
+    const updateProfile = axios.put(`https://testTyping.vercel.app/api/user/updateProfile/${userId}`, { userId, testCpl, testStd, timeTyping }, {
       headers: {
         'Authorization': `Bearer ${authSelector?.token}`,
       }
